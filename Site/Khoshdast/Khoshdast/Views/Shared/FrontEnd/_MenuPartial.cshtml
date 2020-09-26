@@ -1,0 +1,138 @@
+﻿@model ViewModels._BaseViewModel
+
+<header id="navbar-spy" class="header header-1 header-transparent header-fixed">
+    <nav id="primary-menu" class="navbar navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="/">
+                    <img class="logo-light" src="/assets/images/logo/logo.png" alt="پروشا">
+                    <img class="logo-dark" src="/assets/images/logo/logo.png" alt="پروشا">
+                </a>
+            </div>
+            @*<div class="navbar-header">
+                <div><i class="fa fa-phone"></i>22222</div>
+                </div>*@
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+                    <ul class="nav navbar-nav nav-pos-right navbar-left">
+
+                        <li class="active">
+                            <a href="/">@Resources.Label.Home</a>
+                        </li>
+
+                        <li class="has-dropdown mega-dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">@Resources.Label.Products</a>
+
+                            <ul class="dropdown-menu mega-dropdown-menu">
+                                <li>
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <ul>
+                                                    @foreach (var menu in Model.MenuProducts.Take(5))
+                                                    {
+                                                        <li>
+                                                            <a href="/product/@menu.UrlParam"><i class="fa fa-arrow-circle-left"></i> @menu.TitleSrt</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <ul>
+                                                    @foreach (var menu in Model.MenuProducts.Skip(5).Take(5))
+                                                    {
+                                                        <li>
+                                                            <a href="/product/@menu.UrlParam"><i class="fa fa-arrow-circle-left"></i> @menu.TitleSrt</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <img src="~/assets/images/mega-menu-bg.png" class="img-responsive" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/blog">@Resources.Label.Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="/about">@Resources.Label.About</a>
+                        </li>
+
+                        <li>
+                            <a href="/contact">@Resources.Label.Contact</a>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">@Resources.Label.Support</a>
+	                        <ul class="dropdown-menu">
+		                        @foreach (var link in Model.SupportLinks)
+														{
+																<li><a href="@link.SummerySrt"><i class="fa fa-arrow-circle-left"></i>@link.TitleSrt</a></li>
+														}
+	                        </ul>
+                        </li>
+                        @if (Model.PageGroupsMenus.Count() > 0)
+                        {
+                            foreach (var group in Model.PageGroupsMenus)
+                            {
+                                <li class="has-dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">@group.PageGroup.TitleSrt</a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var page in group.Pages)
+                                        {
+                                            <li><a href="/page/@page.UrlParam"><i class="fa fa-arrow-circle-left"></i>@page.TitleSrt</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+
+                        }
+                        @if (Model.PagesMenu.Count() > 0)
+                        {
+                            foreach (var page in Model.PagesMenu)
+                            {
+                                <li>
+                                    <a href="/page/@page.UrlParam">@page.TitleSrt</a>
+                                </li>
+                            }
+                        }
+                        <li>
+                            <a href="#">
+                                <img id="iran-flag" src="~/assets/images/Flags/ir.png" height="22px" width="22px" onclick="languageChanged('fa-IR')" />
+                            </a>
+                        </li>
+                        <li style="margin-right:5px;">
+                            <a href="#">
+                                <img id="us-flag" src="~/assets/images/Flags/us.png" height="22px" width="22px" onclick="languageChanged('en-US')" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:00982174652">021-74652<i class="menu-phone fa fa-phone"></i></a>
+                        </li>
+                        @*<li class="has-dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">فارسی</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">فارسی</a></li>
+                            <li><a href="#">Eng</a></li>
+                        </ul>
+                    </li>*@
+                    </ul>
+
+                </div>
+            </div>
+    </nav>
+</header>

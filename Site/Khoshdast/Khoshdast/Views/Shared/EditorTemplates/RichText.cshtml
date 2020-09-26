@@ -1,0 +1,32 @@
+@model string
+
+    @(Html.Kendo().EditorFor(m => m)
+    .Encode(false)
+    .HtmlAttributes(new { style = "height:400px" })
+    .ImageBrowser(imageBrowser => imageBrowser
+                                    .Image("~/Uploads/Editor/{0}")    
+                                    .Read("Read", "ImageBrowser")
+                                    .Create("Create", "ImageBrowser")
+                                    .Destroy("Destroy", "ImageBrowser")
+                                    .Upload("Upload", "ImageBrowser")
+                                    .Thumbnail("Thumbnail", "ImageBrowser"))
+                                    .Tools(tools => tools
+          .Clear()
+          .Bold().Italic().Underline().Strikethrough()
+          .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+          .InsertUnorderedList().InsertOrderedList()
+          .Outdent().Indent()
+          .CreateLink().Unlink()
+          .InsertImage()
+          .SubScript()
+          .SuperScript()
+          .TableEditing()
+          .ViewHtml()
+          .Formatting()
+          .FontName()
+          .FontSize()
+          .FontColor().BackColor()
+          
+      )
+    )
+

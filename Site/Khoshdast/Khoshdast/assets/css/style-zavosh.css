@@ -1,0 +1,23 @@
+﻿@font-face {
+    font-family: 'Iransans';
+    src: url(../fonts/IranSans/IRANSansWebFaNum.eot) format('embedded-opentype'),
+        url(../fonts/IranSans/IRANSansWebFaNum.woff2) format('woff2'),
+        url(../fonts/IranSans/IRANSansWebFaNum.woff) format('woff'),
+        url(../fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
+}
+
+body {
+    font-family: iransans;
+}
+
+h1, h2, h3, h4, h5, h6,a ,span ,label ,p {
+    font-family: iransans;
+}.menu_banners .header-banner h6, .menu_banners .header-banner h4, .menu_banners .header-banner a {
+    color: #fff !important;
+}
+
+.whatsappicon {
+    position: fixed;
+    bottom:20px;
+    left: 20px;
+}

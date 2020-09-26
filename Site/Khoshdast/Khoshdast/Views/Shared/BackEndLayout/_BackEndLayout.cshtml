@@ -1,0 +1,399 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <title>@ViewBag.Title -پنل مدیریت سایت زاوش </title>
+    <link href="~/Content/_BackEndLayout/app.v2.css" rel="stylesheet" />
+    <script src="~/Scripts/_BackEndLayout/app.v2.js"></script>
+    <link href="~/Content/_BackEndLayout/admin-font-awesome.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
+
+    <link href="@Url.Content("~/Content/kendo/2017.3.913/kendo.rtl.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2017.3.913/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2017.3.913/jszip.min.js")"></script>
+    <script src="~/Scripts/kendo/2017.3.913/kendo.all.min.js"></script>
+
+    <script src="@Url.Content("~/Scripts/kendo/2017.3.913/kendo.aspnetmvc.min.js")"></script>
+    <link href="~/Content/_BackEndLayout/AdminStyle.css" rel="stylesheet" />
+</head>
+
+<body class="k-rtl">
+    <section class="vbox">
+        <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+            <div class="navbar-header aside-md">
+                <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"><i class="fa fa-bars"></i></a><a href="/" class="navbar-brand">
+                    <img src="~/images/logo1.png" class="m-r-sm">
+                </a><a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"><i class="fa fa-cog"></i></a>
+            </div>
+            <ul class="nav navbar-nav hidden-xs"></ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs nav-user">
+                <li class="hidden-xs">
+                    <a href="#" class="dropdown-toggle dk" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i><span class="badge badge-sm up bg-danger m-l-n-sm count">
+                            0
+                        </span>
+                    </a>
+                    <section class="dropdown-menu aside-xl">
+                        <section class="panel bg-white">
+                            <header class="panel-heading b-light bg-light">
+                                <strong>
+                                    شما <span class="count">
+
+                                    </span> اعلان دارید
+                                </strong>
+                            </header>
+
+                            <footer class="panel-footer text-sm"></footer>
+                        </section>
+                    </section>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="thumb-sm avatar pull-left">
+                            <img src="~/images/avatar_default.jpg" />
+                        </span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight">
+                        <span class="arrow top"></span>
+                        <li><a href="#">پروفایل</a> </li>
+                        <li><a href="#">Help</a> </li>
+                        <li class="divider"></li>
+                        <li>
+                            @Html.ActionLink("خروج", "LogOff", "Account")
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </header>
+        <section>
+            <section class="hbox stretch">
+                <!-- .aside -->
+                <aside class="bg-dark lter aside-md hidden-print nav-xs-right" id="nav" style="width:260px;">
+                    <section class="vbox">
+
+                        <section class="w-f scrollable">
+                            <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+                                <!-- nav -->
+                                <nav class="nav-primary hidden-xs">
+                                    <ul class="nav">
+                                        <li id="userLi" class="menuitem"><a href="/users"><i class="fa fa-users icon"><b class="bg-danger"></b></i><span>مدیریت کاربران</span></a></li>
+                                        <li id="visaLi" class="menuitem"><a href="/sliders"><i class="fa fa-paper-plane icon"><b class="bg-success"></b></i><span>مدیریت تصاویر اسلاید</span></a></li>
+                                        <li id="visaLi" class="menuitem"><a href="/minisliders"><i class="fa fa-paper-plane icon"><b class="bg-success"></b></i><span>مدیریت اسلاید کوچک</span></a></li>
+                                        <li id="visaLi" class="menuitem"><a href="/costumers"><i class="fa fa-users icon"><b class="bg-success"></b></i><span>مدیریت اسلاید مشتریان</span></a></li>
+
+                                        <li id="newsLi" class="menuitem"><a href="/products"><i class="fa fa-paper-plane icon"><b class="bg-success"></b></i><span>مدیریت محصولات</span></a></li>
+                                        <li id="newsLi" class="menuitem"><a href="/MapDetails"><i class="fa fa-paper-plane icon"><b class="bg-success"></b></i><span>مدیریت نقشه صفحه اول</span></a></li>
+
+                                        <li id="blogLi" class="menuitem">
+                                            <a href="#">
+                                                <i class="fa fa-text-height icon"><b class="bg-warning"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت بلاگ ها</span>
+                                            </a>
+                                            <ul class="nav lt">
+                                                <li>
+                                                    <a href="/BlogGroups">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت گروه بلاگ ها</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/Blogs">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت بلاگ ها</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li id="pageLi" class="menuitem">
+                                            <a href="#">
+                                                <i class="fa fa-text-height icon"><b class="bg-warning"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت صفحات</span>
+                                            </a>
+                                            <ul class="nav lt">
+                                                <li>
+                                                    <a href="/PageGroups">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت گروه صفحات</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/Pages">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت صفحات</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        
+                                        <li id="textLi" class="menuitem">
+                                            <a href="#">
+                                                <i class="fa fa-text-height icon"><b class="bg-warning"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت متن ها</span>
+                                            </a>
+                                            <ul class="nav lt">
+                                                <li>
+                                                    <a href="/TextTypeItems/index/42FE4195-B677-49A6-B4BC-5AFB6BEDEE5C">
+                                                        <i class="fa fa-angle-left"></i><span>اطلاعات تماس</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/845def3f-9ae0-42c2-9dcd-678b2838f6cd">
+                                                        <i class="fa fa-angle-left"></i><span>متن زیر اسلایدر صفحه اصلی</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/c0267e80-3592-45de-b807-793ef4521f50">
+                                                        <i class="fa fa-angle-left"></i><span>متن ویژگی های پروشا - صفحه اصلی</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/1b230393-175f-409c-90d5-23bc112cd9a6">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت تصویر ویژگی ها -صفحه اصلی</span></a></li>
+
+                                                <li>
+                                                    <a href="/TextTypeItems/index/1893b6e2-4557-4351-99e1-bbeaac2d5cc1">
+                                                        <i class="fa fa-angle-left"></i><span>متن اطلاعات pos - صفحه اصلی</span>
+                                                    </a>
+                                                </li>
+     
+                                                <li>
+                                                    <a href="/TextTypeItems/index/8716ba57-69c0-42ec-b032-37929f98ec3d">
+                                                        <i class="fa fa-angle-left"></i><span>اعداد صفحه اول</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/6f6ee5c2-aee8-4eb4-a561-ff2a262a340e">
+                                                        <i class="fa fa-angle-left"></i><span>متن کنار نقشه صفحه اصلی</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/cb80bdb6-70fa-44c8-af59-e0418d006be6">
+                                                        <i class="fa fa-angle-left"></i><span>متن درباره ما فوتر</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/bea69671-1f1b-41c7-a626-cc83461d3fe4">
+                                                        <i class="fa fa-angle-left"></i><span>متن صفحه درباره ما</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/0f382159-eab4-4550-831c-9a25b29ceb40">
+                                                        <i class="fa fa-angle-left"></i><span>متن بنر وسط درباره ما</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/TextTypeItems/index/5f2212b8-19cd-4385-aec8-74cb5eda71b8">
+                                                        <i class="fa fa-angle-left"></i><span>متن بالای فوتر درباره ما</span>
+                                                    </a>
+                                                </li> 
+                                                <li>
+                                                    <a href="/TextTypeItems/index/947c72e0-b184-4667-8b95-09e282b47688">
+                                                        <i class="fa fa-angle-left"></i><span>متن تاریخچه درباره ما</span>
+                                                    </a>
+                                                </li>  <li>
+                                                    <a href="/TextTypeItems/index/829ff219-6e73-4772-871c-2c7fc1f58a38">
+                                                        <i class="fa fa-angle-left"></i><span>لینک شبکه های اجتماعی</span>
+                                                    </a>
+                                                </li>
+                                         <li>
+                                                    <a href="/TextTypeItems/index/b77580f3-1f5e-4c26-bf42-302f781a0af3">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت منو پشتیبانی</span>
+                                                    </a>
+                                                </li>
+                                         <li>
+                                                    <a href="/TextTypeItems/index/1dfb210f-145a-4ad9-a757-18d60cf13302">
+                                                        <i class="fa fa-angle-left"></i><span>مدیریت تصویر و شماره واتس اپ</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+                        </section>
+
+                    </section>
+                </aside>
+                <!-- /.aside -->
+                <section id="content">
+                    <section class="vbox">
+                        <section class="scrollable padder" style="margin-top: 5px;">
+                            @RenderBody()
+                        </section>
+                    </section>
+                    <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+                </section>
+            </section>
+        </section>
+    </section>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var URL = window.location.pathname;
+
+            if (URL.includes('/TourCategories') || URL.includes('/Tours') || URL.includes('/TourHotelsPackage') || URL.includes('/TourHotelPackageDetails')) {
+                $('.menuitem').removeClass('active');
+                $('#tourLi').addClass('active');
+            }
+
+            else if (URL.includes('/Blogs') || URL.includes('/BlogGroups')) {
+                $('.menuitem').removeClass('active');
+                $('#blogLi').addClass('active');
+            }
+            else if (URL.includes('/Pages') || URL.includes('/PageGroups')) {
+                $('.menuitem').removeClass('active');
+                $('#pageLi').addClass('active');
+            }
+            else if (URL.includes('/TextItems')) {
+                $('.menuitem').removeClass('active');
+                $('#textLi').addClass('active');
+            }
+            else if (URL.includes('/user')) {
+                $('.menuitem').removeClass('active');
+                $('#userLi').addClass('active');
+            }
+            else if (URL.includes('/AirLines')) {
+                $('.menuitem').removeClass('active');
+                $('#airLi').addClass('active');
+            }
+            else if (URL.includes('/Comments')) {
+                $('.menuitem').removeClass('active');
+                $('#comLi').addClass('active');
+            }
+            else if (URL.includes('/TextTypeItems')) {
+                $('.menuitem').removeClass('active');
+                $('#textLi').addClass('active');
+            }
+            else if (URL.includes('/TourHotels')) {
+                $('.menuitem').removeClass('active');
+                $('#tourhotelLi').addClass('active');
+            }
+            else if (URL.includes('/Visas')) {
+                $('.menuitem').removeClass('active');
+                $('#visaLi').addClass('active');
+            }
+            else if (URL.includes('/Reservations')) {
+                $('.menuitem').removeClass('active');
+                $('#resLi').addClass('active');
+            }
+            else if (URL.includes('/NewsLetters')) {
+                $('.menuitem').removeClass('active');
+                $('#newsLi').addClass('active');
+            }
+            else if (URL.includes('/orders')) {
+                $('.menuitem').removeClass('active');
+                $('#orderLi').addClass('active');
+            }
+            else if (URL.includes('/TextTypeItems')) {
+                $('.menuitem').removeClass('active');
+                $('#textLi').addClass('active');
+            }
+            //else if (URL.includes('/blogs')) {
+            //    $('.menuitem').removeClass('active');
+            //    $('#blogLi').addClass('active');
+            //}
+            //$("#Description").kendoEditor({
+            //    resizable: {
+            //        content: true,
+            //        toolbar: true,
+
+            //    }
+
+            //    ,
+            //    tools: [
+            //        "bold",
+            //        "italic",
+            //        "underline",
+            //        "strikethrough",
+            //        "justifyLeft",
+            //        "justifyCenter",
+            //        "justifyRight",
+            //        "justifyFull",
+            //        "insertUnorderedList",
+            //        "insertOrderedList",
+            //        "indent",
+            //        "outdent",
+            //        "createLink",
+            //        "unlink",
+            //        "insertImage",
+            //        "insertFile",
+            //        "subscript",
+            //        "superscript",
+            //        "tableWizard",
+            //        "createTable",
+            //        "addRowAbove",
+            //        "addRowBelow",
+            //        "addColumnLeft",
+            //        "addColumnRight",
+            //        "deleteRow",
+            //        "deleteColumn",
+            //        "viewHtml",
+            //        "formatting",
+            //        "cleanFormatting",
+            //        "fontName",
+            //        "fontSize",
+            //        "foreColor",
+            //        "backColor",
+                    
+                    
+            //    ],
+            //    encoded: false 
+            //});
+            //$("#Body").kendoEditor({
+            //    resizable: {
+            //        content: true,
+            //        toolbar: true,
+            //    },
+            //    tools: [
+            //        "bold",
+            //        "italic",
+            //        "underline",
+            //        "strikethrough",
+            //        "justifyLeft",
+            //        "justifyCenter",
+            //        "justifyRight",
+            //        "justifyFull",
+            //        "insertUnorderedList",
+            //        "insertOrderedList",
+            //        "indent",
+            //        "outdent",
+            //        "createLink",
+            //        "unlink",
+            //        "insertImage",
+            //        "insertFile",
+            //        "subscript",
+            //        "superscript",
+            //        "tableWizard",
+            //        "createTable",
+            //        "addRowAbove",
+            //        "addRowBelow",
+            //        "addColumnLeft",
+            //        "addColumnRight",
+            //        "deleteRow",
+            //        "deleteColumn",
+            //        "viewHtml",
+            //        "formatting",
+            //        "cleanFormatting",
+            //        "fontName",
+            //        "fontSize",
+            //        "foreColor",
+            //        "backColor",
+
+
+            //    ],
+            //    encoded: false 
+
+               
+            //});
+          
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

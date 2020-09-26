@@ -1,0 +1,68 @@
+﻿
+@{
+		Layout = null;
+}<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="گروه نرم افزاری پروشا">
+	<title>@ViewBag.Title | @Resources.Label.Prosha</title>
+	<link href="/assets/images/favicon/favicon.ico" rel="icon">
+	<link rel="canonical" href="@ViewBag.Canonical" />
+
+	<link href='http://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CDroid+Serif:400,400i,700,700i' rel='stylesheet' type='text/css'>
+	<link href="/assets/css/external.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
+	<link rel="shortcut icon" href="/assets/images/logo/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/assets/images/logo/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="/assets/revolution/css/settings.css">
+	<link rel="stylesheet" type="text/css" href="/assets/revolution/css/layers.css">
+	<link rel="stylesheet" type="text/css" href="/assets/revolution/css/navigation.css">
+	<link href="~/assets/css/demo.css" rel="stylesheet" />
+	@*<link href="~/assets/css/style-rtl.css" rel="stylesheet" />*@
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+	@*<link href="/assets/css/shCore.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/shThemeDefault.css" rel="stylesheet" type="text/css" />*@
+	<!-- Demo CSS -->
+	@*<link rel="stylesheet" href="~/assets/css/demo-flex.css" type="text/css" media="screen" />*@
+	<link rel="stylesheet" href="/assets/css/flexslider.css" type="text/css" media="screen" />
+
+	<!-- Modernizr -->
+	<script src="/assets/js/modernizr.js"></script>
+	<link href="~/assets/css/style-rtl.css" rel="stylesheet" id="style-rtl" />
+	<link href="~/assets/css/style-ltr.css" rel="stylesheet" id="style-ltr" />
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-173957624-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'UA-173957624-1');
+	</script>
+</head>
+<body>
+
+
+	<div id="wrapper" class="wrapper clearfix">
+		@Html.Partial("FrontEnd/_MenuPartial")
+		@RenderBody()
+		@Html.Partial("FrontEnd/_FooterPartial")
+	</div>
+
+	<div class="hidden-sm">
+		<script type="text/javascript">!function () { function t() { var t = document.createElement("script"); t.type = "text/javascript", t.async = !0, localStorage.getItem("rayToken") ? t.src = "https://app.raychat.io/scripts/js/" + o + "?rid=" + localStorage.getItem("rayToken") + "&href=" + window.location.href : t.src = "https://app.raychat.io/scripts/js/" + o; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e) } var e = document, a = window, o = "f11ad68a-140e-4fc6-8b7f-a63c90dee9fc"; "complete" == e.readyState ? t() : a.attachEvent ? a.attachEvent("onload", t) : a.addEventListener("load", t, !1) }();</script>
+	</div>
+	<script src="/assets/js/jquery-2.2.4.min.js"></script>
+	<script src="~/assets/js/changeLanguage.js"></script>
+	<script src="/assets/js/plugins.js"></script>
+	<script src="/assets/js/functions.js"></script>
+
+
+	@RenderSection("scripts", required: false)
+</body>
+</html>
