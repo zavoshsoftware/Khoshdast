@@ -17,15 +17,24 @@ namespace Models
         }
 
         [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
+        [Display(Name="عنوان مطلب")]
         public string Title { get; set; }
 
+        [Display(Name="خلاصه")]
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         public string Summery { get; set; }
+
+        [Display(Name="تصویر")]
         public string ImageUrl { get; set; }
+
         [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
+        [Display(Name="پارامتر url")]
         public string UrlParam { get; set; }
+
+        [Display(Name="تعداد بازدید")]
         public int Visit { get; set; }
+
         [Display(Name = "متن")]
         [DataType(DataType.Html)]
         [AllowHtml]
@@ -33,6 +42,8 @@ namespace Models
         [UIHint("RichText")]
         [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         public string Body { get; set; }
+
+        [Display(Name="گروه مطلب")]
         [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         public Guid BlogGroupId { get; set; }
         public virtual BlogGroup BlogGroup { get; set; }

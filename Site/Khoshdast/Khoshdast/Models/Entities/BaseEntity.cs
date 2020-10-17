@@ -41,7 +41,7 @@ namespace Models
         public System.DateTime? DeletionDate { get; set; }
  
         [AllowHtml]
-        [Display(Name = "Description", ResourceType = typeof(Resources.Models.BaseEntity))]
+        [Display(Name = "یادداشت")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
