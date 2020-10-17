@@ -54,10 +54,43 @@
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\Kendo.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsIrRestful, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmsIrRestful.1.1.3\lib\SmsIrRestful.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,6 +151,9 @@
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ZarinPal, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZarinPal-SDK.0.0.7\lib\ZarinPal.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -173,6 +209,8 @@
     <Content Include="assets\images\about_img.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\amarican_express.png" />
+    <Content Include="assets\images\avatar.png" />
+    <Content Include="assets\images\avatar_default.jpg" />
     <Content Include="assets\images\banner1.jpg" />
     <Content Include="assets\images\banner10.jpg" />
     <Content Include="assets\images\banner11.jpg" />
@@ -799,6 +837,7 @@
     <Content Include="Scripts\AdminJS\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\AdminJS\landing.js" />
     <Content Include="Scripts\AdminJS\landing.min.js" />
+    <Content Include="Scripts\function.js" />
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
@@ -1126,6 +1165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\BlogCommentsController.cs" />
     <Compile Include="Controllers\BlogGroupsController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
@@ -1141,8 +1183,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BaseViewModelHelper.cs" />
     <Compile Include="Helpers\CodeGenerator.cs" />
+    <Compile Include="Helpers\DiscountHelper.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
+    <Compile Include="Helpers\SendSms.cs" />
+    <Compile Include="Helpers\ZarinPalHelper.cs" />
     <Compile Include="Migrations\202010162045159_V01.cs" />
     <Compile Include="Migrations\202010162045159_V01.Designer.cs">
       <DependentUpon>202010162045159_V01.cs</DependentUpon>
@@ -1182,7 +1228,15 @@
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\ZarinpallAuthority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CheckOutViewModel.cs" />
+    <Compile Include="ViewModels\CityItemViewModel.cs" />
+    <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\ProductCrudViewModel.cs" />
+    <Compile Include="ViewModels\ProductDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\_BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1377,6 +1431,61 @@
     <Content Include="Views\ProductGroups\Edit.cshtml" />
     <Content Include="Views\ProductGroups\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\BlogComments\Create.cshtml" />
+    <Content Include="Views\BlogComments\Delete.cshtml" />
+    <Content Include="Views\BlogComments\Details.cshtml" />
+    <Content Include="Views\BlogComments\Edit.cshtml" />
+    <Content Include="Views\BlogComments\Index.cshtml" />
+    <Content Include="Views\BlogGroups\Create.cshtml" />
+    <Content Include="Views\BlogGroups\Delete.cshtml" />
+    <Content Include="Views\BlogGroups\Edit.cshtml" />
+    <Content Include="Views\BlogGroups\Index.cshtml" />
+    <Content Include="Views\Blogs\Create.cshtml" />
+    <Content Include="Views\Blogs\Delete.cshtml" />
+    <Content Include="Views\Blogs\Details.cshtml" />
+    <Content Include="Views\Blogs\Edit.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\ContactUsForms\Create.cshtml" />
+    <Content Include="Views\ContactUsForms\Delete.cshtml" />
+    <Content Include="Views\ContactUsForms\Details.cshtml" />
+    <Content Include="Views\ContactUsForms\Edit.cshtml" />
+    <Content Include="Views\ContactUsForms\Index.cshtml" />
+    <Content Include="Views\DiscountCodes\Create.cshtml" />
+    <Content Include="Views\DiscountCodes\Delete.cshtml" />
+    <Content Include="Views\DiscountCodes\Details.cshtml" />
+    <Content Include="Views\DiscountCodes\Edit.cshtml" />
+    <Content Include="Views\DiscountCodes\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\List.cshtml" />
+    <Content Include="Views\ProductComments\Create.cshtml" />
+    <Content Include="Views\ProductComments\Delete.cshtml" />
+    <Content Include="Views\ProductComments\Details.cshtml" />
+    <Content Include="Views\ProductComments\Edit.cshtml" />
+    <Content Include="Views\ProductComments\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Sliders\Create.cshtml" />
+    <Content Include="Views\Sliders\Delete.cshtml" />
+    <Content Include="Views\Sliders\Details.cshtml" />
+    <Content Include="Views\Sliders\Edit.cshtml" />
+    <Content Include="Views\Sliders\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Basket\Basket.cshtml" />
+    <Content Include="Views\Accounts\LoginRegister.cshtml" />
+    <Content Include="Views\Basket\CheckOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

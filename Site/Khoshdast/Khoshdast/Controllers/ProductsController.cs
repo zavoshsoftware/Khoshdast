@@ -17,24 +17,12 @@ namespace Khoshdast.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
+        #region CRUD
+
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Brand).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
             return View(products.ToList());
-        }
-
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-            return View(product);
         }
 
         public ActionResult Create()
@@ -118,7 +106,10 @@ namespace Khoshdast.Controllers
 
             foreach (ProductGroup productGroup in productGroups)
             {
-                bool isSelected = selectedProductGroups.Any(c => c.Id == productGroup.Id);
+                bool isSelected = false;
+
+                if (selectedProductGroups != null)
+                    isSelected = selectedProductGroups.Any(c => c.Id == productGroup.Id);
 
                 list.Add(new ProductGroupCheckboxList()
                 {
@@ -306,7 +297,7 @@ namespace Khoshdast.Controllers
             foreach (ProductGroupRelProduct productGroupRelProduct in products)
             {
                 productGroupRelProduct.IsDeleted = true;
-                productGroupRelProduct.DeletionDate=DateTime.Now;
+                productGroupRelProduct.DeletionDate = DateTime.Now;
             }
 
             db.SaveChanges();
@@ -321,5 +312,164 @@ namespace Khoshdast.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #endregion
+
+
+        [AllowAnonymous]
+        [Route("category/{urlParam}")]
+        public ActionResult List(string urlParam, string[] brands)
+        {
+            ProductGroup productGroup = db.ProductGroups.FirstOrDefault(c => c.UrlParam == urlParam);
+
+            if (productGroup == null)
+                return Redirect("/");
+
+
+
+            ProductListViewModel productList = new ProductListViewModel()
+            {
+                ProductGroup = productGroup,
+                Products = GetProductListByProductGroupId(productGroup.Id, brands),
+                SidebarBrands = GetSidebarBrands(brands),
+                SidebarProductGroups = GetSidebarProductGroups(),
+            };
+
+            return View(productList);
+        }
+
+
+
+
+        [AllowAnonymous]
+        [Route("product/{code}")]
+        public ActionResult Details(string code)
+        {
+            if (code == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.FirstOrDefault(c=>c.Code==code);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            ProductDetailViewModel productDetail = new ProductDetailViewModel()
+            {
+                Product = product,
+
+                ProductComments =
+                    db.ProductComments
+                        .Where(c => c.ProductId == product.Id && c.IsActive == true && c.IsDeleted == false)
+                        .OrderByDescending(c => c.CreationDate).ToList(),
+
+                RelatedProducts = db.Products.Where(c => c.IsDeleted == false && c.IsActive)
+                    .OrderByDescending(c => c.CreationDate).Take(6).ToList(),
+
+                ProductGroup = GetProductGroup(product.Id)
+            };
+            return View(productDetail);
+        }
+
+
+        #region HelperMethods
+
+        public ProductGroup GetProductGroup(Guid productId)
+        {
+            ProductGroupRelProduct productGroupRel =
+                db.ProductGroupRelProducts.FirstOrDefault(c => c.ProductId == productId);
+
+            if (productGroupRel != null)
+                return productGroupRel.ProductGroup;
+
+            else
+                return db.ProductGroups.FirstOrDefault();
+        }
+
+        public List<Product> GetProductListByProductGroupId(Guid productGroupId, string[] brands)
+        {
+            List<Product> products = new List<Product>();
+
+            List<ProductGroupRelProduct> productGroupRel = db.ProductGroupRelProducts
+                .Where(c => (c.ProductGroupId == productGroupId || c.ProductGroup.ParentId == productGroupId) && c.IsDeleted == false).ToList();
+
+            if (brands != null)
+            {
+                foreach (ProductGroupRelProduct groupRelProduct in productGroupRel)
+                {
+                    foreach (string brand in brands)
+                    {
+                        if (groupRelProduct.Product.Brand.UrlParam == brand)
+                        {
+                            if (!products.Any(c => c.Id == groupRelProduct.ProductId))
+                                products.Add(groupRelProduct.Product);
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (ProductGroupRelProduct groupRelProduct in productGroupRel)
+                {
+                    if (!products.Any(c => c.Id == groupRelProduct.ProductId))
+                        products.Add(groupRelProduct.Product);
+                }
+            }
+
+            return products;
+        }
+        public List<SidebarProductGroup> GetSidebarProductGroups()
+        {
+            List<SidebarProductGroup> list = new List<SidebarProductGroup>();
+
+            List<ProductGroup> productGroups = db.ProductGroups
+                .Where(c => c.ParentId == null && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+
+
+            foreach (ProductGroup productGroup in productGroups)
+            {
+                list.Add(new SidebarProductGroup()
+                {
+                    ProductGroup = productGroup,
+
+                    Quantity = db.ProductGroupRelProducts.Count(c =>
+                        (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id) &&
+                        c.IsDeleted == false)
+                });
+            }
+
+            return list;
+        }
+        public List<SidebarBrand> GetSidebarBrands(string[] selectedBrands)
+        {
+            List<SidebarBrand> list = new List<SidebarBrand>();
+
+            List<Brand> brands = db.Brands
+                .Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+
+
+            foreach (Brand brand in brands)
+            {
+                list.Add(new SidebarBrand()
+                {
+                    Brand = brand,
+                    IsSelected = false
+                });
+
+                if (selectedBrands != null)
+                {
+                    if (selectedBrands.Any(c => c == brand.UrlParam))
+                    {
+                        list.LastOrDefault().IsSelected = true;
+                    }
+                }
+            }
+
+            return list;
+        }
+        #endregion
     }
 }
+

@@ -25,3 +25,33 @@ h1, h2, h3, h4, h5, h6,a ,span ,label ,p {
 {
     display:none;
 }
+
+.btn-filter {
+    margin-top: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+#errorDiv, #SuccessDiv, #errorDiv-discount, #SuccessDiv-discount {
+    display: none;
+}
+/*.shop_cart_table td.product-name {
+    float: none;
+}*/
+
+.shop_cart_table th, .shop_cart_table td {
+    text-align: center !important;
+}
+.toggle_info {
+    font-size: 14px;
+}.toggle_info i {
+    left: auto;
+    right: 0;
+    margin-right: 0;
+    margin-left: 10px;
+}
+.toggle_info span {
+    padding-left: 0;
+    padding-right: 25px;
+}

@@ -4,13 +4,14 @@
 <h2>@ViewBag.Title</h2>
 
 @(Html.Kendo().Grid(Model)
-        .Name("Grid")
-        .Columns(columns =>
-        {
-        columns.Bound(model => model.Title);
-        columns.Bound(model => model.Order);
-	        columns.Bound(item => @item.Id).Title("تصویر").Filterable(false).Groupable(false)
-		        .Template(@<text>
+			.Name("Grid")
+			.Columns(columns =>
+			{
+			columns.Bound(model => model.Order);
+			columns.Bound(model => model.Title);
+			columns.Bound(model => model.UrlParam);
+			columns.Bound(item => @item.Id).Title("تصویر").Filterable(false).Groupable(false)
+					.Template(@<text>
              <img src="@item.ImageUrl" height="100px"/>
                     </text>).Width(200);
         columns.Bound(model => model.CreationDate);

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Models;
@@ -134,6 +135,43 @@ namespace Khoshdast.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult SubmitComment(string name, string email, string body, string code)
+        {
+            bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+
+            if (!isEmail)
+                return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
+            else
+            {
+
+                Product product =
+                    db.Products.FirstOrDefault(c => c.Code == code);
+
+                if (product != null)
+                {
+                    ProductComment comment = new ProductComment();
+
+                    comment.Name = name;
+                    comment.Email = email;
+                    comment.Message = body;
+                    comment.CreationDate = DateTime.Now;
+                    comment.IsDeleted = false;
+                    comment.Id = Guid.NewGuid();
+                    comment.ProductId = product.Id;
+                    comment.IsActive = false;
+
+                    db.ProductComments.Add(comment);
+                    db.SaveChanges();
+                    return Json("true", JsonRequestBehavior.AllowGet);
+                }
+
+                return Json("false", JsonRequestBehavior.AllowGet);
+
+            }
         }
     }
 }

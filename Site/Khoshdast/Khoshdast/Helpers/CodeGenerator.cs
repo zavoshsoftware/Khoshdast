@@ -33,6 +33,17 @@ namespace Helpers
             return 100;
         }
 
+        public int ReturnUserCode()
+        {
+            User user = db.Users.Where(c=>c.IsDeleted==false).OrderByDescending(current => current.Code).FirstOrDefault();
+
+            if (user != null)
+            {
+                return Convert.ToInt32(user.Code) + 1;
+            }
+            return 1;
+        }
+
       
     }
 }
