@@ -13,5 +13,22 @@ namespace Khoshdast.Controllers
         {
             return View();
         }
+
+        public ActionResult ProductList()
+        {
+            return View();
+        }
+        public ActionResult ProductDetails()
+        {
+            return View();
+        }
+        public ActionResult About()
+        {
+            return View();
+        }
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

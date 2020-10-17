@@ -173,6 +173,7 @@
     <Content Include="assets\images\about_img.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\amarican_express.png" />
+    <Content Include="assets\images\avatar.png" />
     <Content Include="assets\images\banner1.jpg" />
     <Content Include="assets\images\banner10.jpg" />
     <Content Include="assets\images\banner11.jpg" />
@@ -440,6 +441,7 @@
     <Content Include="assets\owlcarousel\css\owl.theme.default.min.css" />
     <Content Include="assets\owlcarousel\js\owl.carousel.min.js" />
     <Content Include="assets\Scripts\kendo.modernizr.custom.js" />
+    <Content Include="avatar.png" />
     <Content Include="Content\Admin\admin-font-awesome.css" />
     <Content Include="Content\Admin\admin-font-awesome.min.css" />
     <Content Include="Content\Admin\AdminStyle.css" />
@@ -1355,6 +1357,10 @@
     <Content Include="Views\ProductGroups\Edit.cshtml" />
     <Content Include="Views\ProductGroups\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\ProductList.cshtml" />
+    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
