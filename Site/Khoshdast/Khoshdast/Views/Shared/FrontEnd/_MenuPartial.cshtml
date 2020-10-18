@@ -1,4 +1,6 @@
-﻿<header class="header_wrap fixed-top header_with_topbar">
+﻿@model ViewModels._BaseViewModel
+
+<header class="header_wrap fixed-top header_with_topbar">
     <div class="top-header">
         <div class="container">
             <div class="row align-items-center">
@@ -20,7 +22,7 @@
                     <div class="text-center text-md-right">
                         <ul class="header_list">
 
-                            <li><a href="login.html"><i class="ti-user"></i><span>ورود</span></a></li>
+                            <li><a href="/loginregister"><i class="ti-user"></i><span>ورود</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,268 +40,277 @@
                     <span class="ion-android-menu"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="dropdown  dropdown-mega-menu">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">ابزار پتینه</a>
-                            <div class="dropdown-menu">
-                                <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-9">
-                                        <ul class="d-lg-flex">
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی اول</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">لیسه</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">مالیه استیل</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">ماله بلکا</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی دوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">طرح چوب</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">کاردک هنری</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی سوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">کاردک</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">اسفنجی SF</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">sb tm</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">ابزار tm</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <div class="header_banner">
-                                            <div class="header_banner_content">
-                                                <div class="shop_banner">
-                                                    <div class="banner_img overlay_bg_40">
-                                                        <img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-                                                    </div>
-                                                    <div class="shop_bn_content">
-                                                        <h5 class="text-uppercase shop_subtitle">انوع ابزار پتینه</h5>
-                                                        <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-                                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">اسپری ها</a>
-                            <div class="dropdown-menu">
-                                <ul>
-                                    <li><a class="dropdown-item nav-link nav_item" href="#">اسپری گلریز</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="#">اسپری کیش</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="#">اسپری دوپلی</a></li>
-                                    <li><a class="dropdown-item nav-link nav_item" href="#">اسپری الوان</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown dropdown-mega-menu">
-                            <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">غلطک</a>
-                            <div class="dropdown-menu">
-                                <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">غلطک های طرح دار</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">غلطک های ساده</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">غلطک های GR</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <ul>
-                                            <li class="dropdown-header">غلطک های سری Z</li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <div class="d-lg-flex menu_banners">
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="/assets/images/menu-banner1.jpg" alt="menu_banner1">
-                                            <div class="banne_info">
-                                                <h6>تا 20% تخفیف</h6>
-                                                <h4>غلطک های سری GR</h4>
-                                                <a href="#">خرید کنید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="/assets/images/menu-banner2.jpg" alt="menu_banner2">
-                                            <div class="banne_info">
-                                                <h6>تا 20% تخفیف</h6>
-                                                <h4>غلطک های سری Z</h4>
-                                                <a href="#">خرید کنید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="header-banner">
-                                            <img src="/assets/images/menu-banner3.jpg" alt="menu_banner3">
-                                            <div class="banne_info">
-                                                <h6>تا 20% تخفیف</h6>
-                                                <h4>غلطک های پارچه ای</h4>
-                                                <a href="#">خرید کنید</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown  dropdown-mega-menu">
-                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">رنگ و ابزار هنری</a>
-                            <div class="dropdown-menu">
-                                <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-9">
-                                        <ul class="d-lg-flex">
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی اول</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک انتیک</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک متالیک</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک هنری</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">اکلیل</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رنگ کهنه کاری</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی دوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">جوهر سنگ</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رنگ سرامیک</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رنگ هنری</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">بتونه</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">براق کننده</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">فلورسنت</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی سوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">جوهر الکلی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">خمیر رنگ</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رزین اپوکسی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رزین سنگ</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رنگ صدفی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">رنگ پتینه</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <div class="header_banner">
-                                            <div class="header_banner_content">
-                                                <div class="shop_banner">
-                                                    <div class="banner_img overlay_bg_40">
-                                                        <img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-                                                    </div>
-                                                    <div class="shop_bn_content">
-                                                        <h5 class="text-uppercase shop_subtitle">انوع ابزار هنری</h5>
-                                                        <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-                                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown dropdown-mega-menu">
-                            <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ابزار ساختمانی</a>
-                            <div class="dropdown-menu">
-                                <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-9">
-                                        <ul class="d-lg-flex">
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی اول</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">تیغ کاردک</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">سنباده</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">قلم نقاشل</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی دوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">سنباده گیر</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">نردبان چوبی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">چسب نواری</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">کاور</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-menu-col col-lg-4">
-                                                <ul>
-                                                    <li class="dropdown-header">دسته بندی سوم</li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">مقلاویز</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">نوار کناف</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">پادری</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">غلطک رنگ آمیزی</a></li>
-                                                    <li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <div class="header_banner">
-                                            <div class="header_banner_content">
-                                                <div class="shop_banner">
-                                                    <div class="banner_img overlay_bg_40">
-                                                        <img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-                                                    </div>
-                                                    <div class="shop_bn_content">
-                                                        <h5 class="text-uppercase shop_subtitle">انوع ابزار ساختمانی</h5>
-                                                        <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-                                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a class="nav-link nav_item" href="contact.html">مولتی سورفیس</a></li>
-                    </ul>
+                <ul class="navbar-nav">
+                @foreach (var item in Model.MenuItems)
+                {
+	                if (item.ChildCount == 0)
+	                {
+		                <li><a class="nav-link nav_item" href="/category/@item.ParentProductGroup.UrlParam">@item.ParentProductGroup.Title</a></li>
+	                }
+	                else if (item.ChildCount <= 8)
+	                {
+		                <li class="dropdown">
+			                <a class="dropdown-toggle nav-link" href="/category/@item.ParentProductGroup.UrlParam" data-toggle="dropdown">@item.ParentProductGroup.Title</a>
+			                <div class="dropdown-menu">
+				                <ul>
+					                @foreach (var childItem in item.ChildProductGroups)
+					                {
+						                <li><a class="dropdown-item nav-link nav_item" href="/category/@childItem.UrlParam">@childItem.Title</a></li>
+					                }
+				                </ul>
+			                </div>
+		                </li>
+									}
+									else if (item.ChildCount > 8)
+									{
+												<li class="dropdown  dropdown-mega-menu">
+													<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="/category/@item.ParentProductGroup.UrlParam">@item.ParentProductGroup.Title</a>
+													<div class="dropdown-menu">
+														<ul class="mega-menu d-lg-flex">
+															<li class="mega-menu-col col-lg-9">
+																<ul class="d-lg-flex">
+																	@for (int i = 0; i < 3; i++)
+																	{
+																		<li class="mega-menu-col col-lg-4">
+																			<ul>
+																				@foreach (var childItem in item.ChildProductGroups.Skip(i*4).Take(4))
+																				{
+																						<li><a class="dropdown-item nav-link nav_item" href="/category/@childItem.UrlParam">@childItem.Title</a></li>
+																				} 
+																			</ul>
+																		</li>
+																	}
+																
+													 
+																</ul>
+															</li>
+															<li class="mega-menu-col col-lg-3">
+																<div class="header_banner">
+																	<div class="header_banner_content">
+																		<div class="shop_banner">
+																			<div class="banner_img overlay_bg_40">
+																				<img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
+																			</div>
+																			<div class="shop_bn_content">
+																				<h5 class="text-uppercase shop_subtitle">@item.ParentProductGroup.Title</h5>
+																				<h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
+																				<a href="/category/@item.ParentProductGroup.UrlParam" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</li>
+									}
+								}
+              
+                @*<li class="dropdown">
+	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">اسپری ها</a>
+	                <div class="dropdown-menu">
+		                <ul>
+			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری گلریز</a></li>
+			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری کیش</a></li>
+			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری دوپلی</a></li>
+			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری الوان</a></li>
+		                </ul>
+	                </div>
+                </li>
+                <li class="dropdown dropdown-mega-menu">
+	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">غلطک</a>
+	                <div class="dropdown-menu">
+		                <ul class="mega-menu d-lg-flex">
+			                <li class="mega-menu-col col-lg-3">
+				                <ul>
+					                <li class="dropdown-header">غلطک های طرح دار</li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
+				                </ul>
+			                </li>
+			                <li class="mega-menu-col col-lg-3">
+				                <ul>
+					                <li class="dropdown-header">غلطک های ساده</li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
+				                </ul>
+			                </li>
+			                <li class="mega-menu-col col-lg-3">
+				                <ul>
+					                <li class="dropdown-header">غلطک های GR</li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
+				                </ul>
+			                </li>
+			                <li class="mega-menu-col col-lg-3">
+				                <ul>
+					                <li class="dropdown-header">غلطک های سری Z</li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
+					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
+				                </ul>
+			                </li>
+		                </ul>
+		                <div class="d-lg-flex menu_banners">
+			                <div class="col-sm-4">
+				                <div class="header-banner">
+					                <img src="/assets/images/menu-banner1.jpg" alt="menu_banner1">
+					                <div class="banne_info">
+						                <h6>تا 20% تخفیف</h6>
+						                <h4>غلطک های سری GR</h4>
+						                <a href="#">خرید کنید</a>
+					                </div>
+				                </div>
+			                </div>
+			                <div class="col-sm-4">
+				                <div class="header-banner">
+					                <img src="/assets/images/menu-banner2.jpg" alt="menu_banner2">
+					                <div class="banne_info">
+						                <h6>تا 20% تخفیف</h6>
+						                <h4>غلطک های سری Z</h4>
+						                <a href="#">خرید کنید</a>
+					                </div>
+				                </div>
+			                </div>
+			                <div class="col-sm-4">
+				                <div class="header-banner">
+					                <img src="/assets/images/menu-banner3.jpg" alt="menu_banner3">
+					                <div class="banne_info">
+						                <h6>تا 20% تخفیف</h6>
+						                <h4>غلطک های پارچه ای</h4>
+						                <a href="#">خرید کنید</a>
+					                </div>
+				                </div>
+			                </div>
+		                </div>
+	                </div>
+                </li>
+                <li class="dropdown  dropdown-mega-menu">
+	                <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">رنگ و ابزار هنری</a>
+	                <div class="dropdown-menu">
+		                <ul class="mega-menu d-lg-flex">
+			                <li class="mega-menu-col col-lg-9">
+				                <ul class="d-lg-flex">
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی اول</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک انتیک</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک متالیک</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک هنری</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">اکلیل</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ کهنه کاری</a></li>
+						                </ul>
+					                </li>
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی دوم</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">جوهر سنگ</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ سرامیک</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ هنری</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">بتونه</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">براق کننده</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">فلورسنت</a></li>
+						                </ul>
+					                </li>
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی سوم</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">جوهر الکلی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">خمیر رنگ</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رزین اپوکسی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رزین سنگ</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ صدفی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ پتینه</a></li>
+						                </ul>
+					                </li>
+				                </ul>
+			                </li>
+			                <li class="mega-menu-col col-lg-3">
+				                <div class="header_banner">
+					                <div class="header_banner_content">
+						                <div class="shop_banner">
+							                <div class="banner_img overlay_bg_40">
+								                <img src="/assets/images/shop-banner01.jpg" alt="shop_banner"/>
+							                </div>
+							                <div class="shop_bn_content">
+								                <h5 class="text-uppercase shop_subtitle">انوع ابزار هنری</h5>
+								                <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
+								                <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
+							                </div>
+						                </div>
+					                </div>
+				                </div>
+			                </li>
+		                </ul>
+	                </div>
+                </li>
+                <li class="dropdown dropdown-mega-menu">
+	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ابزار ساختمانی</a>
+	                <div class="dropdown-menu">
+		                <ul class="mega-menu d-lg-flex">
+			                <li class="mega-menu-col col-lg-9">
+				                <ul class="d-lg-flex">
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی اول</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">تیغ کاردک</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">سنباده</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">قلم نقاشل</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
+						                </ul>
+					                </li>
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی دوم</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">سنباده گیر</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">نردبان چوبی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">چسب نواری</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">کاور</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
+						                </ul>
+					                </li>
+					                <li class="mega-menu-col col-lg-4">
+						                <ul>
+							                <li class="dropdown-header">دسته بندی سوم</li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">مقلاویز</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">نوار کناف</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">پادری</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">غلطک رنگ آمیزی</a></li>
+							                <li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
+						                </ul>
+					                </li>
+				                </ul>
+			                </li>
+			                <li class="mega-menu-col col-lg-3">
+				                <div class="header_banner">
+					                <div class="header_banner_content">
+						                <div class="shop_banner">
+							                <div class="banner_img overlay_bg_40">
+								                <img src="/assets/images/shop-banner01.jpg" alt="shop_banner"/>
+							                </div>
+							                <div class="shop_bn_content">
+								                <h5 class="text-uppercase shop_subtitle">انوع ابزار ساختمانی</h5>
+								                <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
+								                <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
+							                </div>
+						                </div>
+					                </div>
+				                </div>
+			                </li>
+		                </ul>
+	                </div>
+                </li>
+                <li><a class="nav-link nav_item" href="contact.html">مولتی سورفیس</a></li>*@
+                </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
                     <li>
@@ -313,7 +324,7 @@
                         </div><div class="search_overlay"></div><div class="search_overlay"></div>
                     </li>
                     <li class="dropdown cart_dropdown">
-                        <a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
+                        <a class="nav-link cart_trigger" href="/basket"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
                         @*<div class="cart_box dropdown-menu dropdown-menu-right">
                                 <ul class="cart_list">
                                     <li>

@@ -19,7 +19,7 @@ namespace Helpers
             List < MenuItems > menuItems=new List<MenuItems>();
 
             List<ProductGroup> productGroups = db.ProductGroups
-                .Where(c => c.ParentId == null && c.IsDeleted == false && c.IsActive).ToList();
+                .Where(c => c.ParentId == null && c.IsDeleted == false && c.IsActive).OrderBy(c=>c.Order).ToList();
 
             foreach (ProductGroup productGroup in productGroups)
             {
@@ -28,7 +28,7 @@ namespace Helpers
                     ParentProductGroup = productGroup,
                     ChildProductGroups =
                         db.ProductGroups.Where(c => c.ParentId == productGroup.Id && c.IsDeleted == false && c.IsActive)
-                            .ToList()
+                            .OrderBy(c => c.Order).ToList()
                 });
             }
             return menuItems;

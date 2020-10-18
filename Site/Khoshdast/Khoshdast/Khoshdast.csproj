@@ -1030,6 +1030,14 @@
     <Content Include="fonts\IranSans\woff\Vazir-Medium.woff" />
     <Content Include="fonts\IranSans\woff\Vazir-Thin.woff" />
     <Content Include="fonts\IranSans\woff\Vazir.woff" />
+    <Content Include="assets\fonts\Yekan\Yekan.woff" />
+    <Content Include="assets\fonts\Yekan\Yekan.eot" />
+    <Content Include="assets\fonts\Yekan\Yekan.ttf" />
+    <Content Include="assets\fonts\Yekan\Yekan.woff2" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.eot" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.ttf" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.woff2" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.woff" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -1186,9 +1194,11 @@
     <Compile Include="Helpers\BaseViewModelHelper.cs" />
     <Compile Include="Helpers\CodeGenerator.cs" />
     <Compile Include="Helpers\DiscountHelper.cs" />
+    <Compile Include="Helpers\GetBasketInfo.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Helpers\SendSms.cs" />
     <Compile Include="Helpers\ZarinPalHelper.cs" />
+    <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Migrations\202010162045159_V01.cs" />
     <Compile Include="Migrations\202010162045159_V01.Designer.cs">
       <DependentUpon>202010162045159_V01.cs</DependentUpon>
@@ -1232,6 +1242,7 @@
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\CityItemViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\ProductCrudViewModel.cs" />
     <Compile Include="ViewModels\ProductDetailViewModel.cs" />
@@ -1486,6 +1497,7 @@
     <Content Include="Views\Basket\Basket.cshtml" />
     <Content Include="Views\Accounts\LoginRegister.cshtml" />
     <Content Include="Views\Basket\CheckOut.cshtml" />
+    <Content Include="Views\Home\payment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

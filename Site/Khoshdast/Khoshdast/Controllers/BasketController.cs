@@ -276,15 +276,30 @@ namespace Khoshdast.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                CheckOutViewModel checkOut = new CheckOutViewModel();
                 var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
                 string role = identity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+                string id = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+                Guid userId = new Guid(id);
+
+                Models.User user = db.Users.Find(userId);
+
+                if (user != null)
+                {
+                    UserInformation userInformation=new UserInformation()
+                    {
+                        FullName = user.FullName,
+                        CellNumber = user.CellNum
+                    };
+
+                    checkOut.UserInformation = userInformation;
+                }
 
                 if (role != "customer")
                 {
                     return Redirect("/login?ReturnUrl=checkout");
                 }
 
-                CheckOutViewModel checkOut = new CheckOutViewModel();
                
 
                 List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
@@ -304,7 +319,7 @@ namespace Khoshdast.Controllers
 
 
                 checkOut.Provinces = db.Provinces.OrderBy(current => current.Title).ToList();
-
+                
 
                 ViewBag.CityId = new SelectList(db.Cities, "Id", "Title");
 

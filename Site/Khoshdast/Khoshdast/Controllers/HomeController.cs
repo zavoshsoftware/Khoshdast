@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ViewModels;
 
 namespace Khoshdast.Controllers
 {
@@ -11,10 +12,11 @@ namespace Khoshdast.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            HomeViewModel home=new HomeViewModel();
+            return View(home);
         }
-
-        public ActionResult ProductList()
+        [Route("payment")]
+        public ActionResult payment()
         {
             return View();
         }

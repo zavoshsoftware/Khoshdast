@@ -6,12 +6,20 @@
         url(../fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
 }
 
-body {
-    font-family: iransans;
+@font-face {
+    font-family: 'Yekan';
+    src: url(../fonts/YekanDigits/Yekan.eot) format('embedded-opentype'),
+         url(../fonts/YekanDigits/Yekan.woff2) format('woff2'),
+         url(../fonts/YekanDigits/Yekan.woff) format('woff'),
+         url(../fonts/YekanDigits/Yekan.ttf) format('truetype');
 }
 
-h1, h2, h3, h4, h5, h6,a ,span ,label ,p {
-    font-family: iransans;
+body {
+    font-family: Yekan;
+}
+
+h1, h2, h3, h4, h5, h6, a, span, label, p {
+    font-family: Yekan;
 }.menu_banners .header-banner h6, .menu_banners .header-banner h4, .menu_banners .header-banner a {
     color: #fff !important;
 }
@@ -54,4 +62,13 @@ h1, h2, h3, h4, h5, h6,a ,span ,label ,p {
 .toggle_info span {
     padding-left: 0;
     padding-right: 25px;
+}
+
+.pr_desc p {
+    text-align: justify;
+    direction: rtl;
+}
+
+.btn {
+    font-size: 0.9rem;
 }
