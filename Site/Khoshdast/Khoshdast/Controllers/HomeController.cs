@@ -20,17 +20,18 @@ namespace Khoshdast.Controllers
         {
             return View();
         }
-        public ActionResult ProductDetails()
-        {
-            return View();
-        }
+        
+        [Route("About")]
         public ActionResult About()
         {
-            return View();
+            AboutViewModel about=new AboutViewModel();
+            return View(about);
         }
+        [Route("Contact")]
         public ActionResult Contact()
         {
-            return View();
+            ContactViewModel contact=new ContactViewModel();
+            return View(contact);
         }
     }
 }

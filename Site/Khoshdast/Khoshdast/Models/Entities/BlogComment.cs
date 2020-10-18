@@ -25,6 +25,10 @@ namespace Models
         [DataType(DataType.MultilineText)]
         public string Response { get; set; }
 
+        [Display(Name = "سایت")]
+        public string Website { get; set; }
+
+        [Display(Name="عنوان مطلب")]
         public Guid BlogId { get; set; }
         public virtual Blog Blog { get; set; }
 

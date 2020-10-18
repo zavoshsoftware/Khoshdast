@@ -1,122 +1,189 @@
-﻿@model Models.Blog
+﻿@model ViewModels.BlogDetailViewModel
 
 @{
-    ViewBag.Title = "Details";
+		ViewBag.Title = Model.Blog.Title;
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+
+}
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+					<h1>@Model.Blog.Title</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+					<li class="breadcrumb-item"><a href="/blog">وبلاگ</a></li>
+					<li class="breadcrumb-item active">@Model.Blog.Title</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_content">
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9">
+					<div class="single_post">
+						<h2 class="blog_title">@Model.Blog.Title</h2>
+						<ul class="list_none blog_meta">
+							<li><a href="#"><i class="ti-calendar"></i> @Model.Blog.CreationDateStr</a></li>
+							<li><a href="#"><i class="ti-comments"></i> @Model.BlogCommentsCount نظر</a></li>
+							<li><a href="#"><i class="ti-eye"></i> @Model.Blog.Visit بازدید</a></li>
+						</ul>
+						<div class="blog_img">
+							<img src="@Model.Blog.ImageUrl" alt="@Model.Blog.Title">
+						</div>
+						<div class="blog_content">
+							<div class="blog_text">
+								@Html.Raw(Model.Blog.Body)
+							</div>
+						</div>
+					</div>
+					<div class="post_navigation bg_gray">
+						<div class="row align-items-center justify-content-between p-4">
+							<div class="col-5">
+								<a href="/blog/post/@Model.NextBlog.UrlParam">
+									<div class="post_nav post_nav_prev">
+										<i class="ti-arrow-left"></i>
+										<span>@Model.NextBlog.Title</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-2">
+								<a href="/blog" class="post_nav_home">
+									<i class="ti-layout-grid2"></i>
+								</a>
+							</div>
+							<div class="col-5">
+								<a href="/blog/post/@Model.PrevBlog.UrlParam">
+									<div class="post_nav post_nav_next">
+										<i class="ti-arrow-right"></i>
+										<span>@Model.PrevBlog.Title</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="comment-area">
+						<div class="content_title">
+							<h5>(@Model.BlogCommentsCount) نظر</h5>
+						</div>
+						<ul class="list_none comment_list">
+							@foreach (var comment in Model.BlogComments)
+							{
+									<li class="comment_info">
+										<div class="d-flex">
+											<div class="comment_user">
+												<img src="/assets/images/avatar.png">
+											</div>
+											<div class="comment_content">
+												<div class="d-flex">
+													<div class="meta_data">
+														<h6><a href="#">@comment.Name</a></h6>
+														<div class="comment-time">@comment.CreationDateStr</div>
+													</div>
+
+												</div>
+												<p>@comment.Message</p>
+											</div>
+										</div>
+										@if (!string.IsNullOrEmpty(comment.Response))
+										{
+												<ul class="children">
+													<li class="comment_info">
+														<div class="d-flex">
+															<div class="comment_user">
+																<img src="/assets/images/response-logo.png" alt="خوشدست">
+															</div>
+															<div class="comment_content">
+																<div class="d-flex align-items-md-center">
+																	<div class="meta_data">
+																		<h6><a href="#">خوشدست</a></h6>
+																		<div class="comment-time">@comment.CreationDateStr</div>
+																	</div>
+
+																</div>
+																<p>@comment.Response</p>
+															</div>
+														</div>
+													</li>
+												</ul>
 }
 
-<h2>Details</h2>
+									</li>
+							}
 
-<div>
-    <h4>Blog</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BlogGroup.Title)
-        </dt>
+						</ul>
+						<div class="content_title">
+							<h5>نظر خود را ثبت کنید</h5>
+						</div>
+						<div class="field_form" name="enq">
+							<div id="errorDivBlog" class="alert alert-danger"></div>
+							<div id="SuccessDivBlog" class="alert alert-success">نظر شما با موفقیت ثبت گردید و پس از تایید در سایت به نمایش در خواهد آمد.</div>
+							<div class="row">
+								<div class="form-group col-md-4">
+									<input id="commentName" class="form-control" placeholder="نام" required="required" type="text">
+								</div>
+								<div class="form-group col-md-4">
+									<input id="commentEmail" class="form-control" placeholder="ایمیل" required="required" type="email">
+								</div>
+								<div class="form-group col-md-4">
+									<input id="commentSite" class="form-control" placeholder="وب سایت" required="required" type="text">
+								</div>
+								<div class="form-group col-md-12">
+									<textarea rows="3" id="commentBody" class="form-control" placeholder="نظر شما" required="required"></textarea>
+								</div>
+								<div class="form-group col-md-12">
+									<button onclick="SubmitBlogComment('@Model.Blog.UrlParam');" class="btn btn-fill-out" title="Submit Your Message!" type="button">ثبت نظر</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BlogGroup.Title)
-        </dd>
+				<div class="col-xl-3 order-xl-first mt-4 pt-2 mt-xl-0 pt-xl-0">
+					<div class="sidebar">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+						<div class="widget">
+							<h5 class="widget_title">آخرین پست های وبلاگ</h5>
+							<ul class="widget_recent_post">
+								@foreach (var blog in Model.SidebarRecentBlogs)
+								{
+										<li>
+											<div class="post_footer">
+												<div class="post_img">
+													<a href="/blog/post/@blog.UrlParam"><img src="@blog.ImageUrl" alt="@blog.Title" height="80px"></a>
+												</div>
+												<div class="post_content">
+													<h6><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h6>
+													<p class="small m-0">@blog.CreationDateStr</p>
+												</div>
+											</div>
+										</li>
+								}
+							</ul>
+						</div>
+						<div class="widget">
+							<h5 class="widget_title">گروه مطالب وبلاگ</h5>
+							<ul class="widget_archive">
+								@foreach (var blogGroup in Model.SidebarBlogGroups)
+								{
+										<li><a href="/blog/@blogGroup.UrlParam"><span class="archive_year">@blogGroup.Title</span>@*<span class="archive_num">(12)</span>*@</a></li>
+								}
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Summery)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Summery)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UrlParam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UrlParam)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Visit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Visit)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeletionDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeletionDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

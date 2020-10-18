@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Models;
@@ -16,7 +17,7 @@ namespace Khoshdast.Controllers
 
         public ActionResult Index()
         {
-            return View(db.ContactUsForms.Where(a=>a.IsDeleted==false).OrderByDescending(a=>a.CreationDate).ToList());
+            return View(db.ContactUsForms.Where(a => a.IsDeleted == false).OrderByDescending(a => a.CreationDate).ToList());
         }
 
         // GET: ContactUsForms/Details/5
@@ -49,9 +50,9 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				contactUsForm.IsDeleted=false;
-				contactUsForm.CreationDate= DateTime.Now; 
-					
+                contactUsForm.IsDeleted = false;
+                contactUsForm.CreationDate = DateTime.Now;
+
                 contactUsForm.Id = Guid.NewGuid();
                 db.ContactUsForms.Add(contactUsForm);
                 db.SaveChanges();
@@ -85,8 +86,8 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				contactUsForm.IsDeleted=false;
-					contactUsForm.LastModifiedDate=DateTime.Now;
+                contactUsForm.IsDeleted = false;
+                contactUsForm.LastModifiedDate = DateTime.Now;
                 db.Entry(contactUsForm).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -115,9 +116,9 @@ namespace Khoshdast.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             ContactUsForm contactUsForm = db.ContactUsForms.Find(id);
-			contactUsForm.IsDeleted=true;
-			contactUsForm.DeletionDate=DateTime.Now;
- 
+            contactUsForm.IsDeleted = true;
+            contactUsForm.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -129,6 +130,34 @@ namespace Khoshdast.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult SubmitComment(string name, string email, string body)
+        {
+            bool isEmail = Regex.IsMatch(email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+
+            if (!isEmail)
+                return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
+
+            ContactUsForm comment = new ContactUsForm();
+
+            comment.Name = name;
+            comment.Email = email;
+            comment.Message = body;
+            comment.CreationDate = DateTime.Now;
+            comment.IsDeleted = false;
+            comment.Id = Guid.NewGuid();
+            comment.IsActive = false;
+            comment.Ip = Request.UserHostAddress;
+
+            db.ContactUsForms.Add(comment);
+            db.SaveChanges();
+            return Json("true", JsonRequestBehavior.AllowGet);
+
         }
     }
 }

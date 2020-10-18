@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     width: 100%;
 }
 
-#errorDiv, #SuccessDiv, #errorDiv-discount, #SuccessDiv-discount {
+#errorDiv, #SuccessDiv, #errorDiv-discount, #SuccessDiv-discount, #SuccessDivBlog, #errorDivBlog, #errorDivContact, #SuccessDivContact {
     display: none;
 }
 /*.shop_cart_table td.product-name {
@@ -71,4 +71,21 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .btn {
     font-size: 0.9rem;
+}
+
+.grid_item .blog_text h2 {
+    font-size: 1rem;
+}
+
+.grid_item .blog_text p {
+    font-size: 14px;
+    text-align: justify
+}
+.grid_item .blog_text li {
+    font-size: 14px;
+}
+
+.blog_text p {
+    font-size: 14px;
+    text-align: justify
 }

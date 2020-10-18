@@ -50,7 +50,7 @@
 	                else if (item.ChildCount <= 8)
 	                {
 		                <li class="dropdown">
-			                <a class="dropdown-toggle nav-link" href="/category/@item.ParentProductGroup.UrlParam" data-toggle="dropdown">@item.ParentProductGroup.Title</a>
+			                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">@item.ParentProductGroup.Title</a>
 			                <div class="dropdown-menu">
 				                <ul>
 					                @foreach (var childItem in item.ChildProductGroups)
@@ -63,8 +63,8 @@
 									}
 									else if (item.ChildCount > 8)
 									{
-												<li class="dropdown  dropdown-mega-menu">
-													<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="/category/@item.ParentProductGroup.UrlParam">@item.ParentProductGroup.Title</a>
+												<li class="dropdown dropdown-mega-menu">
+													<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">@item.ParentProductGroup.Title</a>
 													<div class="dropdown-menu">
 														<ul class="mega-menu d-lg-flex">
 															<li class="mega-menu-col col-lg-9">

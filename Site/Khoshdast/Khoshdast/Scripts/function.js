@@ -250,3 +250,74 @@ function postNewsletter() {
             });
     }
 }
+
+
+function SubmitBlogComment(id) {
+    
+    //var url = window.location.pathname;
+    //var id = url.substring(url.lastIndexOf('/') + 1);
+
+    var nameVal = $("#commentName").val();
+    var emailVal = $("#commentEmail").val();
+    var bodyVal = $("#commentBody").val();
+    var siteVal = $("#commentSite").val();
+    if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
+        $.ajax(
+            {
+                url: "/BlogComments/SubmitComment",
+                data: { name: nameVal, email: emailVal, body: bodyVal, code: id, site:siteVal },
+                type: "POST"
+            }).done(function (result) {
+            if (result === "true") {
+                $("#errorDivBlog").css('display', 'none');
+                $("#SuccessDivBlog").css('display', 'block');
+                localStorage.setItem("id", "");
+            }
+            else if (result === "InvalidEmail") {
+                $("#errorDivBlog").html('ایمیل وارد شده صحیح نمی باشد.');
+                $("#errorDivBlog").css('display', 'block');
+                $("#SuccessDivBlog").css('display', 'none');
+
+            }
+        });
+    }
+    else {
+        $("#errorDivBlog").html('تمامی فیلد های زیر را تکمیل نمایید.');
+        $("#errorDivBlog").css('display', 'block');
+        $("#SuccessDivBlog").css('display', 'none');
+
+    }
+}
+
+function SubmitContactUs() {
+
+    var nameVal = $("#commentName").val();
+    var emailVal = $("#commentEmail").val();
+    var bodyVal = $("#commentBody").val();
+    if (nameVal !== "" && emailVal !== "" && bodyVal !== "") {
+        $.ajax(
+            {
+                url: "/ContactUsForms/SubmitComment",
+                data: { name: nameVal, email: emailVal, body: bodyVal },
+                type: "POST"
+            }).done(function (result) {
+            if (result === "true") {
+                $("#errorDivContact").css('display', 'none');
+                $("#SuccessDivContact").css('display', 'block');
+                localStorage.setItem("id", "");
+            }
+            else if (result === "InvalidEmail") {
+                $("#errorDivContact").html('ایمیل وارد شده صحیح نمی باشد.');
+                $("#errorDivContact").css('display', 'block');
+                $("#SuccessDivContact").css('display', 'none');
+
+            }
+        });
+    }
+    else {
+        $("#errorDivContact").html('تمامی فیلد های بالا را تکمیل نمایید.');
+        $("#errorDivContact").css('display', 'block');
+        $("#SuccessDivContact").css('display', 'none');
+
+    }
+}
