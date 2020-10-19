@@ -91,6 +91,9 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInHome { get; set; }
 
+        [Display(Name = "پرفروش ترین ها؟")]
+        public bool IsTopSell { get; set; }
+
         public virtual ICollection<ProductGroupRelProduct> ProductGroupRelProducts { get; set; }
 
 

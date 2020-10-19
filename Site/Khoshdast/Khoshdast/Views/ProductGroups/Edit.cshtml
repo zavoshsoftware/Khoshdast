@@ -55,14 +55,31 @@
 		    </div>
 	    </div>
 			
-			
+	    <div class="form-group">
+		    <div class="col-md-2">
+		    </div>
+		    <div class="col-md-10">
+			    @Html.EditorFor(model => model.IsInHome)
+
+		    </div>
+	    </div>
+
+				
+	    <div class="form-group">
+		    <div class="col-md-2">
+		    </div>
+		    <div class="col-md-10">
+			    @Html.EditorFor(model => model.IsHomeTopGroup)
+
+			    @Html.ValidationMessageFor(model => model.IsHomeTopGroup)
+		    </div>
+	    </div>
 	    <div class="form-group">
 		    <div class="col-md-2">
 		    </div>
 		    <div class="col-md-10">
 			    @Html.EditorFor(model => model.IsActive)
 
-			    @Html.LabelFor(model => model.IsActive)
 			    @Html.ValidationMessageFor(model => model.IsActive)
 		    </div>
 	    </div>

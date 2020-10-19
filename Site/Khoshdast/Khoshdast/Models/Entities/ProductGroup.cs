@@ -45,6 +45,11 @@ namespace Models
         public virtual ProductGroup Parent { get; set; }
         public virtual ICollection<ProductGroup> ProductGroups { get; set; }
 
+        [Display(Name = "گروه های زیر اسلایدر باشد؟")]
+        public bool IsInHome { get; set; }
+
+        [Display(Name = "گروه برتر صفحه اصلی باشد؟")]
+        public bool IsHomeTopGroup { get; set; }
         internal class Configuration : EntityTypeConfiguration<ProductGroup>
         {
             public Configuration()

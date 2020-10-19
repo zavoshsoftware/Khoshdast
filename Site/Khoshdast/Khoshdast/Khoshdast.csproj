@@ -202,6 +202,9 @@
     <Content Include="assets\fonts\fa-solid-900.svg" />
     <Content Include="assets\fonts\Flaticon.svg" />
     <Content Include="assets\fonts\ionicons.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanwebbold%28fanum%29.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanweblight%28fanum%29.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanwebregular%28fanum%29.svg" />
     <Content Include="assets\fonts\Linearicons.svg" />
     <Content Include="assets\fonts\Simple-Line-Icons.svg" />
     <Content Include="assets\fonts\slick.svg" />
@@ -371,6 +374,10 @@
     <Content Include="assets\images\PG\5.jpg" />
     <Content Include="assets\images\PG\6.jpg" />
     <Content Include="assets\images\PG\7.jpg" />
+    <Content Include="assets\images\PG\pg-banner.png" />
+    <Content Include="assets\images\PG\pg-banner2.png" />
+    <Content Include="assets\images\PG\pg-banner3.png" />
+    <Content Include="assets\images\PG\pg-banner4.png" />
     <Content Include="assets\images\popup_img.jpg" />
     <Content Include="assets\images\popup_img3.jpg" />
     <Content Include="assets\images\product_img1-2.jpg" />
@@ -1039,6 +1046,18 @@
     <Content Include="assets\fonts\YekanDigits\Yekan.ttf" />
     <Content Include="assets\fonts\YekanDigits\Yekan.woff2" />
     <Content Include="assets\fonts\YekanDigits\Yekan.woff" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanwebbold%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanweblight%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanwebregular%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanwebbold%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanweblight%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanwebregular%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanwebbold%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanweblight%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanwebregular%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanwebbold%28fanum%29.woff" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanweblight%28fanum%29.woff" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanwebregular%28fanum%29.woff" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -1217,6 +1236,10 @@
     <Compile Include="Migrations\202010181542125_V04.Designer.cs">
       <DependentUpon>202010181542125_V04.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010191543472_V05.cs" />
+    <Compile Include="Migrations\202010191543472_V05.Designer.cs">
+      <DependentUpon>202010191543472_V05.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1256,6 +1279,7 @@
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\ProductCrudViewModel.cs" />
     <Compile Include="ViewModels\ProductDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductGroupListViewModel.cs" />
     <Compile Include="ViewModels\ProductListViewModel.cs" />
     <Compile Include="ViewModels\_BaseViewModel.cs" />
   </ItemGroup>
@@ -1302,7 +1326,6 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
-    <Content Include="assets\Views\Shared\_Layout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\BackEndLayout\_BackEndLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RichText.cshtml" />
@@ -1510,6 +1533,7 @@
     <Content Include="Views\Home\payment.cshtml" />
     <Content Include="Views\Blogs\List.cshtml" />
     <Content Include="Views\Blogs\ListByGroup.cshtml" />
+    <Content Include="Views\ProductGroups\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1544,6 +1568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010181542125_V04.resx">
       <DependentUpon>202010181542125_V04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010191543472_V05.resx">
+      <DependentUpon>202010191543472_V05.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

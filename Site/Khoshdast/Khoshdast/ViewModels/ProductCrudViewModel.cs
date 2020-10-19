@@ -56,7 +56,7 @@ namespace ViewModels
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInPromotion { get; set; }
 
-        [Display(Name = "IsInHome", ResourceType = typeof(Resources.Models.Product))]
+        [Display(Name = "تازه های صفحه اصلی؟")]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInHome { get; set; }
         [Display(Name = "BrandId", ResourceType = typeof(Resources.Models.Product))]
@@ -76,7 +76,8 @@ namespace ViewModels
         [Display(Name = "تعداد فروش")]
         public int SellNumber { get; set; }
 
-
+        [Display(Name = "پرفروش ترین ها؟")]
+        public bool IsTopSale  { get; set; }
         public bool IsAvailable { get; set; }
         [Display(Name = "IsActive", ResourceType = typeof(Resources.Models.BaseEntity))]
         public bool IsActive { get; set; }

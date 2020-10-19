@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewModels.HomeViewModel
 @{
     Layout = null;
 }
@@ -66,42 +66,69 @@
 <div class="staggered-animation-wrap">
 		<div class="custom-container">
 			<div class="row">
-				<div class="col-lg-10">
+				<div class="col-lg-9">
 					<div class="banner_section shop_el_slider">
 						<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="carousel-item active background_bg" data-img-src="/assets/images/banner9.jpg">
-									<div class="banner_slide_content banner_content_inner">
-										<div class="col-lg-7 col-10">
-											<div class="banner_content3 overflow-hidden">
-												<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">با خرید از سایت 10% تخفیف بگیرید</h5>
-												<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">انواع ابزارهای ساختمانی</h2>
-												<a class="btn btn-fill-out btn-radius staggered-animation text-uppercase" href="#" data-animation="slideInRight" data-animation-delay="1.5s">همین حالا خرید کنید</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item background_bg" data-img-src="/assets/images/banner7.jpg">
-									<div class="banner_slide_content banner_content_inner">
-										<div class="col-lg-8 col-10">
-											<div class="banner_content3 overflow-hidden">
-												<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">با خرید از سایت 10% تخفیف بگیرید</h5>
-												<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">انواع غلطک های ساده و طراح دار</h2>
-												<a class="btn btn-fill-out btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInRight" data-animation-delay="1.5s">همین حالا خرید کنید</a>
-											</div>
-										</div>
-									</div>
-								</div>
-					 
+								
+
+								@**@
+								
+								@{
+										int j = 0;
+										foreach (var slider in Model.Sliders)
+										{
+											if (j == 0)
+											{
+												<div class="carousel-item active background_bg" data-img-src="@slider.ImageUrl">
+													<div class="banner_slide_content banner_content_inner">
+														<div class="col-lg-7 col-10">
+															<div class="banner_content3 overflow-hidden">
+																<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
+																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											}
+											else
+											{
+												<div class="carousel-item background_bg" data-img-src="@slider.ImageUrl">
+													<div class="banner_slide_content banner_content_inner">
+														<div class="col-lg-8 col-10">
+															<div class="banner_content3 overflow-hidden">
+																<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
+																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											}
+											j++;
+										}
+								}
 							</div>
 							<ol class="carousel-indicators indicators_style3">
-								<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-								<li data-target="#carouselExampleControls" data-slide-to="1"></li>
+								@for (int i = 0; i < Model.SliderQuantity; i++)
+								{
+									if (i == 0)
+									{
+										<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+
+									}
+									else
+									{
+												<li data-target="#carouselExampleControls" data-slide-to="@i"></li>
+
+									}
+								}
 							</ol>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-2 d-none d-lg-block">
+				<div class="col-lg-3 pr0 d-none d-lg-block">
 					<div class="shop_banner2 el_banner1">
 						<a href="#" class="hover_effect1">
 							<div class="el_title text_white">
@@ -128,187 +155,43 @@
 			</div>
 		</div>
 	</div>
-	@*<div class="banner_section slide_wrap shop_banner_slider staggered-animation-wrap">
-		<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active background_bg" data-img-src="/assets/images/banner9.jpg">
-					<div class="banner_slide_content banner_content_inner">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-6 col-md-8 col-sm-9 col-10">
-									<div class="banner_content2">
-										<h5 class="mb-2 mb-sm-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">با خرید از سایت 10% تخفیف بگیرید</h5>
-										<h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">انواع ابزارهای ساختمانی</h2>
-										<a class="btn btn-border-fill btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">همین حالا خرید کنید</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item background_bg" data-img-src="/assets/images/banner7.jpg">
-					<div class="banner_slide_content banner_content_inner">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-6 col-md-8 col-sm-9 col-10">
-									<div class="banner_content2">
-										<h5 class="mb-2 mb-sm-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">با خرید از سایت 10% تخفیف بگیرید</h5>
-										<h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">انواع غلطک های ساده و طراح دار</h2>
-										<a class="btn btn-border-fill btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">همین حالا خرید کنید</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+ 
 	 
-			</div>
-			<ol class="carousel-indicators indicators_style2">
-				<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleControls" data-slide-to="1"></li>
-			</ol>
-		</div>
-	</div>*@
-	<!-- END SECTION BANNER -->
-	<!-- END MAIN CONTENT -->
 	<div class="main_content">
-
-		<!-- START SECTION SHIPPING INFO -->
-	<div class="section small_pb">
-		<div class="container">
-			<div class="row no-gutters">
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-shipped"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>ارسال رایگان</h6>
-							<p>به سراسر ایران</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-money-back"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>مرجوعی کالا</h6>
-							<p>در صورت عدم رضایت</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-support"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>پشتیبانی 24 ساعته</h6>
-							<p>خدمات مشتریان</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-lock"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>پرداخت ایمن</h6>
-							<p>از طریق درگاه های پرداخت</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		
-		
+		 
 		<div class="section small_pb small_pt">
 			<div class="container">
-				<div class="row justify-content-center">
+				@*<div class="row justify-content-center">
 					<div class="col-md-6">
 						<div class="heading_s4 text-center">
 							<h2>برترین گروه محصولات</h2>
 						</div>
 						<p class="text-center leads">لیست زیر برترین گروه محصولات رنگ خوشدست را مشاهده می کنید. برای مشاهده محصولات هر گروه بر روی آن کلیک کنید</p>
 					</div>
-				</div>
+				</div>*@
 				<div class="row align-items-center">
 					<div class="col-12">
-						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "5"}, "991":{"items": "6"}, "1199":{"items": "7"}}'>
+						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
+							
+						@foreach (var productGroup in Model.HomeProductGroups)
+						{
 							<div class="item">
 								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/1.jpg" alt="cat_img1" />
-										<span>غلطک های طرح دار</span>
+									<a href="/category/@productGroup.UrlParam">
+										<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
+										<span>@productGroup.Title</span>
 									</a>
 								</div>
 							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/2.jpg" alt="cat_img1" />
-
-										<span>ابزار پتینه</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/3.jpg" alt="cat_img1" />
-
-										<span>رنگ و ابزار هنری</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/4.jpg" alt="cat_img1" />
-
-										<span>مولتی سورفیس</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/5.jpg" alt="cat_img1" />
-
-										<span>ابزار ساختمانی</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/6.jpg" alt="cat_img1" />
-
-										<span>مهر و شابلون</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/7.jpg" alt="cat_img1" />
-
-										<span>اسپری</span>
-									</a>
-								</div>
-							</div>
+						}
+						 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	<!-- START SECTION SHIPPING INFO -->
-		<!-- START SECTION SHOP -->
-		<div class="section small_pt pb_20">
+ 
+		<div class="section small_pt pb_20 bg-gray">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -319,42 +202,39 @@
 					</div>
 				</div>
 				<div class="row shop_container">
-					@for (int i = 1; i <= 8; i++)
+					@foreach (var product in Model.NewestProducts)
 					{
-						var imgurl = "/assets/images/web/"+i+".jpg";
-							
-						<div class="col-lg-3 col-md-4 col-6">
-							<div class="product_box text-center">
-								<div class="product_img">
-									<a href="shop-product-detail.html">
-										<img src="@imgurl" alt="furniture_img1">
+						<div class="col-lg-2 col-md-2  col-6">
+							<div class="product text-center">
+								<div>
+									<a href="/product/@product.Code">
+										<img src="@product.ImageUrl" alt="@product.Title">
 									</a>
-							 
 								</div>
 								<div class="product_info">
-									<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
+									<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 									<div class="product_price">
-										<span class="price">125000 تومان</span>
-										<del>188000 تومان</del>
+										@if (product.IsInPromotion)
+										{
+											<span class="price">@product.DiscountAmountStr</span>
+											<del>@product.AmountStr</del>
+}
+										else
+										{
+												<span class="price">@product.AmountStr</span>
+										}
 									</div>
-								 
-								 
-									<div class="add-to-cart">
-										<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</a>
-									</div>
+									<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
+
 								</div>
 							</div>
 						</div>
-
-
 					}
-
 
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION SHOP -->
-		<!-- START SECTION BANNER -->
+	 
 		<div class="section pb_20 small_pt">
 			<div class="container">
 				<div class="row">
@@ -381,9 +261,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION BANNER -->
-		<!-- START SECTION SHOP -->
-		<div class="section small_pt pb_20">
+
+
+	<div class="section small_pt pb_20 bg-gray">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -395,30 +275,35 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-						
-						@for (int i = 1; i <= 8; i++)
-						{
-							var imgurl = "/assets/images/web/" + i + ".jpg";
+						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "6"}, "1199":{"items": "6"}}'>
+					 
+							@foreach (var product in Model.BestSaleProducts)
+							{
 							<div class="item">
-								<div class="product_box text-center">
+								<div class="product text-center">
 									<div class="product_img">
-										<a href="#">
-											<img src="@imgurl" alt="furniture_img1">
+										<a href="/product/@product.Code">
+											<img src="@product.ImageUrl" alt="@product.Title">
 										</a>
 									 
 									</div>
 									<div class="product_info">
-										<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
+										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 										<div class="product_price">
-											<span class="price">110000 تومان</span>
-											<del>188000 تومان</del>
+											@if (product.IsInPromotion)
+											{
+												<span class="price">@product.DiscountAmountStr</span>
+												<del>@product.AmountStr</del>
+											}
+											else
+											{
+												<span class="price">@product.AmountStr</span>
+											}
 										</div>
 									 
 									 
-										<div class="add-to-cart">
-											<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</a>
-										</div>
+										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
+
 									</div>
 								</div>
 							</div>
@@ -428,95 +313,103 @@
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION SHOP -->
-	 
-		<!-- START SECTION CLIENT LOGO -->
-		<div class="section small_pt">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-6">
-						<div class="heading_s3 text-center">
-							<h2>برندها</h2>
-						</div>
-						<div class="small_divider clearfix"></div>
+	
+
+	<div class="section small_pt">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="heading_s3 text-center">
+						<h2>برندها</h2>
 					</div>
+					<div class="small_divider clearfix"></div>
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo1.png" alt="cl_logo"/>
-								</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo1.png" alt="cl_logo"/>
 							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo2.png" alt="cl_logo"/>
-								</div>
+						</div>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo2.png" alt="cl_logo"/>
 							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo3.png" alt="cl_logo"/>
-								</div>
+						</div>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo3.png" alt="cl_logo"/>
 							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo4.png" alt="cl_logo"/>
-								</div>
+						</div>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo4.png" alt="cl_logo"/>
 							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo5.png" alt="cl_logo"/>
-								</div>
+						</div>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo5.png" alt="cl_logo"/>
 							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo6.png" alt="cl_logo"/>
-								</div>
+						</div>
+						<div class="item">
+							<div class="cl_logo">
+								<img src="/assets/images/cl_logo6.png" alt="cl_logo"/>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION CLIENT LOGO -->
+	</div>
 		
-	<div class="section small_pt pb_20">
+
+	<div class="section small_pt pb_20 bg-gray">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6">
 					<div class="heading_s3 text-center">
-						<h2>جدیدترین غلطک ها</h2>
+						<h2>@Model.TopProductGroupTitle</h2>
 					</div>
 					<div class="small_divider clearfix"></div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-						
-						@for (int i = 1; i <= 8; i++)
-						{
-							var imgurl = "/assets/images/web/" + i + ".jpg";
+					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "6"}, "1199":{"items": "6"}}'>
+						 
+					@foreach (var product in Model.TopCategoryProducts)
+					{
 							<div class="item">
-								<div class="product_box text-center">
+								<div class="product text-center">
 									<div class="product_img">
-										<a href="#">
-											<img src="@imgurl" alt="furniture_img1">
+										<a href="/product/@product.Code">
+											<img src="@product.ImageUrl" alt="@product.Title">
 										</a>
 									 
 									</div>
 									<div class="product_info">
-										<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
-										<div class="product_price">
-											<span class="price">110000 تومان</span>
-											<del>188000 تومان</del>
-										</div>
+										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+										
+											@if (product.IsInPromotion)
+											{
+												<div class="product_price">
+												<span class="price">@product.DiscountAmountStr</span>
+													<del>@product.AmountStr</del>
+												</div>
+											}
+											else
+											{
+												<div class="product_price mb29">
+												<span class="price ">@product.AmountStr</span>
+												</div>
+											}
+									
 									 
 									 
-										<div class="add-to-cart">
-											<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</a>
-										</div>
+										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
+
 									</div>
 								</div>
 							</div>
@@ -539,138 +432,37 @@
 					</div>
 				</div>
 				<div class="row justify-content-center">
-					@for (int i = 1; i <=3; i++)
+					@foreach (var blog in Model.HomeBlogs)
 					{
-						var imgUrl = "/assets/images/blog/"+i+".jpg";
 						<div class="col-lg-4 col-md-6">
 							<div class="blog_post blog_style2 box_shadow1">
 								<div class="blog_img">
-									<a href="blog-single.html">
-										<img src="@imgUrl" alt="el_blog_img1">
+									<a href="/blog/post/@blog.UrlParam">
+										<img src="@blog.ImageUrl" alt="@blog.Title">
 									</a>
 								</div>
 								<div class="blog_content bg-white">
 									<div class="blog_text">
-										<h5 class="blog_title"><a href="#">عنوان مطلب</a></h5>
+										<h5 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h5>
 										<ul class="list_none blog_meta">
-											<li><a href="#"><i class="ti-calendar"></i> 14 اسفند 1398</a></li>
-											<li><a href="#"><i class="ti-comments"></i> 3 نظر</a></li>
+											<li><a href="#"><i class="ti-calendar"></i> @blog.CreationDateStr</a></li>
+											<li><a href="#"><i class="ti-eye"></i> @blog.Visit بازدید</a></li>
 										</ul>
-										<p>توضیحات مختصری راجع به مطلب در این قسمت قرار خواهد گرفت. توضیحات مختصری راجع به مطلب در این قسمت قرار خواهد گرفت. </p>
+										<p>@blog.Summery</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					}
-				
-		 
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- END MAIN CONTENT -->
-	<!-- START FOOTER -->
-<footer class="footer_dark">
-	<div class="footer_top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="widget">
-						<h6 class="widget_title">اطلاعات تماس</h6>
-						<ul class="contact_info contact_info_light">
-							<li>
-								<i class="ti-location-pin"></i>
-								<p>تهران، ستارخان، بین دارایی و برق الستوم، پلاک 525</p>
-							</li>
-							<li>
-								<i class="ti-email"></i>
-								<a href="mailto:info@khoshdast.ir">info@khoshdast.ir</a>
-							</li>
-							<li>
-								<i class="ti-mobile"></i>
-								<p>021 - 44289714</p>
-							</li>
-						</ul>
-					</div>
-					<div class="widget">
-						<ul class="social_icons rounded_social">
-							<li><a href="#" class="sc_facebook"><i class="ion-social-facebook"></i></a></li>
-							<li><a href="#" class="sc_twitter"><i class="ion-social-twitter"></i></a></li>
-							<li><a href="#" class="sc_google"><i class="ion-social-googleplus"></i></a></li>
-							<li><a href="#" class="sc_youtube"><i class="ion-social-youtube-outline"></i></a></li>
-							<li><a href="#" class="sc_instagram"><i class="ion-social-instagram-outline"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="widget">
-						<h6 class="widget_title">لینک های مفید</h6>
-						<ul class="widget_links">
-							<li><a href="#">درباره ما</a></li>
-							<li><a href="#">نحوه خرید از سایت</a></li>
-							<li><a href="#">تماس با ما</a></li>
-							<li><a href="#">اخبار و مقالات</a></li>
-							<li><a href="#">محصولات</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="widget">
-						<h6 class="widget_title">حساب کاربری</h6>
-						<ul class="widget_links">
-							<li><a href="#">پروفایل کاربری</a></li>
-							<li><a href="#">لیست سفارشات</a></li>
-							<li><a href="#">پیگیری سفارش</a></li>
-							<li><a href="#">لیست محصولات</a></li>
-							<li><a href="#">سوالات متداول</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12 col-sm-12">
-					<div class="widget">
-						<h6 class="widget_title">گواهینامه ها</h6>
-						 
-						<div class="newsletter_form rounded_input">
-							<a href="#">
+	 
+@Html.Partial("FrontEnd/_FooterPartial")
 
-								<img width="150px" src="~/assets/images/namad1.jpg" />
-							</a>
-							<a href="#">
 
-								<img src="~/assets/images/namad2.jpg"  width="150px"/>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="bottom_footer border-top-tran">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<p class="mb-md-0 text-center text-md-left">تمامی حقوق این وب سایت مطعلق به مجموعه رنگ خوشدست می باشد. طراحی سایت توسط زاوش</p>
-				</div>
-				@*<div class="col-md-6">
-						<ul class="footer_payment text-center text-md-right">
-							<li><a href="#"><img src="/assets/images/visa.png" alt="visa"></a></li>
-							<li><a href="#"><img src="/assets/images/discover.png" alt="discover"></a></li>
-							<li><a href="#"><img src="/assets/images/master_card.png" alt="master_card"></a></li>
-							<li><a href="#"><img src="/assets/images/paypal.png" alt="paypal"></a></li>
-							<li><a href="#"><img src="/assets/images/amarican_express.png" alt="amarican_express"></a></li>
-						</ul>
-					</div>*@
-			</div>
-		</div>
-	</div>
-</footer>
-
-<div class="whatsappicon">
-	<a href="https://api.whatsapp.com/send?phone=989396084722&text=سلام و وقت بخیر">
-		<img src="~/assets/images/whatssapp.png" />
-	</a>
-</div>
-	<a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
 
 	<!-- Latest jQuery -->
 	<script src="/assets/js/jquery-1.12.4.min.js"></script>

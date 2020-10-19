@@ -109,7 +109,7 @@ video {
 }
 .section.small_pt,
 .footer_top.small_pt {
-	padding-top: 40px;
+	padding-top: 30px;
 }
 .section.small_pb,
 .footer_top.small_pb {
@@ -843,7 +843,7 @@ button:focus {
 	-webkit-background-clip: text;
 }
 .heading_s3 {
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
 	padding-bottom: 15px;
 	position: relative;
 }
@@ -2006,8 +2006,8 @@ header.light_skin.nav-fixed .social_icons li a:hover {
 	margin: 0 auto;
 }
 .shop_banner2 {
-	margin-bottom: 30px;
-	height: 235px;
+	margin-bottom: 14px;
+	height: 198px;
 	overflow: hidden;
 }
 .el_banner1 {
@@ -2645,7 +2645,7 @@ input.text {
 .banner_section.shop_el_slider .carousel-item, 
 .banner_section.shop_el_slider .banner_content_wrap, 
 .banner_section.shop_el_slider .banner_content_wrap .carousel-item {
-	height: 500px;
+	height: 410px;
 }
 .banner_section.slide_wrap, 
 .banner_section.slide_wrap .carousel-item, 

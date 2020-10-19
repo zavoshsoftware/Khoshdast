@@ -7,19 +7,45 @@
 }
 
 @font-face {
-    font-family: 'Yekan';
-    src: url(../fonts/YekanDigits/Yekan.eot) format('embedded-opentype'),
-         url(../fonts/YekanDigits/Yekan.woff2) format('woff2'),
-         url(../fonts/YekanDigits/Yekan.woff) format('woff'),
-         url(../fonts/YekanDigits/Yekan.ttf) format('truetype');
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/IranYekan/eot/iranyekanwebbold(fanum).eot');
+    src: url('../fonts/IranYekan/eot/iranyekanwebbold(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+         url('../fonts/IranYekan/woff2/iranyekanwebbold(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+         url('../fonts/IranYekan/woff/iranyekanwebbold(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+         url('../fonts/IranYekan/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
 }
 
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/IranYekan/eot/iranyekanweblight(fanum).eot');
+    src: url('../fonts/IranYekan/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+         url('../fonts/IranYekan/woff2/iranyekanweblight(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+         url('../fonts/IranYekan/woff/iranyekanweblight(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+         url('../fonts/IranYekan/ttf/iranyekanweblight(fanum).ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekan;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular(fanum).eot');
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+         url('../fonts/IranYekan/woff2/iranyekanwebregular(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+         url('../fonts/IranYekan/woff/iranyekanwebregular(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+         url('../fonts/IranYekan/IranYekan/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
+}
+
+
 body {
-    font-family: Yekan;
+    font-family: iranyekan;
 }
 
 h1, h2, h3, h4, h5, h6, a, span, label, p {
-    font-family: Yekan;
+    font-family: iranyekan;
 }.menu_banners .header-banner h6, .menu_banners .header-banner h4, .menu_banners .header-banner a {
     color: #fff !important;
 }
@@ -88,4 +114,30 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .blog_text p {
     font-size: 14px;
     text-align: justify
+}
+
+.pl0 {
+    padding-left: 0;
+}
+.pr0 {
+    padding-right: 0;
+}
+
+.bg-gray {
+    background-color: #f9f9f9 !important
+}
+.btn-addtocart-home {
+    padding:4px 20px;
+}
+
+.product_info {
+    min-height: 142px;
+}
+
+.mb29 {
+    margin-bottom: 29px;
+}
+
+.pg-list-item {
+    margin-bottom: 20px;
 }

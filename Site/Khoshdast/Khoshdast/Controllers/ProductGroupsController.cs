@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace Khoshdast.Controllers
 {
@@ -16,7 +17,7 @@ namespace Khoshdast.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
-        // GET: ProductGroups
+     
         public ActionResult Index(Guid? id)
         {
             List<ProductGroup> productGroups = new List<ProductGroup>();
@@ -186,44 +187,17 @@ namespace Khoshdast.Controllers
             base.Dispose(disposing);
         }
 
-        //public void TestDatainitial()
-        //{
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "تیغ کاردک", "تیغ کاردک");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "سنباده", "سنباده");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "سینی", "سینی");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "قلم نقاشل", "قلم نقاشل");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "لیسه پلاستیکی", "لیسه پلاستیکی");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "سنباده گیر", "سنباده گیر");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "نردبان چوبی", "نردبان چوبی");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "چسب نواری", "چسب نواری");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "کاور", "کاور");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "لیسه کاغذ دیواری", "لیسه کاغذ دیواری");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "مقلاویز", "مقلاویز");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "نوار کناف", "نوار کناف");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "پادری", "پادری");
-        //    TestData(new Guid("8f7ebaa2-64e3-4d13-967e-360f0e53eb29"), "میکسر", "میکسر");
-     
-          
-        //}
+        [AllowAnonymous]
+        [Route("category")]
+        public ActionResult List()
+        {
+        
+            ProductGroupListViewModel productGroupList = new ProductGroupListViewModel()
+            {
+                ProductGroups = db.ProductGroups.Where(c=>c.ParentId==null&& c.IsDeleted==false&&c.IsActive).ToList(),
+            };
 
-
-        //public void TestData(Guid parentId,string title, string urlParam)
-        //{
-        //    ProductGroup productGroup=new ProductGroup()
-        //    {
-        //        Id=Guid.NewGuid(),
-        //        ParentId = parentId,
-        //        Title = title,
-        //        Order = 1,
-        //        UrlParam = urlParam,
-        //        IsDeleted = false,
-        //        IsActive = true,
-        //        CreationDate = DateTime.Now
-        //    };
-
-        //    db.ProductGroups.Add(productGroup);
-        //    db.SaveChanges();
-        //}
-     
+            return View(productGroupList);
+        }
     }
 }
