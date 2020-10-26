@@ -12,7 +12,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="رنگ خوشدست">
-
+	<meta name="robots" content="noindex" />
 	<!-- SITE TITLE -->
 	<title>رنگ خوشدست</title>
 	<!-- Favicon Icon -->
@@ -65,7 +65,7 @@
 
 <div class="staggered-animation-wrap">
 		<div class="custom-container">
-			<div class="row">
+			<div class="row slide-row">
 				<div class="col-lg-9">
 					<div class="banner_section shop_el_slider">
 						<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
@@ -84,7 +84,7 @@
 													<div class="banner_slide_content banner_content_inner">
 														<div class="col-lg-7 col-10">
 															<div class="banner_content3 overflow-hidden">
-																<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
 																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
 																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
 															</div>
@@ -98,7 +98,7 @@
 													<div class="banner_slide_content banner_content_inner">
 														<div class="col-lg-8 col-10">
 															<div class="banner_content3 overflow-hidden">
-																<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
 																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
 																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
 															</div>
@@ -128,7 +128,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 pr0 d-none d-lg-block">
+				<div class="col-lg-3">
 					<div class="shop_banner2 el_banner1">
 						<a href="#" class="hover_effect1">
 							<div class="el_title text_white">
@@ -171,7 +171,7 @@
 				</div>*@
 				<div class="row align-items-center">
 					<div class="col-12">
-						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
+						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
 							
 						@foreach (var productGroup in Model.HomeProductGroups)
 						{
@@ -179,7 +179,7 @@
 								<div class="categories_box">
 									<a href="/category/@productGroup.UrlParam">
 										<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
-										<span>@productGroup.Title</span>
+										@*<span>@productGroup.Title</span>*@
 									</a>
 								</div>
 							</div>
@@ -201,10 +201,10 @@
 						<div class="small_divider clearfix"></div>
 					</div>
 				</div>
-				<div class="row shop_container">
+				<div class="row shop_container top-product">
 					@foreach (var product in Model.NewestProducts)
 					{
-						<div class="col-lg-2 col-md-2  col-6">
+						<div class="col-lg-3 col-md-3 col-6">
 							<div class="product text-center">
 								<div>
 									<a href="/product/@product.Code">
@@ -275,7 +275,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "6"}, "1199":{"items": "6"}}'>
+						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
 					 
 							@foreach (var product in Model.BestSaleProducts)
 							{
@@ -377,7 +377,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "6"}, "1199":{"items": "6"}}'>
+					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
 						 
 					@foreach (var product in Model.TopCategoryProducts)
 					{
@@ -428,7 +428,6 @@
 						<div class="heading_s1 text-center">
 							<h2>آخرین اخبار و مقالات</h2>
 						</div>
-						<p class="leads text-center">در این بخش آخرین اخبار و مقالات وب سایت رنگ خوشدست را مشاهده می نمایید.</p>
 					</div>
 				</div>
 				<div class="row justify-content-center">

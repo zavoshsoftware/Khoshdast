@@ -104,7 +104,7 @@ video {
 	width: 100%;
 }
 .section {
-	padding: 100px 0;
+	padding: 50px 0;
 	position:relative;
 }
 .section.small_pt,
@@ -1139,7 +1139,7 @@ button:focus {
 }
 .navbar .navbar-nav > li > .nav-link {
 	font-weight: 500;
-	padding: 22px 10px;
+	padding: 22px 7px;
 	text-transform: capitalize;
 	font-size: 14px;
 }
@@ -1795,17 +1795,17 @@ button:focus {
 	display: none !important;
 }
 .navbar-toggler {
-	float: right;
-	margin: 13px 0 0 3px;
-	font-size: 28px;
-	color: #333;
-	transition: all 0.5s ease 0s;
-	border-radius: 0;
-	height: 35px;
-	width: 35px;
-	padding: 0;
-	line-height: 36px;
-	transition: none;
+    float: right;
+    margin: 13px 3px 0 0;
+    font-size: 28px;
+    color: #333;
+    transition: all 0.5s ease 0s;
+    border-radius: 0;
+    height: 35px;
+    width: 45px;
+    padding: 0;
+    line-height: 36px;
+    transition: none;
 }
 .navbar-toggler[aria-expanded="true"] span::before {
     content: "\f129";
@@ -3825,7 +3825,7 @@ footer {
 	position: relative;
 }
 .footer_top {
-	padding: 100px 0 70px;
+	padding: 50px 0 20px;
 }
 .footer_logo {
 	margin-bottom: 20px;

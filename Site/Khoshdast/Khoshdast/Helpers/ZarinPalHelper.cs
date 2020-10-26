@@ -9,7 +9,7 @@ namespace Helpers
 {
     public class ZarinPalHelper
     {
-        private String MerchantId = "69773260-ea70-11e9-8a57-000c295eb8fc";
+        private String MerchantId = WebConfigurationManager.AppSettings["MerchantId"];
         private DatabaseContext db = new DatabaseContext();
 
         public string GetMerchantId()
@@ -31,11 +31,11 @@ namespace Helpers
                 productDesc = productDesc + orderDetail.Product.Code + ",";
             }
 
-            String description = "خرید محصول کد" + productDesc;
+            String description = "خرید محصول از وب سایت رنگ خوشدست: " + productDesc;
 
             ZarinPal.PaymentRequest pr = new ZarinPal.PaymentRequest(MerchantId, Amount, CallbackURL, description);
 
-            zarinpal.DisableSandboxMode();
+            zarinpal.EnableSandboxMode();
             try
             {
                 var res = zarinpal.InvokePaymentRequest(pr);

@@ -48,10 +48,10 @@
 					</div>
 					<form method="post">
 						<div class="form-group">
-							<input type="text" required class="form-control" value="@Model.UserInformation.FullName" name="fname" placeholder="نام تحویل گیرنده *">
+							<input type="text" required class="form-control" value="@Model.UserInformation.FullName" id="fullname" placeholder="نام تحویل گیرنده *">
 						</div>
 						<div class="form-group">
-							<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" name="lname" placeholder="شماره موبایل تحویل گیرنده *">
+							<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" id="cellnumber" placeholder="شماره موبایل تحویل گیرنده *">
 						</div>
 					 
 					<div class="form-group">
@@ -70,8 +70,8 @@
 						
 					<div class="form-group">
 						<div class="custom_select">
-							<select id="billing_city" class="form-control">
-								<option value="0">انتخاب شهر</option>
+							<select id="ddlcity" class="form-control">
+								<option value="0">انتخاب شهر*</option>
 								
 							</select>
 						</div>
@@ -79,15 +79,15 @@
 						
 
 					<div class="form-group">
-							<input type="text" class="form-control" name="billing_address" required="" placeholder="آدرس *">
+							<input type="text" class="form-control" id="address" required="" placeholder="آدرس *">
 						</div>
 					 
 				  
 						<div class="form-group">
-							<input class="form-control" required type="text" name="zipcode" placeholder="کد پستی">
+							<input class="form-control" required type="text" id="postalCode" placeholder="کد پستی">
 						</div>
 						<div class="form-group mb-0">
-							<textarea rows="5" class="form-control" placeholder="توضیحات"></textarea>
+							<textarea rows="5" class="form-control" id="note" placeholder="توضیحات"></textarea>
 						</div>
 				 
 					 
@@ -135,8 +135,7 @@
 								</tfoot>
 							</table>
 						</div>
-			 
-						<a href="/payment" class="btn btn-fill-out btn-block">پرداخت سفارش</a>
+			 <button type="button" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>
 					</div>
 				</div>
 			</div>
@@ -156,7 +155,7 @@
 				var SelectedValue = $(this).val();
 				if (SelectedValue !== "") {
 					var procemessage = "<option value='0'> صبرکنید...</option>";
-					$("#billing_city").html(procemessage).show();
+					$("#ddlcity").html(procemessage).show();
 					$.ajax(
 						{
 							url: "/Basket/FillCities",
@@ -168,7 +167,7 @@
 								for (var x = 0; x < data.length; x++) {
 									markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
 								}
-								$("#billing_city").html(markup).show();
+								$("#ddlcity").html(markup).show();
 							},
 							error: function (reponse) {
 								alert("error : " + reponse);

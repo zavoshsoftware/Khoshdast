@@ -57,5 +57,8 @@ namespace Models
                 HasOptional(p => p.Parent).WithMany(j => j.ProductGroups).HasForeignKey(p => p.ParentId);
             }
         }
+
+        [Display(Name = "کد گروه محصول")]
+        public int? Code { get; set; }
     }
 }

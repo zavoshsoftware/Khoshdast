@@ -454,6 +454,7 @@
 .header_wrap nav.navbar {
 	display: table;
 	width: 100%;
+    text-align: center;
 }
 .header_wrap .navbar .navbar-nav.attr-nav {
 	display: block;
@@ -1272,7 +1273,7 @@ p {
 	height: 250px;
 }
 .banner_section:not(.full_screen), .banner_section:not(.full_screen) .carousel-item, .banner_section:not(.full_screen) .banner_content_wrap, .banner_section:not(.full_screen) .banner_content_wrap .carousel-item {
-	height: 350px;
+	height: 155px;
 }
 .banner_content h2 {
 	font-size: 28px;
@@ -1288,7 +1289,7 @@ p {
 	margin-bottom: 15px;
 }
 .banner_content3 h2 {
-	font-size: 30px;
+	font-size: 20px;
 }
 .banner_half_content {
 	padding: 100px 0 30px;

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace Khoshdast.Controllers
 {
@@ -140,5 +141,38 @@ namespace Khoshdast.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //[Authorize]
+        //[Route("profile")]
+        //public ActionResult UserProfile()
+        //{
+        //    var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+
+        //    string name = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+
+        //    Guid userId = new Guid(name);
+
+        //    User user = db.Users.Find(userId);
+
+        //    if (user != null)
+        //    {
+        //        ProfileViewModel profile = new ProfileViewModel()
+        //        {
+        //            Id = user.Id,
+        //            CellNumber = user.CellNum,
+        //            Email = user.Email,
+        //            FullName = user.Email,
+        //        };
+
+        //        ViewBag.GenderId = new SelectList(db.Genders, "Id", "Title",user.GenderId);
+
+        //        ViewBag.BirthDay = new SelectList(db.Genders, "Id", "Title", user.GenderId);
+                
+
+        //    }
+
+        //    return View(profile);
+        //}
+
     }
 }

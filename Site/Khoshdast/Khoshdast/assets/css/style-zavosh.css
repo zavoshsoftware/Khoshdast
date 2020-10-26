@@ -141,3 +141,33 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .pg-list-item {
     margin-bottom: 20px;
 }
+
+.navbar-toggler {
+    float: right;    
+}
+
+.ion-android-menu {
+    float: right;
+    
+}
+
+@media(max-width:768px) {
+    .slide-row .col-lg-3 {
+        margin-top: 15px;
+    }
+}
+@media(min-width:992px) {
+    .slide-row .col-lg-3 {
+        padding-right: 0;
+    }
+}
+
+.cat_slider .item .categories_box img {
+    border-radius: 5px;
+}
+
+@media(min-width:992px) {
+    .top-product .col-md-3 {
+        padding-left: 0 !important;
+    }
+}

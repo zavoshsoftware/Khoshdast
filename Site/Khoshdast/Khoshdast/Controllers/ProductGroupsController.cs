@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Helpers;
 using Models;
 using ViewModels;
 
@@ -68,6 +69,10 @@ namespace Khoshdast.Controllers
 
 
                 #endregion
+                CodeGenerator codeGenerator = new CodeGenerator();
+
+                productGroup.UrlParam = GetUrlParam(productGroup.Title);
+                productGroup.Code = codeGenerator.ReturnProductGroupCode();
                 productGroup.ParentId = id;
                 productGroup.IsDeleted = false;
                 productGroup.CreationDate = DateTime.Now;
@@ -83,6 +88,31 @@ namespace Khoshdast.Controllers
             }
 
             return View(productGroup);
+        }
+
+        public string GetUrlParam(string title)
+        {
+            title = ReplaceCharachter(title, '@');
+            title = ReplaceCharachter(title, '#');
+            title = ReplaceCharachter(title, '$');
+            title = ReplaceCharachter(title, '&');
+            title = ReplaceCharachter(title, '^');
+            title = ReplaceCharachter(title, '/');
+            title = ReplaceCharachter(title, ']');
+            title = ReplaceCharachter(title, '[');
+            title = ReplaceCharachter(title, '%');
+            title = ReplaceCharachter(title, '?');
+            title = ReplaceCharachter(title, '؟');
+            title = ReplaceCharachter(title, '!');
+
+            return title.Replace(' ','-');
+        }
+
+        public string ReplaceCharachter(string title, char charachter)
+        {
+            if (title.Contains(charachter))
+                return title.Replace(charachter, '-');
+            return title;
         }
 
         public ActionResult Edit(Guid? id, Guid? parentId)
@@ -198,6 +228,32 @@ namespace Khoshdast.Controllers
             };
 
             return View(productGroupList);
+        }
+
+        public string GetProductGroupsCodes()
+        {
+            List<ProductGroup> productGroups = db.ProductGroups.Where(c => c.IsDeleted == false).ToList();
+
+            int i = 1;
+            foreach (ProductGroup productGroup in productGroups)
+            {
+                productGroup.Code = i;
+                i++;
+            }
+            db.SaveChanges();
+            return String.Empty;
+        }
+        public string GetProductGroupsUrlParam()
+        {
+            List<ProductGroup> productGroups = db.ProductGroups.Where(c => c.IsDeleted == false).ToList();
+
+            int i = 1;
+            foreach (ProductGroup productGroup in productGroups)
+            {
+                productGroup.UrlParam = GetUrlParam(productGroup.Title);
+            }
+            db.SaveChanges();
+            return String.Empty;
         }
     }
 }

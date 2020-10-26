@@ -49,6 +49,9 @@ namespace Models
         [Display(Name = "RemainCredit", ResourceType = typeof(Resources.Models.User))]
         public decimal? RemainCredit { get; set; }
 
+        public int BirthYear { get; set; }
+        public int BirthMonth { get; set; }
+        public int BirthDay { get; set; }
      
         public virtual Gender Gender { get; set; }
         public virtual Role Role { get; set; }

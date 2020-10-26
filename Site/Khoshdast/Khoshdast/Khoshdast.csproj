@@ -1240,6 +1240,18 @@
     <Compile Include="Migrations\202010191543472_V05.Designer.cs">
       <DependentUpon>202010191543472_V05.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010240627546_V06.cs" />
+    <Compile Include="Migrations\202010240627546_V06.Designer.cs">
+      <DependentUpon>202010240627546_V06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010251254281_V07.cs" />
+    <Compile Include="Migrations\202010251254281_V07.Designer.cs">
+      <DependentUpon>202010251254281_V07.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010261941052_V08.cs" />
+    <Compile Include="Migrations\202010261941052_V08.Designer.cs">
+      <DependentUpon>202010261941052_V08.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1268,6 +1280,8 @@
     <Compile Include="Models\Entities\ZarinpallAuthority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CallBackViewModel.cs" />
+    <Compile Include="ViewModels\DropDownListViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\BlogDetailViewModel.cs" />
     <Compile Include="ViewModels\BlogListViewModel.cs" />
@@ -1281,6 +1295,7 @@
     <Compile Include="ViewModels\ProductDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductGroupListViewModel.cs" />
     <Compile Include="ViewModels\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\_BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1534,6 +1549,7 @@
     <Content Include="Views\Blogs\List.cshtml" />
     <Content Include="Views\Blogs\ListByGroup.cshtml" />
     <Content Include="Views\ProductGroups\List.cshtml" />
+    <Content Include="Views\Basket\CallBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1571,6 +1587,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010191543472_V05.resx">
       <DependentUpon>202010191543472_V05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010240627546_V06.resx">
+      <DependentUpon>202010240627546_V06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010251254281_V07.resx">
+      <DependentUpon>202010251254281_V07.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010261941052_V08.resx">
+      <DependentUpon>202010261941052_V08.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

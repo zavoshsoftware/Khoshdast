@@ -8,13 +8,13 @@ using System.Web.Mvc.Html;
 
 namespace Models
 {
-     
+
     public class Order : BaseEntity
     {
         public Order()
         {
             OrderDetails = new List<OrderDetail>();
-            ZarinpallAuthorities = new List<ZarinpallAuthority>(); 
+            ZarinpallAuthorities = new List<ZarinpallAuthority>();
         }
 
         [Display(Name = "Code", ResourceType = typeof(Resources.Models.Order))]
@@ -32,6 +32,14 @@ namespace Models
         [Column(TypeName = "Money")]
         public decimal TotalAmount { get; set; }
 
+        [NotMapped]
+        [Display(Name = "Amount", ResourceType = typeof(Resources.Models.Order))]
+        public string TotalAmountStr
+        {
+            get { return TotalAmount.ToString("n0") + " تومان"; } 
+        }
+
+
         [Display(Name = "OrderStatusId", ResourceType = typeof(Resources.Models.Order))]
         [Required]
         public Guid OrderStatusId { get; set; }
@@ -39,7 +47,7 @@ namespace Models
         public Guid? CityId { get; set; }
 
         [Display(Name = "SaleReferenceId", ResourceType = typeof(Resources.Models.Order))]
-        public Int64? SaleReferenceId { get; set; }
+        public string SaleReferenceId { get; set; }
 
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual User User { get; set; }
@@ -59,9 +67,35 @@ namespace Models
         [Display(Name = "هزینه جمع فاکتور")]
         public decimal? SubTotal { get; set; }
 
+        [NotMapped]
+        [Display(Name = "هزینه جمع فاکتور")]
+        public string SubTotalStr
+        {
+            get
+            {
+                if (SubTotal != null)
+                    return SubTotal.Value.ToString("n0") + " تومان";
+
+                return string.Empty;
+            }
+        }
 
         [Display(Name = "مبلغ تخفیف")]
         public decimal? DiscountAmount { get; set; }
+
+
+        [NotMapped]
+        [Display(Name = "مبلغ تخفیف")]
+        public string DiscountAmountStr
+        {
+            get
+            {
+                if (DiscountAmount != null)
+                    return DiscountAmount.Value.ToString("n0") + " تومان";
+
+                return string.Empty;
+            }
+        }
 
         public virtual List<ZarinpallAuthority> ZarinpallAuthorities { get; set; }
         internal class Configuration : EntityTypeConfiguration<Order>
@@ -91,6 +125,6 @@ namespace Models
         public string PostalCode { get; set; }
         public DateTime? PaymentDate { get; set; }
 
-    
+
     }
 }

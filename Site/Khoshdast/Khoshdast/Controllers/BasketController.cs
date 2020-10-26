@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Helpers;
 using Models;
- 
+
 using ViewModels;
 
 namespace Khoshdast.Controllers
@@ -26,14 +27,14 @@ namespace Khoshdast.Controllers
             return Json("true", JsonRequestBehavior.AllowGet);
         }
 
-     
+
 
         [Route("Basket")]
         public ActionResult Basket()
         {
             CartViewModel cart = new CartViewModel();
 
-        
+
 
             List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
 
@@ -286,7 +287,7 @@ namespace Khoshdast.Controllers
 
                 if (user != null)
                 {
-                    UserInformation userInformation=new UserInformation()
+                    UserInformation userInformation = new UserInformation()
                     {
                         FullName = user.FullName,
                         CellNumber = user.CellNum
@@ -300,7 +301,7 @@ namespace Khoshdast.Controllers
                     return Redirect("/login?ReturnUrl=checkout");
                 }
 
-               
+
 
                 List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
 
@@ -319,7 +320,7 @@ namespace Khoshdast.Controllers
 
 
                 checkOut.Provinces = db.Provinces.OrderBy(current => current.Title).ToList();
-                
+
 
                 ViewBag.CityId = new SelectList(db.Cities, "Id", "Title");
 
@@ -350,7 +351,7 @@ namespace Khoshdast.Controllers
 
 
         public ActionResult Finalize(string notes, string cellnumber, string postal,
-                                    string address, string city, string fullname, string paymentType)
+                                    string address, string city, string fullname)
         {
             try
             {
@@ -376,7 +377,7 @@ namespace Khoshdast.Controllers
                         order.Description = notes;
                         order.CityId = new Guid(city);
 
-                       
+
 
                         order.TotalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
 
@@ -387,18 +388,13 @@ namespace Khoshdast.Controllers
                         db.SaveChanges();
                         RemoveCookie();
 
-                        string res = "/PaymentafterShippment?code="+order.Code;
+                        string res = "";
 
-                        if (paymentType == "online")
-                        {
-                            decimal onlineAmount = Convert.ToDecimal(order.TotalAmount * 10);
-                            //PaymentUniqeCode paymentUniqeCode =
-                            //    CreateUniqeCode(onlineAmount, order.Id);
+                        if (order.TotalAmount == 0)
+                            res = "freecallback?orderid=" + order.Id;
 
-                            string url ="/payment";
-
-                            res = url;
-                        }
+                        else
+                            res = zp.ZarinPalRedirect(order, order.TotalAmount);
 
                         return Json(res, JsonRequestBehavior.AllowGet);
                     }
@@ -416,8 +412,8 @@ namespace Khoshdast.Controllers
 
 
         #region Finalize
-      
-      
+
+
 
 
         public decimal GetTotalAmount(decimal? subtotal, decimal? discount, decimal? shippment)
@@ -464,16 +460,24 @@ namespace Khoshdast.Controllers
 
                 foreach (ProductInCart product in products)
                 {
+                    decimal amount = product.Product.Amount;
+
+                    if (product.Product.IsInPromotion)
+                    {
+                        if (product.Product.DiscountAmount != null)
+                            amount = product.Product.DiscountAmount.Value;
+                    }
+
                     OrderDetail orderDetail = new OrderDetail()
                     {
                         ProductId = product.Product.Id,
                         Quantity = product.Quantity,
-                        Amount = product.Product.Amount * product.Quantity,
+                        Amount = amount * product.Quantity,
                         IsDeleted = false,
                         IsActive = true,
                         CreationDate = DateTime.Now,
                         OrderId = order.Id,
-                        Price = product.Product.Amount
+                        Price = amount
                     };
 
                     db.OrderDetails.Add(orderDetail);
@@ -550,157 +554,91 @@ namespace Khoshdast.Controllers
         }
         #endregion
 
-
-
-        //[HttpPost]
-        //[Route("callback")]
-        //public ActionResult CallBack(PaymentCallbackModel model)
-        //{
-        //    BaseViewModelHelper baseViewModel = new BaseViewModelHelper();
-
-        //    CallBackViewModel callback = new CallBackViewModel()
-        //    {
-        //        Brands = baseViewModel.GetMenu(),
-        //        OrderCode = model.OrderId.ToString(),
-        //    };
-
-
-        //    if (model.status == Constants.ParsianPaymentGateway.Successful && (model.Token ?? 0L) > 0L)
-        //    {
-        //        //ایجاد یک نمونه از سرویس تایید پرداخت
-        //        using (var confirmSvc = new ConfirmService())
-        //        {
-        //            confirmSvc.Url = ConfigHelper.ParsianPGWConfirmServiceUrl;
-
-        //            //ایجاد یک نمونه از نوع پارامتر سرویس تایید پرداخت
-        //            var confirmRequestData = new ClientConfirmRequestData();
-
-        //            //شناسه پذیرندگی باید در فراخوانی سرویس تایید تراکنش پرداخت ارائه شود
-        //            confirmRequestData.LoginAccount = ConfigHelper.LoginAccount;
-
-        //            //توکن باید ارائه شود
-        //            confirmRequestData.Token = model.Token ?? -1;
-
-        //            //فراخوانی سرویس و دریافت نتیجه فراخوانی
-        //            var confirmResponse = confirmSvc.ConfirmPayment(confirmRequestData);
-        //            //  callBackViewModel.ConfirmResponseStatus = confirmResponse.Status;
-
-        //            //کنترل کد وضعیت نتیجه فراخوانی
-        //            //درصورتی که موفق باشد، باید خدمات یا کالا به کاربر پرداخت کننده ارائه شود
-        //            if (confirmResponse.Status == Constants.ParsianPaymentGateway.Successful)
-        //            {
-        //                PaymentUniqeCode paymentUniqeCode = db.PaymentUniqeCodes
-        //                    .FirstOrDefault(current => current.Id == model.OrderId);
-
-        //                if (paymentUniqeCode != null)
-        //                {
-        //                    paymentUniqeCode.Amount = Convert.ToDecimal(model.Amount);
-        //                    paymentUniqeCode.HashCartNumber = model.HashCardNumber;
-        //                    paymentUniqeCode.RNN = model.RRN.ToString();
-        //                    paymentUniqeCode.Status = model.status;
-        //                    paymentUniqeCode.TerminalNumber = model.TerminalNo;
-        //                    paymentUniqeCode.Token = model.ToString();
-        //                    paymentUniqeCode.IsSuccess = true;
-        //                    db.SaveChanges();
-
-        //                    callback.IsSuccess = true;
-        //                    callback.RefrenceId = model.RRN.ToString();
-        //                    return View("CallBack", callback);
-
-        //                }
-        //                callback.IsSuccess = false;
-        //                return View("CallBack", callback);
-        //            }
-
-        //            callback.IsSuccess = false;
-        //            return View("CallBack", callback);
-        //        }
+        private String MerchantId = WebConfigurationManager.AppSettings["MerchantId"];
 
 
 
+        [Route("callback")]
+        public ActionResult CallBack(string authority, string status)
+        {
+            String Status = status;
+            CallBackViewModel callBack = new CallBackViewModel();
+            ZarinPalHelper zarinPal = new ZarinPalHelper();
+            if (Status != "OK")
+            {
+                callBack.IsSuccess = false;
+                callBack.RefrenceId = "414";
+                Order order = zarinPal.GetOrderByAuthority(authority);
+                if (order != null)
+                {
+                    callBack.Order = order;
+                    callBack.OrderDetails = db.OrderDetails
+                                .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c => c.Product).ToList();
+                }
+            }
 
-        //    }
+            else
+            {
+                try
+                {
+                    var zarinpal = ZarinPal.ZarinPal.Get();
+                    zarinpal.EnableSandboxMode();
+                    String Authority = authority;
+                    long Amount = zarinPal.GetAmountByAuthority(Authority);
 
-        //    callback.IsSuccess = false;
-        //    return View("CallBack", callback);
-        //    //String Status = status;
-        //    //CallBackViewModel callBack = new CallBackViewModel();
-        //    //callBack.Brands = baseViewModel.GetMenu();
-        //    //if (Status != "OK")
-        //    //    callBack.IsSuccess = false;
+                    var verificationRequest = new ZarinPal.PaymentVerification(MerchantId, Amount, Authority);
+                    var verificationResponse = zarinpal.InvokePaymentVerification(verificationRequest);
+                    if (verificationResponse.Status == 100 || verificationResponse.Status == 101)
+                    {
+                        Order order = zarinPal.GetOrderByAuthority(authority);
+                        if (order != null)
+                        {
+                            order.IsPaid = true;
+                            order.PaymentDate = DateTime.Now;
+                            order.SaleReferenceId = verificationResponse.RefID;
 
-        //    //else
-        //    //{
-        //    //    try
-        //    //    {
-        //    //        var zarinpal = ZarinPal.ZarinPal.Get();
-        //    //        zarinpal.DisableSandboxMode();
-        //    //        String Authority = authority;
-        //    //        long Amount = zp.GetAmountByAuthority(Authority);
+                            db.SaveChanges();
+                            callBack.Order = order;
+                            callBack.IsSuccess = true;
+                            callBack.OrderCode = order.Code.ToString();
+                            callBack.RefrenceId = verificationResponse.RefID;
 
-        //    //        var verificationRequest = new ZarinPal.PaymentVerification(zp.GetMerchantId(), Amount, Authority);
-        //    //        var verificationResponse = zarinpal.InvokePaymentVerification(verificationRequest);
-        //    //        if (verificationResponse.Status == 100)
-        //    //        {
-        //    //            Order order = zp.GetOrderByAuthority(authority);
-        //    //            if (order != null)
-        //    //            {
-        //    //                order.IsPaid = true;
-        //    //                order.OrderStatusId = db.OrderStatuses.FirstOrDefault(current => current.Code == 3).Id;
-        //    //                order.PaymentDate = DateTime.Now;
+                            callBack.OrderDetails = db.OrderDetails
+                                .Where(c => c.OrderId == order.Id && c.IsDeleted == false).Include(c => c.Product).ToList();
+                            foreach (OrderDetail orderDetail in callBack.OrderDetails)
+                            {
+                                Product product = orderDetail.Product;
+                                product.Stock = orderDetail.Product.Stock - 1;
 
-        //    //                ChangeStockAfterPayment(order.Id);
+                                if (product.Stock == 0)
+                                {
+                                    product.IsAvailable = false;
+                                }
+                                db.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            callBack.IsSuccess = false;
+                            callBack.RefrenceId = "سفارش پیدا نشد";
+                        }
+                    }
+                    else
+                    {
+                        callBack.IsSuccess = false;
+                        callBack.RefrenceId = verificationResponse.Status.ToString();
+                    }
+                }
+                catch (Exception e)
+                {
+                    callBack.IsSuccess = false;
+                    callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
+                }
+            }
 
-        //    //                db.SaveChanges();
-        //    //                callBack.IsSuccess = true;
-        //    //                callBack.OrderCode = order.Code.ToString();
-        //    //                callBack.RefrenceId = verificationResponse.RefID;
+            return View(callBack);
+        }
 
-        //    //            }
-        //    //            else
-        //    //            {
-        //    //                callBack.IsSuccess = false;
-        //    //                callBack.RefrenceId = "سفارش پیدا نشد";
-        //    //            }
-        //    //        }
-        //    //        else
-        //    //        {
-        //    //            callBack.IsSuccess = false;
-        //    //            callBack.RefrenceId = verificationResponse.Status.ToString();
-        //    //        }
-        //    //    }
-        //    //    catch (Exception e)
-        //    //    {
-        //    //        callBack.IsSuccess = false;
-        //    //        callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
-        //    //    }
-        //    //}
-        //   // return View(callBack);
-
-        //}
-
-        //[Route("PaymentafterShippment")]
-        //public ActionResult CallBackFree(string code)
-        //{
-        //    CallBackViewModel callBack = new CallBackViewModel();
-        //    callBack.Brands = baseViewModel.GetMenu();
-          
-
-         
-        //        try
-        //        {
-        //        callBack.IsSuccess = true;
-        //            callBack.OrderCode = code;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            callBack.IsSuccess = false;
-        //            callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
-        //        }
-            
-        //    return View(callBack);
-
-        //}
 
         public void ChangeStockAfterPayment(Guid orderId)
         {

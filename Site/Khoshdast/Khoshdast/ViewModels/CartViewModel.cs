@@ -29,5 +29,18 @@ namespace ViewModels
                 return (Product.Amount * Quantity).ToString("n0") + " تومان";
             }
         }
+
+   public string  Amount
+        {
+            get
+            {
+                if (Product.IsInPromotion && Product.DiscountAmount != null)
+                    return (Product.DiscountAmount.Value).ToString("n0") + " تومان";
+
+                return (Product.Amount).ToString("n0") + " تومان";
+            }
+        }
+
+
     }
 }

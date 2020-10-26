@@ -112,34 +112,28 @@ function addToBasket(code, qty) {
         });
 }
 
-function FinalizeOrder() {
+function finalizeOrder() {
     //DisappearButton();
-    var orderNotes = $('#orderNotes').val();
-    var billing_cellnumber = $('#billing_cellnumber').val();
-    var billing_postal = $('#billing_postal').val();
-    var billing_Address = $('#billing_Address').val();
-    var billing_city = $('#billing_city option:selected').val();
-    var billing_fullname = $('#billing_fullname').val();
-    var biling_paymentType = '';
-    if ($("#offline-payment").prop("checked")) {
-        biling_paymentType = 'offline';
-    }
-    else if ($("#online-payment").prop("checked")) {
-        biling_paymentType = 'online';
-    }
+    var orderNotes = $('#note').val();
+    var cellnumber = $('#cellnumber').val();
+    var postalCode = $('#postalCode').val();
+    var address = $('#address').val();
+    var city = $('#ddlcity option:selected').val();
+    var fullname = $('#fullname').val();
+ 
 
-    if (billing_city === undefined || billing_city === '0' || billing_city === 0)
-        billing_city = "";
-    if (billing_fullname !== "" &&
-        billing_cellnumber !== "" &&
-        billing_Address !== "" &&
-        billing_city !== "") {
+    if (city === undefined || city === '0' || city === 0)
+        city = "";
+    if (fullname !== "" &&
+        cellnumber !== "" &&
+        address !== "" &&
+        city !== "") {
         $.ajax(
             {
                 url: "/Basket/Finalize",
                 data: {
-                    notes: orderNotes, cellnumber: billing_cellnumber, postal: billing_postal, address: billing_Address,
-                    city: billing_city, fullname: billing_fullname, paymentType: biling_paymentType
+                    notes: orderNotes, cellnumber: cellnumber, postal: postalCode, address: address,
+                    city: city, fullname: fullname
                 },
                 type: "GET"
             }).done(function (result) {
