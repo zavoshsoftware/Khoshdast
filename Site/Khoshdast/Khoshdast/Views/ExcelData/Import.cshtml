@@ -1,0 +1,39 @@
+﻿@model ViewModels.UploadFile
+
+
+@{
+    ViewBag.Title = "ایمپورت فایل اکسل";
+}
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken();
+    <div class="row">
+        <div class="col-md-6"> <div class="form-horizontal">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+               اکسل
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ExcelFile, new { type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExcelFile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type = "submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div></div>
+        <div class="col-md-6 alert alert-info">
+            <p>فایل نمونه اکسل را از 
+                <a href="/Uploads/saniekar-excel.xlsx">
+                    اینجا
+                </a>    دانلود کنید.</p>
+            <p>اگر ستونی مقدار نداشت آن را خالی بگذارید و از به کار بردن کاراکترهایی مثل - ، . بپرهیزید</p>
+        </div>
+
+    </div>
+   
+}

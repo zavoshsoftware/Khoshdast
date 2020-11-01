@@ -20,7 +20,7 @@
                       .Template(@<text>
                 @Html.ActionLink("ویرایش", "Edit", new { id = @item.Id, parentId =ViewBag.parentId }, new { @class = "k-button" })
                 @Html.ActionLink("حذف", "Delete", new { id = @item.Id }, new { @class = "k-button" })
-                @Html.ActionLink("مدیریت زیر گروه ها", "Index", new { id = @item.Id }, new { @class = "k-button " + ViewBag.classItem })
+                @Html.ActionLink("مدیریت زیر گروه ها", "Index", new { id = @item.Id }, new { @class = "k-button " })
                     </text>).Width(200);
         })
         .ToolBar(toolbar =>

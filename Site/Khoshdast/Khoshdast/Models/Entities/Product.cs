@@ -132,5 +132,7 @@ namespace Models
                  HasRequired(p => p.Brand).WithMany(t => t.Products).HasForeignKey(p => p.BrandId);
             }
         }
+        [Display(Name="بارکد")]
+        public string Barcode { get; set; }
     }
 }

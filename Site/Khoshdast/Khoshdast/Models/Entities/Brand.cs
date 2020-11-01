@@ -37,7 +37,6 @@ namespace Models
         [AllowHtml]
         [Column(TypeName = "ntext")]
         [UIHint("RichText")]
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         public string Body { get; set; }
 
         [Display(Name = "تصویر نام برند")]
