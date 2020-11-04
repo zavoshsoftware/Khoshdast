@@ -320,13 +320,15 @@ namespace Khoshdast.Controllers
         //    //}
         //}
 
-        public string updateProductsImages()
+        public string updateProductsCodes()
         {
             List<Product> products = db.Products.ToList();
 
+            int i = 100;
             foreach (Product product in products)
             {
-                product.ImageUrl = "/Uploads/Product/" + product.ImageUrl;
+                product.Code = i.ToString();
+                i++;
             }
 
             db.SaveChanges();

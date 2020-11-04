@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Helpers;
 using Models;
@@ -36,7 +37,6 @@ namespace Khoshdast.Controllers
 
             return View(product);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -260,7 +260,7 @@ namespace Khoshdast.Controllers
                     product.PageTitle = oproduct.PageTitle;
                     product.Summery = oproduct.Summery;
                     product.IsTopSell = oproduct.IsTopSale;
-                    
+
 
 
                     RemoveProductRel(oproduct.Id);
@@ -323,28 +323,76 @@ namespace Khoshdast.Controllers
 
         [AllowAnonymous]
         [Route("category/{urlParam}")]
-        public ActionResult List(string urlParam, string[] brands)
+        public ActionResult List(string urlParam, string[] brands, int? pageId)
         {
             ProductGroup productGroup = db.ProductGroups.FirstOrDefault(c => c.UrlParam == urlParam);
 
             if (productGroup == null)
                 return Redirect("/");
 
+            ViewBag.url = GetUrl(brands,urlParam);
 
+            if (pageId == null)
+                pageId = 1;
+
+            List<Product> products = GetProductListByProductGroupId(productGroup.Id, brands);
 
             ProductListViewModel productList = new ProductListViewModel()
             {
                 ProductGroup = productGroup,
-                Products = GetProductListByProductGroupId(productGroup.Id, brands),
-                SidebarBrands = GetSidebarBrands(brands),
+                Products = GetProductByPagination(products, pageId),
+                SidebarBrands = GetSidebarBrands(brands, products),
                 SidebarProductGroups = GetSidebarProductGroups(),
+                BreadcrumbItems = GetBreadCrumb(productGroup).OrderBy(c => c.Order).ToList(),
+                PageItems = GetPagination(products.Count(), pageId)
             };
 
             return View(productList);
         }
 
+        private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
+
+        public string GetUrl(string[] brands,string urlParam)
+        {
+            string url = "/category/" + urlParam;
+            ViewBag.hasQs = true;
+            if (brands != null)
+            {
+                url += "?";
+                for (int i = 0; i < brands.Length; i++)
+                {
+                    url += "brands[" + i + "]=" + brands[i];
+
+                    if (i != brands.Length - 1)
+                        url += "&";
+                }
+                ViewBag.hasQs = false;
+            }
 
 
+            return url;
+        }
+
+        public List<PageItem> GetPagination(int productCount, int? pageId)
+        {
+            List<PageItem> result = new List<PageItem>();
+
+            int pageNumbers = (int)Math.Ceiling(productCount / (double)productPagination);
+
+            for (int i = 1; i <= pageNumbers; i++)
+            {
+                bool isActive = pageId == i;
+
+                PageItem pageItem = new PageItem()
+                {
+                    PageId = i,
+                    IsCurrentPage = isActive
+                };
+                result.Add(pageItem);
+            }
+
+            return result;
+        }
 
         [AllowAnonymous]
         [Route("product/{code}")]
@@ -354,7 +402,7 @@ namespace Khoshdast.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.FirstOrDefault(c=>c.Code==code);
+            Product product = db.Products.FirstOrDefault(c => c.Code == code);
             if (product == null)
             {
                 return HttpNotFound();
@@ -380,6 +428,13 @@ namespace Khoshdast.Controllers
 
         #region HelperMethods
 
+        public List<Product> GetProductByPagination(List<Product> products, int? pageId)
+        {
+
+            return products.OrderBy(c => c.Order).Skip(pageId.Value * productPagination).Take(productPagination).ToList();
+        }
+
+
         public ProductGroup GetProductGroup(Guid productId)
         {
             ProductGroupRelProduct productGroupRel =
@@ -397,7 +452,8 @@ namespace Khoshdast.Controllers
             List<Product> products = new List<Product>();
 
             List<ProductGroupRelProduct> productGroupRel = db.ProductGroupRelProducts
-                .Where(c => (c.ProductGroupId == productGroupId || c.ProductGroup.ParentId == productGroupId) && c.IsDeleted == false).ToList();
+                .Where(c => (c.ProductGroupId == productGroupId || c.ProductGroup.ParentId == productGroupId ||
+                             c.ProductGroup.Parent.Parent.ParentId == productGroupId) && c.IsDeleted == false).ToList();
 
             if (brands != null)
             {
@@ -441,18 +497,28 @@ namespace Khoshdast.Controllers
 
                     Quantity = db.ProductGroupRelProducts.Count(c =>
                         (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id) &&
-                        c.IsDeleted == false)
+                        c.IsDeleted == false),
+
+                    ChildProductGroups = db.ProductGroups.Where(c=>c.ParentId==productGroup.Id&&c.IsActive&&c.IsDeleted==false).ToList()
                 });
             }
 
             return list;
         }
-        public List<SidebarBrand> GetSidebarBrands(string[] selectedBrands)
+        public List<SidebarBrand> GetSidebarBrands(string[] selectedBrands, List<Product> products)
         {
             List<SidebarBrand> list = new List<SidebarBrand>();
 
-            List<Brand> brands = db.Brands
-                .Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+            List<Brand> brands = new List<Brand>();
+
+
+            foreach (Product product in products)
+            {
+                if (brands.All(c => c.Id != product.BrandId))
+                {
+                    brands.Add(product.Brand);
+                }
+            }
 
 
             foreach (Brand brand in brands)
@@ -472,9 +538,71 @@ namespace Khoshdast.Controllers
                 }
             }
 
-            return list;
+            return list.OrderBy(c => c.Brand.Title).ToList();
+        }
+
+
+        public List<BreadcrumbItem> GetBreadCrumb(ProductGroup currenProductGroup)
+        {
+            List<BreadcrumbItem> result = new List<BreadcrumbItem>();
+
+            result.Add(GetBreadcrumbItem(currenProductGroup, 10));
+
+            for (int i = 9; i > 1; i--)
+            {
+                currenProductGroup = GetRecursive(currenProductGroup);
+                if (currenProductGroup != null)
+                {
+                    result.Add(GetBreadcrumbItem(currenProductGroup, i));
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public BreadcrumbItem GetBreadcrumbItem(ProductGroup currentProductGroup, int order)
+        {
+            BreadcrumbItem breadcrumb = new BreadcrumbItem()
+            {
+                Title = currentProductGroup.Title,
+                UrlParam = currentProductGroup.UrlParam,
+                Order = order
+            };
+
+            return breadcrumb;
+        }
+        public ProductGroup GetRecursive(ProductGroup currenProductGroup)
+        {
+            if (currenProductGroup.ParentId != null)
+                return currenProductGroup.Parent;
+
+            return null;
         }
         #endregion
+
+        public string DuplicatBrands()
+        {
+            Guid brand1 = new Guid("594C2F63-AA93-40DE-9327-6EB837840F16");
+            Guid brand2 = new Guid("38CF80BE-539F-42AE-91FE-E6B38BE6C620");
+            Guid brand3 = new Guid("7CD66676-DE78-4406-B5AD-97079DDF3019");
+            Guid brand4 = new Guid("C77C9F1F-F710-4156-9B7B-F596A0E46D01");
+            List<Product> products = db.Products.Where(c =>
+                c.BrandId == brand1 || c.BrandId == brand2 || c.BrandId == brand3 || c.BrandId == brand4).ToList();
+
+            foreach (Product product in products)
+            {
+                product.BrandId = new Guid("3CD65AC5-87FD-424D-BA41-451FD75F8290");
+            }
+            db.SaveChanges();
+
+            return "";
+        }
     }
 }
+
+
 

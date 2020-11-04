@@ -1,337 +1,171 @@
 ﻿@model ViewModels._BaseViewModel
 
 <header class="header_wrap fixed-top header_with_topbar">
-    <div class="top-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+	<div class="top-header">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<div class="d-flex align-items-center justify-content-center justify-content-md-start">
 
 
-                        <ul class="contact_detail text-center text-lg-left">
-                            <li><a href="tel:00982144289714"> <i class="ti-mobile"></i><span>021-44289714</span></a></li>
-                            <li>
-                                <a href="https://api.whatsapp.com/send?phone=989396084722&text=سلام و وقت بخیر">
-                                    <i class="fa fa-whatsapp"></i><span>مکالمه از طریق Whatssapp</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6  d-none d-lg-block">
-                    <div class="text-center text-md-right">
-                        <ul class="header_list">
+						<ul class="contact_detail text-center text-lg-left">
+							<li><a href="tel:00982144289714"> <i class="ti-mobile"></i><span>021-44289714</span></a></li>
+							<li>
+								<a href="https://api.whatsapp.com/send?phone=989396084722&text=سلام و وقت بخیر">
+									<i class="fa fa-whatsapp"></i><span>مکالمه از طریق Whatssapp</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6  d-none d-lg-block">
+					<div class="text-center text-md-right">
+						<ul class="header_list">
 
-                            <li><a href="/loginregister"><i class="ti-user"></i><span>ورود</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bottom_header dark_skin main_menu_uppercase">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="/">
-                    <img class="logo_light" src="/assets/images/logo_light.png" alt="logo" />
-                    <img class="logo_dark" src="/assets/images/logo_dark.png" alt="logo" />
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false">
-	                <span class="ion-android-menu"  style="margin-left: 3px;"></span>
-	             <label style="font-size: 15px;   display: flex; align-items: center;">
-									منو
-	             </label>
-								</button>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                @foreach (var item in Model.MenuItems)
-                {
-	                if (item.ChildCount == 0)
-	                {
-		                <li><a class="nav-link nav_item" href="/category/@item.ParentProductGroup.UrlParam">@item.ParentProductGroup.Title</a></li>
-	                }
-	                else if (item.ChildCount <= 8)
-	                {
-		                <li class="dropdown">
-			                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">@item.ParentProductGroup.Title</a>
-			                <div class="dropdown-menu">
-				                <ul>
-					                @foreach (var childItem in item.ChildProductGroups)
-					                {
-						                <li><a class="dropdown-item nav-link nav_item" href="/category/@childItem.UrlParam">@childItem.Title</a></li>
-					                }
-				                </ul>
-			                </div>
-		                </li>
-									}
-									else if (item.ChildCount > 8)
-									{
-												<li class="dropdown dropdown-mega-menu">
-													<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">@item.ParentProductGroup.Title</a>
-													<div class="dropdown-menu">
-														<ul class="mega-menu d-lg-flex">
-															<li class="mega-menu-col col-lg-9">
-																<ul class="d-lg-flex">
-																	@for (int i = 0; i < 3; i++)
+							<li><a href="/loginregister"><i class="ti-user"></i><span>ورود</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bottom_header dark_skin main_menu_uppercase">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg">
+				<a class="navbar-brand" href="/">
+					<img class="logo_light" src="/assets/images/logo_light.png" alt="logo" />
+					<img class="logo_dark" src="/assets/images/logo_dark.png" alt="logo" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false">
+					<span class="ion-android-menu" style="margin-left: 3px;"></span>
+					<label style="font-size: 15px;   display: flex; align-items: center;">
+						منو
+					</label>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						@foreach (var item in Model.MenuItems)
+						{
+							if (item.ChildCount == 0 && !item.SimpleProductGroups.Any())
+							{
+										<li><a class="nav-link nav_item" href="/category/@item.ParentProductGroup.UrlParam">@item.ParentProductGroup.Title</a></li>
+							}
+							else if (item.SimpleProductGroups.Any())
+							{
+										<li class="dropdown">
+											<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">@item.ParentProductGroup.Title</a>
+											<div class="dropdown-menu">
+												<ul>
+													@foreach (var childItem in item.SimpleProductGroups)
+													{
+															<li><a class="dropdown-item nav-link nav_item" href="/category/@childItem.UrlParam">@childItem.Title</a></li>
+}
+												</ul>
+											</div>
+										</li>
+							}
+							else
+							{
+										<li class="dropdown dropdown-mega-menu">
+											<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">@item.ParentProductGroup.Title</a>
+											<div class="dropdown-menu">
+												<ul class="mega-menu d-lg-flex">
+													<li class="mega-menu-col col-lg-12">
+														<ul class="d-lg-flex">
+															@{		int i = 1;
+																if (item.ChildCount > 4)
+																{
+																	foreach (var childProductGroup in item.ChildProductGroups)
 																	{
-																		<li class="mega-menu-col col-lg-4">
+
+
+																		<li class="mega-menu-col col-lg-2">
 																			<ul>
-																				@foreach (var childItem in item.ChildProductGroups.Skip(i*4).Take(4))
+																				<li class="dropdown-header"><a href="/category/@childProductGroup.ParentProductGroup.UrlParam">@childProductGroup.ParentProductGroup.Title <i class="fa fa-angle-left"></i></a> </li>
+																				@foreach (var secondChildProductGroup in childProductGroup.ChildProductGroups)
 																				{
-																						<li><a class="dropdown-item nav-link nav_item" href="/category/@childItem.UrlParam">@childItem.Title</a></li>
-																				} 
+																					<li><a class="dropdown-item nav-link nav_item" href="/category/@secondChildProductGroup.UrlParam">@secondChildProductGroup.Title</a></li>
+																				}
+																				@if (i == item.ChildProductGroups.Count())
+																				{
+																					foreach (var nonChild in item.NonChildProductGroups)
+																					{
+																						<li><a class="dropdown-header nav-link nav_item" href="/category/@nonChild.UrlParam">@nonChild.Title <i class="fa fa-angle-left"></i></a></li>
+																					}
+																				}
+
 																			</ul>
 																		</li>
+																		i++;
 																	}
-																
-													 
-																</ul>
-															</li>
-															<li class="mega-menu-col col-lg-3">
-																<div class="header_banner">
-																	<div class="header_banner_content">
-																		<div class="shop_banner">
-																			<div class="banner_img overlay_bg_40">
-																				<img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-																			</div>
-																			<div class="shop_bn_content">
-																				<h5 class="text-uppercase shop_subtitle">@item.ParentProductGroup.Title</h5>
-																				<h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-																				<a href="/category/@item.ParentProductGroup.UrlParam" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</li>
+
+
+																}
+																else
+																{
+																	foreach (var childProductGroup in item.ChildProductGroups)
+																	{
+
+
+																		<li class="mega-menu-col col-lg-3">
+																			<ul>
+																				<li class="dropdown-header"><a href="/category/@childProductGroup.ParentProductGroup.UrlParam">@childProductGroup.ParentProductGroup.Title <i class="fa fa-angle-left"></i></a> </li>
+																				@foreach (var secondChildProductGroup in childProductGroup.ChildProductGroups)
+																				{
+																					<li><a class="dropdown-item nav-link nav_item" href="/category/@secondChildProductGroup.UrlParam">@secondChildProductGroup.Title</a></li>
+																				}
+																			 
+
+																			</ul>
+																		</li>
+
+																		i++;
+																	}
+
+																	 foreach (var nonChild in item.NonChildProductGroups)
+																	 {			
+																		 <li class="mega-menu-col col-lg-3">
+																			 <ul>
+																				 <li><a class="dropdown-header nav-link nav_item" href="/category/@nonChild.UrlParam">@nonChild.Title <i class="fa fa-angle-left"></i></a></li>
+																			
+																			 
+																			 </ul>
+																		 </li>
+																	 }
+																}
+															}
+
 														</ul>
-													</div>
-												</li>
-									}
-								}
-              
-                @*<li class="dropdown">
-	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">اسپری ها</a>
-	                <div class="dropdown-menu">
-		                <ul>
-			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری گلریز</a></li>
-			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری کیش</a></li>
-			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری دوپلی</a></li>
-			                <li><a class="dropdown-item nav-link nav_item" href="#">اسپری الوان</a></li>
-		                </ul>
-	                </div>
-                </li>
-                <li class="dropdown dropdown-mega-menu">
-	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">غلطک</a>
-	                <div class="dropdown-menu">
-		                <ul class="mega-menu d-lg-flex">
-			                <li class="mega-menu-col col-lg-3">
-				                <ul>
-					                <li class="dropdown-header">غلطک های طرح دار</li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-				                </ul>
-			                </li>
-			                <li class="mega-menu-col col-lg-3">
-				                <ul>
-					                <li class="dropdown-header">غلطک های ساده</li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-				                </ul>
-			                </li>
-			                <li class="mega-menu-col col-lg-3">
-				                <ul>
-					                <li class="dropdown-header">غلطک های GR</li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-				                </ul>
-			                </li>
-			                <li class="mega-menu-col col-lg-3">
-				                <ul>
-					                <li class="dropdown-header">غلطک های سری Z</li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-					                <li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-				                </ul>
-			                </li>
-		                </ul>
-		                <div class="d-lg-flex menu_banners">
-			                <div class="col-sm-4">
-				                <div class="header-banner">
-					                <img src="/assets/images/menu-banner1.jpg" alt="menu_banner1">
-					                <div class="banne_info">
-						                <h6>تا 20% تخفیف</h6>
-						                <h4>غلطک های سری GR</h4>
-						                <a href="#">خرید کنید</a>
-					                </div>
-				                </div>
-			                </div>
-			                <div class="col-sm-4">
-				                <div class="header-banner">
-					                <img src="/assets/images/menu-banner2.jpg" alt="menu_banner2">
-					                <div class="banne_info">
-						                <h6>تا 20% تخفیف</h6>
-						                <h4>غلطک های سری Z</h4>
-						                <a href="#">خرید کنید</a>
-					                </div>
-				                </div>
-			                </div>
-			                <div class="col-sm-4">
-				                <div class="header-banner">
-					                <img src="/assets/images/menu-banner3.jpg" alt="menu_banner3">
-					                <div class="banne_info">
-						                <h6>تا 20% تخفیف</h6>
-						                <h4>غلطک های پارچه ای</h4>
-						                <a href="#">خرید کنید</a>
-					                </div>
-				                </div>
-			                </div>
-		                </div>
-	                </div>
-                </li>
-                <li class="dropdown  dropdown-mega-menu">
-	                <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">رنگ و ابزار هنری</a>
-	                <div class="dropdown-menu">
-		                <ul class="mega-menu d-lg-flex">
-			                <li class="mega-menu-col col-lg-9">
-				                <ul class="d-lg-flex">
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی اول</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک انتیک</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک متالیک</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک هنری</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">اکلیل</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ کهنه کاری</a></li>
-						                </ul>
-					                </li>
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی دوم</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">جوهر سنگ</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ سرامیک</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ هنری</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">بتونه</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">براق کننده</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">فلورسنت</a></li>
-						                </ul>
-					                </li>
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی سوم</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">جوهر الکلی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">خمیر رنگ</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رزین اپوکسی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رزین سنگ</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ صدفی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">رنگ پتینه</a></li>
-						                </ul>
-					                </li>
-				                </ul>
-			                </li>
-			                <li class="mega-menu-col col-lg-3">
-				                <div class="header_banner">
-					                <div class="header_banner_content">
-						                <div class="shop_banner">
-							                <div class="banner_img overlay_bg_40">
-								                <img src="/assets/images/shop-banner01.jpg" alt="shop_banner"/>
-							                </div>
-							                <div class="shop_bn_content">
-								                <h5 class="text-uppercase shop_subtitle">انوع ابزار هنری</h5>
-								                <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-								                <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-							                </div>
-						                </div>
-					                </div>
-				                </div>
-			                </li>
-		                </ul>
-	                </div>
-                </li>
-                <li class="dropdown dropdown-mega-menu">
-	                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ابزار ساختمانی</a>
-	                <div class="dropdown-menu">
-		                <ul class="mega-menu d-lg-flex">
-			                <li class="mega-menu-col col-lg-9">
-				                <ul class="d-lg-flex">
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی اول</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">تیغ کاردک</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">سنباده</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">قلم نقاشل</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
-						                </ul>
-					                </li>
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی دوم</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">سنباده گیر</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">نردبان چوبی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">چسب نواری</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">کاور</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
-						                </ul>
-					                </li>
-					                <li class="mega-menu-col col-lg-4">
-						                <ul>
-							                <li class="dropdown-header">دسته بندی سوم</li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">مقلاویز</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">نوار کناف</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">پادری</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">غلطک رنگ آمیزی</a></li>
-							                <li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
-						                </ul>
-					                </li>
-				                </ul>
-			                </li>
-			                <li class="mega-menu-col col-lg-3">
-				                <div class="header_banner">
-					                <div class="header_banner_content">
-						                <div class="shop_banner">
-							                <div class="banner_img overlay_bg_40">
-								                <img src="/assets/images/shop-banner01.jpg" alt="shop_banner"/>
-							                </div>
-							                <div class="shop_bn_content">
-								                <h5 class="text-uppercase shop_subtitle">انوع ابزار ساختمانی</h5>
-								                <h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-								                <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-							                </div>
-						                </div>
-					                </div>
-				                </div>
-			                </li>
-		                </ul>
-	                </div>
-                </li>
-                <li><a class="nav-link nav_item" href="contact.html">مولتی سورفیس</a></li>*@
-                </ul>
-                </div>
-                <ul class="navbar-nav attr-nav align-items-center">
-                    <li>
-                        <a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
-                        <div class="search_wrap">
-                            <span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                            <form>
-                                <input type="text" placeholder="جستجو" class="form-control" id="search_input">
-                                <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
-                            </form>
-                        </div><div class="search_overlay"></div><div class="search_overlay"></div>
-                    </li>
-                    <li class="dropdown cart_dropdown">
-                        <a class="nav-link cart_trigger" href="/basket"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
-                       
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+													</li>
+												 
+												</ul>
+											</div>
+										</li>								}
+																	}
+ 
+							<li><a class="nav-link nav_item" href="/promotion">تخفیف ها</a></li>
+							<li><a class="nav-link nav_item" href="/blog">مجله خوشدست</a></li>
+							<li><a class="nav-link nav_item" href="/blog/آموزش">آموزش</a></li>
+							<li><a class="nav-link nav_item" href="/contact">تماس با ما</a></li>
+					</ul>
+				</div>
+				<ul class="navbar-nav attr-nav align-items-center">
+					<li>
+						<a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
+						<div class="search_wrap">
+							<span class="close-search"><i class="ion-ios-close-empty"></i></span>
+							<form>
+								<input type="text" placeholder="جستجو" class="form-control" id="search_input">
+								<button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
+							</form>
+						</div><div class="search_overlay"></div><div class="search_overlay"></div>
+					</li>
+					<li class="dropdown cart_dropdown">
+						<a class="nav-link cart_trigger" href="/basket"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
+
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 </header>

@@ -165,9 +165,35 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .cat_slider .item .categories_box img {
     border-radius: 5px;
 }
+.pagination {
+    display: block;
+}
 
+    .pagination li {
+        float: right;
+    }
 @media(min-width:992px) {
     .top-product .col-md-3 {
         padding-left: 0 !important;
     }
+    .pagination {
+        display: flex;
+    }
 }
+
+
+.dark_skin .mega-menu-col{
+    border: none;
+}
+
+.navbar .navbar-nav .dropdown-header {
+    border-bottom: 1px solid #ddd;
+}
+
+.collapse-detail-custom {
+    display: none;
+}
+
+/*.bg-gray-list {
+    background-color: #eeecec !important;
+}*/
