@@ -323,6 +323,7 @@
     <Content Include="assets\images\f1.png" />
     <Content Include="assets\images\f2.png" />
     <Content Include="assets\images\favicon.png" />
+    <Content Include="assets\images\favicon125.png" />
     <Content Include="assets\images\fn.png" />
     <Content Include="assets\images\furniture_banner1.jpg" />
     <Content Include="assets\images\furniture_banner2.jpg" />
@@ -1309,6 +1310,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\DropDownListViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\BlogDetailViewModel.cs" />
@@ -1580,6 +1582,7 @@
     <Content Include="Views\ProductGroups\List.cshtml" />
     <Content Include="Views\Basket\CallBack.cshtml" />
     <Content Include="Views\ExcelData\Import.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -315,3 +315,13 @@ function SubmitContactUs() {
 
     }
 }
+
+
+function searchResult() {
+    var searchQuery = $('#search_input').val();
+    location.href = "/result?searchquery=" + searchQuery;
+}
+function submitSearchResult() {
+    var searchQuery = $('#txtsearch').val();
+    location.href = "/result?searchquery=" + searchQuery;
+}

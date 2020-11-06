@@ -1,9 +1,6 @@
 ﻿@font-face {
     font-family: 'Iransans';
-    src: url(../fonts/IranSans/IRANSansWebFaNum.eot) format('embedded-opentype'),
-        url(../fonts/IranSans/IRANSansWebFaNum.woff2) format('woff2'),
-        url(../fonts/IranSans/IRANSansWebFaNum.woff) format('woff'),
-        url(../fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
+    src: url(../fonts/IranSans/IRANSansWebFaNum.eot) format('embedded-opentype'), url(../fonts/IranSans/IRANSansWebFaNum.woff2) format('woff2'), url(../fonts/IranSans/IRANSansWebFaNum.woff) format('woff'), url(../fonts/IranSans/IRANSansWebFaNum.ttf) format('truetype');
 }
 
 @font-face {
@@ -11,10 +8,10 @@
     font-style: normal;
     font-weight: bold;
     src: url('../fonts/IranYekan/eot/iranyekanwebbold(fanum).eot');
-    src: url('../fonts/IranYekan/eot/iranyekanwebbold(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IranYekan/woff2/iranyekanwebbold(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-         url('../fonts/IranYekan/woff/iranyekanwebbold(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-         url('../fonts/IranYekan/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
+    src: url('../fonts/IranYekan/eot/iranyekanwebbold(fanum).eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/IranYekan/woff2/iranyekanwebbold(fanum).woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/IranYekan/woff/iranyekanwebbold(fanum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IranYekan/ttf/iranyekanwebbold(fanum).ttf') format('truetype');
 }
 
 @font-face {
@@ -22,10 +19,10 @@
     font-style: normal;
     font-weight: 300;
     src: url('../fonts/IranYekan/eot/iranyekanweblight(fanum).eot');
-    src: url('../fonts/IranYekan/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IranYekan/woff2/iranyekanweblight(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-         url('../fonts/IranYekan/woff/iranyekanweblight(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-         url('../fonts/IranYekan/ttf/iranyekanweblight(fanum).ttf') format('truetype');
+    src: url('../fonts/IranYekan/eot/iranyekanweblight(fanum).eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/IranYekan/woff2/iranyekanweblight(fanum).woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/IranYekan/woff/iranyekanweblight(fanum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IranYekan/ttf/iranyekanweblight(fanum).ttf') format('truetype');
 }
 
 @font-face {
@@ -33,10 +30,10 @@
     font-style: normal;
     font-weight: normal;
     src: url('../fonts/IranYekan/eot/iranyekanwebregular(fanum).eot');
-    src: url('../fonts/IranYekan/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
-         url('../fonts/IranYekan/woff2/iranyekanwebregular(fanum).woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-         url('../fonts/IranYekan/woff/iranyekanwebregular(fanum).woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-         url('../fonts/IranYekan/IranYekan/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
+    src: url('../fonts/IranYekan/eot/iranyekanwebregular(fanum).eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/IranYekan/woff2/iranyekanwebregular(fanum).woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/IranYekan/woff/iranyekanwebregular(fanum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/IranYekan/IranYekan/ttf/iranyekanwebregular(fanum).ttf') format('truetype');
 }
 
 
@@ -46,18 +43,20 @@ body {
 
 h1, h2, h3, h4, h5, h6, a, span, label, p {
     font-family: iranyekan;
-}.menu_banners .header-banner h6, .menu_banners .header-banner h4, .menu_banners .header-banner a {
+}
+
+.menu_banners .header-banner h6, .menu_banners .header-banner h4, .menu_banners .header-banner a {
     color: #fff !important;
 }
 
 .whatsappicon {
     position: fixed;
-    bottom:20px;
+    bottom: 20px;
     left: 20px;
 }
-#comment-succes, #comment-reject
-{
-    display:none;
+
+#comment-succes, #comment-reject {
+    display: none;
 }
 
 .btn-filter {
@@ -77,18 +76,22 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .shop_cart_table th, .shop_cart_table td {
     text-align: center !important;
 }
+
 .toggle_info {
     font-size: 14px;
-}.toggle_info i {
-    left: auto;
-    right: 0;
-    margin-right: 0;
-    margin-left: 10px;
 }
-.toggle_info span {
-    padding-left: 0;
-    padding-right: 25px;
-}
+
+    .toggle_info i {
+        left: auto;
+        right: 0;
+        margin-right: 0;
+        margin-left: 10px;
+    }
+
+    .toggle_info span {
+        padding-left: 0;
+        padding-right: 25px;
+    }
 
 .pr_desc p {
     text-align: justify;
@@ -107,6 +110,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     font-size: 14px;
     text-align: justify
 }
+
 .grid_item .blog_text li {
     font-size: 14px;
 }
@@ -119,6 +123,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .pl0 {
     padding-left: 0;
 }
+
 .pr0 {
     padding-right: 0;
 }
@@ -126,8 +131,9 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .bg-gray {
     background-color: #f9f9f9 !important
 }
+
 .btn-addtocart-home {
-    padding:4px 20px;
+    padding: 4px 20px;
 }
 
 .product_info {
@@ -143,12 +149,11 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 
 .navbar-toggler {
-    float: right;    
+    float: right;
 }
 
 .ion-android-menu {
     float: right;
-    
 }
 
 @media(max-width:768px) {
@@ -156,6 +161,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
         margin-top: 15px;
     }
 }
+
 @media(min-width:992px) {
     .slide-row .col-lg-3 {
         padding-right: 0;
@@ -165,6 +171,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .cat_slider .item .categories_box img {
     border-radius: 5px;
 }
+
 .pagination {
     display: block;
 }
@@ -172,17 +179,19 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     .pagination li {
         float: right;
     }
+
 @media(min-width:992px) {
     .top-product .col-md-3 {
         padding-left: 0 !important;
     }
+
     .pagination {
         display: flex;
     }
 }
 
 
-.dark_skin .mega-menu-col{
+.dark_skin .mega-menu-col {
     border: none;
 }
 
@@ -192,8 +201,109 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .collapse-detail-custom {
     display: none;
+    margin-right: 23px;
 }
 
-/*.bg-gray-list {
-    background-color: #eeecec !important;
-}*/
+.bg-gray-list {
+    background-color: #eff0f2 !important;
+}
+
+.widjet-2 {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 9px;
+    border: 1px solid #ddd;
+}
+
+.product .product_title {
+    white-space: normal;
+}
+
+.widget_categories li {
+    border-bottom: 1px solid #d5d8df;
+    padding-top: 5px;
+}
+
+    .widget_categories li:last-child {
+        border-bottom: none;
+    }
+
+
+
+    .widget_categories li a {
+        cursor: pointer;
+    }
+
+.child-group {
+    padding-bottom: 5px !important;
+}
+
+    .child-group a {
+        color: #687188;
+        font-size: 13px;
+    }
+
+.product {
+    border-radius: 9px;
+}
+
+    .product img {
+        border-radius: 9px 9px 0 0;
+    }
+
+    .product .product_title {
+        min-height: 50px;
+        line-height: 25px;
+    }
+
+
+.dropdown-header {
+    padding: .5rem 0;
+}
+
+.product_price, .add-to-cart {
+    text-align: center;
+}
+
+.custom-filter {
+    background-color: #fff;
+    width: 100%;
+    padding:10px 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.custom-filter i {
+    float: right;
+    margin-top: 4px;
+}
+
+.custom-filter ul{
+    display: inline;
+}
+
+    .custom-filter li {
+        float: right;
+        list-style: none;
+        margin-right: 5px;
+    }
+
+        .custom-filter li a {
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+            .custom-filter li a.active {
+                background-color: #FF324D;
+                color: #fff;
+            }
+
+
+.section {
+    padding: 30px 0;
+}
+
+.search-box {
+    margin-bottom: 10px;
+}

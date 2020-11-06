@@ -4,11 +4,11 @@
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 @*@section head{
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-}*@
-<div class="breadcrumb_section bg_gray page-title-mini">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	}*@
+<div class="breadcrumb_section bg_gray page-title-mini" style="background-color: #E1D9DA">
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-md-12">
@@ -18,7 +18,7 @@
 						<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 						@foreach (var breadcrumbItem in Model.BreadcrumbItems)
 						{
-								<li class="breadcrumb-item"><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
+								<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
 						}
 					</ol>
 				</div>
@@ -27,7 +27,7 @@
 					<h1>@Model.ProductGroup.Title</h1>
 				</div>
 			</div>
-		 
+
 		</div>
 	</div>
 </div>
@@ -40,7 +40,36 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9">
+					<div class="row align-items-center mb-4 pb-1">
+						<div class="col-12">
+							<div class="product_header">
 
+								<div class="custom-filter ">
+									<div class="  d-none d-lg-block">
+										<i class="fa fa-align-right"></i>
+										<ul>
+											<li>مرتب سازی بر اساس:</li>
+											<li><a id="newest" href="#" class="sortby active">جدیدترین</a></li>
+											<li><a id="mostsell" href="#" class="sortby">پرفروش ترین</a></li>
+											<li><a id="cheapest" href="#" class="sortby">ارزان ترین</a></li>
+											<li><a id="expensive" href="#" class="sortby">گران ترین</a></li>
+											<li><a id="mostdiscount" href="#" class="sortby">بیشترین تخفیف</a></li>
+										</ul>
+									</div>
+									<select id="ddlsortby" class="form-control form-control-sm d-lg-none d-xl-none">
+										<option value="sortby">مرتب سازی</option>
+										<option value="newest">جدیدترین</option>
+										<option value="mostsell">پرفروش ترین</option>
+										<option value="cheapest">ارزان ترین</option>
+										<option value="expensive">گران ترین</option>
+										<option value="mostdiscount">بیشترین تخفیف</option>
+									</select>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
 					<div class="row shop_container grid">
 						@foreach (var product in Model.Products)
 						{
@@ -115,7 +144,7 @@
 				</div>
 				<div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
 					<div class="sidebar">
-						<div class="widget">
+						<div class="widget widjet-2">
 							<h5 class="widget_title">گروه محصولات</h5>
 							<ul class="widget_categories">
 								@foreach (var productGroup in Model.SidebarProductGroups)
@@ -129,19 +158,19 @@
 											<ul id="@productGroup.ProductGroup.Id" class="collapse-detail-custom">
 												@foreach (var childProductGroup in productGroup.ChildProductGroups)
 												{
-														<li>
-															<a class="child-group" href="/category/@childProductGroup.UrlParam">@childProductGroup.Title</a>
+														<li class="child-group">
+															<a href="/category/@childProductGroup.UrlParam">@childProductGroup.Title</a>
 														</li>
-												}
+}
 											</ul>
 										</li>
 								}
 							</ul>
 						</div>
-						<div class="widget">
+
+						<div class="widget widjet-2">
 							<h5 class="widget_title">برندها</h5>
 							<ul class="list_brand" id="list_brand">
-
 								@foreach (var brand in Model.SidebarBrands)
 								{
 										<li>
@@ -151,13 +180,11 @@
 											</div>
 										</li>
 								}
-
-
 							</ul>
-
 							<button class="btn btn-fill-out btn-filter" id="btnfilter">فیلتر</button>
 						</div>
-						<div class="widget">
+
+						<div class="widget widjet-2">
 							<div class="shop_banner">
 								<div class="banner_img overlay_bg_20">
 									<img src="~/assets/images/shop-banner-06.png" height="300" alt="sidebar_banner_img">
@@ -185,10 +212,16 @@
 			$('#' + id).slideToggle();
 		}
 
-		$(document).ready(function () {
-			$('#btnfilter').click(function () {
+		$(document).ready(function() {
+			setSortLink();
+			$('select#ddlsortby').on('change',
+				'',
+				function(e) {
+					sortDdlChangeEvent($('select#ddlsortby').val());
+				});
+			$('#btnfilter').click(function() {
 				var names = [];
-				$('#list_brand input:checked').each(function () {
+				$('#list_brand input:checked').each(function() {
 					names.push(this.name);
 				});
 
@@ -208,5 +241,68 @@
 
 			});
 		});
+
+		function setSortLink() {
+			var url = window.location.href;
+
+			setLink("newest", url);
+			setLink("mostsell", url);
+			setLink("cheapest", url);
+			setLink("expensive", url);
+			setLink("mostdiscount", url);
+
+			setActiveSort("newest", url);
+			setActiveSort("mostsell", url);
+			setActiveSort("cheapest", url);
+			setActiveSort("expensive", url);
+			setActiveSort("mostdiscount", url);
+
+		}
+
+		function setLink(id, url) {
+			url = removePreviousSortValFromUrl(url);
+
+			if (url.includes('?')) {
+				$("a#" + id).attr("href", url + "&sortby=" + id);
+			} else {
+				$("a#" + id).attr("href", url + "?sortby=" + id);
+			}
+		}
+
+		function setActiveSort(id, url) {
+			if (url.includes(id)) {
+				$('.sortby').removeClass('active');
+				$('#' + id).addClass('active');
+
+				$('select#ddlsortby').val(id);
+			}
+
+		
+		}
+
+		function sortDdlChangeEvent(sortybyVal) {
+			if (sortybyVal !== "sortby") {
+				var url = window.location.href;
+
+				url = removePreviousSortValFromUrl(url);
+
+				if (url.includes('?')) {
+					window.location = (url + "&sortby=" + sortybyVal);
+
+				} else {
+					window.location = (url + "?sortby=" + sortybyVal);
+				}
+			}
+		}
+
+		function removePreviousSortValFromUrl(url) {
+			if (url.includes('?sortby')) {
+				url = (url.split('?sortby')[0]);
+			} else if (url.includes('&sortby')) {
+				url = (url.split('&sortby')[0]);
+			}
+
+			return url;
+		}
 	</script>
 }

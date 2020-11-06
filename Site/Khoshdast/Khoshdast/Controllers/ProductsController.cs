@@ -323,14 +323,14 @@ namespace Khoshdast.Controllers
 
         [AllowAnonymous]
         [Route("category/{urlParam}")]
-        public ActionResult List(string urlParam, string[] brands, int? pageId)
+        public ActionResult List(string urlParam, string[] brands, int? pageId, string sortby)
         {
             ProductGroup productGroup = db.ProductGroups.FirstOrDefault(c => c.UrlParam == urlParam);
 
             if (productGroup == null)
                 return Redirect("/");
 
-            ViewBag.url = GetUrl(brands,urlParam);
+            ViewBag.url = GetUrl(brands, urlParam);
 
             if (pageId == null)
                 pageId = 1;
@@ -340,7 +340,7 @@ namespace Khoshdast.Controllers
             ProductListViewModel productList = new ProductListViewModel()
             {
                 ProductGroup = productGroup,
-                Products = GetProductByPagination(products, pageId),
+                Products = GetProductByPagination(products, pageId, sortby),
                 SidebarBrands = GetSidebarBrands(brands, products),
                 SidebarProductGroups = GetSidebarProductGroups(),
                 BreadcrumbItems = GetBreadCrumb(productGroup).OrderBy(c => c.Order).ToList(),
@@ -352,7 +352,7 @@ namespace Khoshdast.Controllers
 
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
 
-        public string GetUrl(string[] brands,string urlParam)
+        public string GetUrl(string[] brands, string urlParam)
         {
             string url = "/category/" + urlParam;
             ViewBag.hasQs = true;
@@ -407,7 +407,7 @@ namespace Khoshdast.Controllers
             {
                 return HttpNotFound();
             }
-
+            ProductGroup productGroup = GetProductGroup(product.Id);
             ProductDetailViewModel productDetail = new ProductDetailViewModel()
             {
                 Product = product,
@@ -420,7 +420,9 @@ namespace Khoshdast.Controllers
                 RelatedProducts = db.Products.Where(c => c.IsDeleted == false && c.IsActive)
                     .OrderByDescending(c => c.CreationDate).Take(6).ToList(),
 
-                ProductGroup = GetProductGroup(product.Id)
+                ProductGroup = productGroup,
+                BreadcrumbItems = GetBreadCrumb(productGroup).OrderBy(c => c.Order).ToList(),
+
             };
             return View(productDetail);
         }
@@ -428,12 +430,51 @@ namespace Khoshdast.Controllers
 
         #region HelperMethods
 
-        public List<Product> GetProductByPagination(List<Product> products, int? pageId)
+        public List<Product> GetProductByPagination(List<Product> products, int? pageId, string sortby)
         {
+            List<Product> result = products.OrderBy(c => c.Order).Skip(pageId.Value * productPagination).Take(productPagination)
+                .ToList();
 
-            return products.OrderBy(c => c.Order).Skip(pageId.Value * productPagination).Take(productPagination).ToList();
+            if (sortby == null)
+                return result;
+
+            return SortProductList(result, sortby);
         }
 
+        public List<Product> SortProductList(List<Product> products, string sortby)
+        {
+            switch (sortby)
+            {
+                case "newest":
+                    {
+                        return products.OrderBy(c => c.CreationDate).ToList();
+                    }
+
+                case "mostsell":
+                    {
+                        return products.OrderByDescending(c => c.SellNumber).ToList();
+                    }
+
+                case "cheapest":
+                    {
+                        return products.OrderBy(c => c.Amount).ToList();
+                    }
+
+                case "expensive":
+                    {
+                        return products.OrderByDescending(c => c.Amount).ToList();
+                    }
+
+                case "mostdiscount":
+                    {
+                        return products.OrderBy(c => c.DiscountAmount).ToList();
+                    }
+                default:
+                    {
+                        return products.OrderBy(c => c.CreationDate).ToList();
+                    }
+            }
+        }
 
         public ProductGroup GetProductGroup(Guid productId)
         {
@@ -499,7 +540,7 @@ namespace Khoshdast.Controllers
                         (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id) &&
                         c.IsDeleted == false),
 
-                    ChildProductGroups = db.ProductGroups.Where(c=>c.ParentId==productGroup.Id&&c.IsActive&&c.IsDeleted==false).ToList()
+                    ChildProductGroups = db.ProductGroups.Where(c => c.ParentId == productGroup.Id && c.IsActive && c.IsDeleted == false).ToList()
                 });
             }
 
@@ -546,14 +587,15 @@ namespace Khoshdast.Controllers
         {
             List<BreadcrumbItem> result = new List<BreadcrumbItem>();
 
-            result.Add(GetBreadcrumbItem(currenProductGroup, 10));
+            //result.Add(GetBreadcrumbItem(currenProductGroup, 10));
 
             for (int i = 9; i > 1; i--)
             {
-                currenProductGroup = GetRecursive(currenProductGroup);
+              
                 if (currenProductGroup != null)
                 {
                     result.Add(GetBreadcrumbItem(currenProductGroup, i));
+                    currenProductGroup = GetRecursive(currenProductGroup);
                 }
                 else
                 {

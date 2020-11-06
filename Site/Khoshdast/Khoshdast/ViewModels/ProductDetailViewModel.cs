@@ -12,6 +12,7 @@ namespace ViewModels
         public List<ProductComment> ProductComments { get; set; }
         public List<Product> RelatedProducts { get; set; }
         public ProductGroup ProductGroup { get; set; }
+        public List<BreadcrumbItem> BreadcrumbItems { get; set; }
 
         public int CommentQty
         {

@@ -1162,7 +1162,7 @@ button:focus {
 	border-right: 1px solid #3f3f3f;
 }
 .navbar .navbar-nav .dropdown-item {
-	padding: 8px 20px 8px 20px;
+	padding: 6px 20px 6px 20px;
 	color: #333;
 	font-size: 14px;
 	text-transform: capitalize;
@@ -4099,7 +4099,7 @@ footer .widget_title {
 	width: 100%;
 }
 .breadcrumb_section.page-title-mini {
-	padding: 30px 0;
+	padding: 20px 0;
 }
 .page-title-mini .page-title h1 {
 	font-size: 28px;
