@@ -344,7 +344,8 @@ namespace Khoshdast.Controllers
                 SidebarBrands = GetSidebarBrands(brands, products),
                 SidebarProductGroups = GetSidebarProductGroups(),
                 BreadcrumbItems = GetBreadCrumb(productGroup).OrderBy(c => c.Order).ToList(),
-                PageItems = GetPagination(products.Count(), pageId)
+                PageItems = GetPagination(products.Count(), pageId),
+                SidebarBanner = db.TextItems.FirstOrDefault(c=>c.Name== "plpsidebar")
             };
 
             return View(productList);
@@ -370,6 +371,14 @@ namespace Khoshdast.Controllers
             }
 
 
+            return url;
+        }
+
+        public string GetUrlByBrand( string urlParam)
+        {
+            string url = "/brand/" + urlParam;
+            ViewBag.hasQs = false;
+           
             return url;
         }
 
@@ -522,6 +531,11 @@ namespace Khoshdast.Controllers
 
             return products;
         }
+
+        public List<Product> GetProductListByBrandId(Guid brandId)
+        {
+            return db.Products.Where(c=>c.BrandId==brandId&&c.IsActive&&c.IsDeleted==false).ToList();
+        }
         public List<SidebarProductGroup> GetSidebarProductGroups()
         {
             List<SidebarProductGroup> list = new List<SidebarProductGroup>();
@@ -626,23 +640,38 @@ namespace Khoshdast.Controllers
         }
         #endregion
 
-        public string DuplicatBrands()
+
+        [AllowAnonymous]
+        [Route("brand/{urlParam}")]
+        public ActionResult ListByBrand(string urlParam, int? pageId, string sortby)
         {
-            Guid brand1 = new Guid("594C2F63-AA93-40DE-9327-6EB837840F16");
-            Guid brand2 = new Guid("38CF80BE-539F-42AE-91FE-E6B38BE6C620");
-            Guid brand3 = new Guid("7CD66676-DE78-4406-B5AD-97079DDF3019");
-            Guid brand4 = new Guid("C77C9F1F-F710-4156-9B7B-F596A0E46D01");
-            List<Product> products = db.Products.Where(c =>
-                c.BrandId == brand1 || c.BrandId == brand2 || c.BrandId == brand3 || c.BrandId == brand4).ToList();
+            Brand brand = db.Brands.FirstOrDefault(c => c.UrlParam == urlParam);
 
-            foreach (Product product in products)
+            if (brand == null)
+                return Redirect("/");
+
+            ViewBag.url = GetUrlByBrand(urlParam);
+
+            if (pageId == null)
+                pageId = 1;
+
+            List<Product> products = GetProductListByBrandId(brand.Id);
+
+            ProductListByBrandViewModel productList = new ProductListByBrandViewModel()
             {
-                product.BrandId = new Guid("3CD65AC5-87FD-424D-BA41-451FD75F8290");
-            }
-            db.SaveChanges();
+                brand = brand,
+                Products = GetProductByPagination(products, pageId, sortby),
+                SidebarProductGroups = GetSidebarProductGroups(),
+               
+                PageItems = GetPagination(products.Count(), pageId),
+                SidebarBanner = db.TextItems.FirstOrDefault(c => c.Name == "plpsidebar")
+            };
 
-            return "";
+            return View(productList);
         }
+
+
+
     }
 }
 

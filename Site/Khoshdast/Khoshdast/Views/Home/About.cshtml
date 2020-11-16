@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewModels.AboutViewModel
 @{
     ViewBag.Title = "درباره ما";
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
@@ -34,9 +34,9 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="heading_s1">
-                        <h2>درباره ما</h2>
+                        <h2>@Model.About.Title</h2>
                     </div>
-                    <p>توضیحات درباره ما در این قسمت قرار می گیرد.توضیحات درباره ما در این قسمت قرار می گیرد.توضیحات درباره ما در این قسمت قرار می گیرد.توضیحات درباره ما در این قسمت قرار می گیرد.</p>
+                    @Html.Raw(Model.About.Body)
                 </div>
             </div>
         </div>
@@ -51,41 +51,20 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-
-                <div class="col-lg-4 col-sm-6">
-                    <div class="icon_box icon_box_style4 box_shadow1">
-                        <div class="icon">
-                            <i class="ti-pencil-alt"></i>
-                        </div>
-                        <div class="icon_box_content">
-                            <h5>دلیل1</h5>
-                            <p>توضیحات در این قسمت قرار می گیرد</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="icon_box icon_box_style4 box_shadow1">
-                        <div class="icon">
-                            <i class="ti-pencil-alt"></i>
-                        </div>
-                        <div class="icon_box_content">
-                            <h5>دلیل2</h5>
-                            <p>توضیحات در این قسمت قرار می گیرد</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="icon_box icon_box_style4 box_shadow1">
-                        <div class="icon">
-                            <i class="ti-pencil-alt"></i>
-                        </div>
-                        <div class="icon_box_content">
-                            <h5>دلیل3</h5>
-                            <p>توضیحات در این قسمت قرار می گیرد</p>
-                        </div>
-                    </div>
-                </div>
-
+							@foreach (var whyus in Model.WhyUsText)
+							{
+								<div class="col-lg-4 col-sm-6">
+									<div class="icon_box icon_box_style4 box_shadow1">
+										<div class="icon">
+											<i class="ti-pencil-alt"></i>
+										</div>
+										<div class="icon_box_content">
+											<h5>@whyus.Title</h5>
+											<p>@whyus.Summery</p>
+										</div>
+									</div>
+								</div>
+							} 
 
             </div>
         </div>

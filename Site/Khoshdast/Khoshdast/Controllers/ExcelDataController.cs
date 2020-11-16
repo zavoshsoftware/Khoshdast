@@ -48,25 +48,23 @@ namespace Khoshdast.Controllers
                             ModelState.AddModelError(String.Empty, "sheet not found!");
                             return View();
                         }
-                           WorkSheet.FirstRow().Delete();//if you want to remove ist row
-                        int newCode = 0;
-                        int i = 1;
+                        WorkSheet.FirstRow().Delete();//if you want to remove ist row
+                      
 
                         foreach (var row in WorkSheet.RowsUsed())
                         {
                             BrandCheck(row.Cell(4).Value.ToString());
                         }
+                  
                         foreach (var row in WorkSheet.RowsUsed())
                         {
                             UpdateRow(row.Cell(1).Value.ToString(), row.Cell(2).Value.ToString(),
-                                Convert.ToInt32(row.Cell(3).Value.ToString()),
+                                 row.Cell(3).Value.ToString(),
                                 row.Cell(4).Value.ToString(),
-                                Convert.ToDecimal(row.Cell(5).Value.ToString()),
-                                Convert.ToInt32(row.Cell(6).Value.ToString()));
-                            i++;
+                                row.Cell(5).Value.ToString(),
+                                row.Cell(6).Value.ToString());
                         }
 
-                        db.SaveChanges();
 
                     }
                     else
@@ -82,6 +80,14 @@ namespace Khoshdast.Controllers
                 }
             }
             return View();
+        }
+
+        public void test()
+        {
+            decimal a = Convert.ToDecimal("");
+            decimal ab = Convert.ToInt32("");
+            decimal aaaDecimal = Convert.ToDecimal(null);
+            decimal aaasdb = Convert.ToInt32(null);
         }
 
         public bool ConvertMattresVal(string hasMattres)
@@ -106,8 +112,8 @@ namespace Khoshdast.Controllers
             }
         }
 
-        public void UpdateRow(string barcode, string title, int productGroupCode, string brandTitle, decimal amount,
-            int qty)
+        public void UpdateRow(string barcode, string title, string productGroupCode, string brandTitle, string amount,
+            string qty)
         {
             CodeGenerator codeGenerator = new CodeGenerator();
 
@@ -115,42 +121,65 @@ namespace Khoshdast.Controllers
 
             if (product == null)
             {
-                bool isAvailable = qty > 0;
-                Product oProduct = new Product()
+                if (!string.IsNullOrEmpty(title) && !string.IsNullOrEmpty(productGroupCode) && !string.IsNullOrEmpty(qty) &&
+                    !string.IsNullOrEmpty(brandTitle) && !string.IsNullOrEmpty(amount) && !string.IsNullOrEmpty(amount))
                 {
-                    Title = title,
-                    PageTitle = title,
-                    Barcode = barcode,
-                    BrandId = GetBrandIdByTitle(brandTitle),
-                    Amount = amount,
-                    Stock = qty,
-                    SeedStock = qty,
-                    Id = Guid.NewGuid(),
-                    Code = codeGenerator.ReturnProductCode().ToString(),
-                    CreationDate = DateTime.Now,
-                    IsActive = true,
-                    IsDeleted = false,
-                    IsAvailable = isAvailable,
-                    ImageUrl = "/Uploads/Product/" +barcode + ".jpg",
-                    Order = 1,
-                    Visit = 0,
-                    SellNumber = 0,
+                    int qtyInt = Convert.ToInt32(qty);
+                    decimal amountDecimal = Convert.ToDecimal(amount);
+                    
+                    int productGroupCodeInt = Convert.ToInt32(productGroupCode);
 
-                };
+                    bool isAvailable = qtyInt > 0;
+                    Product oProduct = new Product()
+                    {
+                        Title = title,
+                        PageTitle = title,
+                        Barcode = barcode,
+                        BrandId = GetBrandIdByTitle(brandTitle),
+                        Amount = amountDecimal,
+                        Stock = qtyInt,
+                        SeedStock = qtyInt,
+                        Id = Guid.NewGuid(),
+                        Code = codeGenerator.ReturnProductCode().ToString(),
+                        CreationDate = DateTime.Now,
+                        IsActive = true,
+                        IsDeleted = false,
+                        IsAvailable = isAvailable,
+                        ImageUrl = "/Uploads/Product/" + barcode + ".jpg",
+                        Order = 1,
+                        Visit = 0,
+                        SellNumber = 0,
 
-                db.Products.Add(oProduct);
+                    };
 
-                InsertToProductGroupRel(oProduct.Id, productGroupCode);
+                    db.Products.Add(oProduct);
+
+                    InsertToProductGroupRel(oProduct.Id, productGroupCodeInt);
+                    db.SaveChanges();
+
+                }
+
             }
             else
             {
-                product.Title = title;
-                product.BrandId = GetBrandIdByTitle(brandTitle);
-                product.Amount = amount;
-                product.Stock = qty;
-                product.LastModifiedDate = DateTime.Now;
+                if (!string.IsNullOrEmpty(amount))
+                {
+                    decimal amountDecimal = Convert.ToDecimal(amount);
+                    product.Amount = amountDecimal;
+                    product.LastModifiedDate = DateTime.Now;
+                    db.SaveChanges();
 
-                InsertToProductGroupRel(product.Id, productGroupCode);
+                }
+                if (!string.IsNullOrEmpty(qty))
+                {
+                    int qtyInt = Convert.ToInt32(qty);
+                    product.Stock = qtyInt;
+                    product.LastModifiedDate = DateTime.Now;
+                    db.SaveChanges();
+
+                }
+
+
             }
         }
 

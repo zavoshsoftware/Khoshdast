@@ -35,12 +35,21 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
                     <div class="product-image">
-                        <div class="product_img_box">
-                            <img id="product_img" src='@Model.Product.ImageUrl' data-zoom-image="@Model.Product.ImageUrl" alt="@Model.Product.Title" />
-                            <a href="#" class="product_img_zoom" title="Zoom">
-                                <span class="linearicons-zoom-in"></span>
-                            </a>
-                        </div>
+	                    <div class="product_img_box">
+		                    @if (File.Exists(Server.MapPath(Model.Product.ImageUrl)))
+		                    {
+			                    <img id="product_img" src='@Model.Product.ImageUrl' data-zoom-image="@Model.Product.ImageUrl" alt="@Model.Product.Title"/>
+
+												}
+												else
+												{
+														<img id="product_img" src='/assets/images/no-Photo.jpg' data-zoom-image="/assets/images/no-Photo.jpg" alt="@Model.Product.Title" />
+
+												}
+		                    <a href="#" class="product_img_zoom" title="Zoom">
+			                    <span class="linearicons-zoom-in"></span>
+		                    </a>
+	                    </div>
                         <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
 
                             
@@ -72,7 +81,11 @@
                             </div>
                             <div class="product_sort_info">
                                 <ul>
-                                    <li><i class="linearicons-weight"></i>برند: @Model.Product.Brand.Title</li>
+	                                <li>
+		                                
+		                                <i class="linearicons-weight"></i>برند:
+		                                <a href="/brand/@Model.Product.Brand.UrlParam">@Model.Product.Brand.Title</a> 
+																	</li>
 																	
 																	@if (Model.Product.Stock > 0)
 																	{
@@ -216,7 +229,14 @@
 					                  <div class="product">
 						                  <div class="">
 							                  <a href="/product/@relatedProduct.Code">
-								                  <img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
+								                  @if (File.Exists(Server.MapPath(relatedProduct.ImageUrl)))
+								                  {
+									                  <img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
+								                  }
+								                  else
+								                  {
+									                  <img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+								                  }
 							                  </a>
 
 						                  </div>

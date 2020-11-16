@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Models.Order>
+
+@{
+ViewBag.Title = "فهرست سفارشات" ;
+    
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+                  {
+	                  columns.Bound(model => model.Code);
+	                  columns.Bound(model => model.OrderStatus.Title);
+
+        columns.Bound(model => model.User.FullName);
+        columns.Bound(model => model.User.CellNum);
+        columns.Bound(model => model.TotalAmount);
+        columns.Bound(model => model.SaleReferenceId);
+        columns.Bound(model => model.IsPaid);
+        columns.Bound(model => model.PaymentDate);
+        columns.Bound(model => model.CreationDate);
+					columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+							.Template(@<text>
+									@Html.ActionLink("جزییات", "Details", new {id = @item.Id}, new {@class = "k-button"})
+									</text>).Width(200);  
+		})
+		.ToolBar(toolbar =>
+					{				
+						toolbar.Custom().Action("Create","Orders").Text("افزودن");                          
+					}
+		)         
+		.DataSource(dataSource => dataSource
+									.Server()
+							
+									.Model(model => model.Id(item => item.Id))
+					)              
+	)

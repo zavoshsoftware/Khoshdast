@@ -89,7 +89,7 @@ namespace Helpers
                 db.ZarinpallAuthorities.FirstOrDefault(current => current.Authority == authority);
 
             if (zarinpallAuthority != null)
-                return zarinpallAuthority.Order;
+                return db.Orders.Find(zarinpallAuthority.OrderId);
 
             else
                 return null;

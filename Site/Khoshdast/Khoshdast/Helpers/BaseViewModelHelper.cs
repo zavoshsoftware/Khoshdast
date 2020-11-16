@@ -49,7 +49,7 @@ namespace Helpers
             List<ProductGroup> productGroups = db.ProductGroups
                 .Where(c => c.ParentId == parentId && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
 
-            
+
             foreach (ProductGroup productGroup in productGroups)
             {
                 if (HasChild(productGroup.Id))
@@ -62,7 +62,7 @@ namespace Helpers
                     {
                         ParentProductGroup = productGroup,
                         ChildProductGroups = childProductGroups,
-                        
+
                     });
                 }
             }
@@ -72,7 +72,7 @@ namespace Helpers
 
         public List<ProductGroup> GetNonChildChildren(Guid parentId)
         {
-            List<ProductGroup> list=new List<ProductGroup>();
+            List<ProductGroup> list = new List<ProductGroup>();
             List<ProductGroup> productGroups = db.ProductGroups
                 .Where(c => c.ParentId == parentId && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
 
@@ -93,6 +93,15 @@ namespace Helpers
                 return true;
 
             return false;
+        }
+
+        public string GetTextItemByName(string name)
+        {
+            TextItem textItem = db.TextItems.FirstOrDefault(c => c.Name == name);
+            if (textItem != null)
+                return textItem.Summery;
+
+            return string.Empty;
         }
 
     }

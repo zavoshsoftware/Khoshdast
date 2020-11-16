@@ -243,6 +243,19 @@ namespace Khoshdast.Controllers
             db.SaveChanges();
             return String.Empty;
         }
+        public string GetProductCodes()
+        {
+            List<Product> products = db.Products.Where(c => c.IsDeleted == false).ToList();
+
+            int i = 100;
+            foreach (Product product in products)
+            {
+                product.Code = i.ToString();
+                i++;
+            }
+            db.SaveChanges();
+            return String.Empty;
+        }
         public string GetProductGroupsUrlParam()
         {
             List<ProductGroup> productGroups = db.ProductGroups.Where(c => c.IsDeleted == false).ToList();

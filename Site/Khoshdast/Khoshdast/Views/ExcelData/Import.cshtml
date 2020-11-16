@@ -10,7 +10,9 @@
 {
 
     @Html.AntiForgeryToken();
-    <div class="row">
+  
+	<div class="container">
+		<div class="row">
         <div class="col-md-6"> <div class="form-horizontal">
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="form-group">
@@ -26,14 +28,46 @@
                 </div>
             </div>
         </div></div>
-        <div class="col-md-6 alert alert-info">
-            <p>فایل نمونه اکسل را از 
-                <a href="/Uploads/saniekar-excel.xlsx">
-                    اینجا
-                </a>    دانلود کنید.</p>
-            <p>اگر ستونی مقدار نداشت آن را خالی بگذارید و از به کار بردن کاراکترهایی مثل - ، . بپرهیزید</p>
-        </div>
+	    <div class="col-md-6 alert alert-info">
+		    <h2>قبل از بارگزاری حتما به نکات زیر توجه کنید</h2>
+		    <ul>
+			    <li>نام شیت اکسل حتما Sheet1 باشد</li>
+			    <li>ترتیب ستون ها به این شکل باشد:
+				    <ol>
+					    <li>
+						    ستون 1: بار کد کالا
+					    </li>
+					    <li>
+						    
+						    ستون2: عنوان محصول</li>
+					    <li>
+								 ستون 3: کد گروه
+					    </li>
+					    <li>
+								 ستون 4: برند
+					    </li>
+					    <li>
+								ستون 5: قیمت
+					    </li>
+					    <li>
+								ستون 6: موجودی
+					    </li>
+				    </ol>  
+			    </li>
+				
+			    <li>فایل نمونه اکسل را از
+				    <a href="/Uploads/sample-excel.xls">
+					    اینجا
+				    </a> دانلود کنید.
+			    </li>
+					
+			    <li>
+				    محصولات بر اساس بارکد شناسایی می شوند و اگر بارکد جدیدی در سایت ثبت شود، به عنوان محصول جدید شناخته خواهد شد و اگر بارکد تکراری باشد سایر اطلاعات محصول جایگزین خواهد شد
+			    </li>
+		    </ul>
+		   
+	    </div>
 
     </div>
-   
+	</div>
 }

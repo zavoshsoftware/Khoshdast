@@ -23,6 +23,9 @@ namespace Khoshdast.Controllers
             if (topProductGroup != null)
                 topPgTitle = "جدیدترین مدل های " + topProductGroup.Title;
 
+            List<TextItem> sliderBanners = db.TextItems.Where(c => c.TextItemType.Name == "sliderleft").ToList();
+            List<TextItem> homeMidkeBanners = db.TextItems.Where(c => c.TextItemType.Name == "twohomebanner").ToList();
+
             HomeViewModel home = new HomeViewModel()
             {
                 Sliders = db.Sliders.Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
@@ -33,6 +36,10 @@ namespace Khoshdast.Controllers
                 TopProductGroupTitle = topPgTitle,
                 HomeBlogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(3).ToList(),
                 HomeBrands = db.Brands.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).ToList(),
+                SliderLeftBanners1 = sliderBanners.FirstOrDefault(),
+                SliderLeftBanners2 = sliderBanners.LastOrDefault(),
+                HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),
+                HomeMidleBanner2 = homeMidkeBanners.LastOrDefault(),
             };
             return View(home);
         }
@@ -64,7 +71,11 @@ namespace Khoshdast.Controllers
         [Route("About")]
         public ActionResult About()
         {
-            AboutViewModel about = new AboutViewModel();
+            AboutViewModel about = new AboutViewModel()
+            {
+                About = db.TextItems.FirstOrDefault(c=>c.Name== "abouttext"),
+                WhyUsText = db.TextItems.Where(c=>c.TextItemType.Name== "whyus").ToList()
+            };
             return View(about);
         }
         [Route("Contact")]

@@ -386,6 +386,7 @@
     <Content Include="assets\images\menu_banner9.jpg" />
     <Content Include="assets\images\namad1.jpg" />
     <Content Include="assets\images\namad2.jpg" />
+    <Content Include="assets\images\no-Photo.jpg" />
     <Content Include="assets\images\paypal.png" />
     <Content Include="assets\images\PG\1.jpg" />
     <Content Include="assets\images\PG\2.jpg" />
@@ -1209,7 +1210,9 @@
     <Content Include="Scripts\kendo\2017.3.913\kendo.webcomponents.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\pako_deflate.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1225,10 +1228,13 @@
     <Compile Include="Controllers\ExcelDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageBrowserController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductCommentsController.cs" />
     <Compile Include="Controllers\ProductGroupsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SlidersController.cs" />
+    <Compile Include="Controllers\TextItemsController.cs" />
+    <Compile Include="Controllers\TextItemTypesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1281,6 +1287,10 @@
     <Compile Include="Migrations\202011012047356_V09.Designer.cs">
       <DependentUpon>202011012047356_V09.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011121537403_V10.cs" />
+    <Compile Include="Migrations\202011121537403_V10.Designer.cs">
+      <DependentUpon>202011121537403_V10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1304,12 +1314,16 @@
     <Compile Include="Models\Entities\Province.cs" />
     <Compile Include="Models\Entities\Role.cs" />
     <Compile Include="Models\Entities\Slider.cs" />
+    <Compile Include="Models\Entities\TextItemType.cs" />
     <Compile Include="Models\Entities\TextItem.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\ZarinpallAuthority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BrandListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
+    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductListByBrandViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\DropDownListViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
@@ -1583,6 +1597,24 @@
     <Content Include="Views\Basket\CallBack.cshtml" />
     <Content Include="Views\ExcelData\Import.cshtml" />
     <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Uploads\sample-excel.xls" />
+    <Content Include="Views\TextItemTypes\Create.cshtml" />
+    <Content Include="Views\TextItemTypes\Delete.cshtml" />
+    <Content Include="Views\TextItemTypes\Details.cshtml" />
+    <Content Include="Views\TextItemTypes\Edit.cshtml" />
+    <Content Include="Views\TextItemTypes\Index.cshtml" />
+    <Content Include="Views\TextItems\Create.cshtml" />
+    <Content Include="Views\TextItems\Delete.cshtml" />
+    <Content Include="Views\TextItems\Details.cshtml" />
+    <Content Include="Views\TextItems\Edit.cshtml" />
+    <Content Include="Views\TextItems\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Brands\List.cshtml" />
+    <Content Include="Views\Products\ListByBrand.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1598,6 +1630,7 @@
     <Folder Include="Uploads\ProductGroup\" />
     <Folder Include="Uploads\Product\" />
     <Folder Include="Uploads\Slider\" />
+    <Folder Include="Uploads\text\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
@@ -1635,6 +1668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011012047356_V09.resx">
       <DependentUpon>202011012047356_V09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011121537403_V10.resx">
+      <DependentUpon>202011121537403_V10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

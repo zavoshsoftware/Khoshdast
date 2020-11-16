@@ -11,15 +11,16 @@ namespace Models
 {
     public class TextItem : BaseEntity
     {
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
+        [Display(Name="عنوان")]
         public string Title { get; set; }
-       
 
+        public string Name { get; set; }
+
+        [Display(Name="تصویر")]
         public string ImageUrl { get; set; }
 
-
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
-        public string UrlParam { get; set; }
+        [Display(Name="متن کوتاه")]
+        public string Summery { get; set; }
      
 
         [Display(Name = "متن")]
@@ -27,9 +28,15 @@ namespace Models
         [AllowHtml]
         [Column(TypeName = "ntext")]
         [UIHint("RichText")]
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         public string Body { get; set; }
 
-        public string Name { get; set; }
+
+        [Display(Name="آدرس لینک")]
+        public string LinkUrl { get; set; }
+        [Display(Name="متن لینک")]
+        public string LinkTitle { get; set; }
+
+        public Guid? TextItemTypeId { get; set; }
+        public virtual  TextItemType  TextItemType { get; set; }
     }
 }

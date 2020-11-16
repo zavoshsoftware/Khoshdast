@@ -185,9 +185,9 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
         padding-left: 0 !important;
     }
 
-    .pagination {
+    /*.pagination {
         display: flex;
-    }
+    }*/
 }
 
 
@@ -307,3 +307,21 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .search-box {
     margin-bottom: 10px;
 }
+.shop_banner3 {
+    margin-bottom: 14px;
+}
+.hover_effect1 img {
+    width: 100%;
+    height: 198px;
+}
+.leftslide {
+    height: 200px;
+}
+
+.brand-item{
+    text-align: center
+
+}
+    .brand-item .brand-item-title {
+        padding-bottom: 5px;
+    }

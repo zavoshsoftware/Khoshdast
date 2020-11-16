@@ -1,4 +1,6 @@
-﻿<footer class="footer_dark">
+﻿@model ViewModels._BaseViewModel
+
+<footer class="footer_dark">
 	<div class="footer_top">
 		<div class="container">
 			<div class="row">
@@ -8,15 +10,16 @@
 						<ul class="contact_info contact_info_light">
 							<li>
 								<i class="ti-location-pin"></i>
-								<p>تهران، ستارخان، بین دارایی و برق الستوم، پلاک 525</p>
+
+								<p>@Model.Address</p>
 							</li>
 							<li>
 								<i class="ti-email"></i>
-								<a href="mailto:info@khoshdast.ir">info@khoshdast.ir</a>
+								<a href="mailto:@Model.Email">@Model.Email</a>
 							</li>
 							<li>
 								<i class="ti-mobile"></i>
-								<p>021 - 44289714</p>
+								<p>@Model.Phone</p>
 							</li>
 						</ul>
 					</div>
@@ -35,7 +38,7 @@
 						<h6 class="widget_title">لینک های مفید</h6>
 						<ul class="widget_links">
 							<li><a href="/about">درباره ما</a></li>
-							<li><a href="#">نحوه خرید از سایت</a></li>
+							<li><a href="/brand">برندها</a></li>
 							<li><a href="/contact">تماس با ما</a></li>
 							<li><a href="/blog">اخبار و مقالات</a></li>
 							<li><a href="/category">محصولات</a></li>

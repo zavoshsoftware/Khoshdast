@@ -120,9 +120,13 @@ namespace Models
             }
         }
 
+        [Display(Name="نام تحویل گیرنده")]
         public string DeliverFullName { get; set; }
+        [Display(Name="شماره موبایل تحویل گیرنده")]
         public string DeliverCellNumber { get; set; }
+        [Display(Name="کد پستی")]
         public string PostalCode { get; set; }
+        [Display(Name="تاریخ پرداخت")]
         public DateTime? PaymentDate { get; set; }
 
 

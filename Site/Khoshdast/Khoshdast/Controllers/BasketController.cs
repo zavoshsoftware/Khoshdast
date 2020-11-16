@@ -50,6 +50,7 @@ namespace Khoshdast.Controllers
 
             cart.Total = (subTotal - discountAmount).ToString("n0");
 
+            cart.Policy = db.TextItems.FirstOrDefault(c => c.Name == "policy");
             return View(cart);
         }
 
@@ -381,9 +382,7 @@ namespace Khoshdast.Controllers
 
                         order.TotalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
 
-                        OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
-                        if (orderStatus != null)
-                            order.OrderStatusId = orderStatus.Id;
+                       
 
                         db.SaveChanges();
                         RemoveCookie();
@@ -597,7 +596,17 @@ namespace Khoshdast.Controllers
                             order.PaymentDate = DateTime.Now;
                             order.SaleReferenceId = verificationResponse.RefID;
 
+
+                            OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
+                            if (orderStatus != null)
+                                order.OrderStatusId = orderStatus.Id;
+
+                            order.LastModifiedDate = DateTime.Now;
+
+                             
+                            //db.Entry(order).State = EntityState.Modified;
                             db.SaveChanges();
+
                             callBack.Order = order;
                             callBack.IsSuccess = true;
                             callBack.OrderCode = order.Code.ToString();

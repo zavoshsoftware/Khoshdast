@@ -18,5 +18,11 @@ namespace ViewModels
         public int SliderQuantity { get { return Sliders.Count(); } }
         public string TopProductGroupTitle { get; set; }
 
+        public TextItem  SliderLeftBanners1 { get; set; }
+        public TextItem  SliderLeftBanners2 { get; set; }
+        public TextItem HomeMidleBanner1 { get; set; }
+        public TextItem HomeMidleBanner2 { get; set; }
+
+
     }
 }

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
+using ViewModels;
 
 namespace Khoshdast.Controllers
 {
@@ -156,6 +157,16 @@ namespace Khoshdast.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [Route("brand")]
+        public ActionResult List()
+        {
+            BrandListViewModel result=new BrandListViewModel()
+            {
+                Brands = db.Brands.Where(c=>c.IsDeleted==false&&c.IsActive).OrderBy(c=>c.Order).ToList()
+            };
+            return View(result);
         }
     }
 }

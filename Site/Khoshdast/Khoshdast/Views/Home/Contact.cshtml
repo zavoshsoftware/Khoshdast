@@ -1,4 +1,4 @@
-﻿
+﻿@model ViewModels.ContactViewModel
 @{
     ViewBag.Title = "تماس با ما";
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
@@ -37,7 +37,7 @@
                             </div>
                             <div class="contact_text">
                                 <span>شماره تماس</span>
-                                <p>  02144289714</p>
+                                <p>  @Model.Phone</p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="contact_text">
                             <span>ایمیل</span>
-                            <p> info@khoshdast.ir</p>
+                            <p> @Model.Email</p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="contact_text">
                             <span>آدرس</span>
-                            <p>  تهران، ستارخان، بین دارایی و برق الستوم</p>
+                            <p>  @Model.Address</p>
                         </div>
                     </div>
                 </div>
