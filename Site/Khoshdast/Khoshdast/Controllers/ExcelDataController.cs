@@ -10,6 +10,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ExcelDataController : Controller
     {
         public ActionResult Import()

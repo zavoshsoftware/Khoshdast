@@ -325,3 +325,10 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     .brand-item .brand-item-title {
         padding-bottom: 5px;
     }
+
+.profile-info-row {
+    margin-bottom: 20px;
+}
+.profile-info-row b{
+    color: #000;
+}

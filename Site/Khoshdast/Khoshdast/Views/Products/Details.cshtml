@@ -1,8 +1,10 @@
 ﻿@model ViewModels.ProductDetailViewModel
 @{
-    ViewBag.Title = @Model.Product.PageTitle;
-    ViewBag.Description = @Model.Product.PageDescription;
-    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Title = @Model.Product.PageTitle;
+		//ViewBag.Description = @Model.Product.PageDescription;
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://khoshdast.ir/product/" + Model.Product.Code;
+		ViewBag.Description = "خرید اینترنتی " + Model.Product.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست. قیمت "+Model.Product.Title;
 }
 
 <div class="breadcrumb_section bg_gray page-title-mini" style="background-color: #E1D9DA">

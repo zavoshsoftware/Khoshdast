@@ -2,6 +2,8 @@
 @{
 		ViewBag.Title = Model.ProductGroup.Title;
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://khoshdast.ir/category/" + Model.ProductGroup.UrlParam;
+		ViewBag.Description = "خرید اینترنتی " + Model.ProductGroup.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست";
 }
 @*@section head{
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -80,12 +82,12 @@
 											<a href="/product/@product.Code">
 												@if (File.Exists(Server.MapPath(product.ImageUrl)))
 												{
-													<img src="@product.ImageUrl" alt="@product.Title">
-												}
+														<img src="@product.ImageUrl" alt="@product.Title">
+}
 												else
 												{
 														<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-												}
+}
 											</a>
 
 										</div>
@@ -217,16 +219,16 @@
 			$('#' + id).slideToggle();
 		}
 
-		$(document).ready(function() {
+		$(document).ready(function () {
 			setSortLink();
 			$('select#ddlsortby').on('change',
 				'',
-				function(e) {
+				function (e) {
 					sortDdlChangeEvent($('select#ddlsortby').val());
 				});
-			$('#btnfilter').click(function() {
+			$('#btnfilter').click(function () {
 				var names = [];
-				$('#list_brand input:checked').each(function() {
+				$('#list_brand input:checked').each(function () {
 					names.push(this.name);
 				});
 
@@ -282,7 +284,7 @@
 				$('select#ddlsortby').val(id);
 			}
 
-		
+
 		}
 
 		function sortDdlChangeEvent(sortybyVal) {

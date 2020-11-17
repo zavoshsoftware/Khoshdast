@@ -13,7 +13,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class ProductGroupsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -230,6 +230,7 @@ namespace Khoshdast.Controllers
             return View(productGroupList);
         }
 
+        [AllowAnonymous]
         public string GetProductGroupsCodes()
         {
             List<ProductGroup> productGroups = db.ProductGroups.Where(c => c.IsDeleted == false).ToList();
@@ -243,6 +244,7 @@ namespace Khoshdast.Controllers
             db.SaveChanges();
             return String.Empty;
         }
+        [AllowAnonymous]
         public string GetProductCodes()
         {
             List<Product> products = db.Products.Where(c => c.IsDeleted == false).ToList();
@@ -256,6 +258,7 @@ namespace Khoshdast.Controllers
             db.SaveChanges();
             return String.Empty;
         }
+        [AllowAnonymous]
         public string GetProductGroupsUrlParam()
         {
             List<ProductGroup> productGroups = db.ProductGroups.Where(c => c.IsDeleted == false).ToList();
@@ -269,6 +272,7 @@ namespace Khoshdast.Controllers
             return String.Empty;
         }
 
+        [AllowAnonymous]
         public string InsertGroups()
         {
             Guid parent1 = Guid.NewGuid();
@@ -366,51 +370,51 @@ namespace Khoshdast.Controllers
 
             Guid parent21 = Guid.NewGuid();
             InsertProGr(parent21, "رنگ ساختمانی", 3, parent2);
- 
+
 
             InsertProGr(Guid.NewGuid(), " رنگ اکریلیک", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " رنگ روغنی", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " رنگ پلاستیک", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " رنگ فوری", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " آستر و عایق", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " بتونه و درزگیر", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " حلال", 1, parent21);
-           InsertProGr(Guid.NewGuid(), " مادر رنگ", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " رنگ روغنی", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " رنگ پلاستیک", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " رنگ فوری", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " آستر و عایق", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " بتونه و درزگیر", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " حلال", 1, parent21);
+            InsertProGr(Guid.NewGuid(), " مادر رنگ", 1, parent21);
 
 
             Guid parent22 = Guid.NewGuid();
             InsertProGr(parent22, "رنگ ساختمانی", 3, parent2);
-             
 
-                InsertProGr(Guid.NewGuid(), " رنگ‌ اکریلیک", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " رنگ مولتی سورفیس", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " رنگ فلئورسنت", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " رنگ مولتی رزین", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " لاینر", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " تکسچر", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " مدیوم", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " رنگ کهنه کاری(آنتیک)", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " پودر و اکلیل", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " مطلا کاری", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " جوهر رنگ", 1, parent22);
-               InsertProGr(Guid.NewGuid(), " تثبیت کننده", 1, parent22);
+
+            InsertProGr(Guid.NewGuid(), " رنگ‌ اکریلیک", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " رنگ مولتی سورفیس", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " رنگ فلئورسنت", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " رنگ مولتی رزین", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " لاینر", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " تکسچر", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " مدیوم", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " رنگ کهنه کاری(آنتیک)", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " پودر و اکلیل", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " مطلا کاری", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " جوهر رنگ", 1, parent22);
+            InsertProGr(Guid.NewGuid(), " تثبیت کننده", 1, parent22);
 
 
             InsertProGr(Guid.NewGuid(), "اسپری رنگ", 3, parent2);
 
 
             InsertProGr(parent3, "چسب", 3, null);
-          
-           
+
+
 
             InsertProGr(Guid.NewGuid(), " نوار چسب", 1, parent3);
             InsertProGr(Guid.NewGuid(), " چسب فوری", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " چسب چوب", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " چسب سنگ", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " چسب کاشی", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " چسب بتن", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " پولیش", 1, parent3);
-           InsertProGr(Guid.NewGuid(), " چسب چند کاره", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " چسب چوب", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " چسب سنگ", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " چسب کاشی", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " چسب بتن", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " پولیش", 1, parent3);
+            InsertProGr(Guid.NewGuid(), " چسب چند کاره", 1, parent3);
 
 
 
@@ -418,6 +422,7 @@ namespace Khoshdast.Controllers
             return string.Empty;
         }
 
+        [AllowAnonymous]
         public void InsertProGr(Guid id, string title, int order, Guid? parentId)
         {
             CodeGenerator codeGenerator = new CodeGenerator();

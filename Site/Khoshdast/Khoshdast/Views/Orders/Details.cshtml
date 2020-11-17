@@ -158,7 +158,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">مشخصات مشتری</div>
                         <div class="panel-body">
@@ -222,7 +222,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="panel panel-info">
                         <div class="panel-heading">لیست سفارشات</div>
                         <div class="panel-body">
@@ -233,6 +233,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-right">محصول</th>
+                                                <th class="text-right">بارکد</th>
                                                 <th class="text-right">تعداد</th>
                                                 <th class="text-right">قیمت</th>
                                                 <th class="text-right">جمع</th>
@@ -243,6 +244,7 @@
                                             {
                                                 <tr>
                                                     <td>@detail.Product.Title</td>
+                                                    <td>@detail.Product.Barcode</td>
                                                     <td>@detail.Quantity</td>
                                                     <td>@detail.Price</td>
                                                     <td>@detail.Amount</td>

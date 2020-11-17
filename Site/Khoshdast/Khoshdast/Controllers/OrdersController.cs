@@ -11,6 +11,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class OrdersController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

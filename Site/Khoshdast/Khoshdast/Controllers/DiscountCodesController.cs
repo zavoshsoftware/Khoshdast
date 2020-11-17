@@ -10,6 +10,7 @@ using Models;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class DiscountCodesController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

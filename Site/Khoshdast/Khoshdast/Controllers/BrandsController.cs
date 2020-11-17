@@ -12,6 +12,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BrandsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -160,6 +161,7 @@ namespace Khoshdast.Controllers
         }
 
         [Route("brand")]
+        [AllowAnonymous]
         public ActionResult List()
         {
             BrandListViewModel result=new BrandListViewModel()

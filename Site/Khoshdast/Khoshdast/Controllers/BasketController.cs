@@ -581,7 +581,7 @@ namespace Khoshdast.Controllers
                 try
                 {
                     var zarinpal = ZarinPal.ZarinPal.Get();
-                    zarinpal.EnableSandboxMode();
+                    zarinpal.DisableSandboxMode();
                     String Authority = authority;
                     long Amount = zarinPal.GetAmountByAuthority(Authority);
 
@@ -592,21 +592,9 @@ namespace Khoshdast.Controllers
                         Order order = zarinPal.GetOrderByAuthority(authority);
                         if (order != null)
                         {
-                            order.IsPaid = true;
-                            order.PaymentDate = DateTime.Now;
-                            order.SaleReferenceId = verificationResponse.RefID;
 
-
-                            OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
-                            if (orderStatus != null)
-                                order.OrderStatusId = orderStatus.Id;
-
-                            order.LastModifiedDate = DateTime.Now;
-
-                             
-                            //db.Entry(order).State = EntityState.Modified;
-                            db.SaveChanges();
-
+                            UpdateOrder(order.Id, verificationResponse.RefID);
+                         
                             callBack.Order = order;
                             callBack.IsSuccess = true;
                             callBack.OrderCode = order.Code.ToString();
@@ -664,6 +652,25 @@ namespace Khoshdast.Controllers
                                     - orderDetail.Quantity;
                 }
             }
+        }
+
+        public void UpdateOrder(Guid orderId,string refId)
+        {
+            Order order = db.Orders.Find(orderId);
+
+            order.IsPaid = true;
+            order.PaymentDate = DateTime.Now;
+            order.SaleReferenceId = refId;
+
+
+            OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
+            if (orderStatus != null)
+                order.OrderStatusId = orderStatus.Id;
+
+            order.LastModifiedDate = DateTime.Now;
+
+
+            db.SaveChanges();
         }
     }
 }

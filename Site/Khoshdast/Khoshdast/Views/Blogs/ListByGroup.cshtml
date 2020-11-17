@@ -1,8 +1,10 @@
 ﻿
 @model ViewModels.BlogListViewModel
 @{
-    ViewBag.Title = "وبلاگ";
-    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Title = "وبلاگ";
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://khoshdast.ir/blog/"+Model.BlogGroup.UrlParam;
+
 }
 
 <div class="breadcrumb_section bg_gray page-title-mini">

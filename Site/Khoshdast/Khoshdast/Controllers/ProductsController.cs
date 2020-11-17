@@ -20,12 +20,57 @@ namespace Khoshdast.Controllers
 
         #region CRUD
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Where(p => p.IsDeleted == false).OrderByDescending(p => p.CreationDate);
-            return View(products.ToList());
+            List<Product> products = db.Products.Include(p => p.Brand).Where(p => p.IsDeleted == false)
+                .OrderByDescending(p => p.CreationDate).ToList();
+
+            List<AdminProductListViewModel> result = new List<AdminProductListViewModel>();
+
+            foreach (Product product in products)
+            {
+                result.Add(new AdminProductListViewModel()
+                {
+                    Id = product.Id,
+                    Title = product.Title,
+                    IsActive = product.IsActive,
+                    ImageUrl = product.ImageUrl,
+                    Stock = product.Stock.ToString(),
+                    IsInPromotion = product.IsInPromotion,
+                    Amount = product.AmountStr,
+                    BarCode = product.Barcode,
+                    BrandTitle = product.Brand.Title,
+                    ProductGroupTitle = GetProductGroups(product.Id)
+
+
+                });
+            }
+            return View(result);
         }
 
+        public string GetProductGroups(Guid productId)
+        {
+            List<ProductGroupRelProduct> productGroupRelProducts = db.ProductGroupRelProducts
+                .Where(c => c.ProductId == productId && c.IsDeleted == false).ToList();
+
+            string groupTitle = "";
+
+            int index = 0;
+            foreach (ProductGroupRelProduct productRel in productGroupRelProducts)
+            {
+                if (index == 0)
+                    groupTitle += productRel.ProductGroup.Title;
+                else
+                    groupTitle += " - " + productRel.ProductGroup.Title;
+
+                index++;
+            }
+
+            return groupTitle;
+        }
+
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.BrandId = new SelectList(db.Brands, "Id", "Title");
@@ -38,6 +83,7 @@ namespace Khoshdast.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductCrudViewModel product, HttpPostedFileBase fileupload)
@@ -156,6 +202,7 @@ namespace Khoshdast.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -216,6 +263,7 @@ namespace Khoshdast.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductCrudViewModel oproduct, HttpPostedFileBase fileupload)
@@ -274,6 +322,7 @@ namespace Khoshdast.Controllers
             return View(oproduct);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
@@ -288,6 +337,7 @@ namespace Khoshdast.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
@@ -345,7 +395,7 @@ namespace Khoshdast.Controllers
                 SidebarProductGroups = GetSidebarProductGroups(),
                 BreadcrumbItems = GetBreadCrumb(productGroup).OrderBy(c => c.Order).ToList(),
                 PageItems = GetPagination(products.Count(), pageId),
-                SidebarBanner = db.TextItems.FirstOrDefault(c=>c.Name== "plpsidebar")
+                SidebarBanner = db.TextItems.FirstOrDefault(c => c.Name == "plpsidebar")
             };
 
             return View(productList);
@@ -374,11 +424,11 @@ namespace Khoshdast.Controllers
             return url;
         }
 
-        public string GetUrlByBrand( string urlParam)
+        public string GetUrlByBrand(string urlParam)
         {
             string url = "/brand/" + urlParam;
             ViewBag.hasQs = false;
-           
+
             return url;
         }
 
@@ -441,7 +491,7 @@ namespace Khoshdast.Controllers
 
         public List<Product> GetProductByPagination(List<Product> products, int? pageId, string sortby)
         {
-            List<Product> result = products.OrderBy(c => c.Order).Skip(pageId.Value * productPagination).Take(productPagination)
+            List<Product> result = products.OrderBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
                 .ToList();
 
             if (sortby == null)
@@ -502,8 +552,8 @@ namespace Khoshdast.Controllers
             List<Product> products = new List<Product>();
 
             List<ProductGroupRelProduct> productGroupRel = db.ProductGroupRelProducts
-                .Where(c => (c.ProductGroupId == productGroupId || c.ProductGroup.ParentId == productGroupId ||
-                             c.ProductGroup.Parent.Parent.ParentId == productGroupId) && c.IsDeleted == false).ToList();
+                .Where(c => (c.ProductGroupId == productGroupId || c.ProductGroup.ParentId == productGroupId
+                             || c.ProductGroup.Parent.ParentId == productGroupId) && c.IsDeleted == false).ToList();
 
             if (brands != null)
             {
@@ -534,7 +584,7 @@ namespace Khoshdast.Controllers
 
         public List<Product> GetProductListByBrandId(Guid brandId)
         {
-            return db.Products.Where(c=>c.BrandId==brandId&&c.IsActive&&c.IsDeleted==false).ToList();
+            return db.Products.Where(c => c.BrandId == brandId && c.IsActive && c.IsDeleted == false).ToList();
         }
         public List<SidebarProductGroup> GetSidebarProductGroups()
         {
@@ -551,7 +601,7 @@ namespace Khoshdast.Controllers
                     ProductGroup = productGroup,
 
                     Quantity = db.ProductGroupRelProducts.Count(c =>
-                        (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id) &&
+                        (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id || c.ProductGroup.Parent.ParentId == productGroup.Id) &&
                         c.IsDeleted == false),
 
                     ChildProductGroups = db.ProductGroups.Where(c => c.ParentId == productGroup.Id && c.IsActive && c.IsDeleted == false).ToList()
@@ -605,7 +655,7 @@ namespace Khoshdast.Controllers
 
             for (int i = 9; i > 1; i--)
             {
-              
+
                 if (currenProductGroup != null)
                 {
                     result.Add(GetBreadcrumbItem(currenProductGroup, i));
@@ -662,7 +712,7 @@ namespace Khoshdast.Controllers
                 brand = brand,
                 Products = GetProductByPagination(products, pageId, sortby),
                 SidebarProductGroups = GetSidebarProductGroups(),
-               
+
                 PageItems = GetPagination(products.Count(), pageId),
                 SidebarBanner = db.TextItems.FirstOrDefault(c => c.Name == "plpsidebar")
             };

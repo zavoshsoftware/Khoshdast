@@ -141,11 +141,12 @@ namespace Khoshdast.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl, string role)
         {
-            if (!string.IsNullOrEmpty(returnUrl))
-                return Redirect("/"+returnUrl);
-
+          
             if (role.ToLower().Contains("admin"))
                 return RedirectToAction("Index", "Users");
+
+            if (!string.IsNullOrEmpty(returnUrl))
+                return Redirect(returnUrl);
 
             if (role.ToLower().Contains("customer"))
                 return RedirectToAction("Index", "Home");

@@ -3,7 +3,7 @@
 @{
 		ViewBag.Title = Model.Blog.Title;
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
-
+		ViewBag.Canonical = "https://khoshdast.ir/blog/post/" + Model.Blog.UrlParam;
 }
 <div class="breadcrumb_section bg_gray page-title-mini">
 	<div class="container">

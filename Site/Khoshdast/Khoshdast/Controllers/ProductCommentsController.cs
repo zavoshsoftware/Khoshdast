@@ -11,6 +11,7 @@ using Models;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductCommentsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

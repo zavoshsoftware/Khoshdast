@@ -13,9 +13,13 @@ namespace ViewModels
         private BaseViewModelHelper baseviewmodel = new BaseViewModelHelper();
 
         public List<MenuItems> MenuItems { get { return baseviewmodel.GetMenuProductGroup(); } }
-        public string Address { get { return baseviewmodel.GetTextItemByName("address"); } }
-        public string Phone { get { return baseviewmodel.GetTextItemByName("phone"); } }
-        public string Email { get { return baseviewmodel.GetTextItemByName("email"); } }
+        public string Address { get { return baseviewmodel.GetTextItemByName("address", "summery"); } }
+        public string Phone { get { return baseviewmodel.GetTextItemByName("phone", "summery"); } }
+        public string Email { get { return baseviewmodel.GetTextItemByName("email", "summery"); } }
+        public string Instagram { get { return baseviewmodel.GetTextItemByName("Instagram", "linkUrl"); } }
+        public string Telegram { get { return baseviewmodel.GetTextItemByName("telegram", "linkUrl"); } }
+        public string Aparat { get { return baseviewmodel.GetTextItemByName("aparat", "linkUrl"); } }
+        public string Youtube { get { return baseviewmodel.GetTextItemByName("youtube", "linkUrl"); } }
     }
 
     public class MenuItems

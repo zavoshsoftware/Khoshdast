@@ -6865,6 +6865,21 @@ body .owl-theme .owl-nav [class*="owl-"] {
 	background-color:#00acee !important;
 	border-color: #00acee !important;
 }
+.sc_telegram {
+    background-color: #0088cc !important;
+    border-color: #0088cc !important;
+}
+    .sc_telegram img {
+        margin-bottom: 5px;
+    }
+.sc_aparat {
+    background-color: #e91e63 !important;
+    border-color: #e91e63 !important;
+}
+.sc_aparat img{
+    height: 22px;
+    margin-bottom: 6px;
+}
 .sc_youtube {
 	background-color:#c4302b !important;
 	border-color: #c4302b !important;

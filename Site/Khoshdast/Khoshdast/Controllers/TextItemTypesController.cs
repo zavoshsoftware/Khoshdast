@@ -10,6 +10,7 @@ using Models;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class TextItemTypesController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

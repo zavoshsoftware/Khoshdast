@@ -95,12 +95,15 @@ namespace Helpers
             return false;
         }
 
-        public string GetTextItemByName(string name)
+        public string GetTextItemByName(string name, string field)
         {
             TextItem textItem = db.TextItems.FirstOrDefault(c => c.Name == name);
             if (textItem != null)
-                return textItem.Summery;
-
+            {
+                if (field == "summery")
+                    return textItem.Summery;
+                return textItem.LinkUrl;
+            }
             return string.Empty;
         }
 

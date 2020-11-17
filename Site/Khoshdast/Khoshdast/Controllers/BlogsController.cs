@@ -12,6 +12,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BlogsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
@@ -149,6 +150,7 @@ namespace Khoshdast.Controllers
         }
 
         [Route("blog")]
+        [AllowAnonymous]
         public ActionResult List()
         {
             List<Blog> blogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive)
@@ -163,6 +165,7 @@ namespace Khoshdast.Controllers
 
 
         [Route("blog/{urlParam}")]
+        [AllowAnonymous]
         public ActionResult ListByGroup(string urlParam)
         {
             BlogGroup blogGroup = db.BlogGroups.FirstOrDefault(c => c.UrlParam == urlParam && c.IsActive);
@@ -183,6 +186,7 @@ namespace Khoshdast.Controllers
 
 
         [Route("blog/post/{urlParam}")]
+        [AllowAnonymous]
         public ActionResult Details(string urlParam)
         {
          
@@ -209,6 +213,7 @@ namespace Khoshdast.Controllers
             return View(detail);
         }
 
+        [AllowAnonymous]
         public Blog GetNeighbourBlogs(string type, Blog blog)
         {
             if (type == "next")
