@@ -50,13 +50,14 @@ namespace Khoshdast.Controllers
                             return View();
                         }
                         WorkSheet.FirstRow().Delete();//if you want to remove ist row
-                      
+
 
                         foreach (var row in WorkSheet.RowsUsed())
                         {
-                            BrandCheck(row.Cell(4).Value.ToString());
+                            if (!string.IsNullOrEmpty(row.Cell(4).Value.ToString()))
+                                BrandCheck(row.Cell(4).Value.ToString());
                         }
-                  
+
                         foreach (var row in WorkSheet.RowsUsed())
                         {
                             UpdateRow(row.Cell(1).Value.ToString(), row.Cell(2).Value.ToString(),
@@ -127,7 +128,7 @@ namespace Khoshdast.Controllers
                 {
                     int qtyInt = Convert.ToInt32(qty);
                     decimal amountDecimal = Convert.ToDecimal(amount);
-                    
+
                     int productGroupCodeInt = Convert.ToInt32(productGroupCode);
 
                     bool isAvailable = qtyInt > 0;
