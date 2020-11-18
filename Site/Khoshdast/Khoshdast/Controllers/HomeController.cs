@@ -30,12 +30,12 @@ namespace Khoshdast.Controllers
             {
                 Sliders = db.Sliders.Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
                 HomeProductGroups = db.ProductGroups.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
-                BestSaleProducts = db.Products.Where(c => c.IsTopSell && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
-                NewestProducts = db.Products.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
+                BestSaleProducts = db.Products.Where(c => c.IsTopSell && c.Stock > 0 && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
+                NewestProducts = db.Products.Where(c => c.IsInHome && c.Stock > 0 && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
                 TopCategoryProducts = GetTopCategoryProducts(topProductGroup),
                 TopProductGroupTitle = topPgTitle,
                 HomeBlogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(3).ToList(),
-                HomeBrands = db.Brands.Where(c =>c.BrandNameImageUrl!=null&& c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).Take(10).ToList(),
+                HomeBrands = db.Brands.Where(c => c.BrandNameImageUrl != null && c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).Take(10).ToList(),
                 SliderLeftBanners1 = sliderBanners.FirstOrDefault(),
                 SliderLeftBanners2 = sliderBanners.LastOrDefault(),
                 HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),
@@ -57,7 +57,8 @@ namespace Khoshdast.Controllers
 
                 foreach (ProductGroupRelProduct pro in productGroupRelProducts)
                 {
-                    list.Add(pro.Product);
+                    if (pro.Product.Stock > 0)
+                        list.Add(pro.Product);
                 }
             }
             return list;
@@ -73,8 +74,8 @@ namespace Khoshdast.Controllers
         {
             AboutViewModel about = new AboutViewModel()
             {
-                About = db.TextItems.FirstOrDefault(c=>c.Name== "abouttext"),
-                WhyUsText = db.TextItems.Where(c=>c.TextItemType.Name== "whyus").ToList()
+                About = db.TextItems.FirstOrDefault(c => c.Name == "abouttext"),
+                WhyUsText = db.TextItems.Where(c => c.TextItemType.Name == "whyus").ToList()
             };
             return View(about);
         }

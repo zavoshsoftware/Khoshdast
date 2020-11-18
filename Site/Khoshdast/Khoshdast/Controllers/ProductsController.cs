@@ -491,7 +491,7 @@ namespace Khoshdast.Controllers
 
         public List<Product> GetProductByPagination(List<Product> products, int? pageId, string sortby)
         {
-            List<Product> result = products.OrderBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
+            List<Product> result = products.OrderByDescending(c => c.Stock).ThenBy(c=>c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
                 .ToList();
 
             if (sortby == null)

@@ -1,6 +1,6 @@
 ﻿function SubmitComment() {
 
-     
+
     var url = window.location.pathname;
     var id = url.substring(url.lastIndexOf('/') + 1);
 
@@ -14,18 +14,18 @@
                 data: { name: nameVal, email: emailVal, body: bodyVal, code: id },
                 type: "GET"
             }).done(function (result) {
-            if (result === "true") {
-                $("#errorDiv").css('display', 'none');
-                $("#SuccessDiv").css('display', 'block');
-                localStorage.setItem("id", "");
-            }
-            else if (result === "InvalidEmail") {
-                $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
-                $("#errorDiv").css('display', 'block');
-                $("#SuccessDiv").css('display', 'none');
+                if (result === "true") {
+                    $("#errorDiv").css('display', 'none');
+                    $("#SuccessDiv").css('display', 'block');
+                    localStorage.setItem("id", "");
+                }
+                else if (result === "InvalidEmail") {
+                    $("#errorDiv").html('ایمیل وارد شده صحیح نمی باشد.');
+                    $("#errorDiv").css('display', 'block');
+                    $("#SuccessDiv").css('display', 'none');
 
-            }
-        });
+                }
+            });
     }
     else {
         $("#errorDiv").html('تمامی فیلد های زیر را تکمیل نمایید.');
@@ -112,63 +112,89 @@ function addToBasket(code, qty) {
         });
 }
 
+function DisappearButton() {
+    $('#btnPayment').css('display', 'none');
+}
+
+function AppearButton() {
+    $('#btnPayment').css('display', 'block');
+}
+
 function finalizeOrder() {
-    //DisappearButton();
+     DisappearButton();
     var orderNotes = $('#note').val();
     var cellnumber = $('#cellnumber').val();
     var postalCode = $('#postalCode').val();
     var address = $('#address').val();
     var city = $('#ddlcity option:selected').val();
     var fullname = $('#fullname').val();
- 
+
+    var paymentMethod = $('input[name="payment_option"]:checked').val();
+
 
     if (city === undefined || city === '0' || city === 0)
         city = "";
-    if (fullname !== "" &&
-        cellnumber !== "" &&
-        address !== "" &&
-        city !== "") {
-        $.ajax(
-            {
-                url: "/Basket/Finalize",
-                data: {
-                    notes: orderNotes, cellnumber: cellnumber, postal: postalCode, address: address,
-                    city: city, fullname: fullname
-                },
-                type: "GET"
-            }).done(function (result) {
-                if (result.includes('nonstock')) {
-                    var products = result.split('|');
-                    var productNames = "";
-                    for (var i = 1; i < products.length - 1; i++) {
-                        productNames = productNames + "\"" + products[i] + "\"";
-                    }
 
-                    $('#error-box').css('display', 'block');
-                    $('#error-box').html('کاربر گرامی موجودی کالای ' +
-                        productNames +
-                        'از موجودی کالا انتخابی شما کمتر می باشد. لطفا به ' +
-                        '<a href="/basket">سبد خرید </a>' +
-                        ' خود مراجعه کنید و موجودی را تغییر دهید.');
-                    AppearButton();
-
-                }
-                else if (result !== "false") {
-                    window.location = result;
-                }
-                else {
-                    $('#error-box').css('display', 'block');
-                    $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
-                    AppearButton();
-
-                }
-            });
+    if (paymentMethod === "recieve" && city !== "2c730dce-774d-4007-88a9-4acb1dd48cea") {
+        $('#error-box').css('display', 'block');
+        $('#error-box').html('امکان پرداخت در محل فقط برای شهر تهران مقدور می باشد');
+        AppearButton();
     }
     else {
-        $('#error-box').css('display', 'block');
-        $('#error-box').html('تمامی فیلدهای ستاره دار باید تکمیل شود');
-        //AppearButton();
 
+        if (fullname !== "" && cellnumber !== "" && address !== "" && city !== "") {
+            $.ajax(
+                {
+                    url: "/Basket/Finalize",
+                    data: {
+                        notes: orderNotes, cellnumber: cellnumber, postal: postalCode, address: address,
+                        city: city, fullname: fullname, paymentType: paymentMethod
+                    },
+                    type: "GET"
+                }).done(function (result) {
+                    if (result.includes('nonstock')) {
+                        var products = result.split('|');
+                        var productNames = "";
+                        for (var i = 1; i < products.length - 1; i++) {
+                            productNames = productNames + "\"" + products[i] + "\"";
+                        }
+
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('کاربر گرامی موجودی کالای ' +
+                            productNames +
+                            'از موجودی کالا انتخابی شما کمتر می باشد. لطفا به ' +
+                            '<a href="/basket">سبد خرید </a>' +
+                            ' خود مراجعه کنید و موجودی را تغییر دهید.');
+                        AppearButton();
+
+                    }
+                    else if (result === 'notonline') {
+
+                        $('#error-box').css('display', 'none');
+                        $('#success-checkout-box').css('display', 'block');
+                        $('#success-checkout-box').html('با تشکر از خرید شما. همکاران ما جهت هماهنگی ارسال با شما تماس خواهند گرفت');
+                        AppearButton();
+
+                    }
+                    else if (result !== "false") {
+                        window.location = result;
+                    }
+                    else {
+                        $('#error-box').css('display', 'block');
+                        $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
+                        $('#success-checkout-box').css('display', 'none');
+
+                        AppearButton();
+
+                    }
+                });
+        }
+        else {
+            $('#error-box').css('display', 'block');
+            $('#error-box').html('تمامی فیلدهای ستاره دار باید تکمیل شود');
+            $('#success-checkout-box').css('display', 'none');
+             AppearButton();
+        }
     }
 
 }
@@ -247,7 +273,7 @@ function postNewsletter() {
 
 
 function SubmitBlogComment(id) {
-    
+
     //var url = window.location.pathname;
     //var id = url.substring(url.lastIndexOf('/') + 1);
 
@@ -259,21 +285,21 @@ function SubmitBlogComment(id) {
         $.ajax(
             {
                 url: "/BlogComments/SubmitComment",
-                data: { name: nameVal, email: emailVal, body: bodyVal, code: id, site:siteVal },
+                data: { name: nameVal, email: emailVal, body: bodyVal, code: id, site: siteVal },
                 type: "POST"
             }).done(function (result) {
-            if (result === "true") {
-                $("#errorDivBlog").css('display', 'none');
-                $("#SuccessDivBlog").css('display', 'block');
-                localStorage.setItem("id", "");
-            }
-            else if (result === "InvalidEmail") {
-                $("#errorDivBlog").html('ایمیل وارد شده صحیح نمی باشد.');
-                $("#errorDivBlog").css('display', 'block');
-                $("#SuccessDivBlog").css('display', 'none');
+                if (result === "true") {
+                    $("#errorDivBlog").css('display', 'none');
+                    $("#SuccessDivBlog").css('display', 'block');
+                    localStorage.setItem("id", "");
+                }
+                else if (result === "InvalidEmail") {
+                    $("#errorDivBlog").html('ایمیل وارد شده صحیح نمی باشد.');
+                    $("#errorDivBlog").css('display', 'block');
+                    $("#SuccessDivBlog").css('display', 'none');
 
-            }
-        });
+                }
+            });
     }
     else {
         $("#errorDivBlog").html('تمامی فیلد های زیر را تکمیل نمایید.');
@@ -295,18 +321,18 @@ function SubmitContactUs() {
                 data: { name: nameVal, email: emailVal, body: bodyVal },
                 type: "POST"
             }).done(function (result) {
-            if (result === "true") {
-                $("#errorDivContact").css('display', 'none');
-                $("#SuccessDivContact").css('display', 'block');
-                localStorage.setItem("id", "");
-            }
-            else if (result === "InvalidEmail") {
-                $("#errorDivContact").html('ایمیل وارد شده صحیح نمی باشد.');
-                $("#errorDivContact").css('display', 'block');
-                $("#SuccessDivContact").css('display', 'none');
+                if (result === "true") {
+                    $("#errorDivContact").css('display', 'none');
+                    $("#SuccessDivContact").css('display', 'block');
+                    localStorage.setItem("id", "");
+                }
+                else if (result === "InvalidEmail") {
+                    $("#errorDivContact").html('ایمیل وارد شده صحیح نمی باشد.');
+                    $("#errorDivContact").css('display', 'block');
+                    $("#SuccessDivContact").css('display', 'none');
 
-            }
-        });
+                }
+            });
     }
     else {
         $("#errorDivContact").html('تمامی فیلد های بالا را تکمیل نمایید.');

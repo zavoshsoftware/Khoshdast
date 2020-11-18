@@ -352,7 +352,7 @@ namespace Khoshdast.Controllers
 
 
         public ActionResult Finalize(string notes, string cellnumber, string postal,
-                                    string address, string city, string fullname)
+                                    string address, string city, string fullname, string paymentType)
         {
             try
             {
@@ -377,23 +377,23 @@ namespace Khoshdast.Controllers
                         order.PostalCode = postal;
                         order.Description = notes;
                         order.CityId = new Guid(city);
-
+                        order.PaymentTypeTitle = paymentType;
 
 
                         order.TotalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
 
-                       
+
 
                         db.SaveChanges();
                         RemoveCookie();
 
                         string res = "";
 
-                        if (order.TotalAmount == 0)
-                            res = "freecallback?orderid=" + order.Id;
-
-                        else
+                        if(paymentType=="online")
                             res = zp.ZarinPalRedirect(order, order.TotalAmount);
+                      
+                        else
+                            res = "notonline";
 
                         return Json(res, JsonRequestBehavior.AllowGet);
                     }
@@ -594,7 +594,7 @@ namespace Khoshdast.Controllers
                         {
 
                             UpdateOrder(order.Id, verificationResponse.RefID);
-                         
+
                             callBack.Order = order;
                             callBack.IsSuccess = true;
                             callBack.OrderCode = order.Code.ToString();
@@ -654,7 +654,7 @@ namespace Khoshdast.Controllers
             }
         }
 
-        public void UpdateOrder(Guid orderId,string refId)
+        public void UpdateOrder(Guid orderId, string refId)
         {
             Order order = db.Orders.Find(orderId);
 

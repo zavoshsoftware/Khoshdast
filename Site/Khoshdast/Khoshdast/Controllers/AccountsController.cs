@@ -146,8 +146,11 @@ namespace Khoshdast.Controllers
                 return RedirectToAction("Index", "Users");
 
             if (!string.IsNullOrEmpty(returnUrl))
+            {
+                if (returnUrl == "checkout")
+                    return Redirect("/checkout");
                 return Redirect(returnUrl);
-
+            }
             if (role.ToLower().Contains("customer"))
                 return RedirectToAction("Index", "Home");
 

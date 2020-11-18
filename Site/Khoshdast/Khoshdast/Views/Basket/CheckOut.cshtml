@@ -104,10 +104,10 @@
 						<div class="table-responsive order_table">
 							<table class="table">
 								<thead>
-									<tr>
-										<th>محصول</th>
-										<th>جمع</th>
-									</tr>
+								<tr>
+									<th>محصول</th>
+									<th>جمع</th>
+								</tr>
 								</thead>
 								<tbody>
 								@foreach (var product in Model.Products)
@@ -120,23 +120,49 @@
 					 
 								</tbody>
 								<tfoot>
-									<tr>
-										<th>جمع فاکتور</th>
-										<td class="product-subtotal">@Model.SubTotal</td>
-									</tr>
-									<tr>
-										<th>تخفیف</th>
-										<td>@Model.DiscountAmount</td>
-									</tr>
-									<tr>
-										<th>مبلغ قابل پرداخت</th>
-										<td class="product-subtotal">@Model.Total</td>
-									</tr>
+								<tr>
+									<th>جمع فاکتور</th>
+									<td class="product-subtotal">@Model.SubTotal</td>
+								</tr>
+								<tr>
+									<th>تخفیف</th>
+									<td>@Model.DiscountAmount</td>
+								</tr>
+								<tr>
+									<th>مبلغ قابل پرداخت</th>
+									<td class="product-subtotal">@Model.Total</td>
+								</tr>
 								</tfoot>
 							</table>
 						</div>
-			 @*<button type="button" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>*@
-			 <button type="button" class="btn btn-fill-out btn-block" onclick="alert('در حال حاظر فقط امکان خرید تلفنی و حضوری مقدور می باشد');">پرداخت سفارش</button>
+						
+						<div class="payment_method">
+							<div class="heading_s1">
+								<h4>نحوه پرداخت</h4>
+							</div>
+							<div class="payment_option">
+								<div class="custome-radio">
+									<input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="online" checked="">
+									<label class="form-check-label" for="exampleRadios3">پرداخت آنلاین</label>
+									<p data-method="online" class="payment-text">از طریق کلیه کارت های بانکی و رمز دوم پویا </p>
+								</div>
+								<div class="custome-radio">
+									<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="recieve">
+									<label class="form-check-label" for="exampleRadios4">پرداخت در محل (فقط سفارشات تهران)</label>
+									<p data-method="recieve" class="payment-text">این امکان فقط برای سفارشات شهر تهران مقدور می باشد.</p>
+								</div>
+								<div class="custome-radio">
+									<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="transfer">
+									<label class="form-check-label" for="exampleRadios5">واریز به حساب</label>
+									<p data-method="transfer" class="payment-text">با انتخاب این گزینه و کلیک بر روی دکمه زیر همکاران ما با شما تماس خواهند گرفت.</p>
+								</div>
+							</div>
+						</div>
+						<p class="alert alert-danger" id="error-box"></p>
+						<p class="alert alert-success" id="success-checkout-box"></p>
+
+						<button type="button" id="btnPayment" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>
+			 @*<button type="button" class="btn btn-fill-out btn-block" onclick="alert('در حال حاظر فقط امکان خرید تلفنی و حضوری مقدور می باشد');">پرداخت سفارش</button>*@
 					</div>
 				</div>
 			</div>

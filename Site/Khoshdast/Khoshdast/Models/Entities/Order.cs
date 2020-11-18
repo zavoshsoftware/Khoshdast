@@ -129,6 +129,9 @@ namespace Models
         [Display(Name="تاریخ پرداخت")]
         public DateTime? PaymentDate { get; set; }
 
+        [Display(Name="نحوه پرداخت")]
+        public string PaymentTypeTitle { get; set; }
+
 
     }
 }
