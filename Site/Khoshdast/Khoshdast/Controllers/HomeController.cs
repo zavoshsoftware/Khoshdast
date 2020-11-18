@@ -29,13 +29,13 @@ namespace Khoshdast.Controllers
             HomeViewModel home = new HomeViewModel()
             {
                 Sliders = db.Sliders.Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
-                HomeProductGroups = db.ProductGroups.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
+                HomeProductGroups = db.ProductGroups.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
                 BestSaleProducts = db.Products.Where(c => c.IsTopSell && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
                 NewestProducts = db.Products.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
                 TopCategoryProducts = GetTopCategoryProducts(topProductGroup),
                 TopProductGroupTitle = topPgTitle,
                 HomeBlogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(3).ToList(),
-                HomeBrands = db.Brands.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).ToList(),
+                HomeBrands = db.Brands.Where(c =>c.BrandNameImageUrl!=null&& c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).Take(10).ToList(),
                 SliderLeftBanners1 = sliderBanners.FirstOrDefault(),
                 SliderLeftBanners2 = sliderBanners.LastOrDefault(),
                 HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),

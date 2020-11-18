@@ -4,7 +4,7 @@
 		//ViewBag.Description = @Model.Product.PageDescription;
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 		ViewBag.Canonical = "https://khoshdast.ir/product/" + Model.Product.Code;
-		ViewBag.Description = "خرید اینترنتی " + Model.Product.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست. قیمت "+Model.Product.Title;
+		ViewBag.Description = "خرید اینترنتی " + Model.Product.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست. قیمت " + Model.Product.Title;
 }
 
 <div class="breadcrumb_section bg_gray page-title-mini" style="background-color: #E1D9DA">
@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 						@foreach (var breadcrumbItem in Model.BreadcrumbItems)
 						{
-							<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
+								<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
 						}
 					</ol>
 				</div>
@@ -32,246 +32,264 @@
 </div>
 <div class="main_content">
 
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
-                    <div class="product-image">
-	                    <div class="product_img_box">
-		                    @if (File.Exists(Server.MapPath(Model.Product.ImageUrl)))
-		                    {
-			                    <img id="product_img" src='@Model.Product.ImageUrl' data-zoom-image="@Model.Product.ImageUrl" alt="@Model.Product.Title"/>
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+					<div class="product-image">
+						<div class="product_img_box">
+							@if (File.Exists(Server.MapPath(Model.Product.ImageUrl)))
+							{
+									<img id="product_img" src='@Model.Product.ImageUrl' data-zoom-image="@Model.Product.ImageUrl" alt="@Model.Product.Title" />
 
+							}
+							else
+							{
+									<img id="product_img" src='/assets/images/no-Photo.jpg' data-zoom-image="/assets/images/no-Photo.jpg" alt="@Model.Product.Title" />
+
+							}
+							<a href="#" class="product_img_zoom" title="Zoom">
+								<span class="linearicons-zoom-in"></span>
+							</a>
+						</div>
+						<div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<div class="pr_detail">
+						<div class="product_description">
+							<h4 class="product_title"><a href="#">@Model.Product.Title</a></h4>
+							<div class="">
+								@if (Model.Product.Amount == 0)
+								{
+										<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+								}
+								else
+								{
+									if (Model.Product.IsInPromotion)
+									{
+												<span class="price">@Model.Product.DiscountAmountStr</span>
+																<del>@Model.Product.AmountStr</del>
+									}
+									else
+									{
+												<span class="price">@Model.Product.AmountStr</span>
+									}
+								}
+
+
+
+							</div>
+
+							<div class="pr_desc">
+								<p>@Model.Product.Summery</p>
+							</div>
+							<div class="product_sort_info">
+								<ul>
+									<li>
+
+										<i class="linearicons-weight"></i>برند:
+										<a href="/brand/@Model.Product.Brand.UrlParam">@Model.Product.Brand.Title</a>
+									</li>
+
+									@if (Model.Product.Stock > 0)
+									{
+											<li><i class="linearicons-shield-check"></i>موجود</li>
+									}
+									else
+									{
+											<li><i class="linearicons-shield-remove"></i>نا موجود</li>
+									}
+								</ul>
+							</div>
+
+
+						</div>
+						<hr />
+						<div class="cart_extra">
+							<div class="cart-product-quantity">
+								<div class="quantity">
+									<input type="button" value="-" class="minus">
+									<input type="text" name="quantity" value="1" title="تعداد" class="qty" size="4" id="basketQty">
+									<input type="button" value="+" class="plus">
+								</div>
+							</div>
+
+							<div class="cart_btn">
+							@if (Model.Product.Amount != 0 && Model.Product.Stock > 0)
+							{
+								<button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code', 'detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>
+							}
+							</div>
+						</div>
+						<hr />
+
+						<div class="product_share">
+							<span>اشتراک گذاری:</span>
+							<ul class="social_icons">
+								<li><a href="#"><i class="ion-social-facebook"></i></a></li>
+								<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+								<li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+								<li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+								<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="large_divider clearfix"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="tab-style3">
+						<ul class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">توضیحات تکمیلی</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">نظرات (@Model.CommentQty)</a>
+							</li>
+						</ul>
+						<div class="tab-content shop_info_tab">
+							<div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
+
+								@Html.Raw(Model.Product.Body)
+							</div>
+
+							<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
+
+								<div class="comments">
+									<h5 class="product_tab_title">@Model.CommentQty نظر برای  <span>عنوان محصول</span></h5>
+									<ul class="list_none comment_list mt-4">
+										@foreach (var comment in Model.ProductComments)
+										{
+												<li>
+													<div class="comment_img">
+														<img src="~/assets/images/avatar.png" alt="user1" />
+													</div>
+													<div class="comment_block">
+
+														<p class="customer_meta">
+															<span class="review_author">@comment.Name</span>
+															<span class="comment-date">@comment.CreationDateStr</span>
+														</p>
+														<div class="description">
+															<p>@comment.Message</p>
+														</div>
+													</div>
+												</li>
+}
+
+
+									</ul>
+								</div>
+
+								<div class="review_form field_form">
+									<h5>افزودن نظر</h5>
+									<div>
+										<p class="alert alert-success" id="SuccessDiv">نظر شما با موفقیت ثبت شد و پس از تایید در سایت نمایش داده می شود</p>
+										<p class="alert alert-danger" id="errorDiv"></p>
+
+									</div>
+									<div class="row mt-3">
+										<div class="form-group col-md-6">
+											<input required="required" placeholder="نام و نام خانوادگی *" class="form-control" name="name" type="text" id="commentName">
+										</div>
+										<div class="form-group col-md-6">
+											<input required="required" placeholder="ایمیل *" class="form-control" name="email" type="email" id="commentEmail">
+										</div>
+										<div class="form-group col-12">
+											<textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4" id="commentBody"></textarea>
+										</div>
+
+
+										<div class="form-group col-12">
+											<button type="button" onclick="SubmitComment();" class="btn btn-fill-out">ثبت نظر</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="small_divider"></div>
+					<div class="divider"></div>
+					<div class="medium_divider"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="heading_s1">
+						<h3>محصولات مرتبط</h3>
+					</div>
+					<div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
+						@foreach (var relatedProduct in Model.RelatedProducts)
+						{
+								<div class="item">
+									<div class="product">
+										<div class="">
+											<a href="/product/@relatedProduct.Code">
+												@if (File.Exists(Server.MapPath(relatedProduct.ImageUrl)))
+												{
+													<img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
 												}
 												else
 												{
-														<img id="product_img" src='/assets/images/no-Photo.jpg' data-zoom-image="/assets/images/no-Photo.jpg" alt="@Model.Product.Title" />
-
+													<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
 												}
-		                    <a href="#" class="product_img_zoom" title="Zoom">
-			                    <span class="linearicons-zoom-in"></span>
-		                    </a>
-	                    </div>
-                        <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+											</a>
 
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="pr_detail">
-                        <div class="product_description">
-                            <h4 class="product_title"><a href="#">@Model.Product.Title</a></h4>
-                            <div class="">
-															
-	                            @if (Model.Product.IsInPromotion)
-	                            {
-		                            <span class="price">@Model.Product.DiscountAmountStr</span>
-		                            <del>@Model.Product.AmountStr</del>
-	                            }
-	                            else
-	                            {
-		                            <span class="price">@Model.Product.AmountStr</span>
-	                            }
+										</div>
+										@if (relatedProduct.Stock <= 0)
+										{
+											<span class="pr_flash bg-danger">ناموجود</span>
+										}
+										<div class="product_info">
+											<h6 class="product_title"><a href="/product/@relatedProduct.Code">@relatedProduct.Title</a></h6>
+											<div class="product_price">
+												@if (relatedProduct.Amount == 0)
+												{
+													<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+												}
+												else
+												{
+													if (relatedProduct.IsInPromotion)
+													{
+														<span class="price">@relatedProduct.DiscountAmountStr</span>
+														<del>@relatedProduct.AmountStr</del>
+													}
+													else
+													{
+														<span class="price">@relatedProduct.AmountStr</span>
+													}
+												}
+											</div>
 
-	                           
-
-                            </div>
-
-                            <div class="pr_desc">
-                                <p>@Model.Product.Summery</p>
-                            </div>
-                            <div class="product_sort_info">
-                                <ul>
-	                                <li>
-		                                
-		                                <i class="linearicons-weight"></i>برند:
-		                                <a href="/brand/@Model.Product.Brand.UrlParam">@Model.Product.Brand.Title</a> 
-																	</li>
-																	
-																	@if (Model.Product.Stock > 0)
-																	{
-																		<li><i class="linearicons-shield-check"></i>موجود</li>
-}
-																	else
-																	{
-																			<li><i class="linearicons-shield-remove"></i>نا موجود</li>
-																	}
-                                </ul>
-                            </div>
-
-
-                        </div>
-                        <hr />
-                        <div class="cart_extra">
-                            <div class="cart-product-quantity">
-                                <div class="quantity">
-                                    <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="1" title="تعداد" class="qty" size="4" id="basketQty">
-                                    <input type="button" value="+" class="plus">
-                                </div>
-                            </div>
-                            <div class="cart_btn">
-                                <button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code','detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>
-                                @*<a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
-                                <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>*@
-                            </div>
-                        </div>
-                        <hr />
-
-                        <div class="product_share">
-                            <span>اشتراک گذاری:</span>
-                            <ul class="social_icons">
-                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-                                <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="large_divider clearfix"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="tab-style3">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">توضیحات تکمیلی</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">نظرات (@Model.CommentQty)</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content shop_info_tab">
-                            <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
-                               
-															@Html.Raw(Model.Product.Body)
-                            </div>
-
-                            <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
-
-                                <div class="comments">
-                                    <h5 class="product_tab_title">@Model.CommentQty نظر برای  <span>عنوان محصول</span></h5>
-                                    <ul class="list_none comment_list mt-4">
-																			@foreach (var comment in Model.ProductComments)
-																			{
-																				<li>
-																					<div class="comment_img">
-																						<img src="~/assets/images/avatar.png" alt="user1" />
-																					</div>
-																					<div class="comment_block">
-
-																						<p class="customer_meta">
-																							<span class="review_author">@comment.Name</span>
-																							<span class="comment-date">@comment.CreationDateStr</span>
-																						</p>
-																						<div class="description">
-																							<p>@comment.Message</p>
-																						</div>
-																					</div>
-																				</li>
-																			}
-                                       
-                             
-                                    </ul>
-                                </div>
-
-                                <div class="review_form field_form">
-                                    <h5>افزودن نظر</h5>
-                                    <div>
-                                        <p class="alert alert-success" id="SuccessDiv">نظر شما با موفقیت ثبت شد و پس از تایید در سایت نمایش داده می شود</p>
-                                        <p class="alert alert-danger" id="errorDiv"></p>
-
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="نام و نام خانوادگی *" class="form-control" name="name" type="text" id="commentName">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="ایمیل *" class="form-control" name="email" type="email" id="commentEmail">
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4" id="commentBody"></textarea>
-                                        </div>
-
-
-                                        <div class="form-group col-12">
-                                            <button type="button" onclick="SubmitComment();" class="btn btn-fill-out">ثبت نظر</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="small_divider"></div>
-                    <div class="divider"></div>
-                    <div class="medium_divider"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="heading_s1">
-                        <h3>محصولات مرتبط</h3>
-                    </div>
-                    <div class="releted_product_slider carousel_slider owl-carousel owl-theme" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-	                 @foreach (var relatedProduct in Model.RelatedProducts)
-	                 {		
-											 <div class="item">
-					                  <div class="product">
-						                  <div class="">
-							                  <a href="/product/@relatedProduct.Code">
-								                  @if (File.Exists(Server.MapPath(relatedProduct.ImageUrl)))
-								                  {
-									                  <img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
-								                  }
-								                  else
-								                  {
-									                  <img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-								                  }
-							                  </a>
-
-						                  </div>
-						                  <div class="product_info">
-							                  <h6 class="product_title"><a href="/product/@relatedProduct.Code">@relatedProduct.Title</a></h6>
-							                  <div class="product_price">
-								                  @if (relatedProduct.IsInPromotion)
-								                  {
-									                  <span class="price">@relatedProduct.DiscountAmountStr</span>
-									                  <del>@relatedProduct.AmountStr</del>
-								                  }
-								                  else
-								                  {
-									                  <span class="price">@relatedProduct.AmountStr</span>
-								                  }
-
-							                  </div>
-
-							                  @*<div class="pr_desc">
-													<p>توضیحات خلاصه درباره محصول در این قسمت قرار می گیرد.</p>
-												</div>*@
-							                  <div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart"  onclick="addToBasket('@relatedProduct.Code','1');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button></div>
-
-						                  </div>
-					                  </div>
-				                  </div>
-	                 }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+											 
+											@if (relatedProduct.Amount!= 0 && relatedProduct.Stock > 0)
+											{
+												<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@relatedProduct.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+												</div>
+											}
+										</div>
+									</div>
+								</div>
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
- 

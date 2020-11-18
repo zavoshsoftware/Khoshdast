@@ -36,13 +36,13 @@
 	<link rel="stylesheet" href="/assets/css/rtl-style.css">
 	<link href="~/assets/css/style-zavosh.css" rel="stylesheet" />
 	
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-W36J0FLBK7"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LK66T2NR3"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
 
-		gtag('config', 'G-W36J0FLBK7');
+		gtag('config', 'G-0LK66T2NR3');
 	</script>
 </head>
 
@@ -197,21 +197,37 @@
 										}
 									</a>
 								</div>
+								@if ( product.Stock <= 0)
+								{
+									<span class="pr_flash bg-danger">ناموجود</span>
+								}
 								<div class="product_info">
 									<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 									<div class="product_price">
-										@if (product.IsInPromotion)
+										@if (product.Amount == 0)
 										{
-											<span class="price">@product.DiscountAmountStr</span>
-											<del>@product.AmountStr</del>
-}
+											<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+										}
 										else
 										{
+											if (product.IsInPromotion)
+											{
+												<span class="price">@product.DiscountAmountStr</span>
+												<del>@product.AmountStr</del>
+											}
+											else
+											{
 												<span class="price">@product.AmountStr</span>
+											}
 										}
 									</div>
-									<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
 
+											 
+									@if (product.Amount!= 0 && product.Stock > 0)
+									{
+										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+										</div>
+									}
 								</div>
 							</div>
 						</div>
@@ -280,23 +296,37 @@
 										</a>
 									 
 									</div>
+									@if ( product.Stock <= 0)
+									{
+										<span class="pr_flash bg-danger">ناموجود</span>
+									}
 									<div class="product_info">
 										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 										<div class="product_price">
-											@if (product.IsInPromotion)
+											@if (product.Amount == 0)
 											{
-												<span class="price">@product.DiscountAmountStr</span>
-												<del>@product.AmountStr</del>
+												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
 											}
 											else
 											{
-												<span class="price">@product.AmountStr</span>
+												if (product.IsInPromotion)
+												{
+													<span class="price">@product.DiscountAmountStr</span>
+													<del>@product.AmountStr</del>
+												}
+												else
+												{
+													<span class="price">@product.AmountStr</span>
+												}
 											}
 										</div>
-									 
-									 
-										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
 
+											 
+										@if (product.Amount!= 0 && product.Stock > 0)
+										{
+											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
 									</div>
 								</div>
 							</div>
@@ -321,36 +351,16 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo1.png" alt="cl_logo"/>
+						
+						@foreach (var brand in Model.HomeBrands)
+						{
+							<div class="item">
+								<div class="cl_logo">
+									<img src="@brand.BrandNameImageUrl" alt="@brand.Title"/>
+								</div>
 							</div>
-						</div>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo2.png" alt="cl_logo"/>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo3.png" alt="cl_logo"/>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo4.png" alt="cl_logo"/>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo5.png" alt="cl_logo"/>
-							</div>
-						</div>
-						<div class="item">
-							<div class="cl_logo">
-								<img src="/assets/images/cl_logo6.png" alt="cl_logo"/>
-							</div>
-						</div>
+						}
+				 
 					</div>
 				</div>
 			</div>
@@ -378,38 +388,49 @@
 								<div class="product text-center">
 									<div class="product_img">
 										<a href="/product/@product.Code">
-											 @if (File.Exists(Server.MapPath(product.ImageUrl)))
-													 {
-														 <img src="@product.ImageUrl" alt="@product.Title">
-													 }
-													 else
-													 {
-														 <img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-													 }
-										</a>
-									 
-									</div>
-									<div class="product_info">
-										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
-										
-											@if (product.IsInPromotion)
+											@if (File.Exists(Server.MapPath(product.ImageUrl)))
 											{
-												<div class="product_price">
-												<span class="price">@product.DiscountAmountStr</span>
-													<del>@product.AmountStr</del>
-												</div>
+												<img src="@product.ImageUrl" alt="@product.Title">
 											}
 											else
 											{
-												<div class="product_price mb29">
-												<span class="price ">@product.AmountStr</span>
-												</div>
+												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
 											}
-									
+										</a>
 									 
-									 
-										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code','1');"><i class="icon-basket-loaded"></i>خرید</button></div>
+									</div>
+									@if ( product.Stock <= 0)
+									{
+										<span class="pr_flash bg-danger">ناموجود</span>
+									}
+									<div class="product_info">
+										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+										@if (product.Amount == 0)
+										{
+											<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+										}
+										else
+										{
+										 if (product.IsInPromotion)
+											 {
+												 <div class="product_price">
+													 <span class="price">@product.DiscountAmountStr</span>
+													 <del>@product.AmountStr</del>
+												 </div>
+											 }
+											 else
+											 {
+												 <div class="product_price mb29">
+													 <span class="price ">@product.AmountStr</span>
+												 </div>
+											 }
 
+										}
+										@if (product.Amount != 0 && product.Stock > 0)
+										{
+											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
 									</div>
 								</div>
 							</div>
