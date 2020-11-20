@@ -299,7 +299,7 @@ namespace Khoshdast.Controllers
 
                 if (role != "customer")
                 {
-                    return Redirect("/login?ReturnUrl=checkout");
+                    return Redirect("/loginregister?ReturnUrl=checkout");
                 }
 
 
@@ -399,7 +399,7 @@ namespace Khoshdast.Controllers
                     }
                 }
 
-                return Json("/login?ReturnUrl=checkout", JsonRequestBehavior.AllowGet);
+                return Json("/loginregister?ReturnUrl=checkout", JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e)
