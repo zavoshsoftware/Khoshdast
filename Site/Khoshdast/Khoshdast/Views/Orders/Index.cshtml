@@ -17,11 +17,11 @@ ViewBag.Title = "فهرست سفارشات" ;
 
         columns.Bound(model => model.User.FullName);
         columns.Bound(model => model.User.CellNum);
-        columns.Bound(model => model.TotalAmount);
+        columns.Bound(model => model.TotalAmountStr);
         columns.Bound(model => model.SaleReferenceId);
         columns.Bound(model => model.IsPaid);
-        columns.Bound(model => model.PaymentDate);
-        columns.Bound(model => model.CreationDate);
+        columns.Bound(model => model.PaymentTypeTitleTranslate);
+        columns.Bound(model => model.OrderDateStr);
 					columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
 							.Template(@<text>
 									@Html.ActionLink("جزییات", "Details", new {id = @item.Id}, new {@class = "k-button"})

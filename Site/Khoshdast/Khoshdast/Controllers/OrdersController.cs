@@ -17,10 +17,21 @@ namespace Khoshdast.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(Guid? id)
         {
-            var orders = db.Orders.Include(o => o.City).Where(o=>o.IsDeleted==false).OrderByDescending(o=>o.CreationDate).Include(o => o.DiscountCode).Where(o=>o.IsDeleted==false).OrderByDescending(o=>o.CreationDate).Include(o => o.OrderStatus).Where(o=>o.IsDeleted==false).OrderByDescending(o=>o.CreationDate).Include(o => o.User).Where(o=>o.IsDeleted==false).OrderByDescending(o=>o.CreationDate);
-            return View(orders.ToList());
+            List<Order> orders = new List<Order>();
+
+            if (id != null)
+                orders = db.Orders.Include(o => o.City).Where(o => o.OrderStatusId == id && o.IsDeleted == false)
+                   .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
+                   .Include(o => o.User).ToList();
+
+            else
+                orders = db.Orders.Include(o => o.City).Where(o => o.IsDeleted == false)
+                    .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
+                    .Include(o => o.User).ToList();
+
+            return View(orders);
         }
 
         // GET: OrderDetails/Details/5
@@ -43,6 +54,8 @@ namespace Khoshdast.Controllers
                 Order = order,
                 OrderDetails = orderDetails
             };
+            ViewBag.OrderStatusId = new SelectList(db.OrderStatuses.Where(c=>c.Code!=2), "Id", "Title", order.OrderStatusId);
+
             return View(orderDetailViewModel);
         }
 
@@ -65,9 +78,9 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				order.IsDeleted=false;
-				order.CreationDate= DateTime.Now; 
-					
+                order.IsDeleted = false;
+                order.CreationDate = DateTime.Now;
+
                 order.Id = Guid.NewGuid();
                 db.Orders.Add(order);
                 db.SaveChanges();
@@ -109,8 +122,8 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				order.IsDeleted=false;
-					order.LastModifiedDate=DateTime.Now;
+                order.IsDeleted = false;
+                order.LastModifiedDate = DateTime.Now;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -143,9 +156,9 @@ namespace Khoshdast.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             Order order = db.Orders.Find(id);
-			order.IsDeleted=true;
-			order.DeletionDate=DateTime.Now;
- 
+            order.IsDeleted = true;
+            order.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -157,6 +170,59 @@ namespace Khoshdast.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        [AllowAnonymous]
+        public ActionResult ChangeOrderStatus(string code, string statusId)
+        {
+
+            Guid id = new Guid(statusId);
+            int orderCode = Convert.ToInt32(code);
+            Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
+
+            if (order != null)
+            {
+                order.OrderStatusId = id;
+                order.LastModifiedDate = DateTime.Now;
+                db.SaveChanges();
+
+            }
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ChangeOrderPaymentStatus(string code, string statusId)
+        {
+
+            bool isPay = Convert.ToBoolean(statusId);
+            int orderCode = Convert.ToInt32(code);
+            Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
+
+            if (order != null)
+            {
+                order.IsPaid = isPay;
+                order.LastModifiedDate = DateTime.Now;
+                db.SaveChanges();
+
+            }
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
+        public string SerOrderStatus()
+        {
+            Guid id = new Guid("7dbf85f4-7835-4d21-8269-26695d0c7e0f");
+            List<Order> orders = db.Orders.Where(c => c.OrderStatusId == id).ToList();
+
+            foreach (Order order in orders)
+            {
+                order.OrderStatusId = new Guid("11869f4d-d6d1-434c-a2f1-7945227cd3bb");
+
+            }
+
+            db.SaveChanges();
+            return string.Empty;
         }
     }
 }

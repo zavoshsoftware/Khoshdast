@@ -48,10 +48,29 @@ namespace Khoshdast.Controllers
 
             cart.DiscountAmount = discountAmount.ToString("n0") + " تومان";
 
-            cart.Total = (subTotal - discountAmount).ToString("n0");
+            decimal total = subTotal - discountAmount;
+
+            decimal shipmentAmount = GetShipmentAmountByTotal(total);
+
+            cart.ShipmentAmount = shipmentAmount.ToString("N0") +" تومان";
+
+            cart.Total = (total+shipmentAmount).ToString("n0") + " تومان";
 
             cart.Policy = db.TextItems.FirstOrDefault(c => c.Name == "policy");
             return View(cart);
+        }
+
+
+
+        public decimal GetShipmentAmountByTotal(decimal totalAmount)
+        {
+          decimal shipmentAmount =Convert.ToDecimal(WebConfigurationManager.AppSettings["shipmentAmount"]);
+          decimal freeShipmentLimitAmount = Convert.ToDecimal(WebConfigurationManager.AppSettings["freeShipmentLimitAmount"]);
+
+            if (totalAmount >= freeShipmentLimitAmount)
+                return 0;
+
+            return shipmentAmount;
         }
 
         [Route("Basket/remove/{code}")]
@@ -317,7 +336,13 @@ namespace Khoshdast.Controllers
 
                 checkOut.DiscountAmount = discountAmount.ToString("n0") + " تومان";
 
-                checkOut.Total = (subTotal - discountAmount).ToString("n0") + " تومان";
+                decimal total = subTotal - discountAmount;
+
+                decimal shipmentAmount = GetShipmentAmountByTotal(total);
+
+                checkOut.ShipmentAmount = shipmentAmount.ToString("N0") + " تومان";
+
+                checkOut.Total = (total + shipmentAmount).ToString("n0") + " تومان";
 
 
                 checkOut.Provinces = db.Provinces.OrderBy(current => current.Title).ToList();
@@ -448,9 +473,10 @@ namespace Khoshdast.Controllers
                 order.OrderStatusId = db.OrderStatuses.FirstOrDefault(current => current.Code == 1).Id;
                 order.SubTotal = GetSubtotal(products);
 
-
                 order.DiscountAmount = GetDiscount();
                 order.DiscountCodeId = GetDiscountId();
+                order.ShippingAmount =
+                    GetShipmentAmountByTotal(Convert.ToDecimal(order.SubTotal - order.DiscountAmount));
 
                 order.TotalAmount = Convert.ToDecimal(order.SubTotal + order.ShippingAmount - order.DiscountAmount);
 
@@ -663,9 +689,9 @@ namespace Khoshdast.Controllers
             order.SaleReferenceId = refId;
 
 
-            OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
-            if (orderStatus != null)
-                order.OrderStatusId = orderStatus.Id;
+            //OrderStatus orderStatus = db.OrderStatuses.FirstOrDefault(current => current.Code == 2);
+            //if (orderStatus != null)
+            //    order.OrderStatusId = orderStatus.Id;
 
             order.LastModifiedDate = DateTime.Now;
 

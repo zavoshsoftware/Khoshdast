@@ -107,5 +107,35 @@ namespace Helpers
             return string.Empty;
         }
 
+        public bool GetAuthenticationStatus()
+        {
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public string GetAuthenticateUserName()
+        {
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var identity = (System.Security.Claims.ClaimsIdentity)HttpContext.Current.User.Identity;
+                string name= identity.FindFirst(System.Security.Claims.ClaimTypes.Surname).Value;
+                return name;
+            }
+            return "ورود";
+        }
+        public string GetRoleTitle()
+        {
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var identity = (System.Security.Claims.ClaimsIdentity)HttpContext.Current.User.Identity;
+                string role= identity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+                return role;
+            }
+            return "";
+        }
+
     }
 }

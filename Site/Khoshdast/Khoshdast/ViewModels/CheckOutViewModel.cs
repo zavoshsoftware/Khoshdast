@@ -15,6 +15,8 @@ namespace ViewModels
         public string DiscountAmount { get; set; }
         public List<Province> Provinces { get; set; }
         public UserInformation UserInformation { get; set; }
+        public string ShipmentAmount { get; set; }
+
     }
 
     public class UserInformation

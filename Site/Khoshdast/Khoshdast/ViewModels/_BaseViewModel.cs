@@ -20,6 +20,9 @@ namespace ViewModels
         public string Telegram { get { return baseviewmodel.GetTextItemByName("telegram", "linkUrl"); } }
         public string Aparat { get { return baseviewmodel.GetTextItemByName("aparat", "linkUrl"); } }
         public string Youtube { get { return baseviewmodel.GetTextItemByName("youtube", "linkUrl"); } }
+        public bool IsAuthenticate { get { return baseviewmodel.GetAuthenticationStatus(); } }
+        public string UserFullName { get { return baseviewmodel.GetAuthenticateUserName(); } }
+        public string UserRole { get { return baseviewmodel.GetRoleTitle(); } }
     }
 
     public class MenuItems

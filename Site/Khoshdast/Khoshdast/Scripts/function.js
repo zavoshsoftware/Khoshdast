@@ -212,16 +212,16 @@ function updateBasket() {
     for (var i = 0; i < orderDetails.length - 1; i++) {
         var orderDetail = orderDetails[i].split('^');
 
-        var txtQty = $('#qty_' + orderDetail[0]).val();
+        var txtQtyVal = $('#txt-qty-' + orderDetail[0]).val();
 
-        if (txtQty !== orderDetail[1]) {
-            orderDetails[i] = orderDetail[0] + '^' + txtQty;
+        if (txtQtyVal !== orderDetail[1]) {
+            orderDetails[i] = orderDetail[0] + '^' + txtQtyVal;
         }
         newOrderDetails = newOrderDetails + orderDetails[i] + '/';
     }
 
     deleteCookie('basket-khoshdast');
-    setcookie('basket-khoshdast', newOrderDetails, 100);
+    setCookie('basket-khoshdast', newOrderDetails, 100);
     location.reload();
 }
 

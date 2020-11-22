@@ -13,6 +13,7 @@ namespace ViewModels
         public string Total { get; set; }
         public string DiscountAmount { get; set; }
         public TextItem Policy { get; set; }
+        public string ShipmentAmount { get; set; }
 
     }
 

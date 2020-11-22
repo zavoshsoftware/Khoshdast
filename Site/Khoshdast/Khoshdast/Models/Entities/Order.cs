@@ -54,7 +54,7 @@ namespace Models
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual City City { get; set; }
 
-        [Display(Name = "IsPaid", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "وضعیت پرداخت")]
         public bool IsPaid { get; set; }
 
 
@@ -132,6 +132,52 @@ namespace Models
         [Display(Name="نحوه پرداخت")]
         public string PaymentTypeTitle { get; set; }
 
+
+        [Display(Name="نحوه پرداخت")]
+        public string PaymentTypeTitleTranslate {
+            get
+            {
+                if (PaymentTypeTitle == "online")
+                    return "پرداخت آنلاین";
+
+                if (PaymentTypeTitle == "recieve")
+                    return "پرداخت در محل";
+
+                if (PaymentTypeTitle == "transfer")
+                    return "کارت به کارت";
+
+                return "پرداخت آنلاین";
+            }
+        }
+
+
+        [NotMapped]
+        [Display(Name="تاریخ ثبت سفارش")]
+        public string OrderDateStr {
+            get
+            {
+                 
+                switch (CreationDate.DayOfWeek.ToString().ToLower())
+                {
+                    case "saturday":
+                        return "شنبه - "+CreationDateStr;
+                    case "sunday":
+                        return "یکشنبه - " + CreationDateStr;
+                    case "monday":
+                        return "دوشنبه - " + CreationDateStr;
+                    case "tuesday":
+                        return "سه شنبه - " + CreationDateStr;
+                    case "wednesday":
+                        return "چهارشنبه - " + CreationDateStr;
+                    case "thursday":
+                        return "پنج شنبه - " + CreationDateStr;
+                    case "friday":
+                        return "جمعه - " + CreationDateStr;
+                }
+
+
+                return CreationDateStr;
+            } }
 
     }
 }

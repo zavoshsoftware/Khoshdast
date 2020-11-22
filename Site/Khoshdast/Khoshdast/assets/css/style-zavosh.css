@@ -336,3 +336,57 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 #error-box, #success-checkout-box {
     display: none;
 }
+
+.shop_cart_table {
+    background-color: #fff;
+    padding-right: 25px;
+    padding-left: 25px; 
+}
+
+    .shop_cart_table .table th {
+        border-top: 0;
+    }
+
+.ptb8 {
+     padding-top: 8px;
+     padding-bottom: 8px;
+ }
+
+/*.bg-gray-list .divider i {
+    background-color: #eff0f2;
+}*/
+
+.order-summery {
+    background-color: #fff;
+    border-radius: 9px;
+}
+
+.order_review {
+    background-color: #fff;
+    border-radius: 9px;
+    border: 1px solid #dee2e6;
+}
+
+.customer-info {
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid #dee2e6;
+            border-radius: 9px;
+
+}
+.shop_cart_table  tfoot td {
+    text-align: right !important;
+}
+
+.shop_cart_table  tfoot  {
+   border-top: 2px solid #000
+}
+
+.color-pink {
+    color: #FF324D;
+}
+
+.basket-container {
+    background-color: #fff;
+    padding-bottom: 30px;
+}

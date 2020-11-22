@@ -22,151 +22,225 @@
 		</div>
 	</div>
 </div>
-<div class="main_content">
+<div class="main_content bg-gray-list">
 
-	<!-- START SECTION SHOP -->
 	<div class="section">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-12">
-					<p class="alert alert-info">
-						برای تکمیل سفارش فرم زیر را تکمیل کنید
-					</p>
+				<div class="col-12">
+					<div class="table-responsive shop_cart_table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="product-thumbnail">&nbsp;</th>
+									<th class="product-name">محصول</th>
+									<th class="product-price">قیمت</th>
+									<th class="product-quantity">تعداد</th>
+									<th class="product-subtotal">جمع مبلغ</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								@foreach (var product in Model.Products)
+								{
+										<tr>
+											<td class="product-thumbnail"><a href="#">
+											@if (File.Exists(Server.MapPath(product.Product.ImageUrl)))
+											{
+												<img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="70px">
+											}
+											else
+											{
+												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست" height="70px">
+											}
+											</a></td>
+											<td class="product-name" data-title="محصول"><a href="#">@product.Product.Title</a></td>
+											<td class="product-price" data-title="قیمت">@product.Amount</td>
+											<td class="product-quantity" data-title="تعداد">
+												@product.Quantity
+											</td>
+											<td class="product-subtotal" data-title="جمع مبلغ">@product.RowAmount</td>
+										</tr>
+								}
+
+
+
+							</tbody>
+							<tfoot>
+							<tr>
+								<td colspan="6" class="px-0">
+									جمع فاکتور: @Model.SubTotal
+								</td>
+							</tr>
+								<tr>
+								<td colspan="6" class="px-0">
+							تخفیف: @Model.DiscountAmount
+								</td>
+							</tr>
+						
+								<tr>
+								<td colspan="6" class="px-0">
+									
+							
+									<div class="row no-gutters align-items-center">
+
+										<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+											هزینه ارسال: @Model.ShipmentAmount 
+
+										</div>
+										<div class="col-lg-8 col-md-6 text-left text-md-right">
+											<dfn>هزینه ارسال برای سفارشات بالای 400 هزار تومان رایگان می باشد</dfn>
+										</div>
+									</div>
+								</td>
+							</tr>
+						
+								<tr>
+									<td colspan="6" class="px-0 color-pink">
+										<div class="row no-gutters align-items-center">
+
+											<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+												مبلغ قابل پرداخت: @Model.Total
+
+											</div>
+											<div class="col-lg-8 col-md-6 text-left text-md-right">
+												<a class="btn btn-line-fill btn-sm" href="/basket">ویرایش سبد خرید</a>
+
+
+											</div>
+										</div>
+
+
+
+									</td>
+							</tr>
+							</tfoot>
+						</table>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<div class="medium_divider"></div>
-					<div class="divider center_icon"><i class="linearicons-credit-card"></i></div>
-					<div class="medium_divider"></div>
+					<div class="small_divider"></div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
+			<div class="row ">
+				<div class="col-md-12 ">
+					<div class="customer-info">
 					<div class="heading_s1">
 						<h4>اطلاعات ارسال</h4>
 					</div>
 					<form method="post">
-						<div class="form-group">
-							<input type="text" required class="form-control" value="@Model.UserInformation.FullName" id="fullname" placeholder="نام تحویل گیرنده *">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" required class="form-control" value="@Model.UserInformation.FullName" id="fullname" placeholder="نام تحویل گیرنده *">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" id="cellnumber" placeholder="شماره موبایل تحویل گیرنده *">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" id="cellnumber" placeholder="شماره موبایل تحویل گیرنده *">
-						</div>
-					 
-					<div class="form-group">
-						<div class="custom_select">
-							<select id="billing_Province"  class="form-control">
-								@foreach (var province in Model.Provinces)
-								{
-									<option value="@province.Id">@province.Title</option>
+						<div class="row">
+							<div class="col-md-6">
 
-								}
-							</select>
-		 
-						</div>
-					</div>
-						
-						
-					<div class="form-group">
-						<div class="custom_select">
-							<select id="ddlcity" class="form-control">
-								<option value="0">انتخاب شهر*</option>
-								
-							</select>
-						</div>
-					</div>
-						
+								<div class="form-group">
+									<div class="custom_select">
+										<select id="billing_Province" class="form-control">
+											@foreach (var province in Model.Provinces)
+											{
+												<option value="@province.Id">@province.Title</option>
 
-					<div class="form-group">
-							<input type="text" class="form-control" id="address" required="" placeholder="آدرس *">
+											}
+										</select>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<div class="custom_select">
+										<select id="ddlcity" class="form-control">
+											<option value="0">انتخاب شهر*</option>
+
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
-					 
-				  
-						<div class="form-group">
-							<input class="form-control" required type="text" id="postalCode" placeholder="کد پستی">
+						<div class="row">
+							<div class="col-md-6">
+
+
+								<div class="form-group">
+									<input type="text" class="form-control" id="address" required="" placeholder="آدرس *">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<input class="form-control" required type="text" id="postalCode" placeholder="کد پستی">
+								</div>
+							</div>
 						</div>
 						<div class="form-group mb-0">
 							<textarea rows="5" class="form-control" id="note" placeholder="توضیحات"></textarea>
 						</div>
-				 
-					 
-			 
-					 
-					
+
+
+
+
+
 					</form>
 				</div>
-				<div class="col-md-6">
-					<div class="order_review">
-						<div class="heading_s1">
-							<h4>سفارش شما</h4>
-						</div>
-						<div class="table-responsive order_table">
-							<table class="table">
-								<thead>
-								<tr>
-									<th>محصول</th>
-									<th>جمع</th>
-								</tr>
-								</thead>
-								<tbody>
-								@foreach (var product in Model.Products)
-								{
-									<tr>
-										<td>@product.Product.Title <span class="product-qty">تعداد: @product.Quantity</span></td>
-										<td>@product.RowAmount</td>
-									</tr>
-								}
-					 
-								</tbody>
-								<tfoot>
-								<tr>
-									<th>جمع فاکتور</th>
-									<td class="product-subtotal">@Model.SubTotal</td>
-								</tr>
-								<tr>
-									<th>تخفیف</th>
-									<td>@Model.DiscountAmount</td>
-								</tr>
-								<tr>
-									<th>مبلغ قابل پرداخت</th>
-									<td class="product-subtotal">@Model.Total</td>
-								</tr>
-								</tfoot>
-							</table>
-						</div>
-						
-						<div class="payment_method">
-							<div class="heading_s1">
-								<h4>نحوه پرداخت</h4>
-							</div>
-							<div class="payment_option">
-								<div class="custome-radio">
-									<input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="online" checked="">
-									<label class="form-check-label" for="exampleRadios3">پرداخت آنلاین</label>
-									<p data-method="online" class="payment-text">از طریق کلیه کارت های بانکی و رمز دوم پویا </p>
-								</div>
-								<div class="custome-radio">
-									<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="recieve">
-									<label class="form-check-label" for="exampleRadios4">پرداخت در محل (فقط سفارشات تهران)</label>
-									<p data-method="recieve" class="payment-text">این امکان فقط برای سفارشات شهر تهران مقدور می باشد.</p>
-								</div>
-								<div class="custome-radio">
-									<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="transfer">
-									<label class="form-check-label" for="exampleRadios5">واریز به حساب</label>
-									<p data-method="transfer" class="payment-text">با انتخاب این گزینه و کلیک بر روی دکمه زیر همکاران ما با شما تماس خواهند گرفت.</p>
-								</div>
-							</div>
-						</div>
-						<p class="alert alert-danger" id="error-box"></p>
-						<p class="alert alert-success" id="success-checkout-box"></p>
-
-						<button type="button" id="btnPayment" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>
-			 @*<button type="button" class="btn btn-fill-out btn-block" onclick="alert('در حال حاظر فقط امکان خرید تلفنی و حضوری مقدور می باشد');">پرداخت سفارش</button>*@
-					</div>
 				</div>
 			</div>
+			
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="small_divider"></div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+			<div class="order_review">
+			 
+	 
+
+				<div class="payment_method">
+					<div class="heading_s1">
+						<h4>نحوه پرداخت</h4>
+					</div>
+					<div class="payment_option">
+						<div class="custome-radio">
+							<input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="online" checked="">
+							<label class="form-check-label" for="exampleRadios3">پرداخت آنلاین</label>
+							<p data-method="online" class="payment-text">از طریق کلیه کارت های بانکی و رمز دوم پویا </p>
+						</div>
+						<div class="custome-radio">
+							<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="recieve">
+							<label class="form-check-label" for="exampleRadios4">پرداخت در محل (فقط سفارشات تهران)</label>
+							<p data-method="recieve" class="payment-text">این امکان فقط برای سفارشات شهر تهران مقدور می باشد.</p>
+						</div>
+						<div class="custome-radio">
+							<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="transfer">
+							<label class="form-check-label" for="exampleRadios5">واریز به حساب</label>
+							<p data-method="transfer" class="payment-text">با انتخاب این گزینه و کلیک بر روی دکمه زیر همکاران ما با شما تماس خواهند گرفت.</p>
+						</div>
+					</div>
+				</div>
+				<p class="alert alert-danger" id="error-box"></p>
+				<p class="alert alert-success" id="success-checkout-box"></p>
+
+				<button type="button" id="btnPayment" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>
+			</div>
 		</div>
+			</div>
 	</div>
 	 
 
@@ -203,6 +277,17 @@
 				}
 			});
 
+		$('input[type=radio][name=payment_option]').change(function() {
+			if (this.value === 'online') {
+				$('#btnPayment').html("پرداخت سفارش");
+			}
+			else if (this.value === 'recieve') {
+				$('#btnPayment').html("ثبت نهایی سفارش");
 
+			}
+			else if (this.value === 'transfer') {
+				$('#btnPayment').html("ثبت نهایی سفارش");
+			}
+		});
 	</script>
 }

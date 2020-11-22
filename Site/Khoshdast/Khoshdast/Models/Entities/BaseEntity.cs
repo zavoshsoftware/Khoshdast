@@ -55,7 +55,7 @@ namespace Models
                 string year = pc.GetYear(CreationDate).ToString().PadLeft(4, '0');
                 string month = pc.GetMonth(CreationDate).ToString().PadLeft(2, '0');
                 string day = pc.GetDayOfMonth(CreationDate).ToString().PadLeft(2, '0');
-                return String.Format("{0}/{1}/{2}", year, month, day);
+                return String.Format("{0}/{1}/{2}", year, month, day + " - ساعت " + CreationDate.ToString("HH:mm:ss"));
             }
         }
     }

@@ -46,5 +46,17 @@ namespace Models
                     .HasForeignKey(p => p.ProductId);
             }
         }
+
+
+
+        [Display(Name = "Price", ResourceType = typeof(Resources.Models.OrderDetail))]
+     [NotMapped]
+        public string PriceStr { get { return Price.ToString("N0"); } }
+
+        [Display(Name = "Amount", ResourceType = typeof(Resources.Models.OrderDetail))]
+        [NotMapped]
+
+        public string AmountStr { get { return Amount.ToString("N0"); } }
+
     }
 }

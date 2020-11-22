@@ -21,9 +21,9 @@
 		</div>
 	</div>
 </div>
-<div class="main_content">
+<div class="main_content bg-gray-list">
 	<div class="section">
-		<div class="container">
+		<div class="container basket-container">
 			<div class="row">
 				<div class="col-12">
 					<div class="table-responsive shop_cart_table">
@@ -43,18 +43,28 @@
 							@foreach (var product in Model.Products)
 							{
 									<tr>
-										<td class="product-thumbnail"><a href="#"><img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="100px"></a></td>
-										<td class="product-name" data-title="Product"><a href="#">@product.Product.Title</a></td>
-										<td class="product-price" data-title="Price">@product.Amount</td>
-										<td class="product-quantity" data-title="Quantity">
+										<td class="product-thumbnail"><a href="#">
+											
+											@if (File.Exists(Server.MapPath(product.Product.ImageUrl)))
+											{
+												<img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="70px">
+											}
+											else
+											{
+												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست" height="70px">
+											}
+										</a></td>
+										<td class="product-name" data-title="محصول"><a href="#">@product.Product.Title</a></td>
+										<td class="product-price" data-title="قیمت">@product.Amount</td>
+										<td class="product-quantity" data-title="تعداد">
 											<div class="quantity">
 												<input type="button" value="-" class="minus">
-												<input type="text" name="quantity" value="@product.Quantity" title="Qty" class="qty" size="4">
+												<input type="text" name="quantity" id="txt-qty-@product.Product.Code" value="@product.Quantity" title="Qty" class="qty" size="4">
 												<input type="button" value="+" class="plus">
 											</div>
 										</td>
-										<td class="product-subtotal" data-title="Total">@product.RowAmount</td>
-										<td class="product-remove" data-title="Remove"><a href="/Basket/remove/@product.Product.Code"><i class="ti-close"></i></a></td>
+										<td class="product-subtotal" data-title="جمع مبلغ">@product.RowAmount</td>
+										<td class="product-remove" data-title="حذف"><a href="/Basket/remove/@product.Product.Code"><i class="ti-close"></i></a></td>
 									</tr>
 							}
 								
@@ -78,7 +88,9 @@
 												</div>
 											</div>
 											<div class="col-lg-8 col-md-6 text-left text-md-right">
-												<button class="btn btn-line-fill btn-sm" type="submit">به روزرسانی سبد خرید</button>
+												<button class="btn btn-line-fill btn-sm" type="button" onclick="updateBasket();">به روزرسانی سبد خرید</button>
+												<a href="/checkout" class="btn btn-fill-out ptb8">تکمیل خرید و پرداخت</a>
+
 											</div>
 										</div>
 									</td>
@@ -90,14 +102,16 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<div class="medium_divider"></div>
+					<div class="small_divider"></div>
 					<div class="divider center_icon"><i class="ti-shopping-cart-full"></i></div>
-					<div class="medium_divider"></div>
+					<div class="small_divider"></div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
-					<div class="border p-3 p-md-4">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8">
+					<div class="border p-3 p-md-4 order-summery">
 						<div class="heading_s1 mb-3">
 							<h6>جمع خرید</h6>
 						</div>
@@ -113,6 +127,13 @@
 									<td class="cart_total_amount">@Model.DiscountAmount</td>
 								</tr>
 								<tr>
+									<td class="cart_total_label">هزینه حمل</td>
+									<td class="cart_total_amount">@Model.ShipmentAmount
+									</td>
+
+								</tr>
+
+								<tr>
 									<td class="cart_total_label">مبلغ قابل پرداخت</td>
 									<td class="cart_total_amount"><strong>@Model.Total</strong></td>
 								</tr>
@@ -120,19 +141,21 @@
 							</table>
 						</div>
 						<a href="/checkout" class="btn btn-fill-out">تکمیل خرید و پرداخت</a>
+						<dfn>هزینه ارسال برای سفارشات بالای 400 هزار تومان رایگان می باشد</dfn>
+
 					</div>
 				</div>
 
-				<div class="col-md-6">
-					<div class="border p-3 p-md-4">
-						<div class="heading_s1 mb-3">
-							<h6>قوانین خرید</h6>
-						</div>
-						<div class="table-responsive">
-						@Html.Raw(Model.Policy.Body)
-						</div>
+				@*<div class="col-md-6">
+				<div class="border p-3 p-md-4">
+					<div class="heading_s1 mb-3">
+						<h6>قوانین خرید</h6>
+					</div>
+					<div class="table-responsive">
+					@Html.Raw(Model.Policy.Body)
 					</div>
 				</div>
+			</div>*@
 
 			</div>
 		</div>
