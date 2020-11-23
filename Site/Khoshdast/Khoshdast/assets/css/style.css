@@ -4099,7 +4099,7 @@ footer .widget_title {
 	width: 100%;
 }
 .breadcrumb_section.page-title-mini {
-	padding: 20px 0;
+	padding: 5px 0;
 }
 .page-title-mini .page-title h1 {
 	font-size: 28px;
@@ -4615,7 +4615,7 @@ footer .widget_title {
 	position: relative;
 }
 .login_footer {
-	margin-bottom: 20px;
+	margin-bottom: 39px;
 	margin-top: 5px;
 	display: -ms-flexbox;
 	display: flex;

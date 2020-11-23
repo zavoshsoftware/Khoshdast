@@ -205,7 +205,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 
 .bg-gray-list {
-    background-color: #eff0f2 !important;
+    background-color: #ddd !important;
 }
 
 .widjet-2 {
@@ -339,8 +339,9 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .shop_cart_table {
     background-color: #fff;
-    padding-right: 25px;
-    padding-left: 25px; 
+
+    padding: 20px 25px 0 25px;
+    border-radius: 9px;
 }
 
     .shop_cart_table .table th {
@@ -389,4 +390,20 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .basket-container {
     background-color: #fff;
     padding-bottom: 30px;
+    border-radius: 9px;
+}
+
+
+#loginform, #coupon {
+    background-color: #fff;
+}
+
+.pdp-container {
+    background-color: #fff;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.dashboard_menu {
+    background-color: #fff;
 }

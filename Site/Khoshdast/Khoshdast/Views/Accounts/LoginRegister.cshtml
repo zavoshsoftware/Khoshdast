@@ -23,7 +23,7 @@
 	</div>
 </div>
 
-<div class="main_content">
+<div class="main_content bg-gray-list">
 
 	<div class="section">
 		<div class="container">
@@ -80,10 +80,10 @@
 							{
 								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterCellnumber"]</p>
 							}
-							if (TempData["WrongRegisterEmail"] != null)
+							@*if (TempData["WrongRegisterEmail"] != null)
 							{
 								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterEmail"]</p>
-							}
+							}*@
 							if (TempData["WrongRegisterDuplicate"] != null)
 							{
 								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterDuplicate"]</p>
@@ -94,9 +94,9 @@
 							<div class="form-group">
 								<input type="text" required="" class="form-control" name="RegisterCellNumber" placeholder="شماره موبایل">
 							</div>
-							<div class="form-group">
+							@*<div class="form-group">
 								<input type="text" required="" class="form-control" name="RegisterEmail" placeholder="ایمیل">
-							</div>
+							</div>*@
 							<div class="form-group">
 								<input class="form-control" required="" type="password" name="RegisterPassword" placeholder="کلمه عبور">
 							</div>
