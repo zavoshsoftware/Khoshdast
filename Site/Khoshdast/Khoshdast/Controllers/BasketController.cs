@@ -410,16 +410,18 @@ namespace Khoshdast.Controllers
 
 
                         db.SaveChanges();
-                        RemoveCookie();
 
                         string res = "";
 
-                        if(paymentType=="online")
+                        if (paymentType == "online")
                             res = zp.ZarinPalRedirect(order, order.TotalAmount);
-                      
-                        else
-                            res = "notonline";
 
+                        else
+                        {
+                            RemoveCookie();
+
+                            res = "notonline";
+                        }
                         return Json(res, JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -639,6 +641,8 @@ namespace Khoshdast.Controllers
                                 }
                                 db.SaveChanges();
                             }
+                            RemoveCookie();
+
                         }
                         else
                         {

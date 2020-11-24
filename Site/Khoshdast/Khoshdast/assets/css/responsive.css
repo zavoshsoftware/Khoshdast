@@ -1159,7 +1159,7 @@ footer .widget_title {
 	margin-bottom: 20px;
 }
 .page-title {
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
 }
 .blog_thumbs .blog_content {
 	padding: 15px 0 0 0;
@@ -1258,7 +1258,7 @@ p {
 	padding: 50px 0;
 }
 .breadcrumb_section.page-title-mini {
-	padding: 30px 0;
+	padding: 5px 0;
 }
 .footer_top {
 	padding: 30px 0 15px;

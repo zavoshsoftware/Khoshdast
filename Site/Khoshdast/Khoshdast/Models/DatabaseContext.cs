@@ -38,6 +38,7 @@ namespace Models
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<TextItem> TextItems { get; set; }
         public DbSet<ContactUsForm> ContactUsForms { get; set; }
+        public DbSet<SidebarBanner> SidebarBanners { get; set; }
 
         public System.Data.Entity.DbSet<Models.TextItemType> TextItemTypes { get; set; }
     }

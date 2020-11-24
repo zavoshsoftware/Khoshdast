@@ -1,6 +1,6 @@
 ﻿@model ViewModels.HomeViewModel
 @{
-    Layout = null;
+		Layout = null;
 }
 
 <!DOCTYPE html>
@@ -35,11 +35,11 @@
 	<link href="~/assets/css/font-awesome.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/assets/css/rtl-style.css">
 	<link href="~/assets/css/style-zavosh.css" rel="stylesheet" />
-	
+
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LK66T2NR3"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 
 		gtag('config', 'G-0LK66T2NR3');
@@ -49,59 +49,59 @@
 <body dir="rtl">
 
 	@*<div class="preloader">
-		<div class="lds-ellipsis">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>*@
-	
-@Html.Partial("FrontEnd/_MenuPartial")
+			<div class="lds-ellipsis">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>*@
+
+	@Html.Partial("FrontEnd/_MenuPartial")
 
 
-<div class="staggered-animation-wrap">
+	<div class="staggered-animation-wrap">
 		<div class="custom-container">
 			<div class="row slide-row">
 				<div class="col-lg-9">
 					<div class="banner_section shop_el_slider">
 						<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 							<div class="carousel-inner">
-								
+
 
 								@**@
-								
+
 								@{
 										int j = 0;
 										foreach (var slider in Model.Sliders)
 										{
 											if (j == 0)
 											{
-												<div class="carousel-item active background_bg" data-img-src="@slider.ImageUrl">
-													<div class="banner_slide_content banner_content_inner">
-														<div class="col-lg-7 col-10">
-															<div class="banner_content3 overflow-hidden">
-																<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
-																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
-																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+														<div class="carousel-item active background_bg" data-img-src="@slider.ImageUrl">
+															<div class="banner_slide_content banner_content_inner">
+																<div class="col-lg-7 col-10">
+																	<div class="banner_content3 overflow-hidden">
+																		<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																		<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
+																		<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+																	</div>
+																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-											}
+}
 											else
 											{
-												<div class="carousel-item background_bg" data-img-src="@slider.ImageUrl">
-													<div class="banner_slide_content banner_content_inner">
-														<div class="col-lg-8 col-10">
-															<div class="banner_content3 overflow-hidden">
-																<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
-																<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
-																<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+														<div class="carousel-item background_bg" data-img-src="@slider.ImageUrl">
+															<div class="banner_slide_content banner_content_inner">
+																<div class="col-lg-8 col-10">
+																	<div class="banner_content3 overflow-hidden">
+																		<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																		<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
+																		<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+																	</div>
+																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-											}
+}
 											j++;
 										}
 								}
@@ -111,7 +111,7 @@
 								{
 									if (i == 0)
 									{
-										<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+												<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
 
 									}
 									else
@@ -125,51 +125,51 @@
 					</div>
 				</div>
 				<div class="col-lg-3">
-					
+
 					<div class="leftslide shop_banner3">
 						<a href="@Model.SliderLeftBanners1.LinkUrl" class="hover_effect1">
-								<img src="@Model.SliderLeftBanners1.ImageUrl" alt="@Model.SliderLeftBanners1.Title">
+							<img src="@Model.SliderLeftBanners1.ImageUrl" alt="@Model.SliderLeftBanners1.Title">
 						</a>
 					</div>
 
 					<div class="leftslide">
 						<a href="@Model.SliderLeftBanners2.LinkUrl" class="hover_effect1">
-								<img src="@Model.SliderLeftBanners2.ImageUrl" alt="@Model.SliderLeftBanners2.Title">
+							<img src="@Model.SliderLeftBanners2.ImageUrl" alt="@Model.SliderLeftBanners2.Title">
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
- 
-	 
+
+
 	<div class="main_content">
-		 
+
 		<div class="section small_pb small_pt">
 			<div class="container">
-			 
+
 				<div class="row align-items-center">
 					<div class="col-12">
-						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5"  data-loop="true" data-autoplay="5000" data-dots="false" data-nav="true"  data-margin="15" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
-							
-						@foreach (var productGroup in Model.HomeProductGroups)
-						{
-							<div class="item">
-								<div class="categories_box">
-									<a href="/category/@productGroup.UrlParam">
-										<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
-										@*<span>@productGroup.Title</span>*@
-									</a>
-								</div>
-							</div>
-						}
-						 
+						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-autoplay="5000" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "4"}, "991":{"items": "4"}, "1199":{"items": "4"}}'>
+
+							@foreach (var productGroup in Model.HomeProductGroups)
+							{
+									<div class="item">
+										<div class="categories_box">
+											<a href="/category/@productGroup.UrlParam">
+												<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
+												@*<span>@productGroup.Title</span>*@
+											</a>
+										</div>
+									</div>
+							}
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
- 
+
 		<div class="section small_pt pb_20 bg-gray">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -183,60 +183,67 @@
 				<div class="row shop_container top-product">
 					@foreach (var product in Model.NewestProducts)
 					{
-						<div class="col-lg-3 col-md-3 col-6">
-							<div class="product text-center">
-								<div>
-									<a href="/product/@product.Code">
-										@if (!string.IsNullOrEmpty(product.ImageUrl))
-										{
-											<img src="@product.ImageUrl" alt="@product.Title">
-										}
-										else
-										{
-											<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-										}
-									</a>
-								</div>
-								@if ( product.Stock <= 0)
-								{
-									<span class="pr_flash bg-danger">ناموجود</span>
-								}
-								<div class="product_info">
-									<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
-									<div class="product_price">
-										@if (product.Amount == 0)
-										{
-											<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-										}
-										else
-										{
-											if (product.IsInPromotion)
+							<div class="col-lg-3 col-md-3 col-6">
+								<div class="product text-center">
+									<div>
+										<a href="/product/@product.Code">
+											@if (!string.IsNullOrEmpty(product.ImageUrl))
 											{
-												<span class="price">@product.DiscountAmountStr</span>
-												<del>@product.AmountStr</del>
-											}
+													<img src="@product.ImageUrl" alt="@product.Title">
+}
 											else
 											{
-												<span class="price">@product.AmountStr</span>
-											}
-										}
+													<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+										</a>
 									</div>
-
-											 
-									@if (product.Amount!= 0 && product.Stock > 0)
+									@if (product.Stock <= 0)
 									{
-										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
-										</div>
+											<span class="pr_flash bg-danger">ناموجود</span>
 									}
+									<div class="product_info">
+										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+										<div class="product_price">
+											@if (product.Amount == 0)
+											{
+													<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+											else
+											{
+												if (product.IsInPromotion)
+												{
+															<span class="price">@product.DiscountAmountStr</span>
+															<del>@product.AmountStr</del>
+}
+												else
+												{
+															<span class="price">@product.AmountStr</span>
+}
+											}
+										</div>
+
+
+										@if (product.Amount != 0 && product.Stock > 0)
+										{
+												<div class="add-to-cart">
+													<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+												</div>
+}
+										else
+										{
+												<div class="add-to-cart">
+													<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+												</div>
+}
+									</div>
 								</div>
 							</div>
-						</div>
 					}
 
 				</div>
 			</div>
 		</div>
-	 
+
 		<div class="section pb_20 small_pt">
 			<div class="container">
 				<div class="row">
@@ -265,7 +272,7 @@
 		</div>
 
 
-	<div class="section small_pt pb_20 bg-gray">
+		<div class="section small_pt pb_20 bg-gray">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -278,170 +285,188 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
-					 
+
 							@foreach (var product in Model.BestSaleProducts)
 							{
-							<div class="item">
-								<div class="product text-center">
-									<div class="product_img">
-										<a href="/product/@product.Code">
-											@if (!string.IsNullOrEmpty(product.ImageUrl))
+									<div class="item">
+										<div class="product text-center">
+											<div class="product_img">
+												<a href="/product/@product.Code">
+													@if (!string.IsNullOrEmpty(product.ImageUrl))
+													{
+															<img src="@product.ImageUrl" alt="@product.Title">
+}
+													else
+													{
+															<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+												</a>
+
+											</div>
+											@if (product.Stock <= 0)
 											{
-												<img src="@product.ImageUrl" alt="@product.Title">
-											}
-											else
-											{
-												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-											}
-										</a>
-									 
-									</div>
-									@if ( product.Stock <= 0)
-									{
-										<span class="pr_flash bg-danger">ناموجود</span>
-									}
-									<div class="product_info">
-										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
-										<div class="product_price">
-											@if (product.Amount == 0)
-											{
-												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-											}
-											else
-											{
-												if (product.IsInPromotion)
+													<span class="pr_flash bg-danger">ناموجود</span>
+}
+											<div class="product_info">
+												<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+												<div class="product_price">
+													@if (product.Amount == 0)
+													{
+															<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+													else
+													{
+														if (product.IsInPromotion)
+														{
+																	<span class="price">@product.DiscountAmountStr</span>
+																	<del>@product.AmountStr</del>
+}
+														else
+														{
+																	<span class="price">@product.AmountStr</span>
+}
+													}
+												</div>
+
+
+												@if (product.Amount != 0 && product.Stock > 0)
 												{
-													<span class="price">@product.DiscountAmountStr</span>
-													<del>@product.AmountStr</del>
-												}
+														<div class="add-to-cart">
+															<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+
 												else
 												{
-													<span class="price">@product.AmountStr</span>
-												}
-											}
-										</div>
-
-											 
-										@if (product.Amount!= 0 && product.Stock > 0)
-										{
-											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+														<div class="add-to-cart">
+															<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
 											</div>
-										}
+										</div>
 									</div>
-								</div>
-							</div>
-						}
+							}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
 
-	<div class="section small_pt">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="heading_s3 text-center">
-						<h2>برندها</h2>
+
+		<div class="section small_pt">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="heading_s3 text-center">
+							<h2>برندها</h2>
+						</div>
+						<div class="small_divider clearfix"></div>
 					</div>
-					<div class="small_divider clearfix"></div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
-						
-						@foreach (var brand in Model.HomeBrands)
-						{
-							<div class="item">
-								<div class="cl_logo">
-									<img src="@brand.BrandNameImageUrl" alt="@brand.Title"/>
-								</div>
-							</div>
-						}
-				 
+				<div class="row">
+					<div class="col-12">
+						<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
+
+							@foreach (var brand in Model.HomeBrands)
+							{
+									<div class="item">
+										<div class="cl_logo">
+											<a href="/brand/@brand.UrlParam">
+												<img src="@brand.BrandNameImageUrl" alt="@brand.Title" />
+											</a>
+										</div>
+									</div>
+							}
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-		
 
-	<div class="section small_pt pb_20 bg-gray">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="heading_s3 text-center">
-						<h2>@Model.TopProductGroupTitle</h2>
+
+		<div class="section small_pt pb_20 bg-gray">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="heading_s3 text-center">
+							<h2>@Model.TopProductGroupTitle</h2>
+						</div>
+						<div class="small_divider clearfix"></div>
 					</div>
-					<div class="small_divider clearfix"></div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
-						 
-					@foreach (var product in Model.TopCategoryProducts)
-					{
-							<div class="item">
-								<div class="product text-center">
-									<div class="product_img">
-										<a href="/product/@product.Code">
-											@if (File.Exists(Server.MapPath(product.ImageUrl)))
-											{
-												<img src="@product.ImageUrl" alt="@product.Title">
-											}
-											else
-											{
-												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-											}
-										</a>
-									 
-									</div>
-									@if ( product.Stock <= 0)
-									{
-										<span class="pr_flash bg-danger">ناموجود</span>
-									}
-									<div class="product_info">
-										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
-										@if (product.Amount == 0)
-										{
-											<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-										}
-										else
-										{
-										 if (product.IsInPromotion)
-											 {
-												 <div class="product_price">
-													 <span class="price">@product.DiscountAmountStr</span>
-													 <del>@product.AmountStr</del>
-												 </div>
-											 }
-											 else
-											 {
-												 <div class="product_price mb29">
-													 <span class="price ">@product.AmountStr</span>
-												 </div>
-											 }
+				<div class="row">
+					<div class="col-md-12">
+						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
 
-										}
-										@if (product.Amount != 0 && product.Stock > 0)
-										{
-											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+							@foreach (var product in Model.TopCategoryProducts)
+							{
+									<div class="item">
+										<div class="product text-center">
+											<div class="product_img">
+												<a href="/product/@product.Code">
+													@if (File.Exists(Server.MapPath(product.ImageUrl)))
+													{
+															<img src="@product.ImageUrl" alt="@product.Title">
+}
+													else
+													{
+															<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+												</a>
+
 											</div>
-										}
+											@if (product.Stock <= 0)
+											{
+													<span class="pr_flash bg-danger">ناموجود</span>
+}
+											<div class="product_info">
+												<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+												@if (product.Amount == 0)
+												{
+														<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+												else
+												{
+													if (product.IsInPromotion)
+													{
+																<div class="product_price">
+																	<span class="price">@product.DiscountAmountStr</span>
+																	<del>@product.AmountStr</del>
+																</div>
+}
+													else
+													{
+																<div class="product_price mb29">
+																	<span class="price ">@product.AmountStr</span>
+																</div>
+}
+
+												}
+												@if (product.Amount != 0 && product.Stock > 0)
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+
+												else
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						}
+							}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-		
-		
+
+
 		<div class="section pb_20">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -451,36 +476,36 @@
 						</div>
 					</div>
 				</div>
-				<div class="row justify-content-center">
+				<div class="row justify-content-center blog-list-home">
 					@foreach (var blog in Model.HomeBlogs)
 					{
-						<div class="col-lg-4 col-md-6">
-							<div class="blog_post blog_style2 box_shadow1">
-								<div class="blog_img">
-									<a href="/blog/post/@blog.UrlParam">
-										<img src="@blog.ImageUrl" alt="@blog.Title">
-									</a>
-								</div>
-								<div class="blog_content bg-white">
-									<div class="blog_text">
-										<h5 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h5>
-										<ul class="list_none blog_meta">
-											<li><a href="#"><i class="ti-calendar"></i> @blog.CreationDateStr</a></li>
-											<li><a href="#"><i class="ti-eye"></i> @blog.Visit بازدید</a></li>
-										</ul>
-										<p>@blog.Summery</p>
+							<div class="col-lg-4 col-md-6">
+								<div class="blog_post blog_style2 box_shadow1">
+									<div class="blog_img">
+										<a href="/blog/post/@blog.UrlParam">
+											<img src="@blog.ImageUrl" alt="@blog.Title">
+										</a>
+									</div>
+									<div class="blog_content bg-white">
+										<div class="blog_text">
+											<h5 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h5>
+											<ul class="list_none blog_meta">
+												<li><a href="#"><i class="ti-calendar"></i> @blog.CustomeCreationDate</a></li>
+												<li><a href="#"><i class="ti-eye"></i> @blog.Visit بازدید</a></li>
+											</ul>
+											<p>@blog.Summery</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 					}
 
 				</div>
 			</div>
 		</div>
 	</div>
-	 
-@Html.Partial("FrontEnd/_FooterPartial")
+
+	@Html.Partial("FrontEnd/_FooterPartial")
 
 
 
@@ -511,19 +536,19 @@
 	<!-- elevatezoom js -->
 	<script src="/assets/js/jquery.elevatezoom.js"></script>
 	<!-- scripts js -->
-<script src="/assets/js/scripts.js"></script>
+	<script src="/assets/js/scripts.js"></script>
 	<script src="~/Scripts/function.js"></script>
-<script>
-	$(document).ready(function () {
-		var cookie = getCookie('basket-khoshdast');
-		if (cookie != null) {
-			var orderDetails = cookie.split('/');
+	<script>
+		$(document).ready(function () {
+			var cookie = getCookie('basket-khoshdast');
+			if (cookie != null) {
+				var orderDetails = cookie.split('/');
 
-			$('.cart_count').html(orderDetails.length - 1);
-		} else {
-			$('.cart_count').html('0');
-		}
-	});
-</script>
+				$('.cart_count').html(orderDetails.length - 1);
+			} else {
+				$('.cart_count').html('0');
+			}
+		});
+	</script>
 </body>
 </html>

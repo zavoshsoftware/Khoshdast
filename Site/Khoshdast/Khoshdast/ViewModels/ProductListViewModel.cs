@@ -14,7 +14,7 @@ namespace ViewModels
         public List<SidebarBrand> SidebarBrands { get; set; }
         public List<BreadcrumbItem> BreadcrumbItems { get; set; }
         public List<PageItem> PageItems { get; set; }
-        public TextItem SidebarBanner { get; set; }
+        public List<SidebarBanner> SidebarBanners { get; set; }
     }
 
     public class SidebarProductGroup

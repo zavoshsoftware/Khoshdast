@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<div class="main_content bg-gray-list">
+<div class="main_content bg-gray-list product-list-padding">
 
 
 
@@ -51,27 +51,49 @@
 								<div class="product">
 									<div>
 										<a href="/product/@product.Code">
-											<img src="@product.ImageUrl" alt="@product.Title">
+											@if (File.Exists(Server.MapPath(product.ImageUrl)))
+											{
+												<img src="@product.ImageUrl" alt="@product.Title">
+											}
+											else
+											{
+												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+											}
 										</a>
 
 									</div>
 									<div class="product_info">
 										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 										<div class="product_price">
-											@if (product.IsInPromotion)
+											@if (product.Amount == 0)
 											{
-												<span class="price">@product.DiscountAmountStr</span>
-												<del>@product.AmountStr</del>
+												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
 											}
 											else
 											{
-												<span class="price">@product.AmountStr</span>
+												 if (product.IsInPromotion)
+												 {
+													 <span class="price">@product.DiscountAmountStr</span>
+													 <del>@product.AmountStr</del>
+												 }
+												 else
+												 {
+													 <span class="price">@product.AmountStr</span>
+												 }
 											}
-
 										</div>
 
-										<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
-										</div>
+										 
+										@if (product.Amount != 0 && product.Stock > 0)
+										{
+											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
+										else
+										{
+											<div class="add-to-cart"><button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
 
 									</div>
 								</div>

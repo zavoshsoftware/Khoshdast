@@ -28,7 +28,7 @@
 	</div>
 </div>
 
-<div class="main_content bg-gray-list">
+<div class="main_content bg-gray-list product-list-padding">
 
 
 
@@ -36,7 +36,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9">
-					<div class="row align-items-center mb-4 pb-1">
+					<div class="row align-items-center sort-box">
 						<div class="col-12">
 							<div class="product_header">
 
@@ -116,6 +116,11 @@
 												<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
 												</div>
 											}
+											else
+											{
+												<div class="add-to-cart"><button class="btn btn-addtocart btn-disable" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+												</div>
+											}
 										</div>
 									</div>
 								</div>
@@ -171,16 +176,20 @@
 						</div>
  
 
-						<div class="widget widjet-2">
-							<div class="shop_banner">
-								<div class="banner_img overlay_bg_20">
-									<img src="@Model.SidebarBanner.ImageUrl" height="300" alt="رنگ خوشدست">
+						@foreach (var banner in Model.SidebarBanners)
+						{
+								<div class="widget widjet-2 sidebar-banner-item">
+									<div class="shop_banner">
+
+										<div class="banner_img">
+											<a href="@banner.LinkUrl">
+												<img src="@banner.ImageUrl" height="300" alt="@banner.ImageAlt">
+											</a>
+										</div>
+
+									</div>
 								</div>
-								<div class="shop_bn_content2 text_white">
-									<a href="@Model.SidebarBanner.LinkUrl" class="btn btn-white rounded-0 btn-sm text-uppercase">@Model.SidebarBanner.LinkTitle</a>
-								</div>
-							</div>
-						</div>
+						}
 					</div>
 				</div>
 			</div>

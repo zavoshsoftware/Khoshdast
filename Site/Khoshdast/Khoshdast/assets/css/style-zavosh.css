@@ -407,3 +407,45 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .dashboard_menu {
     background-color: #fff;
 }
+
+.btn-disable {
+    opacity: 0.4 !important;
+    cursor: not-allowed;
+    background-color: #ddd;
+}
+
+.product-list-padding .col-lg-3 ,.product-list-padding .col-lg-9 ,.product-list-padding .col-md-4  
+,.product-list-padding .col-12 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.h6, h6 {
+    font-size: 0.977rem
+}
+.sort-box {
+    margin-bottom: 20px;
+}
+.blog_meta li {
+    font-size: 13px;
+}
+
+.blog_post {
+    border-radius: 7px;
+}
+    .blog_post .blog_content {
+        border-radius: 0 0 7px 7px;
+        height: 270px;
+    }
+.blog_post .blog_img {
+    border-radius: 7px 7px 0 0;
+}
+
+.blog-list-home .col-lg-4 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.sidebar-banner-item {
+    padding: 10px !important;
+}

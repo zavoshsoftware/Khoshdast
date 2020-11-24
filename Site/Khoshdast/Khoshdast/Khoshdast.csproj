@@ -1235,6 +1235,7 @@
     <Compile Include="Controllers\ProductCommentsController.cs" />
     <Compile Include="Controllers\ProductGroupsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SidebarBannersController.cs" />
     <Compile Include="Controllers\SlidersController.cs" />
     <Compile Include="Controllers\TextItemsController.cs" />
     <Compile Include="Controllers\TextItemTypesController.cs" />
@@ -1298,6 +1299,10 @@
     <Compile Include="Migrations\202011182022178_V11.Designer.cs">
       <DependentUpon>202011182022178_V11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011242023548_V12.cs" />
+    <Compile Include="Migrations\202011242023548_V12.Designer.cs">
+      <DependentUpon>202011242023548_V12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1320,6 +1325,7 @@
     <Compile Include="Models\Entities\ProductGroupRelProduct.cs" />
     <Compile Include="Models\Entities\Province.cs" />
     <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\SidebarBanner.cs" />
     <Compile Include="Models\Entities\Slider.cs" />
     <Compile Include="Models\Entities\TextItemType.cs" />
     <Compile Include="Models\Entities\TextItem.cs" />
@@ -1631,6 +1637,11 @@
     <Content Include="Views\Dashboard\OrderList.cshtml" />
     <Content Include="Views\Dashboard\Details.cshtml" />
     <Content Include="Views\Dashboard\EditProfile.cshtml" />
+    <Content Include="Views\SidebarBanners\Create.cshtml" />
+    <Content Include="Views\SidebarBanners\Delete.cshtml" />
+    <Content Include="Views\SidebarBanners\Details.cshtml" />
+    <Content Include="Views\SidebarBanners\Edit.cshtml" />
+    <Content Include="Views\SidebarBanners\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1690,6 +1701,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011182022178_V11.resx">
       <DependentUpon>202011182022178_V11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011242023548_V12.resx">
+      <DependentUpon>202011242023548_V12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

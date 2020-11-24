@@ -123,6 +123,8 @@
 							{
 								<button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code', 'detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>
 							}
+							
+						
 							</div>
 						</div>
 						<hr />
@@ -279,6 +281,11 @@
 											@if (relatedProduct.Amount!= 0 && relatedProduct.Stock > 0)
 											{
 												<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@relatedProduct.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+												</div>
+											}
+											else
+											{
+												<div class="add-to-cart"><button class="btn btn-addtocart btn-disable" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
 												</div>
 											}
 										</div>
