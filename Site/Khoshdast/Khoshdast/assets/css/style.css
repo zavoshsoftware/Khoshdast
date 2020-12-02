@@ -1611,7 +1611,8 @@ button:focus {
 }
 .top-header {
     padding: 10px 0;
-	transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    background-color: #57b951;
 }
 .top-header[class*="bg_"], .top-header[class*="bg-"] {
 	border: 0;
@@ -3082,8 +3083,8 @@ input.text {
 }
 .categories_box a {
 	display: block;
-	padding: 35px 20px;
-	background-color: #f7f7f7;
+	padding: 5px 0px;
+	/*background-color: #f7f7f7;*/
 }
 .categories_box i {
 	font-size: 40px;

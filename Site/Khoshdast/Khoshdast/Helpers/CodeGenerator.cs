@@ -18,7 +18,7 @@ namespace Helpers
             {
                 return order.Code + 1;
             }
-            return 1;
+            return 100000;
         }
 
 

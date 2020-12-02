@@ -54,7 +54,7 @@ namespace Models
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual City City { get; set; }
 
-        [Display(Name = "وضعیت پرداخت")]
+        [Display(Name = "پرداخت شده")]
         public bool IsPaid { get; set; }
 
 
@@ -178,6 +178,14 @@ namespace Models
 
                 return CreationDateStr;
             } }
+
+        [Display(Name="توضیحات مشتری")]
+        [DataType(DataType.MultilineText)]
+        public string CustomerDesc { get; set; }
+
+        [Display(Name="توضیحات پرداخت")]
+        [DataType(DataType.MultilineText)]
+        public string PaymentDesc { get; set; }
 
     }
 }

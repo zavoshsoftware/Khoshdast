@@ -35,7 +35,7 @@ namespace Helpers
 
             ZarinPal.PaymentRequest pr = new ZarinPal.PaymentRequest(MerchantId, Amount, CallbackURL, description);
 
-            zarinpal.DisableSandboxMode();
+            zarinpal.EnableSandboxMode();
             try
             {
                 var res = zarinpal.InvokePaymentRequest(pr);

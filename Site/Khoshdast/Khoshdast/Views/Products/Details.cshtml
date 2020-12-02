@@ -7,33 +7,31 @@
 		ViewBag.Description = "خرید اینترنتی " + Model.Product.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست. قیمت " + Model.Product.Title;
 }
 
-<div class="breadcrumb_section bg_gray page-title-mini" style="background-color: #E1D9DA">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-md-12">
+<div class="main_content bg-gray-list">
 
-				<div class="breadcrumb-custom">
-					<ol class="breadcrumb">
+	<div class="container container-custom">
+		<div class="row">
+			<div class="col-md-12 noprl mt20">
+				<div class="khoshdast-breadcramp">
+					<ol class="breadcrumb ">
 						<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 						@foreach (var breadcrumbItem in Model.BreadcrumbItems)
 						{
 								<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
 						}
 					</ol>
-				</div>
-
-				<div class="page-title">
 					<h1>@Model.Product.Title</h1>
+					<p class="clearfix"></p>
 				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
-<div class="main_content bg-gray-list">
+
 
 	<div class="section">
-		<div class="container pdp-container">
+		<div class="container pdp-container container-custom">
+
+
 			<div class="row">
 				<div class="col-lg-6 col-md-6 mb-4 mb-md-0">
 					<div class="product-image">
@@ -72,7 +70,7 @@
 									if (Model.Product.IsInPromotion)
 									{
 												<span class="price">@Model.Product.DiscountAmountStr</span>
-																<del>@Model.Product.AmountStr</del>
+												<del>@Model.Product.AmountStr</del>
 									}
 									else
 									{
@@ -119,12 +117,12 @@
 							</div>
 
 							<div class="cart_btn">
-							@if (Model.Product.Amount != 0 && Model.Product.Stock > 0)
-							{
-								<button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code', 'detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>
-							}
-							
-						
+								@if (Model.Product.Amount != 0 && Model.Product.Stock > 0)
+								{
+										<button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code', 'detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>
+								}
+
+
 							</div>
 						</div>
 						<hr />
@@ -132,11 +130,10 @@
 						<div class="product_share">
 							<span>اشتراک گذاری:</span>
 							<ul class="social_icons">
-								<li><a href="#"><i class="ion-social-facebook"></i></a></li>
-								<li><a href="#"><i class="ion-social-twitter"></i></a></li>
-								<li><a href="#"><i class="ion-social-googleplus"></i></a></li>
-								<li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
-								<li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+								<li><a target="_blank" rel="noreferrer nofollow" href="https://www.facebook.com/sharer/sharer.php?u=https://khoshdast.ir/product/@Model.Product.Code"><i class="ion-social-facebook"></i></a></li>
+								<li><a target="_blank" rel="noreferrer nofollow" href="https://twitter.com/intent/tweet?text=https://khoshdast.ir/product/@Model.Product.Code"><i class="ion-social-twitter"></i></a></li>
+								<li><a target="_blank" rel="noreferrer nofollow" href="https://www.linkedin.com/shareArticle?mini=true&url=https://khoshdast.ir/product/@Model.Product.Code&title=@Model.Product.Title&summary=&source="><i class="ion-social-linkedin"></i></a></li>
+								<li><a target="_blank" rel="noreferrer nofollow" href="https://pinterest.com/pin/create/button/?url=&media=https://khoshdast.ir/product/@Model.Product.Code&description="><i class="ion-social-pinterest"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -168,7 +165,7 @@
 							<div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
 
 								<div class="comments">
-									<h5 class="product_tab_title">@Model.CommentQty نظر برای  <span>عنوان محصول</span></h5>
+									<h5 class="product_tab_title">@Model.CommentQty نظر برای <span>عنوان محصول</span></h5>
 									<ul class="list_none comment_list mt-4">
 										@foreach (var comment in Model.ProductComments)
 										{
@@ -243,51 +240,53 @@
 											<a href="/product/@relatedProduct.Code">
 												@if (File.Exists(Server.MapPath(relatedProduct.ImageUrl)))
 												{
-													<img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
-												}
+														<img src="@relatedProduct.ImageUrl" alt="@relatedProduct.Title">
+}
 												else
 												{
-													<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-												}
+														<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
 											</a>
 
 										</div>
 										@if (relatedProduct.Stock <= 0)
 										{
-											<span class="pr_flash bg-danger">ناموجود</span>
-										}
+												<span class="pr_flash bg-danger">ناموجود</span>
+}
 										<div class="product_info">
 											<h6 class="product_title"><a href="/product/@relatedProduct.Code">@relatedProduct.Title</a></h6>
 											<div class="product_price">
 												@if (relatedProduct.Amount == 0)
 												{
-													<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-												}
+														<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
 												else
 												{
 													if (relatedProduct.IsInPromotion)
 													{
-														<span class="price">@relatedProduct.DiscountAmountStr</span>
-														<del>@relatedProduct.AmountStr</del>
-													}
+																<span class="price">@relatedProduct.DiscountAmountStr</span>
+																<del>@relatedProduct.AmountStr</del>
+}
 													else
 													{
-														<span class="price">@relatedProduct.AmountStr</span>
-													}
+																<span class="price">@relatedProduct.AmountStr</span>
+}
 												}
 											</div>
 
-											 
-											@if (relatedProduct.Amount!= 0 && relatedProduct.Stock > 0)
+
+											@if (relatedProduct.Amount != 0 && relatedProduct.Stock > 0)
 											{
-												<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@relatedProduct.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
-												</div>
-											}
+													<div class="add-to-cart">
+														<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@relatedProduct.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
 											else
 											{
-												<div class="add-to-cart"><button class="btn btn-addtocart btn-disable" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
-												</div>
-											}
+													<div class="add-to-cart">
+														<button class="btn btn-addtocart btn-disable" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
 										</div>
 									</div>
 								</div>
@@ -299,4 +298,3 @@
 	</div>
 
 </div>
-

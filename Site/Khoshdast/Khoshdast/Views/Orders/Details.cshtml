@@ -31,7 +31,7 @@
 							</label>
 						</div>
 						<div class="col-md-7">
-							@Html.DropDownList("OrderStatusId", String.Empty)
+							@Html.DropDownList("OrderStatusId")
 							<button type="button" onclick="changeOrderStatus('@Model.Order.Code');" class="btn btn-warning">تغییر وضعیت</button>
 
 						</div>
@@ -125,17 +125,30 @@
 
 				<div class="col-md-4">
 
+
 					<div class="row">
 						<div class="col-md-5">
 							<label class="control-label">
-								@Html.LabelFor(model => model.Order.IsPaid, new { @class = "control-label" })
+								<label class="control-label">وضعیت پرداخت</label>
 							</label>
 						</div>
 						<div class="col-md-7">
 							@Html.EditorFor(model => model.Order.IsPaid)
-				 
+
 							<button type="button" onclick="changeOrderPayment('@Model.Order.Code');" class="btn btn-warning">تغییر وضعیت پرداخت</button>
 
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.PaymentDesc, new { @class = "control-label" })
+
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.EditorFor(model => model.Order.PaymentDesc)
 						</div>
 					</div>
 					<div class="row">
@@ -171,11 +184,11 @@
 					<div class="row">
 						<div class="col-md-5">
 							<label class="control-label">
-								@Html.LabelFor(model => model.Order.Description, new { @class = "control-label" })
+								@Html.LabelFor(model => model.Order.CustomerDesc, new { @class = "control-label" })
 							</label>
 						</div>
 						<div class="col-md-7">
-							@Html.DisplayFor(model => model.Order.Description)
+							@Html.DisplayFor(model => model.Order.CustomerDesc)
 						</div>
 					</div>
 
@@ -273,13 +286,13 @@
 									<tbody>
 										@foreach (var detail in Model.OrderDetails)
 										{
-												<tr>
-													<td>@detail.Product.Title</td>
-													<td>@detail.Product.Barcode</td>
-													<td>@detail.Quantity</td>
-													<td>@detail.PriceStr</td>
-													<td>@detail.AmountStr</td>
-												</tr>
+										<tr>
+											<td>@detail.Product.Title</td>
+											<td>@detail.Product.Barcode</td>
+											<td>@detail.Quantity</td>
+											<td>@detail.PriceStr</td>
+											<td>@detail.AmountStr</td>
+										</tr>
 }
 									</tbody>
 								</table>
@@ -295,33 +308,103 @@
 
 		</div>
 
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading">ارسال پیامک به مشتری</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td>متن پیامک</td>
+								<td>
+									<textarea id="txtUsersms" style="width: 100%;" ></textarea><br/>
+									<button class="btn btn-success" style="margin-top: 20px;" onclick="sendUserSms('@Model.Order.Code');">ارسال پیامک</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading">یادداشت</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td>یادداشت بر روی سفارش</td>
+								<td>
+								
+									@Html.EditorFor(model => model.Order.Description)
+									<br/>
+									<dfn>این متن به کاربر نمایش داده نخواهد شد</dfn><br/>
+									<button class="btn btn-success" style="margin-top: 20px;" onclick="postDesc('@Model.Order.Code');">ارسال پیامک</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="loading-fuulpage">Loading&#8230;</div>
 
-@section scripts{
-	<script>
-		function changeOrderStatus(code) {
-			var statusId = $('#OrderStatusId').val();
-			$.ajax(
-				{
-					url: "/orders/ChangeOrderStatus",
-					data: { code: code, statusId: statusId },
-					type: "GET"
-				}).done(function (result) {
-					location.reload();
-				});
-		}
+	@section scripts{
+		<script>
+			function postDesc(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var desc = $('#Order_Description').val();
 
-		function changeOrderPayment(code) {
-			var statusId = $('#Order_IsPaid').val();
-			$.ajax(
-				{
-					url: "/orders/ChangeOrderPaymentStatus",
-					data: { code: code, statusId: statusId },
-					type: "GET"
-				}).done(function (result) {
-					location.reload();
-				});
-		}
-	</script>
-}
+				$.ajax(
+					{
+						url: "/orders/SubmitOrderDesc",
+						data: { code: code, desc: desc },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+			function sendUserSms(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var userSms = $('#txtUsersms').val();
+
+				$.ajax(
+					{
+						url: "/orders/SendSmsToUser",
+						data: { code: code, userSms: userSms },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+
+			function changeOrderStatus(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var statusId = $('#OrderStatusId').val();
+				$.ajax(
+					{
+						url: "/orders/ChangeOrderStatus",
+						data: { code: code, statusId: statusId },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+
+			function changeOrderPayment(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var statusId = $('#OrderStatusId').val();
+
+				var statusId = $('#Order_IsPaid').val();
+				var paymentDesc = $('#Order_PaymentDesc').val();
+				$.ajax(
+					{
+						url: "/orders/ChangeOrderPaymentStatus",
+						data: { code: code, statusId: statusId, paymentDesc: paymentDesc },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+		</script>
+	}

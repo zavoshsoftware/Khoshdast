@@ -10,7 +10,8 @@ namespace ViewModels
     {
         public ProductGroup ProductGroup { get; set; }
         public List<Product> Products { get; set; }
-        public List<SidebarProductGroup> SidebarProductGroups { get; set; }
+        //public List<SidebarProductGroup> SidebarProductGroups { get; set; }
+        public List<ProductGroup> SidebarProductGroups { get; set; }
         public List<SidebarBrand> SidebarBrands { get; set; }
         public List<BreadcrumbItem> BreadcrumbItems { get; set; }
         public List<PageItem> PageItems { get; set; }

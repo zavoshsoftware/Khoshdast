@@ -396,13 +396,136 @@ namespace Khoshdast.Controllers
                 ProductGroup = productGroup,
                 Products = GetProductByPagination(products, pageId, sortby),
                 SidebarBrands = sidebarBrands,
-                SidebarProductGroups = GetSidebarProductGroups(),
+                SidebarProductGroups = GetSidebarProductGroups(productGroup),
                 BreadcrumbItems = GetBreadCrumb(productGroup.Parent).OrderBy(c => c.Order).ToList(),
-                PageItems = GetPagination(products.Count(), pageId),
-                SidebarBanners = db.SidebarBanners.Where(c =>c.IsActive&&c.IsDeleted==false).ToList()
+                //PageItems = GetPagination(products.Count(), pageId),
+                SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList()
             };
 
             return View(productList);
+        }
+
+
+        public ActionResult GetNewPage(string page, string sort, string brands, string category)
+        {
+
+            ProductGroup productGroup = db.ProductGroups.FirstOrDefault(c => c.UrlParam == category);
+
+            if (productGroup == null)
+                return Redirect("/");
+
+            string[] arrayBrands = null;
+            if (!string.IsNullOrEmpty(brands))
+            {
+               arrayBrands = brands.Split('-');
+            }
+            ViewBag.url = GetUrl(arrayBrands, category);
+
+            if (string.IsNullOrEmpty(sort))
+            {
+                sort = null;
+            }
+
+            int pageId = 1;
+            if (page != null)
+                pageId = Convert.ToInt32(page);
+
+            bool isLastBatch = false;
+
+            List<Product> products = GetProductListByProductGroupId(productGroup.Id);
+             
+            products = GetProductListByBrandFilter(products, arrayBrands);
+
+            if (products.Count <= productPagination)
+                isLastBatch = true;
+
+            products = GetProductByPagination(products, pageId, sort);
+
+            List< LazyLoadProductCardsItemViewModel> resItem=new List<LazyLoadProductCardsItemViewModel>();
+
+            foreach (var product in products)
+            {
+                string amount = product.AmountStr;
+
+                if (product.IsInPromotion)
+                    amount = product.DiscountAmountStr;
+
+                string imageUrl = product.ImageUrl;
+
+                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl))||string.IsNullOrEmpty(product.ImageUrl))
+                    imageUrl = "/assets/images/no-Photo.jpg";
+
+                resItem.Add(new LazyLoadProductCardsItemViewModel()
+                {
+                    Title = product.Title,
+                    Amount = amount,
+                    ImageUrl = imageUrl,
+                    Code = product.Code,
+                    Stock = product.Stock
+                });
+            }
+
+            LazyLoadProductCardsViewModel res = new  LazyLoadProductCardsViewModel ()
+            {
+                Result = resItem,
+                IsLastBatch = isLastBatch.ToString()
+            };
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+   public ActionResult GetNewPageForBrand(string page, string sort, string brand)
+        {
+
+            ViewBag.url = GetUrlByBrand(brand);
+
+            int pageId = 1;
+            if (page != null)
+                pageId = Convert.ToInt32(page);
+
+
+
+            Brand oBrand = db.Brands.FirstOrDefault(c => c.UrlParam == brand);
+
+            List<Product> products = GetProductListByBrandId(oBrand.Id);
+
+         products = GetProductByPagination(products, pageId, sort);
+
+
+
+            bool isLastBatch = products.Count <= productPagination; 
+
+            List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
+
+            foreach (var product in products)
+            {
+                string amount = product.AmountStr;
+
+                if (product.IsInPromotion)
+                    amount = product.DiscountAmountStr;
+
+                string imageUrl = product.ImageUrl;
+
+                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl))||string.IsNullOrEmpty(product.ImageUrl))
+                    imageUrl = "/assets/images/no-Photo.jpg";
+
+
+                resItem.Add(new LazyLoadProductCardsItemViewModel()
+                {
+                    Title = product.Title,
+                    Amount = amount,
+                    ImageUrl = imageUrl,
+                    Code = product.Code,
+                    Stock = product.Stock
+                });
+            }
+
+            LazyLoadProductCardsViewModel res = new  LazyLoadProductCardsViewModel ()
+            {
+                Result = resItem,
+                IsLastBatch = isLastBatch.ToString()
+            };
+
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
 
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
@@ -573,8 +696,8 @@ namespace Khoshdast.Controllers
         {
             if (brands != null)
             {
-               List<Product> result=new List<Product>();
-                    
+                List<Product> result = new List<Product>();
+
                 foreach (Product product in products)
                 {
                     foreach (string brand in brands)
@@ -597,7 +720,22 @@ namespace Khoshdast.Controllers
         {
             return db.Products.Where(c => c.BrandId == brandId && c.IsActive && c.IsDeleted == false).ToList();
         }
-        public List<SidebarProductGroup> GetSidebarProductGroups()
+        public List<ProductGroup> GetSidebarProductGroups(ProductGroup currentProductGroup)
+        {
+            List<SidebarProductGroup> list = new List<SidebarProductGroup>();
+
+            List<ProductGroup> productGroups = db.ProductGroups
+                .Where(c => c.ParentId == currentProductGroup.Id && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+
+            if (!productGroups.Any())
+                productGroups = db.ProductGroups
+                     .Where(c => c.ParentId == currentProductGroup.ParentId && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+
+
+            return productGroups;
+
+        }
+        public List<SidebarProductGroup> GetComplexSidebarProductGroups()
         {
             List<SidebarProductGroup> list = new List<SidebarProductGroup>();
 
@@ -721,7 +859,7 @@ namespace Khoshdast.Controllers
             {
                 brand = brand,
                 Products = GetProductByPagination(products, pageId, sortby),
-                SidebarProductGroups = GetSidebarProductGroups(),
+                SidebarProductGroups = GetComplexSidebarProductGroups(),
 
                 PageItems = GetPagination(products.Count(), pageId),
                 SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList()
@@ -731,7 +869,11 @@ namespace Khoshdast.Controllers
             return View(productList);
         }
 
-
+        public ActionResult TestLazy()
+        {
+            var model = db.Products.Where(c => c.ImageUrl != null).OrderBy(p => p.CreationDate).Take(30); ;
+            return View(model);
+        }
 
     }
 }

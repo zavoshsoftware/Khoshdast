@@ -53,6 +53,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     position: fixed;
     bottom: 20px;
     left: 20px;
+    z-index: 10;
 }
 
 #comment-succes, #comment-reject {
@@ -205,7 +206,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 
 .bg-gray-list {
-    background-color: #ddd !important;
+    background-color: #ececec !important;
 }
 
 .widjet-2 {
@@ -415,13 +416,13 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 
 .product-list-padding .col-lg-3 ,.product-list-padding .col-lg-9 ,.product-list-padding .col-md-4  
-,.product-list-padding .col-12 {
+,.product-list-padding .col-12 ,.product-list-padding .col-md-3 {
     padding-right: 10px;
     padding-left: 10px;
 }
 
 .h6, h6 {
-    font-size: 0.977rem
+    font-size: 0.86rem
 }
 .sort-box {
     margin-bottom: 20px;
@@ -448,4 +449,104 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .sidebar-banner-item {
     padding: 10px !important;
+}
+
+.moving-div{
+    margin-top:100px;
+    animation-name: move;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(10%);
+    }
+
+    100% {
+        transform: translateY(-10%);
+    }
+}
+
+.moving-div:hover {
+    animation-name: none;
+}
+
+.khoshdast-breadcramp {
+    background-color: #dcdcdc;
+    border-radius: 5px;
+    direction: rtl;
+    text-align: right;
+    padding: 8px 8px 2px 0;
+    margin-bottom: 10px;
+}
+.pl5 {
+    padding-left: 5px !important;
+}
+.khoshdast-breadcramp ol{
+    text-decoration: none;
+    float: right;
+    font-size: 14px;
+}
+.khoshdast-breadcramp h1{
+    float: right;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+.khoshdast-breadcramp p{
+    margin-bottom: 0;
+}
+
+
+.khoshdast-breadcramp h1:before {
+    content: "\f3d2";
+    font-family: "Ionicons";
+    padding-left:.5rem;
+    vertical-align: middle;
+}
+
+.top-header a, .top-header i {
+    color :#fff
+}
+
+.container-custom {
+    max-width: 1280px;
+}
+.btn-addtocart {
+    width: 100%;
+    padding: 6px 35px;
+}
+
+.productgroup-home{ 
+}
+.productgroup-home .col-md-3{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.bg-blue {
+    background-color: #3d6fbb !important;
+}
+.bg-blue h2{
+    color: #fff !important;
+}
+
+.noprl {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.simple-sidebar {
+    font-size: 14px;
+}
+
+.container-custom .col-lg-9 {
+    text-align: center;
 }

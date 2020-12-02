@@ -400,7 +400,7 @@ namespace Khoshdast.Controllers
                         order.DeliverCellNumber = cellnumber;
                         order.Address = address;
                         order.PostalCode = postal;
-                        order.Description = notes;
+                        order.CustomerDesc = notes;
                         order.CityId = new Guid(city);
                         order.PaymentTypeTitle = paymentType;
 
@@ -421,6 +421,9 @@ namespace Khoshdast.Controllers
                             RemoveCookie();
 
                             res = "notonline";
+
+                            SendSms.SendCommonSms(order.User.CellNum, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
+
                         }
                         return Json(res, JsonRequestBehavior.AllowGet);
                     }
@@ -609,7 +612,7 @@ namespace Khoshdast.Controllers
                 try
                 {
                     var zarinpal = ZarinPal.ZarinPal.Get();
-                    zarinpal.DisableSandboxMode();
+                    zarinpal.EnableSandboxMode();
                     String Authority = authority;
                     long Amount = zarinPal.GetAmountByAuthority(Authority);
 
@@ -635,7 +638,7 @@ namespace Khoshdast.Controllers
                                 Product product = orderDetail.Product;
                                 product.Stock = orderDetail.Product.Stock - 1;
 
-                                if (product.Stock == 0)
+                                if (product.Stock <= 0)
                                 {
                                     product.IsAvailable = false;
                                 }
@@ -643,6 +646,7 @@ namespace Khoshdast.Controllers
                             }
                             RemoveCookie();
 
+                           SendSms.SendCommonSms(order.User.CellNum,"کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با شماره پیگیری "+ verificationResponse.RefID + " با موفقیت ثبت گردید.");
                         }
                         else
                         {

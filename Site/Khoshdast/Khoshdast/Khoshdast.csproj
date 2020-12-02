@@ -498,6 +498,9 @@
     <Content Include="assets\js\jquery.elevatezoom.js" />
     <Content Include="assets\js\jquery.fitvids.js" />
     <Content Include="assets\js\jquery.ui.slider-rtl.min.js" />
+    <Content Include="assets\js\loadmore\btnloadmoreforBrands.js" />
+    <Content Include="assets\js\loadmore\btnloadmore.js" />
+    <Content Include="assets\js\loadmore\btnloadmore.min.js" />
     <Content Include="assets\js\magnific-popup.min.js" />
     <Content Include="assets\js\parallax.js" />
     <Content Include="assets\js\popper.min.js" />
@@ -517,6 +520,7 @@
     <Content Include="Content\Admin\app.v2.min.css" />
     <Content Include="Content\Admin\bootstrap.css" />
     <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\style.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\fonts\Simple-Line-Icons.svg" />
@@ -1247,6 +1251,7 @@
     <Compile Include="Helpers\CodeGenerator.cs" />
     <Compile Include="Helpers\DiscountHelper.cs" />
     <Compile Include="Helpers\GetBasketInfo.cs" />
+    <Compile Include="Helpers\LoadMore.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Helpers\SendSms.cs" />
     <Compile Include="Helpers\ZarinPalHelper.cs" />
@@ -1303,6 +1308,10 @@
     <Compile Include="Migrations\202011242023548_V12.Designer.cs">
       <DependentUpon>202011242023548_V12.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012011526340_V13.cs" />
+    <Compile Include="Migrations\202012011526340_V13.Designer.cs">
+      <DependentUpon>202012011526340_V13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1339,6 +1348,7 @@
     <Compile Include="ViewModels\CustomerOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\LazyLoadProductCards.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductListByBrandViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -1642,6 +1652,7 @@
     <Content Include="Views\SidebarBanners\Details.cshtml" />
     <Content Include="Views\SidebarBanners\Edit.cshtml" />
     <Content Include="Views\SidebarBanners\Index.cshtml" />
+    <Content Include="Views\Products\TestLazy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1704,6 +1715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011242023548_V12.resx">
       <DependentUpon>202011242023548_V12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012011526340_V13.resx">
+      <DependentUpon>202012011526340_V13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

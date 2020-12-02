@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Helpers;
 using Models;
 using ViewModels;
 
@@ -54,7 +55,7 @@ namespace Khoshdast.Controllers
                 Order = order,
                 OrderDetails = orderDetails
             };
-            ViewBag.OrderStatusId = new SelectList(db.OrderStatuses.Where(c=>c.Code!=2), "Id", "Title", order.OrderStatusId);
+            ViewBag.OrderStatusId = new SelectList(db.OrderStatuses, "Id", "Title", order.OrderStatusId);
 
             return View(orderDetailViewModel);
         }
@@ -193,7 +194,7 @@ namespace Khoshdast.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ChangeOrderPaymentStatus(string code, string statusId)
+        public ActionResult ChangeOrderPaymentStatus(string code, string statusId,string paymentDesc)
         {
 
             bool isPay = Convert.ToBoolean(statusId);
@@ -203,6 +204,7 @@ namespace Khoshdast.Controllers
             if (order != null)
             {
                 order.IsPaid = isPay;
+                order.PaymentDesc = paymentDesc;
                 order.LastModifiedDate = DateTime.Now;
                 db.SaveChanges();
 
@@ -210,19 +212,66 @@ namespace Khoshdast.Controllers
             return Json("true", JsonRequestBehavior.AllowGet);
         }
 
-        public string SerOrderStatus()
+        [AllowAnonymous]
+        public ActionResult SendSmsToUser(string code, string userSms)
         {
-            Guid id = new Guid("7dbf85f4-7835-4d21-8269-26695d0c7e0f");
-            List<Order> orders = db.Orders.Where(c => c.OrderStatusId == id).ToList();
 
-            foreach (Order order in orders)
+            
+            int orderCode = Convert.ToInt32(code);
+            Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
+
+            if (order != null)
             {
-                order.OrderStatusId = new Guid("11869f4d-d6d1-434c-a2f1-7945227cd3bb");
+                SendSms.SendCommonSms(order.User.CellNum,userSms);
 
             }
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
 
+        [AllowAnonymous]
+        public ActionResult SubmitOrderDesc(string code, string desc)
+        {
+
+            
+            int orderCode = Convert.ToInt32(code);
+            Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
+
+            if (order != null)
+            {
+                order.Description = desc;
+                order.LastModifiedDate = DateTime.Now;
+                db.SaveChanges();
+
+            }
+            return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
+        //public string SerOrderStatus()
+        //{
+        //    Guid id = new Guid("7dbf85f4-7835-4d21-8269-26695d0c7e0f");
+        //    List<Order> orders = db.Orders.Where(c => c.OrderStatusId == id).ToList();
+
+        //    foreach (Order order in orders)
+        //    {
+        //        order.OrderStatusId = new Guid("11869f4d-d6d1-434c-a2f1-7945227cd3bb");
+
+        //    }
+
+        //    db.SaveChanges();
+        //    return string.Empty;
+        //}
+
+        public void UpdateOrderCodes()
+        {
+            var orders = db.Orders.Where(c => c.IsDeleted == false).OrderBy(c => c.CreationDate).ToList();
+
+           int i = 0;
+            foreach (var order in orders)
+            {
+                order.Code = 100000 + i;
+                i++;
+            }
             db.SaveChanges();
-            return string.Empty;
         }
     }
 }

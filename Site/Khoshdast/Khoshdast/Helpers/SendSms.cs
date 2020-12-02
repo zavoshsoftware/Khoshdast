@@ -10,7 +10,7 @@ namespace Helpers
     {
         public static void SendCommonSms(string cellNumber, string message)
         {
-            var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
+            var token = new Token().GetToken("cb6f10e0147b27dbea1b14df", "123qwe!@#QWE");
 
             SmsIrRestful.MessageSend messageSend = new SmsIrRestful.MessageSend();
 
@@ -18,7 +18,7 @@ namespace Helpers
             {
                 MobileNumbers = new List<string>() { cellNumber }.ToArray(),
                 Messages = new List<string>() { message }.ToArray(),
-                LineNumber = "30004747475709",
+                LineNumber = "30005240003000",
                 SendDateTime = null,
                 CanContinueInCaseOfError = false
             });
@@ -29,7 +29,7 @@ namespace Helpers
         }
         public static void SendOtpSms(string cellNumber, string code)
         {
-            var token = new Token().GetToken("773e6490afdaeccca1206490", "123qwe!@#QWE");
+            var token = new Token().GetToken("cb6f10e0147b27dbea1b14df", "123qwe!@#QWE");
 
             var ultraFastSend = new UltraFastSend()
             {

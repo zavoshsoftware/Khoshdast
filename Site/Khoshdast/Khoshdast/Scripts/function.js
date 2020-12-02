@@ -351,3 +351,24 @@ function submitSearchResult() {
     var searchQuery = $('#txtsearch').val();
     location.href = "/result?searchquery=" + searchQuery;
 }
+
+
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+
+function getItem(code, title, amount, imageUrl, stock) {
+   return "		<div class='col-md-3 col-6'><div class='product'><div>" +
+        "<a href='/product/"+code+"'><img src='"+imageUrl+"' alt='"+title+"'></a></div>" +
+        "<div class='product_info'><h6 class='product_title'><a href='/product/" + code + "'>" + title +"</a></h6>" +
+        "<div class='product_price'><span class='price'>" + amount+"</span></div>" +
+        "<div class='add-to-cart'><button class='btn btn-fill-out btn-addtocart' onclick='addToBasket('" + code +"', '1');'><i class='icon-basket-loaded'></i>خرید</button></div></div></div></div>";
+}
