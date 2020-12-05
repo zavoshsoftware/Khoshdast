@@ -11,5 +11,7 @@ namespace ViewModels
         public List<Product> Products { get; set; }
         public List<PageItem> PageItems { get; set; }
         public string SearchQuery { get; set; }
+        public List<SidebarProductGroup> SidebarProductGroups { get; set; }
+        public List<SidebarBanner> SidebarBanners { get; set; }
     }
 }

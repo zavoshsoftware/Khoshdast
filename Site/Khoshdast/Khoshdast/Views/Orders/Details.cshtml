@@ -7,9 +7,10 @@
 
 <h2>جزییات سفارش کد @Html.DisplayFor(model => model.Order.Code)</h2>
 <a href="/orders" class="btn btn-warning">بازگشت به لیست سفارشات</a>
+<a href="/Report/Invoice/@Model.Order.Id" class="btn btn-default" target="_blank">چاپ فاکتور <i class="fa fa-print"></i></a>
 
-<div>
-	<hr />
+
+ 
 	<div class="panel panel-info">
 		<div class="panel-heading">مشخصات سفارش</div>
 		<div class="panel-body">
@@ -347,7 +348,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="loading-fuulpage">Loading&#8230;</div>
+	<div class="loading-fuulpage">Loading&#8230;</div> 
 
 	@section scripts{
 		<script>
@@ -408,3 +409,4 @@
 			}
 		</script>
 	}
+

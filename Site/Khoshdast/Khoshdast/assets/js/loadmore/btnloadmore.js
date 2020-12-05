@@ -34,7 +34,8 @@
             $(document).on('click', '.btn-loadmore', function (e) {
                 e.preventDefault();
                 page++;
-
+                $('.loading-img').css('display', 'block');
+                $('.newclass').css('display', 'block');
                 var sortby = getUrlVars()["sortby"];
                 var brands = "";
 
@@ -57,7 +58,7 @@
                         data: { page: page, sort: sortby, brands: decodeURIComponent(brands), category: category },
                         type: "GET",
                         success: function (json) {
-                           
+                            //$('.newclass').removeClass('newclass');
                             for (var i = 0; i < json.Result.length; i++) {
                                 var card = getItem(json.Result[i].Code,
                                     json.Result[i].Title,
@@ -72,22 +73,20 @@
                             //if ($childrenClass.filter(":hidden").length == 0) {
                             //    $(".btn-loadmore").fadeOut('slow');
                             //}
-                            if (json.IsLastBatch === "true") {
+                            if (json.IsLastBatch === "True") {
                                 $(".btn-loadmore").fadeOut('slow');
                             }
-                            // scrollDown(); 
+                            $('.loading-img').css('display', 'none');
+                            //document.getElementById(".col-md-3").style.visibility = "visible";
+                             scrollDown(page-1); 
                         }
                     });
-
-
-
-
-
             });
 
-            function scrollDown() {
+            function scrollDown(page) {
+                var aa = $childrenClass.filter(":visible").last().offset().top;
                 $('html, body').animate({
-                    scrollTop: $childrenClass.filter(":visible").last().offset().top
+                    scrollTop:page* $childrenClass.filter(":visible").last().offset().top
                 }, defaults.delayToScroll);
             }
         });

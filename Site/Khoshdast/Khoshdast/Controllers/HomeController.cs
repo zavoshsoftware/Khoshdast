@@ -40,10 +40,19 @@ namespace Khoshdast.Controllers
                 SliderLeftBanners2 = sliderBanners.LastOrDefault(),
                 HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),
                 HomeMidleBanner2 = homeMidkeBanners.LastOrDefault(),
+                HomeMetaDescription = GetTextByName("metadesc")
             };
             return View(home);
         }
 
+        public string GetTextByName(string name)
+        {
+            var textItem = db.TextItems.Where(c => c.Name == name).Select(c => c.Summery).FirstOrDefault();
+
+            if (textItem != null)
+                return textItem;
+            return string.Empty;
+        }
         public List<Product> GetTopCategoryProducts(ProductGroup productGroup)
         {
 
@@ -91,7 +100,7 @@ namespace Khoshdast.Controllers
         {
 
             List<Product> products = db.Products
-                .Where(c => c.Title.Contains(searchQuery) && c.IsDeleted == false && c.IsActive).ToList();
+                .Where(c => (c.Title.Contains(searchQuery) ||c.Brand.Title.Contains(searchQuery))&& c.IsDeleted == false && c.IsActive).ToList();
 
             if (pageId == null)
                 pageId = 1;
@@ -100,12 +109,37 @@ namespace Khoshdast.Controllers
             {
                 Products = GetProductByPagination(products, pageId),
                 PageItems = GetPagination(products.Count(), pageId),
-                SearchQuery = searchQuery
+                SearchQuery = searchQuery,
+                SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
+                SidebarProductGroups = GetComplexSidebarProductGroups(),
             };
 
             return View(search);
         }
+        public List<SidebarProductGroup> GetComplexSidebarProductGroups()
+        {
+            List<SidebarProductGroup> list = new List<SidebarProductGroup>();
 
+            List<ProductGroup> productGroups = db.ProductGroups
+                .Where(c => c.ParentId == null && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList();
+
+
+            foreach (ProductGroup productGroup in productGroups)
+            {
+                list.Add(new SidebarProductGroup()
+                {
+                    ProductGroup = productGroup,
+
+                    Quantity = db.ProductGroupRelProducts.Count(c =>
+                        (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id || c.ProductGroup.Parent.ParentId == productGroup.Id) &&
+                        c.IsDeleted == false),
+
+                    ChildProductGroups = db.ProductGroups.Where(c => c.ParentId == productGroup.Id && c.IsActive && c.IsDeleted == false).ToList()
+                });
+            }
+
+            return list;
+        }
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
 
         public List<Product> GetProductByPagination(List<Product> products, int? pageId)

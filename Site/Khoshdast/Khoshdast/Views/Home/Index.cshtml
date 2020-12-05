@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>رنگ و ابزار خوشدست</title>
 	<link rel="canonical" href="https://khoshdast.ir/" />
-	<meta name="description" content="فروشگاه اینترنتی رنگ و ابزار خوشدست ارائه دهنده انوع ابزار نقاشی، چست، رنگ و غلطک با قیمت های مناسب و امکان خرید آنلاین از وب سایت خوشدست">
+	<meta name="description" content="@Model.HomeMetaDescription">
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
 	<link rel="stylesheet" href="/assets/css/animate.css">
 	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -36,13 +36,14 @@
 	<link rel="stylesheet" href="/assets/css/rtl-style.css?v=1.1">
 	<link href="~/assets/css/style-zavosh.css?v=1.1" rel="stylesheet" />
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LK66T2NR3"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-P83QNZCTEW"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
+		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
 
-		gtag('config', 'G-0LK66T2NR3');
+		gtag('config', 'G-P83QNZCTEW');
 	</script>
 </head>
 
@@ -545,7 +546,7 @@
 	<script src="/assets/js/jquery.elevatezoom.js"></script>
 	<!-- scripts js -->
 	<script src="/assets/js/scripts.js"></script>
-	<script src="~/Scripts/function.js?v=1.1"></script>
+	<script src="~/Scripts/function.js?v=1.2"></script>
 	<script>
 		$(document).ready(function () {
 			var cookie = getCookie('basket-khoshdast');
@@ -556,6 +557,15 @@
 			} else {
 				$('.cart_count').html('0');
 			}
+		});
+
+		$(function(){
+			$('input').keydown(function(e){
+				if (e.keyCode === 13) {
+					searchResult();
+					return false;
+				}
+			});
 		});
 	</script>
 </body>

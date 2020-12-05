@@ -22,7 +22,7 @@ namespace ViewModels
         public TextItem  SliderLeftBanners2 { get; set; }
         public TextItem HomeMidleBanner1 { get; set; }
         public TextItem HomeMidleBanner2 { get; set; }
-
+        public string HomeMetaDescription { get; set; }
 
     }
 }

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using Helpers;
+using Kendo.Mvc.Extensions;
 using Models;
 using ViewModels;
 
@@ -167,7 +168,7 @@ namespace Khoshdast.Controllers
                 });
             }
 
-            return list;
+            return list.OrderBy(c=>c.Title).ToList();
         }
 
         public void PostProductGroupsRelProducts(Guid productId, List<ProductGroupCheckboxList> productGroups)
@@ -436,19 +437,25 @@ namespace Khoshdast.Controllers
              
             products = GetProductListByBrandFilter(products, arrayBrands);
 
-            if (products.Count <= productPagination)
-                isLastBatch = true;
+        
 
             products = GetProductByPagination(products, pageId, sort);
+
+            if (products.Count < productPagination)
+                isLastBatch = true;
 
             List< LazyLoadProductCardsItemViewModel> resItem=new List<LazyLoadProductCardsItemViewModel>();
 
             foreach (var product in products)
             {
+
                 string amount = product.AmountStr;
 
                 if (product.IsInPromotion)
                     amount = product.DiscountAmountStr;
+
+                if(product.Amount==0)
+                    amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
 
                 string imageUrl = product.ImageUrl;
 
@@ -490,9 +497,7 @@ namespace Khoshdast.Controllers
 
          products = GetProductByPagination(products, pageId, sort);
 
-
-
-            bool isLastBatch = products.Count <= productPagination; 
+            bool isLastBatch = products.Count < productPagination; 
 
             List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
 
@@ -690,7 +695,7 @@ namespace Khoshdast.Controllers
             }
 
 
-            return products;
+            return products.OrderByDescending(c=>c.Stock).ThenByDescending(c=>c.Amount).ToList();
         }
         public List<Product> GetProductListByBrandFilter(List<Product> products, string[] brands)
         {
@@ -860,10 +865,8 @@ namespace Khoshdast.Controllers
                 brand = brand,
                 Products = GetProductByPagination(products, pageId, sortby),
                 SidebarProductGroups = GetComplexSidebarProductGroups(),
-
                 PageItems = GetPagination(products.Count(), pageId),
                 SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList()
-
             };
 
             return View(productList);

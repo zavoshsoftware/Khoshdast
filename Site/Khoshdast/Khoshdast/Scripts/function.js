@@ -204,6 +204,7 @@ function deleteCookie(name) {
 }
 
 function updateBasket() {
+    $('.loading-fuulpage').css('display', 'block');
     var cookie = getCookie('basket-khoshdast');
 
     var orderDetails = cookie.split('/');
@@ -366,9 +367,34 @@ function getUrlVars() {
 
 
 function getItem(code, title, amount, imageUrl, stock) {
-   return "		<div class='col-md-3 col-6'><div class='product'><div>" +
-        "<a href='/product/"+code+"'><img src='"+imageUrl+"' alt='"+title+"'></a></div>" +
+    return "		<div class='col-md-3 col-6 newclass'><div class='product'><div>" +
+        "<a href='/product/" + code + "'><img src='" + imageUrl + "' alt='" + title + "'></a></div>" +
+        getNoStockTitle(stock)+
         "<div class='product_info'><h6 class='product_title'><a href='/product/" + code + "'>" + title +"</a></h6>" +
         "<div class='product_price'><span class='price'>" + amount+"</span></div>" +
-        "<div class='add-to-cart'><button class='btn btn-fill-out btn-addtocart' onclick='addToBasket('" + code +"', '1');'><i class='icon-basket-loaded'></i>خرید</button></div></div></div></div>";
+        getAddToBasketButton(code,stock) +
+        "</div></div></div>";
+}
+
+function getAddToBasketButton(code, stock) {
+    var stockInt = parseInt(stock);
+
+    if (stockInt > 0) {
+        return "<div class='add-to-cart'><button class='btn btn-fill-out btn-addtocart' onclick='addToBasket('" +
+            code +
+            "', '1');'><i class='icon-basket-loaded'></i>خرید</button></div>";
+    } else {
+        return "<div class='add-to-cart'><button class='btn btn-addtocart btn-disable' disabled='disabled' onclick='addToBasket('" +
+            code +
+            "', '1');'><i class='icon-basket-loaded'></i>خرید</button></div>";
+    }
+}
+function getNoStockTitle(stock) {
+    var stockInt = parseInt(stock);
+
+    if (stockInt === 0) {
+        return " <span class='pr_flash bg-danger'>ناموجود</span>";
+    } else {
+        return "";
+    }
 }

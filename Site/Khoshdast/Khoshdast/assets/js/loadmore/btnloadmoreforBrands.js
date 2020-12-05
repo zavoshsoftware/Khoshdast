@@ -61,10 +61,10 @@
                             //if ($childrenClass.filter(":hidden").length == 0) {
                             //    $(".btn-loadmore").fadeOut('slow');
                             //}
-                            if (json.IsLastBatch === "true") {
+                            if (json.IsLastBatch === "True") {
                                 $(".btn-loadmore").fadeOut('slow');
                             }
-                            // scrollDown(); 
+                            scrollDown(page - 1); 
                         }
                     });
 
@@ -74,9 +74,9 @@
 
             });
 
-            function scrollDown() {
+            function scrollDown(page) {
                 $('html, body').animate({
-                    scrollTop: $childrenClass.filter(":visible").last().offset().top
+                    scrollTop: page * $childrenClass.filter(":visible").last().offset().top
                 }, defaults.delayToScroll);
             }
         });

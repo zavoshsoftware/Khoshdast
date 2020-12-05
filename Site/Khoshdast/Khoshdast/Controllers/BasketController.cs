@@ -347,6 +347,9 @@ namespace Khoshdast.Controllers
 
                 checkOut.Provinces = db.Provinces.OrderBy(current => current.Title).ToList();
 
+                checkOut.OnlinePay = GetTextByName("online-payment");
+                checkOut.TransferPay = GetTextByName("transfer-payment");
+                checkOut.RecievePay = GetTextByName("recieve-payment");
 
                 ViewBag.CityId = new SelectList(db.Cities, "Id", "Title");
 
@@ -357,6 +360,14 @@ namespace Khoshdast.Controllers
 
         }
 
+        public string GetTextByName(string name)
+        {
+            var textItem = db.TextItems.Where(c => c.Name == name).Select(c => c.Summery).FirstOrDefault();
+
+            if (textItem != null)
+                return textItem;
+            return string.Empty;
+        }
         public ActionResult FillCities(string id)
         {
             Guid provinceId = new Guid(id);
@@ -612,7 +623,7 @@ namespace Khoshdast.Controllers
                 try
                 {
                     var zarinpal = ZarinPal.ZarinPal.Get();
-                    zarinpal.EnableSandboxMode();
+                    zarinpal.DisableSandboxMode();
                     String Authority = authority;
                     long Amount = zarinPal.GetAmountByAuthority(Authority);
 

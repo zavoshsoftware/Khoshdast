@@ -16,7 +16,9 @@ namespace ViewModels
         public List<Province> Provinces { get; set; }
         public UserInformation UserInformation { get; set; }
         public string ShipmentAmount { get; set; }
-
+        public string OnlinePay { get; set; }
+        public string RecievePay { get; set; }
+        public string TransferPay { get; set; }
     }
 
     public class UserInformation
