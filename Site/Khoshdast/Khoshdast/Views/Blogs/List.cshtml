@@ -5,29 +5,28 @@
 	ViewBag.Canonical = "https://khoshdast.ir/blog";
 }
 
-<div class="breadcrumb_section bg_gray page-title-mini">
-	<div class="container">
-		<!-- STRART CONTAINER -->
-		<div class="row align-items-center">
-			<div class="col-md-6">
-				<div class="page-title">
-					<h1>وبلاگ</h1>
+ 
+
+<div class="main_content  bg-gray-list">
+	<div class="section">
+		<div class="container  container-custom2">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+						</ol>
+
+						<h1>نتیجه پرداخت</h1>
+						<p class="clearfix"></p>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<ol class="breadcrumb justify-content-md-end">
-					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-					<li class="breadcrumb-item active">وبلاگ</li>
-				</ol>
-			</div>
 		</div>
-	</div>
-</div>
 
-<div class="main_content">
-	<div class="section">
-		<div class="container">
-			<div class="row">
+		<div class="container container-white">
+			<div class="row blog-list">
 				@foreach (var blog in Model.Blogs)
 				{
 					<div class="col-lg-4 col-md-6 grid_item">
@@ -39,7 +38,8 @@
 							</div>
 							<div class="blog_content bg-white">
 								<div class="blog_text">
-									<h2 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h2>
+									<h2 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a>
+									</h2>
 									<ul class="list_none blog_meta">
 										<li><a href="#"><i class="ti-calendar"></i> @blog.CreationDateStr</a></li>
 										<li><a href="#"><i class="ti-eye"></i> @blog.Visit</a></li>

@@ -3,42 +3,34 @@
 		ViewBag.Title = "نتایج جستجو - "+Model.SearchQuery;
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
-
-<div class="breadcrumb_section bg_gray page-title-mini" style="background-color: #E1D9DA">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-md-12">
-
-				<div class="breadcrumb-custom">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-						<li class="breadcrumb-item "><a href="#">@ViewBag.Title</a></li>
-					</ol>
-				</div>
-
-				<div class="page-title">
-					<h1>@ViewBag.Title</h1>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</div>
-
+@section head{
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+}
 <div class="main_content bg-gray-list product-list-padding">
-
-
 
 	<div class="section">
 		<div class="container  container-custom">
+			<div class="row">
+				<div class="col-md-12 pl5">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+						 
+						</ol>
+						
+						<h1>@ViewBag.Title</h1>
+						<p class="clearfix"></p>
+					</div>
+				</div>
+			</div>
 			<div class="row search-box">
 				<div class="col-lg-10 col-8">
-					<input class="form-control form-control-sm" type="text" id="txtsearchpage" value="@Model.SearchQuery" />
+					<input class="form-control form-control-sm" type="text" id="txtsearchpage" value="@Model.SearchQuery"/>
 				</div>
 				<div class="col-lg-2 col-3">
-					<button class="btn btn-border-fill" type="button" onclick="submitSearchForSearchPageResult();">جستجو</button>
+					<button class="btn btn-full btn-border-fill" type="button" onclick="submitSearchForSearchPageResult();">جستجو</button>
 				</div>
-				</div>
+			</div>
 
 			<div class="row">
 				<div class="col-lg-9">
@@ -61,28 +53,35 @@
 										</a>
 
 									</div>
+									@if (product.Stock <= 0)
+									{
+										<span class="pr_flash bg-danger">ناموجود</span>
+									}
 									<div class="product_info">
 										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 										<div class="product_price">
-											@if (product.Amount == 0)
+											@if (product.Stock > 0)
+											{
+												if (product.Amount == 0)
 											{
 												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
 											}
 											else
 											{
-												 if (product.IsInPromotion)
-												 {
-													 <span class="price">@product.DiscountAmountStr</span>
-													 <del>@product.AmountStr</del>
-												 }
-												 else
-												 {
-													 <span class="price">@product.AmountStr</span>
-												 }
+												if (product.IsInPromotion)
+												{
+													<span class="price">@product.DiscountAmountStr</span>
+													<del>@product.AmountStr</del>
+												}
+												else
+												{
+													<span class="price">@product.AmountStr</span>
+												}
+												}
 											}
 										</div>
 
-										 
+
 										@if (product.Amount != 0 && product.Stock > 0)
 										{
 											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
@@ -99,31 +98,10 @@
 							</div>
 						}
 					</div>
-					<div class="row">
-						<div class="col-12">
-							<ul class="pagination mt-3 justify-content-center pagination_style1">
-								@foreach (var page in Model.PageItems)
-								{
-									if (page.IsCurrentPage)
-									{
-
-										<li class="page-item active"><a class="page-link" href="@ViewBag.url?searchquery=@Model.SearchQuery&pageid=@page.PageId">@page.PageId</a></li>
-
-									}
-									else
-									{
-
-										<li class="page-item"><a class="page-link" href="@ViewBag.url?searchquery=@Model.SearchQuery&pageid=@page.PageId">@page.PageId</a></li>
-
-
-									}
-								}
-							</ul>
-						</div>
-					</div>
+				 
 
 				</div>
-				
+
 				<div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
 					<div class="sidebar">
 						<div class="widget widjet-2">
@@ -149,7 +127,7 @@
 								}
 							</ul>
 						</div>
- 
+
 
 						@foreach (var banner in Model.SidebarBanners)
 						{
@@ -175,6 +153,7 @@
 </div>
 
 @section scripts{
+
 
 	<script>
 		
@@ -285,4 +264,20 @@
 
 
 	</script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	        crossorigin="anonymous"></script>
+	<script src="~/assets/js/loadmore/btnloadmore_search.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.shop_container').btnLoadmore({
+				showItem: 32,
+				whenClickBtn: 32,
+				textBtn: 'مشاهده محصولات بیشتر',
+				classBtn: 'btn btn-danger'
+			});
+		});
+
+	</script>
+
 }

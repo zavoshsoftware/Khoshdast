@@ -536,6 +536,7 @@
     <Content Include="assets\js\loadmore\btnloadmoreforBrands.js" />
     <Content Include="assets\js\loadmore\btnloadmore.js" />
     <Content Include="assets\js\loadmore\btnloadmore.min.js" />
+    <Content Include="assets\js\loadmore\btnloadmore_search.js" />
     <Content Include="assets\js\magnific-popup.min.js" />
     <Content Include="assets\js\parallax.js" />
     <Content Include="assets\js\popper.min.js" />

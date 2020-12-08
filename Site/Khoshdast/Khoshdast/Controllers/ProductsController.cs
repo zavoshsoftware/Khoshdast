@@ -168,7 +168,7 @@ namespace Khoshdast.Controllers
                 });
             }
 
-            return list.OrderBy(c=>c.Title).ToList();
+            return list.OrderBy(c => c.Title).ToList();
         }
 
         public void PostProductGroupsRelProducts(Guid productId, List<ProductGroupCheckboxList> productGroups)
@@ -206,7 +206,7 @@ namespace Khoshdast.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult SetDiscountForGroup(Guid id)
         {
-         
+
             ProductGroup oProductGroup = db.ProductGroups.Find(id);
             if (oProductGroup == null)
             {
@@ -244,17 +244,17 @@ namespace Khoshdast.Controllers
 
                         if (input.IsPercent)
                         {
-                            discountAmount = product.Amount - (product.Amount * input.Amount/100);
+                            discountAmount = product.Amount - (product.Amount * input.Amount / 100);
                         }
 
                         product.DiscountAmount = discountAmount;
                         product.IsInPromotion = true;
-                        product.LastModifiedDate=DateTime.Now;
-                        
+                        product.LastModifiedDate = DateTime.Now;
+
                     }
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index","ProductGroups");
+                return RedirectToAction("Index", "ProductGroups");
             }
             return View(input);
         }
@@ -473,7 +473,7 @@ namespace Khoshdast.Controllers
             string[] arrayBrands = null;
             if (!string.IsNullOrEmpty(brands))
             {
-               arrayBrands = brands.Split('-');
+                arrayBrands = brands.Split('-');
             }
             ViewBag.url = GetUrl(arrayBrands, category);
 
@@ -489,32 +489,34 @@ namespace Khoshdast.Controllers
             bool isLastBatch = false;
 
             List<Product> products = GetProductListByProductGroupId(productGroup.Id);
-             
+
             products = GetProductListByBrandFilter(products, arrayBrands);
 
-        
+
 
             products = GetProductByPagination(products, pageId, sort);
 
             if (products.Count < productPagination)
                 isLastBatch = true;
 
-            List< LazyLoadProductCardsItemViewModel> resItem=new List<LazyLoadProductCardsItemViewModel>();
+            List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
 
             foreach (var product in products)
             {
+                string amount = "";
+                if (product.Stock > 0)
+                {
+                     amount = product.AmountStr;
 
-                string amount = product.AmountStr;
+                    if (product.IsInPromotion)
+                        amount = product.DiscountAmountStr;
 
-                if (product.IsInPromotion)
-                    amount = product.DiscountAmountStr;
-
-                if(product.Amount==0)
-                    amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
-
+                    if (product.Amount == 0)
+                        amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
+                }
                 string imageUrl = product.ImageUrl;
 
-                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl))||string.IsNullOrEmpty(product.ImageUrl))
+                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl)) || string.IsNullOrEmpty(product.ImageUrl))
                     imageUrl = "/assets/images/no-Photo.jpg";
 
                 resItem.Add(new LazyLoadProductCardsItemViewModel()
@@ -527,7 +529,7 @@ namespace Khoshdast.Controllers
                 });
             }
 
-            LazyLoadProductCardsViewModel res = new  LazyLoadProductCardsViewModel ()
+            LazyLoadProductCardsViewModel res = new LazyLoadProductCardsViewModel()
             {
                 Result = resItem,
                 IsLastBatch = isLastBatch.ToString()
@@ -535,7 +537,7 @@ namespace Khoshdast.Controllers
 
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-   public ActionResult GetNewPageForBrand(string page, string sort, string brand)
+        public ActionResult GetNewPageForBrand(string page, string sort, string brand)
         {
 
             ViewBag.url = GetUrlByBrand(brand);
@@ -550,22 +552,29 @@ namespace Khoshdast.Controllers
 
             List<Product> products = GetProductListByBrandId(oBrand.Id);
 
-         products = GetProductByPagination(products, pageId, sort);
+            products = GetProductByPagination(products, pageId, sort);
 
-            bool isLastBatch = products.Count < productPagination; 
+            bool isLastBatch = products.Count < productPagination;
 
             List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
 
             foreach (var product in products)
             {
-                string amount = product.AmountStr;
+               string amount = "";
+                if (product.Stock > 0)
+                {
+                     amount = product.AmountStr;
 
-                if (product.IsInPromotion)
-                    amount = product.DiscountAmountStr;
+                    if (product.IsInPromotion)
+                        amount = product.DiscountAmountStr;
+
+                    if (product.Amount == 0)
+                        amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
+                }
 
                 string imageUrl = product.ImageUrl;
 
-                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl))||string.IsNullOrEmpty(product.ImageUrl))
+                if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl)) || string.IsNullOrEmpty(product.ImageUrl))
                     imageUrl = "/assets/images/no-Photo.jpg";
 
 
@@ -579,7 +588,7 @@ namespace Khoshdast.Controllers
                 });
             }
 
-            LazyLoadProductCardsViewModel res = new  LazyLoadProductCardsViewModel ()
+            LazyLoadProductCardsViewModel res = new LazyLoadProductCardsViewModel()
             {
                 Result = resItem,
                 IsLastBatch = isLastBatch.ToString()
@@ -750,7 +759,7 @@ namespace Khoshdast.Controllers
             }
 
 
-            return products.OrderByDescending(c=>c.Stock).ThenByDescending(c=>c.Amount).ToList();
+            return products.OrderByDescending(c => c.Stock).ThenByDescending(c => c.Amount).ToList();
         }
         public List<Product> GetProductListByBrandFilter(List<Product> products, string[] brands)
         {

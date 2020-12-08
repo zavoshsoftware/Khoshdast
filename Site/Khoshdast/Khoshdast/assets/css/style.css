@@ -4929,7 +4929,7 @@ footer .widget_title {
 	position: relative;
 	margin-bottom: 30px;
 	transition: all 0.5s ease-in-out;
-	box-shadow: 0 0 7px rgba(0,0,0,0.1);
+	box-shadow: 0 0 7px rgba(0,0,0,0.3);
 }
 .product_box {
 	margin-bottom: 30px;

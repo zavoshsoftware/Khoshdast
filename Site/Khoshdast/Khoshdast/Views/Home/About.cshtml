@@ -5,73 +5,69 @@
 		ViewBag.Canonical = "https://khoshdast.ir/about";
 }
 
-<div class="breadcrumb_section bg_gray page-title-mini" style="background-image: url('../../images/banner2.jpg');">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="page-title">
-                    <h1>درباره ما</h1>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <ol class="breadcrumb justify-content-md-end">
-                    <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-                    <li class="breadcrumb-item active">درباره ما</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="main_content">
+ 
+<div class="main_content bg-gray-list">
 	
   
 	<div class="section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="about_img scene mb-4 mb-lg-0">
-                        <img src="~/assets/images/blog/1.jpg" alt="about_img" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="heading_s1">
-                        <h2>@Model.About.Title</h2>
-                    </div>
-                    @Html.Raw(Model.About.Body)
+		<div class="container  container-custom2">
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section bg_light_blue2 pb_70">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="heading_s1 text-center">
-                        <h2>چرا رنگ خوشدست</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-							@foreach (var whyus in Model.WhyUsText)
-							{
-								<div class="col-lg-4 col-sm-6">
-									<div class="icon_box icon_box_style4 box_shadow1">
-										<div class="icon">
-											<i class="ti-pencil-alt"></i>
-										</div>
-										<div class="icon_box_content">
-											<h5>@whyus.Title</h5>
-											<p>@whyus.Summery</p>
-										</div>
-									</div>
-								</div>
-							} 
+			<div class="row">
+				<div class="col-md-12">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+						</ol>
 
-            </div>
-        </div>
-    </div>
-    <!-- END SECTION WHY CHOOSE -->
+						<h1>تماس با ما</h1>
+						<p class="clearfix"></p>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<div class="container container-white">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="about_img scene mb-4 mb-lg-0">
+						<img src="~/assets/images/blog/1.jpg" alt="about_img"/>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="heading_s1">
+						<h2>@Model.About.Title</h2>
+					</div>
+					@Html.Raw(Model.About.Body)
+
+				</div>
+			</div>
+			
+			<div class="row justify-content-center why-us">
+				<div class="col-lg-6 col-md-8">
+					<div class="heading_s1 text-center">
+						<h2>چرا رنگ خوشدست</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				@foreach (var whyus in Model.WhyUsText)
+				{
+					<div class="col-lg-4 col-sm-6">
+						<div class="icon_box icon_box_style4 box_shadow1">
+							<div class="icon">
+								<i class="ti-pencil-alt"></i>
+							</div>
+							<div class="icon_box_content">
+								<h5>@whyus.Title</h5>
+								<p>@whyus.Summery</p>
+							</div>
+						</div>
+					</div>
+				} 
+
+			</div>
+		</div>
+	</div>
+  
 
 </div>

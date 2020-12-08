@@ -3,154 +3,155 @@
     ViewBag.Title = "سبد خرید";
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
+ 
+<div class="main_content bg-gray-list">
+<div class="section">
+<div class="container container-custom2">
 
-<div class="breadcrumb_section bg_gray page-title-mini">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-md-6">
-				<div class="page-title">
-					<h1>سبد خرید</h1>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<ol class="breadcrumb justify-content-md-end">
-					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-					<li class="breadcrumb-item active">سبد خرید</li>
-				</ol>
-			</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="khoshdast-breadcramp">
+			<ol class="breadcrumb ">
+				<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+			</ol>
+
+			<h1>سبد خرید</h1>
+			<p class="clearfix"></p>
 		</div>
 	</div>
 </div>
-<div class="main_content bg-gray-list">
-	<div class="section">
-		@if (Model.Products.Any())
-		{
-			<div class="container basket-container">
-				<div class="row">
-					<div class="col-12">
-						<div class="table-responsive shop_cart_table">
-							<table class="table">
-								<thead>
-								<tr>
-									<th class="product-thumbnail">&nbsp;</th>
-									<th class="product-name">محصول</th>
-									<th class="product-price">قیمت</th>
-									<th class="product-quantity">تعداد</th>
-									<th class="product-subtotal">جمع مبلغ</th>
-									<th class="product-remove">حذف</th>
-								</tr>
-								</thead>
-								<tbody>
+</div>
 
-								@foreach (var product in Model.Products)
-								{
-									<tr>
-										<td class="product-thumbnail"><a href="#">
-
-											@if (File.Exists(Server.MapPath(product.Product.ImageUrl)))
-											{
-												<img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="70px">
-											}
-											else
-											{
-												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست" height="70px">
-											}
-										</a></td>
-										<td class="product-name" data-title="محصول"><a href="#">@product.Product.Title</a></td>
-										<td class="product-price" data-title="قیمت">@product.Amount</td>
-										<td class="product-quantity" data-title="تعداد">
-											<div class="quantity">
-												<input type="button" value="-" class="minus">
-												<input type="text" name="quantity" id="txt-qty-@product.Product.Code" value="@product.Quantity" title="Qty" class="qty" size="4">
-												<input type="button" value="+" class="plus">
-											</div>
-										</td>
-										<td class="product-subtotal" data-title="جمع مبلغ">@product.RowAmount</td>
-										<td class="product-remove" data-title="حذف"><a href="/Basket/remove/@product.Product.Code"><i class="ti-close"></i></a></td>
-									</tr>
-								}
+@if (Model.Products.Any())
+{
+	<div class="container basket-container">
 
 
+		<div class="row">
+			<div class="col-12">
+				<div class="table-responsive shop_cart_table">
+					<table class="table">
+						<thead>
+						<tr>
+							<th class="product-thumbnail">&nbsp;</th>
+							<th class="product-name">محصول</th>
+							<th class="product-price">قیمت</th>
+							<th class="product-quantity">تعداد</th>
+							<th class="product-subtotal">جمع مبلغ</th>
+							<th class="product-remove">حذف</th>
+						</tr>
+						</thead>
+						<tbody>
 
-								</tbody>
-								<tfoot>
-								<tr>
-									<td colspan="6" class="px-0">
-										<div class="row no-gutters align-items-center">
+						@foreach (var product in Model.Products)
+						{
+							<tr>
+								<td class="product-thumbnail"><a href="#">
 
-											<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
-												<div class="alert alert-danger" id="errorDiv-discount"></div>
-												<div class="alert alert-danger" id="SuccessDiv-discount">کد تخفیف با موفقیت اعمال شد.</div>
+									@if (File.Exists(Server.MapPath(product.Product.ImageUrl)))
+									{
+										<img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="70px">
+									}
+									else
+									{
+										<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست" height="70px">
+									}
+								</a></td>
+								<td class="product-name" data-title="محصول"><a href="#">@product.Product.Title</a></td>
+								<td class="product-price" data-title="قیمت">@product.Amount</td>
+								<td class="product-quantity" data-title="تعداد">
+									<div class="quantity">
+										<input type="button" value="-" class="minus">
+										<input type="text" name="quantity" id="txt-qty-@product.Product.Code" value="@product.Quantity" title="Qty" class="qty" size="4">
+										<input type="button" value="+" class="plus">
+									</div>
+								</td>
+								<td class="product-subtotal" data-title="جمع مبلغ">@product.RowAmount</td>
+								<td class="product-remove" data-title="حذف"><a href="/Basket/remove/@product.Product.Code"><i class="ti-close"></i></a></td>
+							</tr>
+						}
 
-												<div class="coupon field_form input-group">
-													<input type="text" id="coupon" class="form-control form-control-sm" placeholder="کد تخفیف">
-													<div class="input-group-append">
-														<button class="btn btn-fill-out btn-sm" type="button" onclick="addDiscountCode();">ثبت کد تخفیف</button>
-													</div>
-												</div>
-											</div>
-											<div class="col-lg-8 col-md-6 text-left text-md-right">
-												@*<button class="btn btn-line-fill btn-sm" type="button" onclick="updateBasket();">به روزرسانی سبد خرید</button>*@
-												@*<a href="/checkout" class="btn btn-fill-out ptb8">تکمیل خرید و پرداخت</a>*@
 
+
+						</tbody>
+						<tfoot>
+						<tr>
+							<td colspan="6" class="px-0">
+								<div class="row no-gutters align-items-center">
+
+									<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+										<div class="alert alert-danger" id="errorDiv-discount"></div>
+										<div class="alert alert-danger" id="SuccessDiv-discount">کد تخفیف با موفقیت اعمال شد.</div>
+
+										<div class="coupon field_form input-group">
+											<input type="text" id="coupon" class="form-control form-control-sm" placeholder="کد تخفیف">
+											<div class="input-group-append">
+												<button class="btn btn-fill-out btn-sm" type="button" onclick="addDiscountCode();">ثبت کد تخفیف</button>
 											</div>
 										</div>
-									</td>
-									<tr>
-										<td colspan="6" class="px-0">
-											جمع فاکتور: @Model.SubTotal
-										</td>
-									</tr>
-									<tr>
-										<td colspan="6" class="px-0">
-											تخفیف: @Model.DiscountAmount
-										</td>
-									</tr>
-						
-									<tr>
-										<td colspan="6" class="px-0">
-									
-							
-											<div class="row no-gutters align-items-center">
+									</div>
+									<div class="col-lg-8 col-md-6 text-left text-md-right">
+										@*<button class="btn btn-line-fill btn-sm" type="button" onclick="updateBasket();">به روزرسانی سبد خرید</button>*@
+										@*<a href="/checkout" class="btn btn-fill-out ptb8">تکمیل خرید و پرداخت</a>*@
 
-												<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
-													هزینه ارسال: @Model.ShipmentAmount 
+									</div>
+								</div>
+							</td>
+							<tr>
+								<td colspan="6" class="px-0">
+									جمع فاکتور: @Model.SubTotal
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6" class="px-0">
+									تخفیف: @Model.DiscountAmount
+								</td>
+							</tr>
 
-												</div>
-												<div class="col-lg-8 col-md-6 text-left text-md-right">
-													<dfn>هزینه ارسال برای سفارشات بالای 400 هزار تومان رایگان می باشد</dfn>
-												</div>
-											</div>
-										</td>
-									</tr>
-						
-									<tr>
-										<td colspan="6" class="px-0 color-pink">
-											<div class="row no-gutters align-items-center">
-
-												<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
-													مبلغ قابل پرداخت: @Model.Total
-
-												</div>
-												<div class="col-lg-8 col-md-6 text-left text-md-right">
-													<a href="/checkout" class="btn btn-fill-out">تکمیل خرید و پرداخت</a>
+							<tr>
+								<td colspan="6" class="px-0">
 
 
+									<div class="row no-gutters align-items-center">
 
-												</div>
-											</div>
+										<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+											هزینه ارسال: @Model.ShipmentAmount
+
+										</div>
+										<div class="col-lg-8 col-md-6 text-left text-md-right">
+											<dfn >هزینه ارسال برای سفارشات بالای 400 هزار تومان رایگان می باشد</dfn>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="6" class="px-0 color-pink">
+									<div class="row no-gutters align-items-center">
+
+										<div class="col-lg-4 col-md-6 mb-3 mb-md-0 total-amount">
+											مبلغ قابل پرداخت: @Model.Total
+
+										</div>
+										<div class="col-lg-8 col-md-6 text-left text-md-right">
+											<a href="/checkout" class="btn btn-fill-out">تکمیل خرید و پرداخت</a>
 
 
 
-										</td>
-									</tr>
-								</tr>
-								</tfoot>
-							</table>
-						</div>
-					</div>
+										</div>
+									</div>
+
+
+
+								</td>
+							</tr>
+						</tr>
+						</tfoot>
+					</table>
 				</div>
-				@*<div class="row">
+			</div>
+		</div>
+		@*<div class="row">
 				<div class="col-12">
 					<div class="small_divider"></div>
 					<div class="divider center_icon"><i class="ti-shopping-cart-full"></i>
@@ -201,21 +202,21 @@
  
 
 			</div>*@
-			</div>
-		}
-		else
-		{
-			<div class="container basket-container">
-				<div class="row">
-					<div class="col-12">
-						<p class="alert alert-warning">سبد خرید شما خالی است!</p>
-					</div>
-				
-				</div>
+	</div>
+}
+else
+{
+	<div class="container basket-container">
+		<div class="row">
+			<div class="col-12">
+				<p class="alert alert-warning">سبد خرید شما خالی است!</p>
 			</div>
 
-		}
+		</div>
 	</div>
+
+}
+</div>
  
 </div>
 

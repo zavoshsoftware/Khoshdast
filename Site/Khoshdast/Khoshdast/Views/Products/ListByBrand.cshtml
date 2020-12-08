@@ -90,7 +90,9 @@
 										<div class="product_info">
 											<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
 											<div class="product_price">
-												@if (product.Amount == 0)
+											@if (product.Stock > 0)
+											{
+												if (product.Amount == 0)
 												{
 													<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
 												}
@@ -104,6 +106,7 @@
 													else
 													{
 														<span class="price">@product.AmountStr</span>
+													}
 													}
 												}
 											</div>

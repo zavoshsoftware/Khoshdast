@@ -135,9 +135,10 @@ function finalizeOrder() {
     if (city === undefined || city === '0' || city === 0)
         city = "";
 
-    if (paymentMethod === "recieve" && city !== "2c730dce-774d-4007-88a9-4acb1dd48cea") {
+    if (paymentMethod === "recieve" && (city !== "2c730dce-774d-4007-88a9-4acb1dd48cea" && city !== "86f565ad-8e81-43bd-8c93-c98a5d153e74" && city !== "538063d6-fff3-4bc8-aa57-fa163cc6a7a7"
+        && city !== "42628c04-3419-4ed2-948d-4a3de83a82d7" && city !== "8a679628-c6f6-4584-a44b-691497f91567")) {
         $('#error-box').css('display', 'block');
-        $('#error-box').html('امکان پرداخت در محل فقط برای شهر تهران مقدور می باشد');
+        $('#error-box').html('امکان پرداخت در محل فقط برای شهرهای تهران،اسلامشهر، شهر قدس، اندیشه و شهریار مقدور می باشد');
         AppearButton();
     }
     else {

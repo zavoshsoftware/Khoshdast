@@ -7,8 +7,8 @@
 }
 @section head{
 	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-	}
- 
+}
+
 
 <div class="main_content bg-gray-list product-list-padding">
 
@@ -16,7 +16,7 @@
 
 	<div class="section">
 		<div class="container container-custom">
-			
+
 			<div class="row">
 				<div class="col-md-12 pl5">
 					<div class="khoshdast-breadcramp">
@@ -24,11 +24,11 @@
 							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 							@foreach (var breadcrumbItem in Model.BreadcrumbItems)
 							{
-								<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
+									<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
 							}
-						 
+
 						</ol>
-						
+
 						<h1>@Model.ProductGroup.Title</h1>
 						<p class="clearfix"></p>
 					</div>
@@ -53,7 +53,7 @@
 											<li><a id="mostdiscount" href="#" class="sortby">بیشترین تخفیف</a></li>
 										</ul>
 									</div>
-									
+
 									<div class="row">
 										<div class="col-6">
 											<select id="ddlsortby" class="form-control form-control-sm d-lg-none d-xl-none">
@@ -64,22 +64,22 @@
 												<option value="expensive">گران ترین</option>
 												<option value="mostdiscount">بیشترین تخفیف</option>
 											</select>
-									
+
 										</div>
 										<div class="col-6">
-											<select id="ddlCategory" class="form-control form-control-sm d-lg-none d-xl-none"  onchange="location = this.value;">
+											<select id="ddlCategory" class="form-control form-control-sm d-lg-none d-xl-none" onchange="location = this.value;">
 												<option value="#">گروه محصولات</option>
 												@foreach (var @group in Model.SidebarProductGroups)
 												{
-													<option value="/category/@group.UrlParam">@group.Title</option>
-											
+														<option value="/category/@group.UrlParam">@group.Title</option>
+
 												}
-												 
+
 											</select>
 										</div>
 									</div>
-								
-							
+
+
 								</div>
 
 
@@ -90,60 +90,65 @@
 						@foreach (var product in Model.Products)
 						{
 
-							<div class="col-md-3 col-6">
-								<div class="product">
-									<div>
-										<a href="/product/@product.Code">
-											@if (File.Exists(Server.MapPath(product.ImageUrl)))
-											{
-												<img src="@product.ImageUrl" alt="@product.Title">
-											}
-											else
-											{
-												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
-											}
-										</a>
-
-									</div>
-									@if (product.Stock <= 0)
-									{
-										<span class="pr_flash bg-danger">ناموجود</span>
-									}
-									<div class="product_info">
-										<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
-										<div class="product_price">
-											@if (product.Amount == 0)
-											{
-												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-											}
-											else
-											{
-												if (product.IsInPromotion)
+								<div class="col-md-3 col-6">
+									<div class="product">
+										<div>
+											<a href="/product/@product.Code">
+												@if (File.Exists(Server.MapPath(product.ImageUrl)))
 												{
-													<span class="price">@product.DiscountAmountStr</span>
-													<del>@product.AmountStr</del>
-												}
+														<img src="@product.ImageUrl" alt="@product.Title">
+}
 												else
 												{
-													<span class="price">@product.AmountStr</span>
-												}
-											}
+														<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+											</a>
+
 										</div>
+										@if (product.Stock <= 0)
+										{
+												<span class="pr_flash bg-danger">ناموجود</span>
+}
+										<div class="product_info">
+											<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+											<div class="product_price">
+												@if (product.Stock > 0)
+												{
+													if (product.Amount == 0)
+													{
+																<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+													else
+													{
+														if (product.IsInPromotion)
+														{
+																		<span class="price">@product.DiscountAmountStr</span>
+																		<del>@product.AmountStr</del>
+}
+														else
+														{
+																		<span class="price">@product.AmountStr</span>
+}
+													}
+												}
+											</div>
 
 
-										@if (product.Amount != 0 && product.Stock > 0)
-										{
-											<div class="add-to-cart"><button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
-											</div>
-										}
-										else
-										{
-											<div class="add-to-cart"><button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
-											</div>
-										}
+											@if (product.Amount != 0 && product.Stock > 0)
+											{
+													<div class="add-to-cart">
+														<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
+											else
+											{
+													<div class="add-to-cart">
+														<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
+										</div>
 									</div>
 								</div>
-							</div>
 						}
 					</div>
 					<div class="row text-center loading-img">
@@ -159,14 +164,14 @@
 							<ul class="widget_categories">
 								@foreach (var productGroup in Model.SidebarProductGroups)
 								{
-									<li class="simple-sidebar">
-										<a href="/category/@productGroup.UrlParam">
-											<span class="categories_name">@productGroup.Title</span>
-											@*<span class="categories_num">@productGroup.Quantity</span>*@
-										</a>
+								<li class="simple-sidebar">
+									<a href="/category/@productGroup.UrlParam">
+										<span class="categories_name">@productGroup.Title</span>
+										@*<span class="categories_num">@productGroup.Quantity</span>*@
+									</a>
 
-								 
-									</li>
+
+								</li>
 								}
 							</ul>
 						</div>
@@ -176,12 +181,12 @@
 							<ul class="list_brand" id="list_brand">
 								@foreach (var brand in Model.SidebarBrands)
 								{
-									<li>
-										<div class="custome-checkbox">
-											<input class="form-check-input" type="checkbox" name="@brand.Brand.UrlParam" id="@brand.Brand.Id" value="@brand.Brand.Id" checked="@brand.IsSelected">
-											<label class="form-check-label" for="@brand.Brand.Id"><span>@brand.Brand.Title</span></label>
-										</div>
-									</li>
+								<li>
+									<div class="custome-checkbox">
+										<input class="form-check-input" type="checkbox" name="@brand.Brand.UrlParam" id="@brand.Brand.Id" value="@brand.Brand.Id" checked="@brand.IsSelected">
+										<label class="form-check-label" for="@brand.Brand.Id"><span>@brand.Brand.Title</span></label>
+									</div>
+								</li>
 								}
 							</ul>
 							<button class="btn btn-fill-out btn-filter" id="btnfilter">فیلتر</button>
@@ -189,17 +194,17 @@
 
 						@foreach (var banner in Model.SidebarBanners)
 						{
-							<div class="widget widjet-2 sidebar-banner-item">
-								<div class="shop_banner">
+						<div class="widget widjet-2 sidebar-banner-item">
+							<div class="shop_banner">
 
-									<div class="banner_img">
-										<a href="@banner.LinkUrl">
-											<img src="@banner.ImageUrl" height="300" alt="@banner.ImageAlt">
-										</a>
-									</div>
-
+								<div class="banner_img">
+									<a href="@banner.LinkUrl">
+										<img src="@banner.ImageUrl" height="300" alt="@banner.ImageAlt">
+									</a>
 								</div>
+
 							</div>
+						</div>
 						}
 
 					</div>
@@ -311,10 +316,10 @@
 			return url;
 		}
 	</script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	        crossorigin="anonymous"></script>
-	
+					crossorigin="anonymous"></script>
+
 	<script src="~/assets/js/loadmore/btnloadmore.js?v1.1"></script>
 	<script>
 		$(document).ready(function () {
@@ -327,6 +332,6 @@
 		});
 
 	</script>
-	
+
 
 }

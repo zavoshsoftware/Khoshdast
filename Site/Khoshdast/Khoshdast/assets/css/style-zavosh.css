@@ -211,8 +211,8 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .widjet-2 {
     background-color: #fff;
-    padding: 10px;
-    border-radius: 9px;
+    padding: 20px;
+    border-radius: 5px;
     border: 1px solid #ddd;
 }
 
@@ -245,11 +245,11 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     }
 
 .product {
-    border-radius: 9px;
+    border-radius: 5px;
 }
 
     .product img {
-        border-radius: 9px 9px 0 0;
+        border-radius:5px 5px 0 0;
     }
 
     .product .product_title {
@@ -292,7 +292,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
         .custom-filter li a {
             padding: 2px 8px;
-            border-radius: 6px;
+            border-radius: 5px;
         }
 
             .custom-filter li a.active {
@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 
 .section {
-    padding: 30px 0;
+    padding: 10px 0;
 }
 
 .search-box {
@@ -345,7 +345,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     background-color: #fff;
 
     padding: 20px 25px 0 25px;
-    border-radius: 9px;
+    border-radius: 5px;
 }
 
     .shop_cart_table .table th {
@@ -363,12 +363,12 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .order-summery {
     background-color: #fff;
-    border-radius: 9px;
+    border-radius: 5px;
 }
 
 .order_review {
     background-color: #fff;
-    border-radius: 9px;
+    border-radius: 5px;
     border: 1px solid #dee2e6;
 }
 
@@ -376,7 +376,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     background-color: #fff;
     padding: 30px;
     border: 1px solid #dee2e6;
-            border-radius: 9px;
+            border-radius:5px;
 
 }
 .shop_cart_table  tfoot td {
@@ -394,7 +394,8 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .basket-container {
     background-color: #fff;
     padding-bottom: 30px;
-    border-radius: 9px;
+    border-radius: 5px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.3);
 }
 
 
@@ -435,14 +436,14 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 
 .blog_post {
-    border-radius: 7px;
+    border-radius: 5px;
 }
     .blog_post .blog_content {
-        border-radius: 0 0 7px 7px;
+        border-radius: 0 0 5px 5px;
         height: 270px;
     }
 .blog_post .blog_img {
-    border-radius: 7px 7px 0 0;
+    border-radius:5px 5px 0 0;
 }
 
 .blog-list-home .col-lg-4 {
@@ -510,6 +511,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     font-family: "Ionicons";
     padding-left:.5rem;
     vertical-align: middle;
+    color: #ff3240;
 }
 
 .top-header a, .top-header i {
@@ -518,6 +520,9 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .container-custom {
     max-width: 1280px;
+}
+.container-custom2 {
+    max-width: 1170px;
 }
 .btn-addtocart {
     width: 100%;
@@ -699,4 +704,46 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 .tab-content h3 {
     font-size: 1.2rem;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.breadcrumb-item + .breadcrumb-item:before {
+    color: #ff3240;
+}
+.widget_categories li a:before {
+    color: #ff3240;
+    margin-left: 2px;
+    font-weight: bold;
+}
+
+.btn-loadmore {
+    width: 100%;
+}
+
+.container-white {
+    background-color: #fff;
+    border-radius: 5px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.3);
+} 
+.blog-detail {
+    background-color: #fff;
+    box-shadow: 0 0 7px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.why-us {
+    margin-top: 20px;
+}
+
+.total-amount {
+    font-size: 19px;
+}
+
+.col-lg-8 dfn {
+    font-weight: bold;
 }

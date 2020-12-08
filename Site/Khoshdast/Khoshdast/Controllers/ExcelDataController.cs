@@ -127,7 +127,7 @@ namespace Khoshdast.Controllers
                     !string.IsNullOrEmpty(brandTitle) && !string.IsNullOrEmpty(amount) && !string.IsNullOrEmpty(amount))
                 {
                     int qtyInt = Convert.ToInt32(qty);
-                    decimal amountDecimal = Convert.ToDecimal(amount);
+                    decimal amountDecimal = Convert.ToDecimal(amount)/10;
 
                     int productGroupCodeInt = Convert.ToInt32(productGroupCode);
 

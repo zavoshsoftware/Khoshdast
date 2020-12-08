@@ -96,7 +96,7 @@ namespace Khoshdast.Controllers
         }
 
         [Route("result")]
-        public ActionResult Result(string searchQuery, int? pageId)
+        public ActionResult Result(string searchQuery)
         {
             List<Product> products = db.Products
                 .Where(c => (c.Title.Contains(searchQuery) ||c.Brand.Title.Contains(searchQuery))&& c.IsDeleted == false && c.IsActive).ToList();
@@ -116,14 +116,12 @@ namespace Khoshdast.Controllers
                     }
                 }
             }
-
-            if (pageId == null)
-                pageId = 1;
+ 
 
             SearchViewModel search = new SearchViewModel()
             {
-                Products = GetProductByPagination(products, pageId),
-                PageItems = GetPagination(products.Count(), pageId),
+                Products = products.OrderByDescending(c => c.Stock).ThenByDescending(c => c.Amount).ToList(),
+                
                 SearchQuery = searchQuery,
                 SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
                 SidebarProductGroups = GetComplexSidebarProductGroups(),
@@ -156,14 +154,7 @@ namespace Khoshdast.Controllers
             return list;
         }
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
-
-        public List<Product> GetProductByPagination(List<Product> products, int? pageId)
-        {
-            List<Product> result = products.OrderBy(c => c.Order).Skip((pageId.Value-1) * productPagination).Take(productPagination)
-                .ToList();
-
-            return result;
-        }
+ 
 
 
         public List<PageItem> GetPagination(int productCount, int? pageId)
