@@ -204,6 +204,61 @@ namespace Khoshdast.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
+        public ActionResult SetDiscountForGroup(Guid id)
+        {
+         
+            ProductGroup oProductGroup = db.ProductGroups.Find(id);
+            if (oProductGroup == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.productGroupTitle = oProductGroup.Title;
+
+            ViewBag.productCount = db.ProductGroupRelProducts.Count(c => c.ProductGroupId == id && c.IsDeleted == false);
+            return View();
+        }
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetDiscountForGroup(ProductGroupDiscountViewModel input, Guid id)
+        {
+            if (ModelState.IsValid)
+            {
+                ProductGroup oProductGroup = db.ProductGroups.Find(id);
+
+                if (oProductGroup != null)
+                {
+                    List<ProductGroupRelProduct> productGroupRelProducts = db.ProductGroupRelProducts
+                        .Where(c => c.ProductGroupId == oProductGroup.Id && c.IsDeleted == false).ToList();
+                    List<Product> products = new List<Product>();
+
+                    foreach (ProductGroupRelProduct productGroupRelProduct in productGroupRelProducts)
+                    {
+                        if (!products.Contains(productGroupRelProduct.Product))
+                            products.Add(productGroupRelProduct.Product);
+                    }
+
+                    foreach (Product product in products)
+                    {
+                        decimal discountAmount = product.Amount - input.Amount;
+
+                        if (input.IsPercent)
+                        {
+                            discountAmount = product.Amount - (product.Amount * input.Amount/100);
+                        }
+
+                        product.DiscountAmount = discountAmount;
+                        product.IsInPromotion = true;
+                        product.LastModifiedDate=DateTime.Now;
+                        
+                    }
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index","ProductGroups");
+            }
+            return View(input);
+        }
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(Guid? id)
         {
             if (id == null)

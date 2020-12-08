@@ -1316,6 +1316,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SidebarBannersController.cs" />
+    <Compile Include="Controllers\SiteMapGeneratorController.cs" />
     <Compile Include="Controllers\SlidersController.cs" />
     <Compile Include="Controllers\TextItemsController.cs" />
     <Compile Include="Controllers\TextItemTypesController.cs" />
@@ -1330,6 +1331,7 @@
     <Compile Include="Helpers\LoadMore.cs" />
     <Compile Include="Helpers\PersianCulture.cs" />
     <Compile Include="Helpers\SendSms.cs" />
+    <Compile Include="Helpers\Sitemap.cs" />
     <Compile Include="Helpers\ZarinPalHelper.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Migrations\202010162045159_V01.cs" />
@@ -1427,6 +1429,7 @@
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LazyLoadProductCards.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductGroupDiscountViewModel.cs" />
     <Compile Include="ViewModels\ProductListByBrandViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\DropDownListViewModel.cs" />
@@ -1731,6 +1734,7 @@
     <Content Include="Views\SidebarBanners\Index.cshtml" />
     <Content Include="Views\Products\TestLazy.cshtml" />
     <Content Include="Views\Report\Invoice.cshtml" />
+    <Content Include="Views\Products\SetDiscountForGroup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

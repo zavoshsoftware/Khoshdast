@@ -23,15 +23,33 @@ namespace Khoshdast.Controllers
             List<Order> orders = new List<Order>();
 
             if (id != null)
-                orders = db.Orders.Include(o => o.City).Where(o => o.OrderStatusId == id && o.IsDeleted == false)
-                   .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
-                   .Include(o => o.User).ToList();
-
+            {
+                if (id == new Guid("11869F4D-D6D1-434C-A2F1-7945227CD3BB"))
+                {
+                    Guid status2 = new Guid("EC934A7E-0061-4B09-BD44-CA5120CF6200");
+                    Guid status3 = new Guid("7DBF85F4-7835-4D21-8269-26695D0C7E0F");
+                    orders = db.Orders.Include(o => o.City).Where(o =>
+                            (o.OrderStatusId == id || o.OrderStatusId == status3 || o.OrderStatusId == status2) &&
+                            o.IsDeleted == false)
+                        .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
+                        .Include(o => o.User).ToList();
+                }
+                else
+                {
+                    orders = db.Orders.Include(o => o.City).Where(o =>
+                           o.OrderStatusId == id  && o.IsDeleted == false)
+                        .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
+                        .Include(o => o.User).ToList();
+                }
+            }
             else
+            {
+
                 orders = db.Orders.Include(o => o.City).Where(o => o.IsDeleted == false)
                     .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                     .Include(o => o.User).ToList();
 
+            }
             return View(orders);
         }
 
@@ -194,7 +212,7 @@ namespace Khoshdast.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult ChangeOrderPaymentStatus(string code, string statusId,string paymentDesc)
+        public ActionResult ChangeOrderPaymentStatus(string code, string statusId, string paymentDesc)
         {
 
             bool isPay = Convert.ToBoolean(statusId);
@@ -216,13 +234,13 @@ namespace Khoshdast.Controllers
         public ActionResult SendSmsToUser(string code, string userSms)
         {
 
-            
+
             int orderCode = Convert.ToInt32(code);
             Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
 
             if (order != null)
             {
-                SendSms.SendCommonSms(order.User.CellNum,userSms);
+                SendSms.SendCommonSms(order.User.CellNum, userSms);
 
             }
             return Json("true", JsonRequestBehavior.AllowGet);
@@ -232,7 +250,7 @@ namespace Khoshdast.Controllers
         public ActionResult SubmitOrderDesc(string code, string desc)
         {
 
-            
+
             int orderCode = Convert.ToInt32(code);
             Order order = db.Orders.FirstOrDefault(c => c.Code == orderCode);
 
@@ -265,7 +283,7 @@ namespace Khoshdast.Controllers
         {
             var orders = db.Orders.Where(c => c.IsDeleted == false).OrderBy(c => c.CreationDate).ToList();
 
-           int i = 0;
+            int i = 0;
             foreach (var order in orders)
             {
                 order.Code = 100000 + i;

@@ -168,6 +168,7 @@ function finalizeOrder() {
                         AppearButton();
 
                     }
+
                     else if (result === 'notonline') {
 
                         $('#error-box').css('display', 'none');
@@ -176,9 +177,15 @@ function finalizeOrder() {
                         AppearButton();
 
                     }
+                    else if (result === 'emptyBasket') {
+
+                        window.location = "/checkout";
+
+                    }
                     else if (result !== "false") {
                         window.location = result;
                     }
+                   
                     else {
                         $('#error-box').css('display', 'block');
                         $('#error-box').html('خطایی رخ داده است. لطفا مجددا تلاش کنید');
@@ -350,7 +357,11 @@ function searchResult() {
 }
 function submitSearchResult() {
     var searchQuery = $('#txtsearch').val();
-    location.href = "/result?searchquery=" + searchQuery;
+    location.href = "/result?searchquery=" + decodeURIComponent (searchQuery);
+}
+function submitSearchForSearchPageResult() {
+    var searchQuery = $('#txtsearchpage').val();
+    location.href = "/result?searchquery=" + decodeURIComponent(searchQuery);
 }
 
 

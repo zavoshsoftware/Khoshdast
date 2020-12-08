@@ -98,9 +98,24 @@ namespace Khoshdast.Controllers
         [Route("result")]
         public ActionResult Result(string searchQuery, int? pageId)
         {
-
             List<Product> products = db.Products
                 .Where(c => (c.Title.Contains(searchQuery) ||c.Brand.Title.Contains(searchQuery))&& c.IsDeleted == false && c.IsActive).ToList();
+
+            string[] searchArray = searchQuery.Split(' ');
+            foreach (string searchItem in searchArray)
+            {
+                List<Product> segmentProducts = db.Products
+                    .Where(c => (c.Title.Contains(searchItem) || c.Brand.Title.Contains(searchItem)) && c.IsDeleted == false && c.IsActive).ToList();
+
+
+                foreach (Product product in segmentProducts)
+                {
+                    if (products.All(c => c.Id == product.Id))
+                    {
+                        products.Add(product);
+                    }
+                }
+            }
 
             if (pageId == null)
                 pageId = 1;
@@ -144,10 +159,8 @@ namespace Khoshdast.Controllers
 
         public List<Product> GetProductByPagination(List<Product> products, int? pageId)
         {
-            List<Product> result = products.OrderBy(c => c.Order).Skip(pageId.Value * productPagination).Take(productPagination)
+            List<Product> result = products.OrderBy(c => c.Order).Skip((pageId.Value-1) * productPagination).Take(productPagination)
                 .ToList();
-
-
 
             return result;
         }

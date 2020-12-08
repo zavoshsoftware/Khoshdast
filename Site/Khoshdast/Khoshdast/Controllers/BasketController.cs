@@ -402,6 +402,11 @@ namespace Khoshdast.Controllers
 
                     List<ProductInCart> productInCarts = GetProductInBasketByCoockie();
 
+                    if (productInCarts.Count == 0)
+                    {
+                        return Json("emptyBasket", JsonRequestBehavior.AllowGet);
+
+                    }
                     Order order = ConvertCoockieToOrder(productInCarts);
 
                     if (order != null)
@@ -433,7 +438,11 @@ namespace Khoshdast.Controllers
 
                             res = "notonline";
 
-                            SendSms.SendCommonSms(order.User.CellNum, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
+                            User user = db.Users.Find(userId);
+                           string smsCellnumber = cellnumber;
+                            if (user != null)
+                                smsCellnumber = user.CellNum;
+                            SendSms.SendCommonSms(smsCellnumber, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
 
                         }
                         return Json(res, JsonRequestBehavior.AllowGet);

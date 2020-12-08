@@ -33,10 +33,10 @@
 		<div class="container  container-custom">
 			<div class="row search-box">
 				<div class="col-lg-10 col-8">
-					<input class="form-control form-control-sm" type="text" id="txtsearch" value="@Model.SearchQuery" />
+					<input class="form-control form-control-sm" type="text" id="txtsearchpage" value="@Model.SearchQuery" />
 				</div>
 				<div class="col-lg-2 col-3">
-					<button class="btn btn-border-fill" type="button" onclick="submitSearchResult();">جستجو</button>
+					<button class="btn btn-border-fill" type="button" onclick="submitSearchForSearchPageResult();">جستجو</button>
 				</div>
 				</div>
 
@@ -177,11 +177,20 @@
 @section scripts{
 
 	<script>
+		
+		var myTextBox = document.getElementById('txtsearchpage');
+		myTextBox.addEventListener('keypress', function(e){
+			if (e.keyCode === 13) {
+				submitSearchForSearchPageResult();
+			}
+		});
 		function showCollapse(id) {
 			$('#' + id).slideToggle();
 		}
 
-		$(document).ready(function() {
+		$(document).ready(function () {
+
+
 			setSortLink();
 			$('select#ddlsortby').on('change',
 				'',
@@ -273,5 +282,7 @@
 
 			return url;
 		}
+
+
 	</script>
 }

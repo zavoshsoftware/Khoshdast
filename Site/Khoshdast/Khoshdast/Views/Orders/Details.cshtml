@@ -311,7 +311,7 @@
 
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="panel panel-info">
 					<div class="panel-heading">ارسال پیامک به مشتری</div>
 					<div class="panel-body">
@@ -327,7 +327,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="panel panel-info">
 					<div class="panel-heading">یادداشت</div>
 					<div class="panel-body">
@@ -339,7 +339,7 @@
 									@Html.EditorFor(model => model.Order.Description)
 									<br/>
 									<dfn>این متن به کاربر نمایش داده نخواهد شد</dfn><br/>
-									<button class="btn btn-success" style="margin-top: 20px;" onclick="postDesc('@Model.Order.Code');">ارسال پیامک</button>
+									<button class="btn btn-success" style="margin-top: 20px;" onclick="postDesc('@Model.Order.Code');">ثبت یادداشت</button>
 								</td>
 							</tr>
 						</table>
