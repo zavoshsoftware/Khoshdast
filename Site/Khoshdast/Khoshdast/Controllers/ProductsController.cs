@@ -447,6 +447,11 @@ namespace Khoshdast.Controllers
 
             products = GetProductListByBrandFilter(products, brands);
 
+            if (products.Count() <= productPagination)
+                ViewBag.isLastPage = "true";
+            else
+                ViewBag.isLastPage = "false";
+
             ProductListViewModel productList = new ProductListViewModel()
             {
                 ProductGroup = productGroup,
@@ -508,8 +513,8 @@ namespace Khoshdast.Controllers
                 {
                      amount = product.AmountStr;
 
-                    if (product.IsInPromotion)
-                        amount = product.DiscountAmountStr;
+                    //if (product.IsInPromotion)
+                    //    amount = product.DiscountAmountStr;
 
                     if (product.Amount == 0)
                         amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
@@ -518,6 +523,10 @@ namespace Khoshdast.Controllers
 
                 if (!System.IO.File.Exists(Server.MapPath(product.ImageUrl)) || string.IsNullOrEmpty(product.ImageUrl))
                     imageUrl = "/assets/images/no-Photo.jpg";
+                string discountAmount = "";
+
+                if (product.IsInPromotion)
+                    discountAmount = product.DiscountAmountStr;
 
                 resItem.Add(new LazyLoadProductCardsItemViewModel()
                 {
@@ -525,7 +534,8 @@ namespace Khoshdast.Controllers
                     Amount = amount,
                     ImageUrl = imageUrl,
                     Code = product.Code,
-                    Stock = product.Stock
+                    Stock = product.Stock,
+                    DiscountAmount = discountAmount
                 });
             }
 
@@ -557,7 +567,7 @@ namespace Khoshdast.Controllers
             bool isLastBatch = products.Count < productPagination;
 
             List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
-
+          
             foreach (var product in products)
             {
                string amount = "";
@@ -565,12 +575,16 @@ namespace Khoshdast.Controllers
                 {
                      amount = product.AmountStr;
 
-                    if (product.IsInPromotion)
-                        amount = product.DiscountAmountStr;
+                    //if (product.IsInPromotion)
+                    //    amount = product.DiscountAmountStr;
 
                     if (product.Amount == 0)
                         amount = (WebConfigurationManager.AppSettings["CallForAmount"]);
                 }
+                string discountAmount = "";
+
+                if (product.IsInPromotion)
+                    discountAmount = product.DiscountAmountStr;
 
                 string imageUrl = product.ImageUrl;
 
@@ -584,7 +598,8 @@ namespace Khoshdast.Controllers
                     Amount = amount,
                     ImageUrl = imageUrl,
                     Code = product.Code,
-                    Stock = product.Stock
+                    Stock = product.Stock,
+                    DiscountAmount = discountAmount
                 });
             }
 

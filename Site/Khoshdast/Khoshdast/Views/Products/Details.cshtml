@@ -74,7 +74,8 @@
 									}
 									else
 									{
-												<span class="price">@Model.Product.AmountStr</span>
+										<span class="price">@Model.Product.AmountStr</span>
+									 
 									}
 								}
 
@@ -263,7 +264,7 @@
 												<span class="pr_flash bg-danger">ناموجود</span>
 }
 										<div class="product_info">
-											<h6 class="product_title"><a href="/product/@relatedProduct.Code">@relatedProduct.Title</a></h6>
+											<h6 class="product_title"><a href="/product/@relatedProduct.Code" title="@relatedProduct.Title">@relatedProduct.Title</a></h6>
 											<div class="product_price">
 												@if (relatedProduct.Amount == 0)
 												{
@@ -278,7 +279,8 @@
 }
 													else
 													{
-																<span class="price">@relatedProduct.AmountStr</span>
+														<span class="price">@relatedProduct.AmountStr</span>
+														<del></del>
 }
 												}
 											</div>

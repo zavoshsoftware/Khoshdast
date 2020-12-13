@@ -155,8 +155,6 @@ namespace Khoshdast.Controllers
         }
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
  
-
-
         public List<PageItem> GetPagination(int productCount, int? pageId)
         {
             List<PageItem> result = new List<PageItem>();
@@ -176,6 +174,26 @@ namespace Khoshdast.Controllers
             }
 
             return result;
+        }
+
+
+
+        [Route("Promotion")]
+        public ActionResult Promotion()
+        {
+            List<Product> products = db.Products
+                .Where(c =>  c.IsInPromotion==true && c.IsDeleted == false && c.IsActive).ToList();
+             
+            SearchViewModel search = new SearchViewModel()
+            {
+                Products = products.OrderByDescending(c => c.Stock).ThenByDescending(c => c.Amount).ToList(),
+
+             
+                SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
+                SidebarProductGroups = GetComplexSidebarProductGroups(),
+            };
+
+            return View(search);
         }
     }
 }

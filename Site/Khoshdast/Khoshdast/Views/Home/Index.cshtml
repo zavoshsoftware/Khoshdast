@@ -30,11 +30,11 @@
 	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
 	<link rel="stylesheet" href="/assets/css/slick.css">
 	<link rel="stylesheet" href="/assets/css/slick-theme.css">
-	<link rel="stylesheet" href="/assets/css/style.css?v=1.1">
+	<link rel="stylesheet" href="/assets/css/style.css?v=1.3">
 	<link rel="stylesheet" href="/assets/css/responsive.css?v=1.1">
 	<link href="~/assets/css/font-awesome.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/assets/css/rtl-style.css?v=1.1">
-	<link href="~/assets/css/style-zavosh.css?v=1.1" rel="stylesheet" />
+	<link href="~/assets/css/style-zavosh.css?v=1.3" rel="stylesheet" />
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-P83QNZCTEW"></script>
@@ -172,7 +172,7 @@
 			</div>
 		</div>
 
-		<div class="section small_pt pb_20 bg-blue">
+		<div class="section small_pt pb_20 home-bg1">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -207,7 +207,7 @@
 												<span class="pr_flash bg-danger">ناموجود</span>
 }
 										<div class="product_info">
-											<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+											<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
 											<div class="product_price">
 												@if (product.Amount == 0)
 												{
@@ -222,7 +222,8 @@
 }
 													else
 													{
-																<span class="price">@product.AmountStr</span>
+														<span class="price">@product.AmountStr</span>
+														<del></del>
 }
 												}
 											</div>
@@ -281,7 +282,7 @@
 		</div>
 
 
-		<div class="section small_pt pb_20 bg-blue">
+		<div class="section small_pt pb_20 home-bg2">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -317,7 +318,7 @@
 													<span class="pr_flash bg-danger">ناموجود</span>
 }
 											<div class="product_info">
-												<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+												<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
 												<div class="product_price">
 													@if (product.Amount == 0)
 													{
@@ -332,7 +333,8 @@
 }
 														else
 														{
-																	<span class="price">@product.AmountStr</span>
+															<span class="price">@product.AmountStr</span>
+															<del></del>
 }
 													}
 												</div>
@@ -394,7 +396,7 @@
 		</div>
 
 
-		<div class="section small_pt pb_20 bg-blue">
+		<div class="section small_pt pb_20 home-bg3">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -430,7 +432,7 @@
 													<span class="pr_flash bg-danger">ناموجود</span>
 }
 											<div class="product_info">
-												<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+												<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
 												@if (product.Amount == 0)
 												{
 														<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
@@ -448,6 +450,7 @@
 													{
 																<div class="product_price mb29">
 																	<span class="price ">@product.AmountStr</span>
+																	<del></del>
 																</div>
 }
 
@@ -546,7 +549,7 @@
 	<script src="/assets/js/jquery.elevatezoom.js"></script>
 	<!-- scripts js -->
 	<script src="/assets/js/scripts.js"></script>
-	<script src="~/Scripts/function.js?v=1.2"></script>
+	<script src="~/Scripts/function.js?v=1.3"></script>
 	<script>
 		$(document).ready(function () {
 			var cookie = getCookie('basket-khoshdast');

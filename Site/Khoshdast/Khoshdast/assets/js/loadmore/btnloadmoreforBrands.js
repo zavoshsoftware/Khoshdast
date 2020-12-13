@@ -52,7 +52,8 @@
                                     json.Result[i].Title,
                                     json.Result[i].Amount,
                                     json.Result[i].ImageUrl,
-                                    json.Result[i].Stock);
+                                    json.Result[i].Stock,
+                                    json.Result[i].DiscountAmount);
                                 
                                 $(".shop_container").append(card);
                             }

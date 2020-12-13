@@ -5029,6 +5029,8 @@ footer .widget_title {
 	font-size: 14px;
 	margin-right: 5px;
 	margin-left: 3px;
+    display: block;
+    min-height: 20px;
 }
 .product-price del {
 	margin-left: 5px;

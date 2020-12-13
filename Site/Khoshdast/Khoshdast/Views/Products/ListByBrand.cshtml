@@ -88,7 +88,7 @@
 											<span class="pr_flash bg-danger">ناموجود</span>
 										}
 										<div class="product_info">
-											<h6 class="product_title"><a href="/product/@product.Code">@product.Title</a></h6>
+											<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
 											<div class="product_price">
 											@if (product.Stock > 0)
 											{
@@ -106,6 +106,7 @@
 													else
 													{
 														<span class="price">@product.AmountStr</span>
+														<del></del>
 													}
 													}
 												}
@@ -287,7 +288,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 				crossorigin="anonymous"></script>
 
-<script src="~/assets/js/loadmore/btnloadmoreforBrands.js"></script>
+<script src="~/assets/js/loadmore/btnloadmoreforBrands.js?v1.2"></script>
 <script>
 		$(document).ready(function () {
 			$('.shop_container').btnLoadmore({

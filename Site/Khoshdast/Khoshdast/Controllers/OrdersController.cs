@@ -37,7 +37,7 @@ namespace Khoshdast.Controllers
                 else
                 {
                     orders = db.Orders.Include(o => o.City).Where(o =>
-                           o.OrderStatusId == id  && o.IsDeleted == false)
+                           o.OrderStatusId == id && o.IsDeleted == false)
                         .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                         .Include(o => o.User).ToList();
                 }
@@ -203,12 +203,34 @@ namespace Khoshdast.Controllers
 
             if (order != null)
             {
+                //اگر وضعیت از ثبت اولیه به درحال اماده سازی یا در حال ارسال یا ارسال شده تغییر کرد از موجودی کسر بشه
+                if (order.PaymentTypeTitle != "online")
+                    ChangeStock(order, id);
+
                 order.OrderStatusId = id;
                 order.LastModifiedDate = DateTime.Now;
+
                 db.SaveChanges();
 
             }
             return Json("true", JsonRequestBehavior.AllowGet);
+        }
+
+        public void ChangeStock(Order order, Guid newstatusId)
+        {
+            if (order.OrderStatusId == new Guid("11869F4D-D6D1-434C-A2F1-7945227CD3BB") &&
+                (newstatusId == new Guid("7DBF85F4-7835-4D21-8269-26695D0C7E0F") || newstatusId == new Guid("68490C34-A666-44DA-8D9F-7B6DEE2E4DE0") ||
+                 newstatusId == new Guid("EC934A7E-0061-4B09-BD44-CA5120CF6200")))
+            {
+                List<OrderDetail> orderDetails = db.OrderDetails.Where(c => c.OrderId == order.Id).ToList();
+
+                foreach (OrderDetail orderDetail in orderDetails)
+                {
+                    orderDetail.Product.Stock = orderDetail.Product.Stock - orderDetail.Quantity;
+                    if (orderDetail.Product.Stock <= 0)
+                        orderDetail.Product.IsAvailable = false;
+                }
+            }
         }
 
         [AllowAnonymous]

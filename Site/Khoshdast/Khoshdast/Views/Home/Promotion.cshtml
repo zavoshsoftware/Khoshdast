@@ -1,6 +1,6 @@
 ﻿@model ViewModels.SearchViewModel
 @{
-		ViewBag.Title = "نتایج جستجو - "+Model.SearchQuery;
+		ViewBag.Title = "تخفیفات رنگ و ابزار خوشدست";
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 @section head{
@@ -23,15 +23,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row search-box">
-				<div class="col-lg-10 col-8">
-					<input class="form-control form-control-sm" type="text" id="txtsearchpage" value="@Model.SearchQuery"/>
-				</div>
-				<div class="col-lg-2 col-3">
-					<button class="btn btn-full btn-border-fill" type="button" onclick="submitSearchForSearchPageResult();">جستجو</button>
-				</div>
-			</div>
-
+	 
 			<div class="row">
 				<div class="col-lg-9">
 

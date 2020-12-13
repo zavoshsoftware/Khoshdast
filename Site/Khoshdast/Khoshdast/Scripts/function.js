@@ -378,16 +378,23 @@ function getUrlVars() {
 }
 
 
-function getItem(code, title, amount, imageUrl, stock) {
+function getItem(code, title, amount, imageUrl, stock,discountAmount) {
     return "		<div class='col-md-3 col-6 newclass'><div class='product'><div>" +
         "<a href='/product/" + code + "'><img src='" + imageUrl + "' alt='" + title + "'></a></div>" +
         getNoStockTitle(stock)+
         "<div class='product_info'><h6 class='product_title'><a href='/product/" + code + "'>" + title +"</a></h6>" +
-        "<div class='product_price'><span class='price'>" + amount+"</span></div>" +
+        "<div class='product_price'>" + getAmount(amount,discountAmount) +  " </div>" +
         getAddToBasketButton(code,stock) +
         "</div></div></div>";
 }
+function getAmount(amount, discountAmout) {
+    if (discountAmout === '') {
+        return "<span class='price'>" + amount + "</span><del></del>";
+    } else {
+        return "<span class='price'>" + discountAmout + "</span><del>" + amount+"</del>";
+    }
 
+}
 function getAddToBasketButton(code, stock) {
     var stockInt = parseInt(stock);
 
@@ -410,3 +417,4 @@ function getNoStockTitle(stock) {
         return "";
     }
 }
+ 
