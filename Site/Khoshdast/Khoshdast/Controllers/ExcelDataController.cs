@@ -142,7 +142,7 @@ namespace Khoshdast.Controllers
                         Stock = qtyInt,
                         SeedStock = qtyInt,
                         Id = Guid.NewGuid(),
-                        Code = codeGenerator.ReturnProductCode().ToString(),
+                        Code = codeGenerator.ReturnProductCode(),
                         CreationDate = DateTime.Now,
                         IsActive = true,
                         IsDeleted = false,
@@ -358,7 +358,7 @@ namespace Khoshdast.Controllers
             int i = 100;
             foreach (Product product in products)
             {
-                product.Code = i.ToString();
+                product.Code = i;
                 i++;
             }
 

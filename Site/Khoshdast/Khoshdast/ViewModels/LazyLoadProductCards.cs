@@ -17,7 +17,7 @@ namespace ViewModels
         public string Title { get; set; }
         public string Amount { get; set; }
         public string DiscountAmount { get; set; }
-        public string Code { get; set; }
+        public int Code { get; set; }
         public int Stock { get; set; }
     }
 }

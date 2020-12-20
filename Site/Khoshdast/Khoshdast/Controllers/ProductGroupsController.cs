@@ -252,7 +252,7 @@ namespace Khoshdast.Controllers
             int i = 100;
             foreach (Product product in products)
             {
-                product.Code = i.ToString();
+                product.Code = i;
                 i++;
             }
             db.SaveChanges();

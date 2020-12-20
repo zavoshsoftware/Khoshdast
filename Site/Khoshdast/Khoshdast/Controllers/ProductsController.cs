@@ -83,6 +83,7 @@ namespace Khoshdast.Controllers
 
             return View(product);
         }
+        CodeGenerator codeGenerator = new CodeGenerator();
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
@@ -109,7 +110,7 @@ namespace Khoshdast.Controllers
                 Product oProduct = new Product()
                 {
                     ImageUrl = newFilenameUrl,
-                    Code = codeGenerator.ReturnProductCode().ToString(),
+                    Code = codeGenerator.ReturnProductCode(),
                     IsDeleted = false,
                     Id = Guid.NewGuid(),
                     CreationDate = DateTime.Now,
@@ -672,7 +673,8 @@ namespace Khoshdast.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.FirstOrDefault(c => c.Code == code);
+           int proCode= Convert.ToInt32(code);
+            Product product = db.Products.FirstOrDefault(c => c.Code == proCode);
             if (product == null)
             {
                 return HttpNotFound();
@@ -957,6 +959,24 @@ namespace Khoshdast.Controllers
             return View(model);
         }
 
+
+
+        public string ChangeBadCode()
+        {
+            List<Product> products = db.Products.Where(c => c.Code == 1788 && c.IsDeleted == false)
+                .OrderBy(c => c.CreationDate).ToList();
+
+            foreach (Product product in products)
+            {
+                product.Code = codeGenerator.ReturnProductCode();
+                product.LastModifiedDate=DateTime.Now;
+                db.SaveChanges();
+
+            }
+
+
+            return string.Empty;
+        }
     }
 }
 

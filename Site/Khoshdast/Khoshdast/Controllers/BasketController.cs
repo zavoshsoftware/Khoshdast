@@ -162,7 +162,7 @@ namespace Khoshdast.Controllers
                 {
                     string[] productItem = basketItems[i].Split('^');
 
-                    string productCode = productItem[0];
+                    int productCode =Convert.ToInt32(productItem[0]);
 
                     Product product =
                         db.Products.FirstOrDefault(current =>

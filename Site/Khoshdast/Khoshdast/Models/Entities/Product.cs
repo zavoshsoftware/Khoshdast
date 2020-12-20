@@ -24,8 +24,7 @@ namespace Models
         public int Order { get; set; }
 
         [Display(Name = "Code", ResourceType = typeof(Resources.Models.Product))]
-        [StringLength(15, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         [Display(Name = "Title", ResourceType = typeof(Resources.Models.Product))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]

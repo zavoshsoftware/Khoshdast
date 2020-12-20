@@ -148,9 +148,9 @@ namespace Khoshdast.Controllers
                 return Json("InvalidEmail", JsonRequestBehavior.AllowGet);
             else
             {
-
+                int proCode = Convert.ToInt32(code);
                 Product product =
-                    db.Products.FirstOrDefault(c => c.Code == code);
+                    db.Products.FirstOrDefault(c => c.Code == proCode);
 
                 if (product != null)
                 {
