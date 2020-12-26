@@ -12,7 +12,7 @@ using ViewModels;
 
 namespace Khoshdast.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Content")]
     public class BlogsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

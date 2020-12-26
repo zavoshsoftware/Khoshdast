@@ -21,7 +21,7 @@
                 @Html.ActionLink("ویرایش", "Edit", new { id = @item.Id, parentId =ViewBag.parentId }, new { @class = "k-button" })
                 @Html.ActionLink("حذف", "Delete", new { id = @item.Id }, new { @class = "k-button" })
                 @Html.ActionLink("مدیریت زیر گروه ها", "Index", new { id = @item.Id }, new { @class = "k-button " })
-                @Html.ActionLink("اعمال تخفیف برای محصولات گروه", "SetDiscountForGroup","Products", new { id = @item.Id }, new { @class = "k-button " })
+                @Html.ActionLink("اعمال تخفیف برای محصولات گروه", "index","ProductGroupDiscounts", new { id = @item.Id }, new { @class = "k-button " })
                     </text>).Width(200);
         })
         .ToolBar(toolbar =>

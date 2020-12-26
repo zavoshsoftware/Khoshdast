@@ -23,10 +23,11 @@
     <script src="@Url.Content("~/Scripts/kendo/2017.3.913/jquery.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/2017.3.913/jszip.min.js")"></script>
     @*<script src="@Url.Content("~/Scripts/kendo/2016.2.504/kendo.all.min.js")"></script>*@
-    <script src="~/Scripts/kendo/2017.3.913/kendo.all.min.js"></script>
-    @*<script src="~/Scripts/KendoPersianDate/JalaliDate.js"></script>
-    <script src="~/Scripts/KendoPersianDate/kendo.web.js"></script>
-    <script src="~/Scripts/KendoPersianDate/fa-IR.js"></script>*@
+	<script src="~/Scripts/kendo/2017.3.913/kendo.all.min.js"></script>
+	
+
+	@RenderSection("styles", required: false)
+
     <script src="@Url.Content("~/Scripts/kendo/2017.3.913/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
     <link href="~/Content/admin/admin-font-awesome.css" rel="stylesheet" />
@@ -97,183 +98,215 @@
                             <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
                                 <!-- nav -->
                                 <nav class="nav-primary hidden-xs">
-                                    <ul class="nav">
-	                                    <li id="productLi" class="menuitem">
-		                                    <a href="#">
-			                                    <i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت محصولات</span>
-		                                    </a>
-		                                    <ul class="nav lt">
-			                                    <li>
-				                                    <a href="/Productgroups">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت گروه محصولات</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/products">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت محصولات</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/ProductComments">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت نظرات محصولات</span>
-				                                    </a>
-			                                    </li>
-																					
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/ExcelData/import">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>بارگزاری اکسل محصولات</span>
-				                                    </a>
-			                                    </li>
-		                                    </ul>
-	                                    </li>
-																			 <li id="productLi" class="menuitem">
-		                                    <a href="#">
-			                                    <i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت مطالب وبلاگ</span>
-		                                    </a>
-		                                    <ul class="nav lt">
-			                                    <li>
-				                                    <a href="/BlogGroups">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت گروه وبلاگ</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/Blogs">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت مطالب وبلاگ</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/BlogComments">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت نظرات وبلاگ</span>
-				                                    </a>
-			                                    </li>
-		                                    </ul>
-	                                    </li>
-																			
-																			
-																			 <li id="productLi" class="menuitem">
-		                                    <a href="#">
-			                                    <i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت سفارشات</span>
-		                                    </a>
-		                                    <ul class="nav lt">
-			                                    <li>
-																						<a href="/orders/index/11869F4D-D6D1-434C-A2F1-7945227CD3BB">
-																							<i class="fa fa-angle-left"></i><span>سفارشات جاری</span>
-																						</a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/orders/index/68490C34-A666-44DA-8D9F-7B6DEE2E4DE0">
-					                                    <i class="fa fa-angle-left"></i><span>سفارشات ارسال شده</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/orders/index/99C42AD7-AE29-46C5-BAE2-00D2DA31DDCD">
-					                                    <i class="fa fa-angle-left"></i><span>سفارشات لغو شده</span>
-				                                    </a>
-			                                    </li>
+	                                <ul class="nav">
+		                                
+																		
+	                                @{
+		                                var identity = (System.Security.Claims.ClaimsIdentity) User.Identity;
+		                                string roleName = identity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+		                                if (roleName == "Content")
+		                                {
+			                                <li id="productLi" class="menuitem">
+				                                <a href="#">
+					                                <i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت مطالب وبلاگ</span>
+				                                </a>
+				                                <ul class="nav lt">
+					                                <li>
+						                                <a href="/BlogGroups">
+							                                <i class="fa fa-angle-left"></i><span>مدیریت گروه وبلاگ</span>
+						                                </a>
+					                                </li>
+					                                <li>
+						                                <a href="/Blogs">
+							                                <i class="fa fa-angle-left"></i><span>مدیریت مطالب وبلاگ</span>
+						                                </a>
+					                                </li>
 
-																					<li>
-																						<a href="/orders">
-																							<i class="fa fa-angle-left"></i><span>همه سفارشات</span>
+				                                </ul>
+			                                </li>
+																			}
+																			else
+																			{
+																					<li id="productLi" class="menuitem">
+																						<a href="#">
+																							<i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت محصولات</span>
+																						</a>
+																						<ul class="nav lt">
+																							<li>
+																								<a href="/Productgroups">
+																									<i class="fa fa-angle-left"></i><span>مدیریت گروه محصولات</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/products">
+																									<i class="fa fa-angle-left"></i><span>مدیریت محصولات</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/ProductComments">
+																									<i class="fa fa-angle-left"></i><span>مدیریت نظرات محصولات</span>
+																								</a>
+																							</li>
+
+																							<li id="supportLi" class="menuitem">
+																								<a href="/ExcelData/import">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>بارگزاری اکسل محصولات</span>
+																								</a>
+																							</li>
+																						</ul>
+																					</li>
+																					<li id="productLi" class="menuitem">
+																						<a href="#">
+																							<i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت مطالب وبلاگ</span>
+																						</a>
+																						<ul class="nav lt">
+																							<li>
+																								<a href="/BlogGroups">
+																									<i class="fa fa-angle-left"></i><span>مدیریت گروه وبلاگ</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/Blogs">
+																									<i class="fa fa-angle-left"></i><span>مدیریت مطالب وبلاگ</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/BlogComments">
+																									<i class="fa fa-angle-left"></i><span>مدیریت نظرات وبلاگ</span>
+																								</a>
+																							</li>
+																						</ul>
+																					</li>
+
+
+																					<li id="productLi" class="menuitem">
+																						<a href="#">
+																							<i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت سفارشات</span>
+																						</a>
+																						<ul class="nav lt">
+																							<li>
+																								<a href="/orders/index/11869F4D-D6D1-434C-A2F1-7945227CD3BB">
+																									<i class="fa fa-angle-left"></i><span>سفارشات جاری</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/orders/index/68490C34-A666-44DA-8D9F-7B6DEE2E4DE0">
+																									<i class="fa fa-angle-left"></i><span>سفارشات ارسال شده</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/orders/index/99C42AD7-AE29-46C5-BAE2-00D2DA31DDCD">
+																									<i class="fa fa-angle-left"></i><span>سفارشات لغو شده</span>
+																								</a>
+																							</li>
+
+																							<li>
+																								<a href="/orders">
+																									<i class="fa fa-angle-left"></i><span>همه سفارشات</span>
+																								</a>
+																							</li>
+																						</ul>
+																					</li>
+
+
+																					<li id="supportLi" class="menuitem">
+																						<a href="/brands">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت برندها</span>
 																						</a>
 																					</li>
-		                                    </ul>
-	                                    </li>
-																			
-																			
-	                                    <li id="supportLi" class="menuitem">
-		                                    <a href="/brands">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت برندها</span>
-		                                    </a>
-	                                    </li>
-																 
-	                                    <li id="supportLi" class="menuitem">
-		                                    <a href="/ContactUsForms">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت فرم های تماس با ما</span>
-		                                    </a>
-	                                    </li>
-	                                    <li id="supportLi" class="menuitem">
-		                                    <a href="/DiscountCodes">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت کد تخفیف</span>
-		                                    </a>
-	                                    </li>  
-	                                    <li id="supportLi" class="menuitem">
-		                                    <a href="/sliders">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت تصاویر اسلایدر</span>
-		                                    </a>
-	                                    </li>
-																			<li id="supportLi" class="menuitem">
-		                                    <a href="/users">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت کاربران</span>
-		                                    </a>
-	                                    </li>
-																			<li id="supportLi" class="menuitem">
-		                                    <a href="/sidebarbanners">
-			                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت بنرهای سایدبار</span>
-		                                    </a>
-	                                    </li>
-																			
-																			
-	                                    <li id="textLi" class="menuitem">
-		                                    <a href="#">
-			                                    <i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت متن ها و تصاویر</span>
-		                                    </a>
-		                                    <ul class="nav lt">
-			                                    <li>
-				                                    <a href="/TextItems/Index/6048c82f-b227-4d01-82a8-6081198ce735">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت بنرهای کنار اسلایدر</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/TextItems/index/36208e14-d87b-40b4-9f2c-2a4f2ed79b0c">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت بنرهای وسط صفحه اصلی</span>
-				                                    </a>
-			                                    </li>
-			                                    <li>
-				                                    <a href="/TextItems/index/8214a822-8c9c-446c-9e60-3f63c60da7a9">
-					                                    <i class="fa fa-angle-left"></i><span>مدیریت اطلاعات تماس</span>
-				                                    </a>
-			                                    </li>
-																					
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/24ec4797-e8e7-4817-96b0-131043e78f51">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن صفحه درباره ما</span>
-				                                    </a>
-			                                    </li>
-																					
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/ce1306d5-1f76-4cf9-9948-5b4703096b9f">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن why us صفحه درباره ما</span>
-				                                    </a>
-			                                    </li>
-																					
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/210a4e62-d6de-459d-b9f2-cb6bdbaaa5bd">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>بنر سایدبار لیست محصولات</span>
-				                                    </a>
-			                                    </li>
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/be20e533-5b83-436c-955e-0b4d3b528994">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت متن قوانین خرید</span>
-				                                    </a>
-			                                    </li>
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/b8f0ffe3-740d-42ff-9c0a-9542531dfdc4">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت لینک شبکه های اجتماعی</span>
-				                                    </a>
-			                                    </li>
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/f2cc7d4e-607c-4664-8d6c-9635501f2a11">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن های مربوط به نوع پرداخت</span>
-				                                    </a>
-			                                    </li>
-			                                    <li id="supportLi" class="menuitem">
-				                                    <a href="/TextItems/index/01a64248-aafc-400a-bb34-3a7c38de52d8">
-					                                    <i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن متا دسکریپشن صفحه اصلی</span>
-				                                    </a>
-			                                    </li>
-		                                    </ul>
-	                                    </li>
-                                    </ul>
+
+																					<li id="supportLi" class="menuitem">
+																						<a href="/ContactUsForms">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت فرم های تماس با ما</span>
+																						</a>
+																					</li>
+																					<li id="supportLi" class="menuitem">
+																						<a href="/DiscountCodes">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت کد تخفیف</span>
+																						</a>
+																					</li>
+																					<li id="supportLi" class="menuitem">
+																						<a href="/sliders">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت تصاویر اسلایدر</span>
+																						</a>
+																					</li>
+																					<li id="supportLi" class="menuitem">
+																						<a href="/users">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت کاربران</span>
+																						</a>
+																					</li>
+																					<li id="supportLi" class="menuitem">
+																						<a href="/sidebarbanners">
+																							<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت بنرهای سایدبار</span>
+																						</a>
+																					</li>
+
+
+																					<li id="textLi" class="menuitem">
+																						<a href="#">
+																							<i class="fa fa-sitemap icon"><b class="bg-primary"></b></i><span class="pull-right"><i class="fa fa-angle-down text"></i><i class="fa fa-angle-up text-active"></i></span><span>مدیریت متن ها و تصاویر</span>
+																						</a>
+																						<ul class="nav lt">
+																							<li>
+																								<a href="/TextItems/Index/6048c82f-b227-4d01-82a8-6081198ce735">
+																									<i class="fa fa-angle-left"></i><span>مدیریت بنرهای کنار اسلایدر</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/TextItems/index/36208e14-d87b-40b4-9f2c-2a4f2ed79b0c">
+																									<i class="fa fa-angle-left"></i><span>مدیریت بنرهای وسط صفحه اصلی</span>
+																								</a>
+																							</li>
+																							<li>
+																								<a href="/TextItems/index/8214a822-8c9c-446c-9e60-3f63c60da7a9">
+																									<i class="fa fa-angle-left"></i><span>مدیریت اطلاعات تماس</span>
+																								</a>
+																							</li>
+
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/24ec4797-e8e7-4817-96b0-131043e78f51">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن صفحه درباره ما</span>
+																								</a>
+																							</li>
+
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/ce1306d5-1f76-4cf9-9948-5b4703096b9f">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن why us صفحه درباره ما</span>
+																								</a>
+																							</li>
+
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/210a4e62-d6de-459d-b9f2-cb6bdbaaa5bd">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>بنر سایدبار لیست محصولات</span>
+																								</a>
+																							</li>
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/be20e533-5b83-436c-955e-0b4d3b528994">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت متن قوانین خرید</span>
+																								</a>
+																							</li>
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/b8f0ffe3-740d-42ff-9c0a-9542531dfdc4">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>مدیریت لینک شبکه های اجتماعی</span>
+																								</a>
+																							</li>
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/f2cc7d4e-607c-4664-8d6c-9635501f2a11">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن های مربوط به نوع پرداخت</span>
+																								</a>
+																							</li>
+																							<li id="supportLi" class="menuitem">
+																								<a href="/TextItems/index/01a64248-aafc-400a-bb34-3a7c38de52d8">
+																									<i class="fa fa-bars icon"><b class="bg-info"></b></i><span>متن متا دسکریپشن صفحه اصلی</span>
+																								</a>
+																							</li>
+																						</ul>
+																					</li>
+}
+																	}
+
+		                           
+	                                </ul>
                                 </nav>
                             </div>
                         </section>

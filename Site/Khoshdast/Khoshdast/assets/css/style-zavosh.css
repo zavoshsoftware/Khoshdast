@@ -323,10 +323,10 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 }
 .hover_effect1 img {
     width: 100%;
-    height: 198px;
+    height: 100%;
 }
 .leftslide {
-    height: 200px;
+    height: 195px;
 }
 
 .brand-item{
@@ -777,4 +777,8 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .productgroup_descriptionn h2 {
     font-size:1.5rem
+}
+
+.shop_el_slider .carousel-item {
+    cursor: pointer;
 }

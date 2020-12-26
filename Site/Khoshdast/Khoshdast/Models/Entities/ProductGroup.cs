@@ -15,6 +15,7 @@ namespace Models
         {
             ProductGroupRelProducts=new List<ProductGroupRelProduct>();
             ProductGroups=new List<ProductGroup>();
+            ProductGroupDiscounts = new List<ProductGroupDiscount>();
         }
         [Display(Name = "Order", ResourceType = typeof(Resources.Models.ProductGroup))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -60,5 +61,7 @@ namespace Models
 
         [Display(Name = "کد گروه محصول")]
         public int? Code { get; set; }
+
+        public virtual ICollection<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
     }
 }

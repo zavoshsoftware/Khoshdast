@@ -947,6 +947,9 @@
     <Content Include="Scripts\AdminJS\landing.js" />
     <Content Include="Scripts\AdminJS\landing.min.js" />
     <Content Include="Scripts\function.js" />
+    <Content Include="Scripts\KendoPersianDate\fa-IR.js" />
+    <Content Include="Scripts\KendoPersianDate\JalaliDate.js" />
+    <Content Include="Scripts\KendoPersianDate\kendo.web.js" />
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
@@ -1313,6 +1316,7 @@
     <Compile Include="Controllers\ImageBrowserController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductCommentsController.cs" />
+    <Compile Include="Controllers\ProductGroupDiscountsController.cs" />
     <Compile Include="Controllers\ProductGroupsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -1395,6 +1399,10 @@
     <Compile Include="Migrations\202012201056207_V14.Designer.cs">
       <DependentUpon>202012201056207_V14.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012240648407_V15.cs" />
+    <Compile Include="Migrations\202012240648407_V15.Designer.cs">
+      <DependentUpon>202012240648407_V15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1413,6 +1421,7 @@
     <Compile Include="Models\Entities\OrderStatus.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ProductComment.cs" />
+    <Compile Include="Models\Entities\ProductGroupDiscount.cs" />
     <Compile Include="Models\Entities\ProductGroup.cs" />
     <Compile Include="Models\Entities\ProductGroupRelProduct.cs" />
     <Compile Include="Models\Entities\Province.cs" />
@@ -1741,6 +1750,10 @@
     <Content Include="Views\Report\Invoice.cshtml" />
     <Content Include="Views\Products\SetDiscountForGroup.cshtml" />
     <Content Include="Views\Home\Promotion.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Create.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Delete.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Edit.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1809,6 +1822,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012201056207_V14.resx">
       <DependentUpon>202012201056207_V14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012240648407_V15.resx">
+      <DependentUpon>202012240648407_V15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

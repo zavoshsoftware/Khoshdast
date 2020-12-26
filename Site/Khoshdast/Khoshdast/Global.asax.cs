@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using GSD.Globalization;
+using Helpers;
 
 namespace Khoshdast
 {
@@ -23,6 +24,9 @@ namespace Khoshdast
             var persianCulture = new PersianCulture();
             Thread.CurrentThread.CurrentCulture = persianCulture;
             Thread.CurrentThread.CurrentUICulture = persianCulture;
+            DiscountHelper discountHelper = new DiscountHelper();
+
+            discountHelper.CheckProductGroupDiscount();
         }
     }
 }

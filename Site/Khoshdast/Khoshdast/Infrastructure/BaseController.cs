@@ -22,6 +22,7 @@ namespace Khoshdast.Infrastructure
             System.Threading.Thread.CurrentThread.CurrentUICulture = oCultureInfo;
 
             //ViewBag.Name = GetUserInfo.GetUserFullName();
+        
             return base.BeginExecuteCore(callback, state);
         }
     }

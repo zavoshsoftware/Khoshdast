@@ -272,9 +272,12 @@
   min-width: 992px
 ---------------------------------------------------*/
 @media only screen and (min-width: 992px) {
-.navbar-toggler {
-	display: none;
-}
+    .banner_section.slide_medium, .banner_section.slide_medium .carousel-item, .banner_section.slide_medium .banner_content_wrap, .banner_section.slide_medium .banner_content_wrap .carousel-item, .banner_section.shop_el_slider, .banner_section.shop_el_slider .carousel-item, .banner_section.shop_el_slider .banner_content_wrap, .banner_section.shop_el_slider .banner_content_wrap .carousel-item {
+        height: 410px !important;
+
+    }.navbar-toggler {
+        display: none;
+    }
 .navbar .navbar-nav li > .dropdown-menu,
 #navCatContent ul > li .dropdown-menu {
 	display: block;
@@ -608,8 +611,11 @@
 .banner_section:not(.full_screen) .carousel-item, 
 .banner_section:not(.full_screen) .banner_content_wrap, 
 .banner_section:not(.full_screen) .banner_content_wrap .carousel-item {
-	height: 500px;
+	height: 253px;
 }
+    .leftslide {
+        height: 120px !important;
+    }
 .banner_section.full_screen.banner_half_content,
 .banner_section:not(.full_screen).banner_half_content,
 .banner_section:not(.full_screen).banner_half_content .banner_content_wrap {
@@ -952,8 +958,11 @@ div.banner_large_pad {
 .banner_section:not(.full_screen) .carousel-item, 
 .banner_section:not(.full_screen) .banner_content_wrap, 
 .banner_section:not(.full_screen) .banner_content_wrap .carousel-item {
-	height: 400px;
+	height: 252px;
 }
+    .leftslide {
+        height: 200px !important;
+    }
 .banner_section.slide_medium, 
 .banner_section.slide_medium .carousel-item, 
 .banner_section.slide_medium .banner_content_wrap, 

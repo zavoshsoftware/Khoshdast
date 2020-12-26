@@ -133,5 +133,7 @@ namespace Models
         }
         [Display(Name="بارکد")]
         public string Barcode { get; set; }
+
+        public Guid? ProductGroupDiscountId { get; set; }
     }
 }

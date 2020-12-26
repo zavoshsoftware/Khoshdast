@@ -40,6 +40,7 @@ namespace Models
         public DbSet<ContactUsForm> ContactUsForms { get; set; }
         public DbSet<SidebarBanner> SidebarBanners { get; set; }
 
-        public System.Data.Entity.DbSet<Models.TextItemType> TextItemTypes { get; set; }
+        public DbSet<TextItemType> TextItemTypes { get; set; }
+        public DbSet<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
     }
 }
