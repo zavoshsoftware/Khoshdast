@@ -6,6 +6,9 @@
 		ViewBag.Canonical = "https://khoshdast.ir/product/" + Model.Product.Code;
 		ViewBag.Description = "خرید اینترنتی " + Model.Product.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست. قیمت " + Model.Product.Title;
 }
+@section head{
+	<meta name="product_id" content="@Model.Product.Barcode" />
+}
 
 <div class="main_content bg-gray-list">
 

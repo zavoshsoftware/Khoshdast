@@ -62,6 +62,9 @@ namespace ViewModels
         [Display(Name = "BrandId", ResourceType = typeof(Resources.Models.Product))]
         public Guid BrandId { get; set; }
 
+        [Display(Name = "بارکد")]
+        public string Barcode { get; set; }
+
 
         [Display(Name = "موجودی")]
         public int Stock { get; set; }

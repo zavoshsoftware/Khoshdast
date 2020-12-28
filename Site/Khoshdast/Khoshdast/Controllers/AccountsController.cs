@@ -89,7 +89,7 @@ namespace Khoshdast.Controllers
                 return RedirectToAction("LoginRegister", model);
             }
 
-            CodeGenerator codeGenerator=new CodeGenerator();
+            CodeGenerator codeGenerator = new CodeGenerator();
 
             User oUser = new User()
             {
@@ -141,10 +141,10 @@ namespace Khoshdast.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl, string role)
         {
-          
+
             if (role.ToLower().Contains("admin"))
                 return RedirectToAction("Index", "Users");
-   if (role.ToLower().Contains("content"))
+            if (role.ToLower().Contains("content"))
                 return RedirectToAction("Index", "Blogs");
 
             if (!string.IsNullOrEmpty(returnUrl))

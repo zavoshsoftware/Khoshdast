@@ -132,7 +132,8 @@ namespace Khoshdast.Controllers
                     PageDescription = product.PageDescription,
                     PageTitle = product.PageTitle,
                     Summery = product.Summery,
-                    IsTopSell = product.IsTopSale
+                    IsTopSell = product.IsTopSale,
+                    Barcode = product.Barcode
                 };
 
                 db.Products.Add(oProduct);
@@ -295,7 +296,8 @@ namespace Khoshdast.Controllers
                 Visit = oProduct.Visit,
                 SeedStock = oProduct.SeedStock,
                 Stock = oProduct.Stock,
-                IsTopSale = oProduct.IsTopSell
+                IsTopSale = oProduct.IsTopSell,
+                Barcode = oProduct.Barcode,
 
             };
             ViewBag.BrandId = new SelectList(db.Brands, "Id", "Title", product.BrandId);
@@ -365,7 +367,7 @@ namespace Khoshdast.Controllers
                     product.PageTitle = oproduct.PageTitle;
                     product.Summery = oproduct.Summery;
                     product.IsTopSell = oproduct.IsTopSale;
-
+                    product.Barcode = oproduct.Barcode;
 
 
                     RemoveProductRel(oproduct.Id);
