@@ -166,7 +166,7 @@ namespace Khoshdast.Controllers
             {
                 if (!string.IsNullOrEmpty(amount))
                 {
-                    decimal amountDecimal = Convert.ToDecimal(amount);
+                    decimal amountDecimal = Convert.ToDecimal(amount)/10;
                     product.Amount = amountDecimal;
                     product.LastModifiedDate = DateTime.Now;
                     db.SaveChanges();
