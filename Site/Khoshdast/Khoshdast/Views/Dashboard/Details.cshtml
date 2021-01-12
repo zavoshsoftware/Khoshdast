@@ -1,0 +1,95 @@
+﻿
+@model ViewModels.CustomerOrderDetailViewModel
+@{
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+<div class="breadcrumb_section bg_gray page-title-mini">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="page-title">
+			 
+					<h1>@ViewBag.Title</h1>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<ol class="breadcrumb justify-content-md-end">
+					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+					<li class="breadcrumb-item active">@ViewBag.Title</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="main_content bg-gray-list">
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-4">
+					@Html.Partial("_CustomerDashboardMenuPartial")
+				</div>
+				<div class="col-lg-9 col-md-8">
+					<div class="tab-content dashboard_content">
+				 
+						<div class="tab-pane fade  active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+							<div class="card">
+								<div class="card-header">
+									<h3>@ViewBag.Title</h3>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+											<tr>
+												<th>محصول</th>
+												<th>فی</th>
+												<th>تعداد</th>
+												<th>جمع کل</th>
+											</tr>
+											</thead>
+											<tbody>
+											@foreach (var orderDetail in Model.OrderDetails)
+											{
+												<tr>
+													<td>@orderDetail.Product.Title</td>
+													<td>@orderDetail.Price.ToString("N0") تومان</td>
+													<td>@orderDetail.Quantity</td>
+													<td>@orderDetail.Amount.ToString("N0") تومان</td>
+												</tr>
+											}
+											
+										 
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+				 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section scripts{
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var URL = window.location.pathname;
+			if (URL.includes('order') ) {
+				$('.menuitem').removeClass('active');
+				$('#orders-tab').addClass('active');
+			}
+
+			else if (URL.includes('editProfile')) {
+				$('.menuitem').removeClass('active');
+				$('#account-detail-tab').addClass('active');
+			}
+
+
+		});
+	</script>
+}

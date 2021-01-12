@@ -1,0 +1,56 @@
+﻿@model ViewModels.ProductGroupDiscountViewModel
+
+@{
+		ViewBag.Title = "اعمال تخفیف برای محصولات " +ViewBag.productGroupTitle;
+		Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2> @Html.DisplayNameFor(model => model)</h2>
+
+@using (Html.BeginForm("SetDiscountForGroup", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			@Html.ValidationSummary(true)
+			<h1>@ViewBag.Title</h1>
+			<div class="form-group">
+				<h3>
+					تعداد محصولات این گروه: @ViewBag.productCount
+				</h3>
+
+
+			 
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Amount, new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Amount)
+
+						@Html.ValidationMessageFor(model => model.Amount)
+						<dfn>
+							اگر تخفیف درصدی است، عدد صحیح درصد را وارد کنید. مثال: برای 10% تخفبف 10 وارد کنید
+						</dfn>
+					</div>
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.IsPercent, new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.IsPercent)
+
+						@Html.ValidationMessageFor(model => model.IsPercent)
+					</div>
+				</div>
+
+				 
+
+				<div class="form-group" id="buttons">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="ایجاد" class="btn btn-primary" />
+						@Html.ActionLink("بازگشت به فهرست", "Index","ProductGroups")
+					</div>
+				</div>
+			</div>
+		</div>
+}
+

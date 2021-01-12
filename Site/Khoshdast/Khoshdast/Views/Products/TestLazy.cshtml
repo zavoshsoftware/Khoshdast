@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Models.Product>
+@{
+		Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/minty/bootstrap.min.css">
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<title>btnloadmore.js: Load More Button Example</title>
+</head>
+<body>
+
+	<main role="main">
+
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row contents">
+				@foreach (var pro in Model)
+				{
+						<div class="col-md-3">
+							<h2>@pro.Title </h2>
+							<img style="width: 100%" src="@pro.ImageUrl" />
+
+							<p>
+								<a class="btn btn-secondary" href="#" role="button">View details »</a>
+							</p>
+						</div>
+				}
+
+			</div>
+			<hr>
+		</div> <!-- /container -->
+	</main>
+	<footer class="container">
+		<p>© Company 2017-2019</p>
+	</footer>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+					crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+					crossorigin="anonymous"></script>
+	<script src="~/assets/js/loadmore/btnloadmore.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.contents').btnLoadmore({
+				showItem: 8,
+				whenClickBtn: 8,
+				textBtn: 'Load more...',
+				classBtn: 'btn btn-danger'
+			});
+		});
+
+	</script>
+</body>
+</html>
+
+
+<script>
+	function getItem(code, title, amount, imageUrl, stock) {
+		var a = "		<div class='col-md-3 col-6'><div class='product'><div>" +
+			"<a href='/product/274'><img src='/Uploads/Product/٠١٠٠٢٠٠١٠٠١٠٠١٠٠١٠٩١.jpg' alt='رول یدک طرح‌دار GSB کد GR-91'></a></div>" +
+			"<div class='product_info'><h6 class='product_title'><a href='/product/274'>رول یدک طرح‌دار GSB کد GR-91</a></h6>" +
+			"<div class='product_price'><span class='price'>241,155 تومان</span></div>" +
+			"<div class='add-to-cart'><button class='btn btn-fill-out btn-addtocart' onclick='addToBasket('274', '1');'><i class='icon-basket-loaded'></i>خرید</button></div></div></div></div>";
+	}
+</script>

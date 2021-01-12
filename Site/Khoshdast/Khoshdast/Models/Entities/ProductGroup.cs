@@ -15,6 +15,7 @@ namespace Models
         {
             ProductGroupRelProducts=new List<ProductGroupRelProduct>();
             ProductGroups=new List<ProductGroup>();
+            ProductGroupDiscounts = new List<ProductGroupDiscount>();
         }
         [Display(Name = "Order", ResourceType = typeof(Resources.Models.ProductGroup))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -45,6 +46,11 @@ namespace Models
         public virtual ProductGroup Parent { get; set; }
         public virtual ICollection<ProductGroup> ProductGroups { get; set; }
 
+        [Display(Name = "گروه های زیر اسلایدر باشد؟")]
+        public bool IsInHome { get; set; }
+
+        [Display(Name = "گروه برتر صفحه اصلی باشد؟")]
+        public bool IsHomeTopGroup { get; set; }
         internal class Configuration : EntityTypeConfiguration<ProductGroup>
         {
             public Configuration()
@@ -52,5 +58,10 @@ namespace Models
                 HasOptional(p => p.Parent).WithMany(j => j.ProductGroups).HasForeignKey(p => p.ParentId);
             }
         }
+
+        [Display(Name = "کد گروه محصول")]
+        public int? Code { get; set; }
+
+        public virtual ICollection<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
     }
 }

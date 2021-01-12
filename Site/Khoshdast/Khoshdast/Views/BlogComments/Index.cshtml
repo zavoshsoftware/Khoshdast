@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Models.BlogComment>
+
+@{
+ViewBag.Title = "فهرست نظرات وبلاگ" ;
+    
+}
+
+<h2>@ViewBag.Title</h2>
+
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+                  {
+                              columns.Bound(model => model.Blog.Title);
+        columns.Bound(model => model.Name);
+        columns.Bound(model => model.Email);
+        columns.Bound(model => model.Message);
+        columns.Bound(model => model.Response);
+        columns.Bound(model => model.IsActive);
+        columns.Bound(model => model.CreationDate);
+					columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+							.Template(@<text>
+									@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
+									@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
+									</text>).Width(200);  
+		})
+		  
+		.DataSource(dataSource => dataSource
+									.Server()
+							
+									.Model(model => model.Id(item => item.Id))
+					)              
+	)

@@ -1,0 +1,351 @@
+﻿@model ViewModels.ProductListViewModel
+@{
+		ViewBag.Title = Model.ProductGroup.Title;
+		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+		ViewBag.Canonical = "https://khoshdast.ir/category/" + Model.ProductGroup.UrlParam;
+		ViewBag.Description = "خرید اینترنتی " + Model.ProductGroup.Title + " از فروشگاه اینترنتی رنگ و ابزار خوشدست";
+}
+@section head{
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+}
+
+
+<div class="main_content bg-gray-list product-list-padding">
+
+
+
+	<div class="section">
+		<div class="container container-custom">
+
+			<div class="row">
+				<div class="col-md-12 pl5">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+							@foreach (var breadcrumbItem in Model.BreadcrumbItems)
+							{
+									<li class="breadcrumb-item "><a href="/category/@breadcrumbItem.UrlParam">@breadcrumbItem.Title</a></li>
+							}
+
+						</ol>
+
+						<h1>@Model.ProductGroup.Title</h1>
+						<p class="clearfix"></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="row align-items-center sort-box ">
+						<div class="col-12">
+							<div class="product_header">
+
+								<div class="custom-filter ">
+									<div class="  d-none d-lg-block">
+										<i class="fa fa-align-right"></i>
+										<ul>
+											<li>مرتب سازی بر اساس:</li>
+											<li><a id="newest" href="#" class="sortby active">جدیدترین</a></li>
+											<li><a id="mostsell" href="#" class="sortby">پرفروش ترین</a></li>
+											<li><a id="cheapest" href="#" class="sortby">ارزان ترین</a></li>
+											<li><a id="expensive" href="#" class="sortby">گران ترین</a></li>
+											<li><a id="mostdiscount" href="#" class="sortby">بیشترین تخفیف</a></li>
+										</ul>
+									</div>
+
+									<div class="row">
+										<div class="col-6">
+											<select id="ddlsortby" class="form-control form-control-sm d-lg-none d-xl-none">
+												<option value="sortby">مرتب سازی</option>
+												<option value="newest">جدیدترین</option>
+												<option value="mostsell">پرفروش ترین</option>
+												<option value="cheapest">ارزان ترین</option>
+												<option value="expensive">گران ترین</option>
+												<option value="mostdiscount">بیشترین تخفیف</option>
+											</select>
+
+										</div>
+										<div class="col-6">
+											<select id="ddlCategory" class="form-control form-control-sm d-lg-none d-xl-none" onchange="location = this.value;">
+												<option value="#">گروه محصولات</option>
+												@foreach (var @group in Model.SidebarProductGroups)
+												{
+													<option value="/category/@group.UrlParam">@group.Title</option>
+
+												}
+
+											</select>
+										</div>
+									</div>
+
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<div class="row shop_container grid">
+						@foreach (var product in Model.Products)
+						{
+
+							<div class="col-md-3 col-6">
+								<div class="product">
+									<div>
+										<a href="/product/@product.Code">
+											@if (File.Exists(Server.MapPath(product.ImageUrl)))
+											{
+												<img src="@product.ImageUrl" alt="@product.Title">
+											}
+											else
+											{
+												<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+											}
+										</a>
+
+									</div>
+									@if (product.Stock <= 0)
+									{
+										<span class="pr_flash bg-danger">ناموجود</span>
+									}
+									<div class="product_info">
+										<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
+										<div class="product_price">
+											@if (product.Stock > 0)
+											{
+												if (product.Amount == 0)
+												{
+													<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+												}
+												else
+												{
+													if (product.IsInPromotion)
+													{
+														<span class="price">@product.DiscountAmountStr</span>
+														<del>@product.AmountStr</del>
+													}
+													else
+													{
+														<span class="price">@product.AmountStr</span>
+														<del></del>
+													}
+												}
+											}
+										</div>
+
+
+										@if (product.Amount != 0 && product.Stock > 0)
+										{
+											<div class="add-to-cart">
+												<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
+										else
+										{
+											<div class="add-to-cart">
+												<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+											</div>
+										}
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+					<div class="row text-center loading-img">
+
+						<img src="~/assets/images/loading.gif" />
+					</div>
+
+				</div>
+				<div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
+					<div class="sidebar">
+						<div class="widget widjet-2   d-none d-lg-block">
+							<h5 class="widget_title">گروه محصولات</h5>
+							<ul class="widget_categories">
+								@foreach (var productGroup in Model.SidebarProductGroups)
+								{
+									<li class="simple-sidebar">
+										<a href="/category/@productGroup.UrlParam">
+											<span class="categories_name">@productGroup.Title</span>
+											@*<span class="categories_num">@productGroup.Quantity</span>*@
+										</a>
+
+
+									</li>
+								}
+							</ul>
+						</div>
+
+						<div class="widget widjet-2">
+							<h5 class="widget_title">برندها</h5>
+							<ul class="list_brand" id="list_brand">
+								@foreach (var brand in Model.SidebarBrands)
+								{
+									<li>
+										<div class="custome-checkbox">
+											<input class="form-check-input" type="checkbox" name="@brand.Brand.UrlParam" id="@brand.Brand.Id" value="@brand.Brand.Id" checked="@brand.IsSelected">
+											<label class="form-check-label" for="@brand.Brand.Id"><span>@brand.Brand.Title</span></label>
+										</div>
+									</li>
+								}
+							</ul>
+							<button class="btn btn-fill-out btn-filter" id="btnfilter">فیلتر</button>
+						</div>
+
+						@foreach (var banner in Model.SidebarBanners)
+						{
+							<div class="widget widjet-2 sidebar-banner-item">
+								<div class="shop_banner">
+
+									<div class="banner_img">
+										<a href="@banner.LinkUrl">
+											<img src="@banner.ImageUrl" height="300" alt="@banner.ImageAlt">
+										</a>
+									</div>
+
+								</div>
+							</div>
+						}
+
+					</div>
+				</div>
+			</div>
+			@if (!string.IsNullOrEmpty(Model.ProductGroup.Body))
+			{
+				<div class="row">
+					<div class="col-md-12 productgroup_descriptionn">
+						@Html.Raw(Model.ProductGroup.Body)
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+
+
+</div>
+
+@section scripts{
+
+	<script>
+		function showCollapse(id) {
+			$('#' + id).slideToggle();
+		}
+
+		$(document).ready(function () {
+			setSortLink();
+			$('select#ddlsortby').on('change',
+				'',
+				function (e) {
+					sortDdlChangeEvent($('select#ddlsortby').val());
+				});
+			$('#btnfilter').click(function () {
+				var names = [];
+				$('#list_brand input:checked').each(function () {
+					names.push(this.name);
+				});
+
+				var qs = '';
+				for (var i = 0; i < names.length; i++) {
+					if (i === 0) {
+						qs = '?brands[0]=' + names[0];
+					} else {
+						qs = qs + '&brands[' + i + ']=' + names[i];
+					}
+				}
+
+				var url = window.location.href;
+				var baseUrl = url.split('?')[0];
+
+				window.location.href = baseUrl + qs;
+
+			});
+		});
+
+		function setSortLink() {
+			var url = window.location.href;
+
+			setLink("newest", url);
+			setLink("mostsell", url);
+			setLink("cheapest", url);
+			setLink("expensive", url);
+			setLink("mostdiscount", url);
+
+			setActiveSort("newest", url);
+			setActiveSort("mostsell", url);
+			setActiveSort("cheapest", url);
+			setActiveSort("expensive", url);
+			setActiveSort("mostdiscount", url);
+
+		}
+
+		function setLink(id, url) {
+			url = removePreviousSortValFromUrl(url);
+
+			if (url.includes('?')) {
+				$("a#" + id).attr("href", url + "&sortby=" + id);
+			} else {
+				$("a#" + id).attr("href", url + "?sortby=" + id);
+			}
+		}
+
+		function setActiveSort(id, url) {
+			if (url.includes(id)) {
+				$('.sortby').removeClass('active');
+				$('#' + id).addClass('active');
+
+				$('select#ddlsortby').val(id);
+			}
+
+
+		}
+
+		function sortDdlChangeEvent(sortybyVal) {
+			if (sortybyVal !== "sortby") {
+				var url = window.location.href;
+
+				url = removePreviousSortValFromUrl(url);
+
+				if (url.includes('?')) {
+					window.location = (url + "&sortby=" + sortybyVal);
+
+				} else {
+					window.location = (url + "?sortby=" + sortybyVal);
+				}
+			}
+		}
+
+		function removePreviousSortValFromUrl(url) {
+			if (url.includes('?sortby')) {
+				url = (url.split('?sortby')[0]);
+			} else if (url.includes('&sortby')) {
+				url = (url.split('&sortby')[0]);
+			}
+
+			return url;
+		}
+	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+					crossorigin="anonymous"></script>
+
+	<script src="~/assets/js/loadmore/btnloadmore.js?v1.2"></script>
+	<script>
+		$(document).ready(function () {
+			$('.shop_container').btnLoadmore({
+				showItem: 32,
+				whenClickBtn: 32,
+				textBtn: 'مشاهده محصولات بیشتر',
+				classBtn: 'btn btn-danger'
+			});
+
+			if (@ViewBag.isLastPage===true) {
+				$('.btn-loadmore').css('display', 'none');
+			}
+		});
+
+	</script>
+
+
+}

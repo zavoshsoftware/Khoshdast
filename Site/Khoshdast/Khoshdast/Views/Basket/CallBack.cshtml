@@ -1,0 +1,157 @@
+﻿@model ViewModels.CallBackViewModel
+@{
+    ViewBag.Title = "نتیجه پرداخت";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+ 
+<div class="main_content bg-gray-list">
+
+	<div class="section">
+		<div class="container container-custom2 ">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+						</ol>
+
+						<h1>نتیجه پرداخت</h1>
+						<p class="clearfix"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container  basket-container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					@if (Model.IsSuccess)
+					{
+						<div class="text-center order_complete">
+							<i class="fas fa-check-circle"></i>
+							<div class="heading_s1">
+								<h3>مبلغ سفارش شما با موفقیت پرداخت شد.</h3>
+							</div>
+							<p>ممنون بابت تکمیل سفارش. سفارش شما به انبار ارجاع داده شد و کارشناسان ما جهت هماهنگی ارسال با شما تماس خواهند گرفت</p>
+							<table class="table table-bordered table-hover" style="direction: rtl;">
+								<tbody>
+
+								<tr>
+									<td>شماره فاکتور: </td>
+									<td>@Model.OrderCode </td>
+								</tr>
+								<tr>
+									<td>شماره پیگیری: </td>
+									<td>@Model.RefrenceId </td>
+								</tr>
+
+								</tbody>
+							</table>
+
+
+
+							<div class="panel panel-primary">
+								<div class="panel-heading"></div>
+								<div class="panel-body">
+									<section class="ls section_padding_top_100 section_padding_bottom_75">
+
+										<div class="table-responsive">
+											<table class="table cart-table topmargin_0 tbl-basket">
+												<thead>
+												<tr>
+													<td class="product-info">محصول</td>
+													<td class="product-price-td">قیمت</td>
+													<td class="product-quantity">تعداد</td>
+													<td class="product-subtotal">جمع کل</td>
+												</tr>
+												</thead>
+												<tbody>
+												@foreach (var orderDetail in Model.OrderDetails)
+												{
+													<tr class="cart_item">
+														<td class="product-info">
+															<div class="media">
+																<div class="media-right">
+																	<a href="product-right.html">
+																		<img class="media-object cart-product-image" src="@orderDetail.Product.ImageUrl" height="100px">
+																	</a>
+																</div>
+																<div class="media-body">
+																	<h4 class="media-heading">
+																		<a href="product-right.html">@orderDetail.Product.Title</a>
+																	</h4>
+
+																</div>
+															</div>
+														</td>
+														<td class="product-price">
+															@if (orderDetail.Product.IsInPromotion == true)
+															{
+																<span class="amount">@orderDetail.Product.DiscountAmountStr</span>
+
+															}
+															else
+															{
+																<span class="amount">@orderDetail.Product.AmountStr</span>
+
+															}
+														</td>
+														<td class="product-quantity">
+															<div class="quantity">
+																@orderDetail.Quantity
+															</div>
+														</td>
+														<td class="product-subtotal">
+															<span class="amount">@string.Format("{0:n0}", orderDetail.Amount) تومان</span>
+														</td>
+
+													</tr>
+
+												}
+												<tr>
+													<td colspan="4" class="border-left">جمع خرید: @string.Format("{0:n0}", Model.Order.SubTotalStr) تومان</td>
+
+												</tr>
+												<tr>
+													<td colspan="4" class="border-left">تخفیفات: @string.Format("{0:n0}", Model.Order.DiscountAmountStr) تومان</td>
+
+												</tr>
+												<tr>
+													<td colspan="4" class="border-left"><strong>مبلغ پرداختی: @string.Format("{0:n0}", Model.Order.TotalAmountStr) تومان</strong></td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</section>
+
+								</div>
+							</div>
+						</div>
+					}
+					else
+					{
+						<div class="text-center order_complete">
+							<i class="fas fa-check-circle"></i>
+							<div class="heading_s1">
+								<h3>فرایند پرداخت سفارش با خطا رو به رو شده است.</h3>
+							</div>
+							<p>کاربر گرامی متاسفانه فرایند پرداخت شما تکمیل نشده است. اگر مبلغی از حساب شما کسر شده باشد، حداکثر ظرف مدت 72 سایت به حساب شما عودت می گردد.</p>
+							<table class="table table-hover" style="direction: rtl;">
+								<tbody>
+
+								<tr>
+									<td>کد خطا: </td>
+									<td>@Model.RefrenceId </td>
+								</tr>
+
+								</tbody>
+							</table>
+
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

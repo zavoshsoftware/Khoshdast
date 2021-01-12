@@ -4,13 +4,15 @@
 <h2>@ViewBag.Title</h2>
 
 @(Html.Kendo().Grid(Model)
-        .Name("Grid")
-        .Columns(columns =>
-        {
-        columns.Bound(model => model.Title);
-        columns.Bound(model => model.Order);
-	        columns.Bound(item => @item.Id).Title("تصویر").Filterable(false).Groupable(false)
-		        .Template(@<text>
+			.Name("Grid")
+			.Columns(columns =>
+			{
+			columns.Bound(model => model.Code);
+			columns.Bound(model => model.Order);
+			columns.Bound(model => model.Title);
+			columns.Bound(model => model.UrlParam);
+			columns.Bound(item => @item.Id).Title("تصویر").Filterable(false).Groupable(false)
+					.Template(@<text>
              <img src="@item.ImageUrl" height="100px"/>
                     </text>).Width(200);
         columns.Bound(model => model.CreationDate);
@@ -18,7 +20,8 @@
                       .Template(@<text>
                 @Html.ActionLink("ویرایش", "Edit", new { id = @item.Id, parentId =ViewBag.parentId }, new { @class = "k-button" })
                 @Html.ActionLink("حذف", "Delete", new { id = @item.Id }, new { @class = "k-button" })
-                @Html.ActionLink("مدیریت زیر گروه ها", "Index", new { id = @item.Id }, new { @class = "k-button " + ViewBag.classItem })
+                @Html.ActionLink("مدیریت زیر گروه ها", "Index", new { id = @item.Id }, new { @class = "k-button " })
+                @Html.ActionLink("اعمال تخفیف برای محصولات گروه", "index","ProductGroupDiscounts", new { id = @item.Id }, new { @class = "k-button " })
                     </text>).Width(200);
         })
         .ToolBar(toolbar =>

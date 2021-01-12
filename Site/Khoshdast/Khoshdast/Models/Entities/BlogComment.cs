@@ -21,6 +21,14 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public string Message { get; set; }
 
+        [Display(Name = "پاسخ")]
+        [DataType(DataType.MultilineText)]
+        public string Response { get; set; }
+
+        [Display(Name = "سایت")]
+        public string Website { get; set; }
+
+        [Display(Name="عنوان مطلب")]
         public Guid BlogId { get; set; }
         public virtual Blog Blog { get; set; }
 

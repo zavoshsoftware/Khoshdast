@@ -38,6 +38,9 @@ namespace Models
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<TextItem> TextItems { get; set; }
         public DbSet<ContactUsForm> ContactUsForms { get; set; }
-     
+        public DbSet<SidebarBanner> SidebarBanners { get; set; }
+
+        public DbSet<TextItemType> TextItemTypes { get; set; }
+        public DbSet<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
     }
 }

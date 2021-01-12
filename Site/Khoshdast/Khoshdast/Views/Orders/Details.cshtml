@@ -1,0 +1,414 @@
+﻿@model ViewModels.OrderDetailViewModel
+
+@{
+		ViewBag.Title = "جزییات سفارش کد " + Model.Order.Code;
+		Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>جزییات سفارش کد @Html.DisplayFor(model => model.Order.Code)</h2>
+<a href="/orders" class="btn btn-warning">بازگشت به لیست سفارشات</a>
+<a href="/Report/Invoice/@Model.Order.Id" class="btn btn-default" target="_blank">چاپ فاکتور <i class="fa fa-print"></i></a>
+
+
+ 
+	<div class="panel panel-info">
+		<div class="panel-heading">مشخصات سفارش</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4" style="border-left: 1px solid #ddd; min-height: 146px;">
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.Code, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.Code)
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.OrderStatus.Title, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DropDownList("OrderStatusId")
+							<button type="button" onclick="changeOrderStatus('@Model.Order.Code');" class="btn btn-warning">تغییر وضعیت</button>
+
+						</div>
+					</div>
+
+
+
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.SubTotalStr, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.SubTotalStr)
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.DiscountAmountStr, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.DiscountAmountStr)
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.ShippingAmount, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.ShippingAmount)
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.TotalAmountStr, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.TotalAmountStr)
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+				<div class="col-md-4" style="border-left: 1px solid #ddd; min-height: 146px;">
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.City.Title, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.City.Title)
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.Address, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.Address)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.PostalCode, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.PostalCode)
+						</div>
+					</div>
+
+
+
+				</div>
+
+				<div class="col-md-4">
+
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								<label class="control-label">وضعیت پرداخت</label>
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.EditorFor(model => model.Order.IsPaid)
+
+							<button type="button" onclick="changeOrderPayment('@Model.Order.Code');" class="btn btn-warning">تغییر وضعیت پرداخت</button>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.PaymentDesc, new { @class = "control-label" })
+
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.EditorFor(model => model.Order.PaymentDesc)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.PaymentDate, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.PaymentDate)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.SaleReferenceId, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.SaleReferenceId)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.PaymentTypeTitle, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.PaymentTypeTitle)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
+								@Html.LabelFor(model => model.Order.CustomerDesc, new { @class = "control-label" })
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.CustomerDesc)
+						</div>
+					</div>
+
+
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-info">
+					<div class="panel-heading">مشخصات مشتری</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-3">
+										@Html.LabelFor(model => model.Order.User.FullName, new { @class = "control-label" })
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.User.FullName)
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										@Html.LabelFor(model => model.Order.User.CellNum, new { @class = "control-label" })
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.User.CellNum)
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<label class="control-label">
+											تاریخ ثبت نام
+										</label>
+
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.User.CreationDateStr)
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										@Html.LabelFor(model => model.Order.User.Email, new { @class = "control-label" })
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.User.Email)
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										@Html.LabelFor(model => model.Order.DeliverFullName, new { @class = "control-label" })
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.DeliverFullName)
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										@Html.LabelFor(model => model.Order.DeliverCellNumber, new { @class = "control-label" })
+									</div>
+									<div class="col-md-9">
+										@Html.DisplayFor(model => model.Order.DeliverCellNumber)
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="panel panel-info">
+					<div class="panel-heading">لیست سفارشات</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th class="text-right">محصول</th>
+											<th class="text-right">بارکد</th>
+											<th class="text-right">تعداد</th>
+											<th class="text-right">قیمت</th>
+											<th class="text-right">جمع</th>
+											<th class="text-right">موجودی انبار</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var detail in Model.OrderDetails)
+										{
+										<tr>
+											<td>@detail.Product.Title</td>
+											<td>@detail.Product.Barcode</td>
+											<td>@detail.Quantity</td>
+											<td>@detail.PriceStr</td>
+											<td>@detail.AmountStr</td>
+											<td>@detail.Product.Stock</td>
+										</tr>
+}
+									</tbody>
+								</table>
+
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">ارسال پیامک به مشتری</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td>متن پیامک</td>
+								<td>
+									<textarea id="txtUsersms" style="width: 100%;" ></textarea><br/>
+									<button class="btn btn-success" style="margin-top: 20px;" onclick="sendUserSms('@Model.Order.Code');">ارسال پیامک</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">یادداشت</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<tr>
+								<td>یادداشت بر روی سفارش</td>
+								<td>
+								
+									@Html.EditorFor(model => model.Order.Description)
+									<br/>
+									<dfn>این متن به کاربر نمایش داده نخواهد شد</dfn><br/>
+									<button class="btn btn-success" style="margin-top: 20px;" onclick="postDesc('@Model.Order.Code');">ثبت یادداشت</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="loading-fuulpage">Loading&#8230;</div> 
+
+	@section scripts{
+		<script>
+			function postDesc(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var desc = $('#Order_Description').val();
+
+				$.ajax(
+					{
+						url: "/orders/SubmitOrderDesc",
+						data: { code: code, desc: desc },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+			function sendUserSms(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var userSms = $('#txtUsersms').val();
+
+				$.ajax(
+					{
+						url: "/orders/SendSmsToUser",
+						data: { code: code, userSms: userSms },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+
+			function changeOrderStatus(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var statusId = $('#OrderStatusId').val();
+				$.ajax(
+					{
+						url: "/orders/ChangeOrderStatus",
+						data: { code: code, statusId: statusId },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+
+			function changeOrderPayment(code) {
+				$('.loading-fuulpage ').css('display', 'block');
+				var statusId = $('#OrderStatusId').val();
+
+				var statusId = $('#Order_IsPaid').val();
+				var paymentDesc = $('#Order_PaymentDesc').val();
+				$.ajax(
+					{
+						url: "/orders/ChangeOrderPaymentStatus",
+						data: { code: code, statusId: statusId, paymentDesc: paymentDesc },
+						type: "GET"
+					}).done(function (result) {
+						location.reload();
+					});
+			}
+		</script>
+	}
+

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ViewModels.AdminProductListViewModel>
+
+@{
+ViewBag.Title = "فهرست محصولات";
+    
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+        @(Html.Kendo().Grid(Model)
+							.Name("Grid")
+							.Columns(columns =>
+							{
+							columns.Bound(model => model.BarCode);
+							columns.Bound(model => model.Title);
+							columns.Bound(model => model.ProductGroupTitle);
+							columns.Bound(model => model.BrandTitle);
+							columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
+						  columns.Bound(model => model.Amount);
+						  columns.Bound(model => model.IsInPromotion);
+					    columns.Bound(model => model.Stock);
+					    columns.Bound(model => model.IsActive);
+							columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+										.Template(@<text>
+										@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
+										@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
+										</text>).Width(200);  
+							})
+							.ToolBar(toolbar =>
+										{				
+											toolbar.Custom().Action("Create","Products").Text("افزودن");                          
+										}
+							)         .Filterable().Pageable().Sortable()
+							.DataSource(dataSource => dataSource
+														.Server()
+												.PageSize(50)
+														.Model(model => model.Id(item => item.Id))
+										)              
+							)

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Models.ProductGroupDiscount>
+
+@{
+ViewBag.Title = "فهرست تخفیفات گروه محصول";
+    
+	Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+                  {
+                            columns.Bound(model => model.ProductGroup.Title);
+        columns.Bound(model => model.Amount);
+        columns.Bound(model => model.IsPercentage);
+        columns.Bound(model => model.ExpireDate);
+        columns.Bound(model => model.IsActive);
+        columns.Bound(model => model.CreationDate);
+					columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+							.Template(@<text>
+									@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
+									@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
+									</text>).Width(200);
+									})
+		.ToolBar(toolbar =>
+		{
+			if (!Model.Any())
+			{
+				toolbar.Custom().Action("Create", "ProductGroupDiscounts").Text("افزودن");
+			}
+		}
+	          )
+		.DataSource(dataSource => dataSource
+									.Server()
+
+									.Model(model => model.Id(item => item.Id))
+					)
+	)

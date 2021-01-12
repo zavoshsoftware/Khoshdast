@@ -23,7 +23,7 @@ namespace Models
         [Display(Name = "IsPercent", ResourceType = typeof(Resources.Models.DiscountCode))]
         public bool IsPercent { get; set; }
         [Display(Name = "Amount", ResourceType = typeof(Resources.Models.DiscountCode))]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")] 
         public decimal Amount { get; set; }
 
         [Display(Name = "IsMultiUsing", ResourceType = typeof(Resources.Models.DiscountCode))]

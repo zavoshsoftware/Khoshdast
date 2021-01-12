@@ -24,8 +24,7 @@ namespace Models
         public int Order { get; set; }
 
         [Display(Name = "Code", ResourceType = typeof(Resources.Models.Product))]
-        [StringLength(15, ErrorMessage = "طول {0} نباید بیشتر از {1} باشد")]
-        public string Code { get; set; }
+        public int Code { get; set; }
 
         [Display(Name = "Title", ResourceType = typeof(Resources.Models.Product))]
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
@@ -91,6 +90,13 @@ namespace Models
         [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
         public bool IsInHome { get; set; }
 
+        [Display(Name = "پرفروش ترین ها؟")]
+        public bool IsTopSell { get; set; }
+
+        [Display(Name = "برچسب ها")]
+        public string Tags { get; set; }
+
+
         public virtual ICollection<ProductGroupRelProduct> ProductGroupRelProducts { get; set; }
 
 
@@ -121,6 +127,7 @@ namespace Models
         public virtual ICollection<ProductComment> ProductComments { get; set; }
  
         public bool IsAvailable { get; set; }
+      
         internal class configuration : EntityTypeConfiguration<Product>
         {
             public configuration()
@@ -128,5 +135,9 @@ namespace Models
                  HasRequired(p => p.Brand).WithMany(t => t.Products).HasForeignKey(p => p.BrandId);
             }
         }
+        [Display(Name="بارکد")]
+        public string Barcode { get; set; }
+
+        public Guid? ProductGroupDiscountId { get; set; }
     }
 }

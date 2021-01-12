@@ -1,689 +1,174 @@
-﻿
+﻿@model ViewModels.HomeViewModel
 @{
-    Layout = null;
+		Layout = null;
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-	<!-- Meta -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="رنگ خوشدست">
-
-	<!-- SITE TITLE -->
-	<title>رنگ خوشدست</title>
-	<!-- Favicon Icon -->
-	@*<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">*@
-	<!-- Animation CSS -->
+	<title>رنگ و ابزار خوشدست</title>
+	<link rel="canonical" href="https://khoshdast.ir/" />
+	<meta name="description" content="@Model.HomeMetaDescription">
+	<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
 	<link rel="stylesheet" href="/assets/css/animate.css">
-	<!-- Latest Bootstrap min CSS -->
 	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-	<!-- Icon Font CSS -->
 	<link rel="stylesheet" href="/assets/css/all.min.css">
 	<link rel="stylesheet" href="/assets/css/ionicons.min.css">
 	<link rel="stylesheet" href="/assets/css/themify-icons.css">
 	<link rel="stylesheet" href="/assets/css/linearicons.css">
 	<link rel="stylesheet" href="/assets/css/flaticon.css">
 	<link rel="stylesheet" href="/assets/css/simple-line-icons.css">
-	<!--- owl carousel CSS-->
 	<link rel="stylesheet" href="/assets/owlcarousel/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="/assets/owlcarousel/css/owl.theme.css">
 	<link rel="stylesheet" href="/assets/owlcarousel/css/owl.theme.default.min.css">
-	<!-- Magnific Popup CSS -->
 	<link rel="stylesheet" href="/assets/css/magnific-popup.css">
-	<!-- Slick CSS -->
 	<link rel="stylesheet" href="/assets/css/slick.css">
 	<link rel="stylesheet" href="/assets/css/slick-theme.css">
-	<!-- Style CSS -->
-	<link rel="stylesheet" href="/assets/css/style.css">
-	<link rel="stylesheet" href="/assets/css/responsive.css">
-	<!-- RTL CSS -->
+	<link rel="stylesheet" href="/assets/css/style.css?v=1.4">
+	<link rel="stylesheet" href="/assets/css/responsive.css?v=1.2">
 	<link href="~/assets/css/font-awesome.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/assets/css/rtl-style.css">
-	<link href="~/assets/css/style-zavosh.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/assets/css/rtl-style.css?v=1.1">
+	<link href="~/assets/css/style-zavosh.css?v=1.5" rel="stylesheet" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-P83QNZCTEW"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-P83QNZCTEW');
+	</script>
 </head>
 
 <body dir="rtl">
 
-	<!-- LOADER -->
-	<div class="preloader">
-		<div class="lds-ellipsis">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</div>
-	<!-- END LOADER -->
-	<!-- Home Popup Section -->
-	@*<div class="modal fade subscribe_popup" id="onload-popup" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-md modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true"><i class="ion-ios-close-empty"></i></span>
-					</button>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="popup_content">
-								<div class="popup-text">
-									<div class="heading_s3 text-center">
-										<h4>Subscribe and Get 25% Discount!</h4>
-									</div>
-									<p>Subscribe to the newsletter to receive updates about new products.</p>
-								</div>
-								<form method="post" class="rounded_input">
-									<div class="form-group">
-										<input name="email" required type="email" class="form-control" placeholder="Enter Your Email">
-									</div>
-									<div class="form-group">
-										<button class="btn btn-fill-line btn-block text-uppercase btn-radius" title="Subscribe" type="submit">Subscribe</button>
-									</div>
-								</form>
-								<div class="chek-form">
-									<div class="custome-checkbox">
-										<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="">
-										<label class="form-check-label" for="exampleCheckbox3"><span>Don't show this popup again!</span></label>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+	@*<div class="preloader">
+			<div class="lds-ellipsis">
+				<span></span>
+				<span></span>
+				<span></span>
 			</div>
-		</div>
-	</div>*@
-	<!-- End Screen Load Popup Section -->
-	<!-- START HEADER -->
-	<header class="header_wrap fixed-top header_with_topbar">
-		<div class="top-header">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<div class="d-flex align-items-center justify-content-center justify-content-md-start">
-					 
-						 
-							<ul class="contact_detail text-center text-lg-left">
-								<li><a href="tel:00982144289714"> <i class="ti-mobile"></i><span>021-44289714</span></a></li>
-								<li><a href="https://api.whatsapp.com/send?phone=989396084722&text=سلام و وقت بخیر">
-									<i class="fa fa-whatsapp"></i><span>مکالمه از طریق Whatssapp</span>
-								</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="text-center text-md-right">
-							<ul class="header_list">
-							 
-								<li><a href="login.html"><i class="ti-user"></i><span>ورود</span></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="bottom_header dark_skin main_menu_uppercase">
-			<div class="container">
-				<nav class="navbar navbar-expand-lg">
-					<a class="navbar-brand" href="/">
-						<img class="logo_light" src="/assets/images/logo_light.png" alt="logo" />
-						<img class="logo_dark" src="/assets/images/logo_dark.png" alt="logo" />
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false">
-						<span class="ion-android-menu"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-						<ul class="navbar-nav">
-							<li class="dropdown  dropdown-mega-menu">
-								<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">ابزار پتینه</a>
-								<div class="dropdown-menu">
-									<ul class="mega-menu d-lg-flex">
-										<li class="mega-menu-col col-lg-9">
-											<ul class="d-lg-flex">
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی اول</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">لیسه</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">مالیه استیل</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">ماله بلکا</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی دوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">طرح چوب</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">کاردک هنری</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی سوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">کاردک</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">اسفنجی SF</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">sb tm</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">ابزار tm</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<div class="header_banner">
-												<div class="header_banner_content">
-													<div class="shop_banner">
-														<div class="banner_img overlay_bg_40">
-															<img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-														</div>
-														<div class="shop_bn_content">
-															<h5 class="text-uppercase shop_subtitle">انوع ابزار پتینه</h5>
-															<h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-															<a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">اسپری ها</a>
-								<div class="dropdown-menu">
-									<ul>
-										<li><a class="dropdown-item nav-link nav_item" href="#">اسپری گلریز</a></li>
-										<li><a class="dropdown-item nav-link nav_item" href="#">اسپری کیش</a></li>
-										<li><a class="dropdown-item nav-link nav_item" href="#">اسپری دوپلی</a></li>
-										<li><a class="dropdown-item nav-link nav_item" href="#">اسپری الوان</a></li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown dropdown-mega-menu">
-								<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">غلطک</a>
-								<div class="dropdown-menu">
-									<ul class="mega-menu d-lg-flex">
-										<li class="mega-menu-col col-lg-3">
-											<ul>
-												<li class="dropdown-header">غلطک های طرح دار</li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-											</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<ul>
-												<li class="dropdown-header">غلطک های ساده</li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>
-											</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<ul>
-												<li class="dropdown-header">غلطک های GR</li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>			</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<ul>
-												<li class="dropdown-header">غلطک های سری Z</li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته اول</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته دوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته سوم</a></li>
-												<li><a class="dropdown-item nav-link nav_item" href="#">زیر دسته جهارم</a></li>	</ul>
-										</li>
-									</ul>
-									<div class="d-lg-flex menu_banners">
-										<div class="col-sm-4">
-											<div class="header-banner">
-												<img src="/assets/images/menu-banner1.jpg" alt="menu_banner1">
-												<div class="banne_info">
-													<h6>تا 20% تخفیف</h6>
-													<h4>غلطک های سری GR</h4>
-													<a href="#">خرید کنید</a>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="header-banner">
-												<img src="/assets/images/menu-banner2.jpg" alt="menu_banner2">
-												<div class="banne_info">
-													<h6>تا 20% تخفیف</h6>
-													<h4>غلطک های سری Z</h4>
-													<a href="#">خرید کنید</a>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="header-banner">
-												<img src="/assets/images/menu-banner3.jpg" alt="menu_banner3">
-												<div class="banne_info">
-													<h6>تا 20% تخفیف</h6>
-													<h4>غلطک های پارچه ای</h4>
-													<a href="#">خرید کنید</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown  dropdown-mega-menu">
-								<a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">رنگ و ابزار هنری</a>
-								<div class="dropdown-menu">
-									<ul class="mega-menu d-lg-flex">
-										<li class="mega-menu-col col-lg-9">
-											<ul class="d-lg-flex">
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی اول</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک انتیک</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک متالیک</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">اکرلیک هنری</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">اکلیل</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">ورق طلا</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رنگ کهنه کاری</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی دوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">جوهر سنگ</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رنگ سرامیک</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رنگ هنری</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">بتونه</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">براق کننده</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">فلورسنت</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی سوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">جوهر الکلی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">خمیر رنگ</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رزین اپوکسی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رزین سنگ</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رنگ صدفی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">رنگ پتینه</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<div class="header_banner">
-												<div class="header_banner_content">
-													<div class="shop_banner">
-														<div class="banner_img overlay_bg_40">
-															<img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-														</div>
-														<div class="shop_bn_content">
-															<h5 class="text-uppercase shop_subtitle">انوع ابزار هنری</h5>
-															<h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-															<a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="dropdown dropdown-mega-menu">
-								<a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">ابزار ساختمانی</a>
-								<div class="dropdown-menu">
-									<ul class="mega-menu d-lg-flex">
-										<li class="mega-menu-col col-lg-9">
-											<ul class="d-lg-flex">
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی اول</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">تیغ کاردک</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">سنباده</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">سینی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">قلم نقاشل</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">لیسه پلاستیکی</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی دوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">سنباده گیر</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">نردبان چوبی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">چسب نواری</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">کاور</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">لیسه کاغذ دیواری</a></li>
-													</ul>
-												</li>
-												<li class="mega-menu-col col-lg-4">
-													<ul>
-														<li class="dropdown-header">دسته بندی سوم</li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">مقلاویز</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">نوار کناف</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">پادری</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">غلطک رنگ آمیزی</a></li>
-														<li><a class="dropdown-item nav-link nav_item" href="#">میکسر</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-										<li class="mega-menu-col col-lg-3">
-											<div class="header_banner">
-												<div class="header_banner_content">
-													<div class="shop_banner">
-														<div class="banner_img overlay_bg_40">
-															<img src="/assets/images/shop-banner01.jpg" alt="shop_banner" />
-														</div>
-														<div class="shop_bn_content">
-															<h5 class="text-uppercase shop_subtitle">انوع ابزار ساختمانی</h5>
-															<h3 class="text-uppercase shop_title">تا 30% تخفیف</h3>
-															<a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">مشاهده</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li><a class="nav-link nav_item" href="contact.html">مولتی سورفیس</a></li>
-						</ul>
-					</div>
-					<ul class="navbar-nav attr-nav align-items-center">
-						<li>
-							<a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
-							<div class="search_wrap">
-								<span class="close-search"><i class="ion-ios-close-empty"></i></span>
-								<form>
-									<input type="text" placeholder="جستجو" class="form-control" id="search_input">
-									<button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
-								</form>
-							</div><div class="search_overlay"></div><div class="search_overlay"></div>
-						</li>
-						<li class="dropdown cart_dropdown">
-							<a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
-							@*<div class="cart_box dropdown-menu dropdown-menu-right">
-								<ul class="cart_list">
-									<li>
-										<a href="#" class="item_remove"><i class="ion-close"></i></a>
-										<a href="#"><img src="/assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a>
-										<span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>78.00</span>
-									</li>
-									<li>
-										<a href="#" class="item_remove"><i class="ion-close"></i></a>
-										<a href="#"><img src="/assets/images/cart_thamb2.jpg" alt="cart_thumb2">Ornare sed consequat</a>
-										<span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>81.00</span>
-									</li>
-								</ul>
-								<div class="cart_footer">
-									<p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
-									<p class="cart_buttons"><a href="#" class="btn btn-fill-line btn-radius view-cart">View Cart</a><a href="#" class="btn btn-fill-out btn-radius checkout">Checkout</a></p>
-								</div>
-							</div>*@
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<!-- END HEADER -->
-<!-- START SECTION BANNER -->
+		</div>*@
+
+	@Html.Partial("FrontEnd/_MenuPartial")
+
+
 	<div class="staggered-animation-wrap">
-		<div class="custom-container">
-			<div class="row">
-				<div class="col-lg-10">
+		<div class="container">
+			<div class="row slide-row">
+				<div class="col-lg-9 col-md-9">
 					<div class="banner_section shop_el_slider">
 						<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
 							<div class="carousel-inner">
-								<div class="carousel-item active background_bg" data-img-src="/assets/images/banner9.jpg">
-									<div class="banner_slide_content banner_content_inner">
-										<div class="col-lg-7 col-10">
-											<div class="banner_content3 overflow-hidden">
-												<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">با خرید از سایت 10% تخفیف بگیرید</h5>
-												<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">انواع ابزارهای ساختمانی</h2>
-												<a class="btn btn-fill-out btn-radius staggered-animation text-uppercase" href="#" data-animation="slideInRight" data-animation-delay="1.5s">همین حالا خرید کنید</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="carousel-item background_bg" data-img-src="/assets/images/banner7.jpg">
-									<div class="banner_slide_content banner_content_inner">
-										<div class="col-lg-8 col-10">
-											<div class="banner_content3 overflow-hidden">
-												<h5 class="mb-3 staggered-animation font-weight-light" data-animation="slideInRight" data-animation-delay="0.5s">با خرید از سایت 10% تخفیف بگیرید</h5>
-												<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">انواع غلطک های ساده و طراح دار</h2>
-												<a class="btn btn-fill-out btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInRight" data-animation-delay="1.5s">همین حالا خرید کنید</a>
-											</div>
-										</div>
-									</div>
-								</div>
-					 
+
+
+								@**@
+
+								@{
+										int j = 0;
+										foreach (var slider in Model.Sliders)
+										{
+											if (j == 0)
+											{
+														<div class="carousel-item active background_bg" data-img-src="@slider.ImageUrl"  onclick="window.location.href='@slider.LandingPage';">
+															<div class="banner_slide_content banner_content_inner">
+																<div class="col-lg-7 col-10">
+																	@*<div class="banner_content3 overflow-hidden">
+																		<h5 class="mb-3 staggered-animation font-weight-light d-none d-lg-block" data-animation="slideInRight" data-animation-delay="0.5s">@slider.Summery</h5>
+																		<h2 class="staggered-animation" data-animation="slideInRight" data-animation-delay="1s">@slider.Title</h2>
+																		<a class="btn btn-fill-out btn-radius staggered-animation" href="@slider.LandingPage" data-animation="slideInRight" data-animation-delay="1.5s">@slider.LinkTitle</a>
+																	</div>*@
+																</div>
+															</div>
+														</div>
+}
+											else
+											{
+														<div class="carousel-item background_bg" data-img-src="@slider.ImageUrl"  onclick="window.location.href='@slider.LandingPage';">
+															<div class="banner_slide_content banner_content_inner">
+																<div class="col-lg-8 col-10">
+																W
+																</div>
+															</div>
+														</div>
+}
+											j++;
+										}
+								}
 							</div>
 							<ol class="carousel-indicators indicators_style3">
-								<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-								<li data-target="#carouselExampleControls" data-slide-to="1"></li>
+								@for (int i = 0; i < Model.SliderQuantity; i++)
+								{
+									if (i == 0)
+									{
+												<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+
+									}
+									else
+									{
+												<li data-target="#carouselExampleControls" data-slide-to="@i"></li>
+
+									}
+								}
 							</ol>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-2 d-none d-lg-block">
-					<div class="shop_banner2 el_banner1">
-						<a href="#" class="hover_effect1">
-							<div class="el_title text_white">
-								<h6>غلطک های طرح دار</h6>
-								<span>15% تخفیف</span>
-							</div>
-							<div class="el_img">
-								<img src="/assets/images/shop-banner-06.png" alt="shop_banner_img6">
-							</div>
+				<div class="col-lg-3 col-md-3">
+
+					<div class="leftslide shop_banner3">
+						<a href="@Model.SliderLeftBanners1.LinkUrl" class="hover_effect1">
+							<img src="@Model.SliderLeftBanners1.ImageUrl" alt="@Model.SliderLeftBanners1.Title">
 						</a>
 					</div>
-					<div class="shop_banner2 el_banner2">
-						<a href="#" class="hover_effect1">
-							<div class="el_title text_white">
-								<h6>رنگ و ابزار هنری</h6>
-								<span><u>مشاهده محصولات</u></span>
-							</div>
-							<div class="el_img">
-								<img src="/assets/images/shop-banner-07.png" alt="shop_banner_img7">
-							</div>
+
+					<div class="leftslide">
+						<a href="@Model.SliderLeftBanners2.LinkUrl" class="hover_effect1">
+							<img src="@Model.SliderLeftBanners2.ImageUrl" alt="@Model.SliderLeftBanners2.Title">
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	@*<div class="banner_section slide_wrap shop_banner_slider staggered-animation-wrap">
-		<div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active background_bg" data-img-src="/assets/images/banner9.jpg">
-					<div class="banner_slide_content banner_content_inner">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-6 col-md-8 col-sm-9 col-10">
-									<div class="banner_content2">
-										<h5 class="mb-2 mb-sm-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">با خرید از سایت 10% تخفیف بگیرید</h5>
-										<h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">انواع ابزارهای ساختمانی</h2>
-										<a class="btn btn-border-fill btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">همین حالا خرید کنید</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item background_bg" data-img-src="/assets/images/banner7.jpg">
-					<div class="banner_slide_content banner_content_inner">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-6 col-md-8 col-sm-9 col-10">
-									<div class="banner_content2">
-										<h5 class="mb-2 mb-sm-3 staggered-animation font-weight-light" data-animation="fadeInDown" data-animation-delay="0.2s">با خرید از سایت 10% تخفیف بگیرید</h5>
-										<h2 class="staggered-animation" data-animation="fadeInDown" data-animation-delay="0.3s">انواع غلطک های ساده و طراح دار</h2>
-										<a class="btn btn-border-fill btn-radius staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="fadeInUp" data-animation-delay="0.4s">همین حالا خرید کنید</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	 
-			</div>
-			<ol class="carousel-indicators indicators_style2">
-				<li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleControls" data-slide-to="1"></li>
-			</ol>
-		</div>
-	</div>*@
-	<!-- END SECTION BANNER -->
-	<!-- END MAIN CONTENT -->
+
+
 	<div class="main_content">
 
-		<!-- START SECTION SHIPPING INFO -->
-	<div class="section small_pb">
-		<div class="container">
-			<div class="row no-gutters">
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-shipped"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>ارسال رایگان</h6>
-							<p>به سراسر ایران</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-money-back"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>مرجوعی کالا</h6>
-							<p>در صورت عدم رضایت</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-support"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>پشتیبانی 24 ساعته</h6>
-							<p>خدمات مشتریان</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="icon_box icon_box_style3">
-						<div class="icon">
-							<i class="flaticon-lock"></i>
-						</div>
-						<div class="icon_box_content">
-							<h6>پرداخت ایمن</h6>
-							<p>از طریق درگاه های پرداخت</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-		
-		
-		<div class="section small_pb small_pt">
+		<div class="section small_pb small_pt productgroup-home">
 			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-6">
-						<div class="heading_s4 text-center">
-							<h2>برترین گروه محصولات</h2>
-						</div>
-						<p class="text-center leads">لیست زیر برترین گروه محصولات رنگ خوشدست را مشاهده می کنید. برای مشاهده محصولات هر گروه بر روی آن کلیک کنید</p>
-					</div>
-				</div>
+
 				<div class="row align-items-center">
-					<div class="col-12">
-						<div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "5"}, "991":{"items": "6"}, "1199":{"items": "7"}}'>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/1.jpg" alt="cat_img1" />
-										<span>غلطک های طرح دار</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/2.jpg" alt="cat_img1" />
+					@*<div class="col-12">*@
 
-										<span>ابزار پتینه</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/3.jpg" alt="cat_img1" />
+							@foreach (var productGroup in Model.HomeProductGroups)
+							{
+								<div class="col-md-3 col-xs-6 col-6">
+									<div class="item">
+										<div class="categories_box">
+											<a href="/category/@productGroup.UrlParam">
+												<img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
+												@*<span>@productGroup.Title</span>*@
+											</a>
+										</div>
+									</div>
+									</div>
+							}
 
-										<span>رنگ و ابزار هنری</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/4.jpg" alt="cat_img1" />
-
-										<span>مولتی سورفیس</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/5.jpg" alt="cat_img1" />
-
-										<span>ابزار ساختمانی</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/6.jpg" alt="cat_img1" />
-
-										<span>مهر و شابلون</span>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="categories_box">
-									<a href="#">
-										<img src="/assets/images/pg/7.jpg" alt="cat_img1" />
-
-										<span>اسپری</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					 
+					@*</div>*@
 				</div>
 			</div>
 		</div>
-	<!-- START SECTION SHIPPING INFO -->
-		<!-- START SECTION SHOP -->
-		<div class="section small_pt pb_20">
+
+		<div class="section small_pt pb_20 home-bg1">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -693,72 +178,107 @@
 						<div class="small_divider clearfix"></div>
 					</div>
 				</div>
-				<div class="row shop_container">
-					@for (int i = 1; i <= 8; i++)
-					{
-						var imgurl = "/assets/images/web/"+i+".jpg";
-							
-						<div class="col-lg-3 col-md-4 col-6">
-							<div class="product_box text-center">
-								<div class="product_img">
-									<a href="shop-product-detail.html">
-										<img src="@imgurl" alt="furniture_img1">
-									</a>
-							 
-								</div>
-								<div class="product_info">
-									<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
-									<div class="product_price">
-										<span class="price">125000 تومان</span>
-										<del>188000 تومان</del>
-									</div>
-								 
-								 
-									<div class="add-to-cart">
-										<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</a>
-									</div>
-								</div>
-							</div>
-						</div>
+				<div class="row shop_container top-product">
+					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
+
+						@foreach (var product in Model.NewestProducts)
+						{
+								<div class="item">
+									<div class="product text-center">
+										<div >
+											<a href="/product/@product.Code">
+												@if (!string.IsNullOrEmpty(product.ImageUrl))
+												{
+														<img src="@product.ImageUrl" alt="@product.Title">
+}
+												else
+												{
+														<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+											</a>
+
+										</div>
+										@if (product.Stock <= 0)
+										{
+												<span class="pr_flash bg-danger">ناموجود</span>
+}
+										<div class="product_info">
+											<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
+											<div class="product_price">
+												@if (product.Amount == 0)
+												{
+														<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+												else
+												{
+													if (product.IsInPromotion)
+													{
+																<span class="price">@product.DiscountAmountStr</span>
+																	<del>@product.AmountStr</del>
+}
+													else
+													{
+														<span class="price">@product.AmountStr</span>
+														<del></del>
+}
+												}
+											</div>
 
 
-					}
+											@if (product.Amount != 0 && product.Stock > 0)
+											{
+													<div class="add-to-cart">
+														<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
+
+											else
+											{
+													<div class="add-to-cart">
+														<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+													</div>
+}
+										</div>
+									</div>
+								</div>
+						}
+					</div>
+
 
 
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION SHOP -->
-		<!-- START SECTION BANNER -->
+
 		<div class="section pb_20 small_pt">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
 						<div class="single_banner">
-							<img src="/assets/images/furniture_banner1.jpg" alt="furniture_banner1">
+							<img src="@Model.HomeMidleBanner2.ImageUrl" alt="@Model.HomeMidleBanner2.Title">
 							<div class="fb_info">
-								<h5 class="single_bn_title1">انواع غلطک های تکسچر</h5>
-								<h3 class="single_bn_title">فروش ویژه</h3>
-								<a href="#" class="single_bn_link">مشاهده محصولات</a>
+								<h5 class="single_bn_title1">@Model.HomeMidleBanner2.Summery</h5>
+								<h3 class="single_bn_title">@Model.HomeMidleBanner2.Title</h3>
+								<a href="@Model.HomeMidleBanner2.LinkUrl" class="single_bn_link">@Model.HomeMidleBanner2.LinkTitle</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-7">
 						<div class="single_banner">
-							<img src="/assets/images/furniture_banner2.jpg" alt="furniture_banner2">
+							<img src="@Model.HomeMidleBanner1.ImageUrl" alt="@Model.HomeMidleBanner1.Title">
 							<div class="fb_info2">
-								<h3 class="single_bn_title">غلطک های ساده</h3>
-								<h4 class="single_bn_title1">با تخفیفات ویژه</h4>
-								<a href="#" class="single_bn_link">مشاهده محصولات</a>
+								<h3 class="single_bn_title">@Model.HomeMidleBanner1.Title</h3>
+								<h4 class="single_bn_title1">@Model.HomeMidleBanner1.Summery</h4>
+								<a href="@Model.HomeMidleBanner1.LinkUrl" class="single_bn_link">@Model.HomeMidleBanner1.LinkTitle</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION BANNER -->
-		<!-- START SECTION SHOP -->
-		<div class="section small_pt pb_20">
+
+
+		<div class="section small_pt pb_20 home-bg2">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6">
@@ -770,42 +290,76 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-						
-						@for (int i = 1; i <= 8; i++)
-						{
-							var imgurl = "/assets/images/web/" + i + ".jpg";
-							<div class="item">
-								<div class="product_box text-center">
-									<div class="product_img">
-										<a href="#">
-											<img src="@imgurl" alt="furniture_img1">
-										</a>
-									 
-									</div>
-									<div class="product_info">
-										<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
-										<div class="product_price">
-											<span class="price">110000 تومان</span>
-											<del>188000 تومان</del>
+						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
+
+							@foreach (var product in Model.BestSaleProducts)
+							{
+									<div class="item">
+										<div class="product text-center">
+											<div>
+												<a href="/product/@product.Code">
+													@if (!string.IsNullOrEmpty(product.ImageUrl))
+													{
+															<img src="@product.ImageUrl" alt="@product.Title">
+}
+													else
+													{
+															<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+												</a>
+
+											</div>
+											@if (product.Stock <= 0)
+											{
+													<span class="pr_flash bg-danger">ناموجود</span>
+}
+											<div class="product_info">
+												<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
+												<div class="product_price">
+													@if (product.Amount == 0)
+													{
+															<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+													else
+													{
+														if (product.IsInPromotion)
+														{
+																	<span class="price">@product.DiscountAmountStr</span>
+																	<del>@product.AmountStr</del>
+}
+														else
+														{
+															<span class="price">@product.AmountStr</span>
+															<del></del>
+}
+													}
+												</div>
+
+
+												@if (product.Amount != 0 && product.Stock > 0)
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+
+												else
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+											</div>
 										</div>
-									 
-									 
-										<div class="add-to-cart">
-											<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</a>
-										</div>
 									</div>
-								</div>
-							</div>
-						}
+							}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION SHOP -->
-	 
-		<!-- START SECTION CLIENT LOGO -->
+
+
 		<div class="section small_pt">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -819,90 +373,108 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="client_logo carousel_slider owl-carousel owl-theme" data-dots="false" data-margin="30" data-loop="true" data-autoplay="true" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "767":{"items": "4"}, "991":{"items": "5"}}'>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo1.png" alt="cl_logo"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo2.png" alt="cl_logo"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo3.png" alt="cl_logo"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo4.png" alt="cl_logo"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo5.png" alt="cl_logo"/>
-								</div>
-							</div>
-							<div class="item">
-								<div class="cl_logo">
-									<img src="/assets/images/cl_logo6.png" alt="cl_logo"/>
-								</div>
-							</div>
+
+							@foreach (var brand in Model.HomeBrands)
+							{
+									<div class="item">
+										<div class="cl_logo">
+											<a href="/brand/@brand.UrlParam">
+												<img src="@brand.BrandNameImageUrl" alt="@brand.Title" />
+											</a>
+										</div>
+									</div>
+							}
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- END SECTION CLIENT LOGO -->
-		
-	<div class="section small_pt pb_20">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6">
-					<div class="heading_s3 text-center">
-						<h2>جدیدترین غلطک ها</h2>
+
+
+		<div class="section small_pt pb_20 home-bg3">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-6">
+						<div class="heading_s3 text-center">
+							<h2>@Model.TopProductGroupTitle</h2>
+						</div>
+						<div class="small_divider clearfix"></div>
 					</div>
-					<div class="small_divider clearfix"></div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "1199":{"items": "4"}}'>
-						
-						@for (int i = 1; i <= 8; i++)
-						{
-							var imgurl = "/assets/images/web/" + i + ".jpg";
-							<div class="item">
-								<div class="product_box text-center">
-									<div class="product_img">
-										<a href="#">
-											<img src="@imgurl" alt="furniture_img1">
-										</a>
-									 
-									</div>
-									<div class="product_info">
-										<h6 class="product_title"><a href="#">عنوان محصول</a></h6>
-										<div class="product_price">
-											<span class="price">110000 تومان</span>
-											<del>188000 تومان</del>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="product_slider carousel_slider owl-carousel owl-theme nav_style4" data-loop="true" data-dots="false" data-nav="true" data-margin="15" data-responsive='{"0":{"items": "2"}, "481":{"items": "2"}, "768":{"items": "4"}, "1199":{"items": "4"}}'>
+
+							@foreach (var product in Model.TopCategoryProducts)
+							{
+									<div class="item">
+										<div class="product text-center">
+											<div>
+												<a href="/product/@product.Code">
+													@if (File.Exists(Server.MapPath(product.ImageUrl)))
+													{
+															<img src="@product.ImageUrl" alt="@product.Title">
+}
+													else
+													{
+															<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست">
+}
+												</a>
+
+											</div>
+											@if (product.Stock <= 0)
+											{
+													<span class="pr_flash bg-danger">ناموجود</span>
+}
+											<div class="product_info">
+												<h6 class="product_title"><a href="/product/@product.Code" title="@product.Title">@product.Title</a></h6>
+												@if (product.Amount == 0)
+												{
+														<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
+}
+												else
+												{
+													if (product.IsInPromotion)
+													{
+																<div class="product_price">
+																	<span class="price">@product.DiscountAmountStr</span>
+																	<del>@product.AmountStr</del>
+																</div>
+}
+													else
+													{
+																<div class="product_price mb29">
+																	<span class="price ">@product.AmountStr</span>
+																	<del></del>
+																</div>
+}
+
+												}
+												@if (product.Amount != 0 && product.Stock > 0)
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-fill-out btn-addtocart-home" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+
+												else
+												{
+														<div class="add-to-cart">
+															<button class="btn btn-addtocart btn-disable" onclick="addToBasket('@product.Code', '1');" disabled="disabled"><i class="icon-basket-loaded"></i>خرید</button>
+														</div>
+}
+											</div>
 										</div>
-									 
-									 
-										<div class="add-to-cart">
-											<a href="#" class="btn btn-fill-out btn-radius"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</a>
-										</div>
 									</div>
-								</div>
-							</div>
-						}
+							}
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-		
-		
+
+
 		<div class="section pb_20">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -910,142 +482,40 @@
 						<div class="heading_s1 text-center">
 							<h2>آخرین اخبار و مقالات</h2>
 						</div>
-						<p class="leads text-center">در این بخش آخرین اخبار و مقالات وب سایت رنگ خوشدست را مشاهده می نمایید.</p>
 					</div>
 				</div>
-				<div class="row justify-content-center">
-					@for (int i = 1; i <=3; i++)
+				<div class="row justify-content-center blog-list-home">
+					@foreach (var blog in Model.HomeBlogs)
 					{
-						var imgUrl = "/assets/images/blog/"+i+".jpg";
-						<div class="col-lg-4 col-md-6">
-							<div class="blog_post blog_style2 box_shadow1">
-								<div class="blog_img">
-									<a href="blog-single.html">
-										<img src="@imgUrl" alt="el_blog_img1">
-									</a>
-								</div>
-								<div class="blog_content bg-white">
-									<div class="blog_text">
-										<h5 class="blog_title"><a href="#">عنوان مطلب</a></h5>
-										<ul class="list_none blog_meta">
-											<li><a href="#"><i class="ti-calendar"></i> 14 اسفند 1398</a></li>
-											<li><a href="#"><i class="ti-comments"></i> 3 نظر</a></li>
-										</ul>
-										<p>توضیحات مختصری راجع به مطلب در این قسمت قرار خواهد گرفت. توضیحات مختصری راجع به مطلب در این قسمت قرار خواهد گرفت. </p>
+							<div class="col-lg-4 col-md-6">
+								<div class="blog_post blog_style2 box_shadow1">
+									<div class="blog_img">
+										<a href="/blog/post/@blog.UrlParam">
+											<img src="@blog.ImageUrl" alt="@blog.Title">
+										</a>
+									</div>
+									<div class="blog_content bg-white">
+										<div class="blog_text">
+											<h5 class="blog_title"><a href="/blog/post/@blog.UrlParam">@blog.Title</a></h5>
+											<ul class="list_none blog_meta">
+												<li><a href="#"><i class="ti-calendar"></i> @blog.CustomeCreationDate</a></li>
+												<li><a href="#"><i class="ti-eye"></i> @blog.Visit بازدید</a></li>
+											</ul>
+											<p>@blog.Summery</p>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 					}
-				
-		 
+
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- END MAIN CONTENT -->
-	<!-- START FOOTER -->
-<footer class="footer_dark">
-	<div class="footer_top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-sm-12">
-					<div class="widget">
-						<h6 class="widget_title">اطلاعات تماس</h6>
-						<ul class="contact_info contact_info_light">
-							<li>
-								<i class="ti-location-pin"></i>
-								<p>تهران، ستارخان، بین دارایی و برق الستوم، پلاک 525</p>
-							</li>
-							<li>
-								<i class="ti-email"></i>
-								<a href="mailto:info@khoshdast.ir">info@khoshdast.ir</a>
-							</li>
-							<li>
-								<i class="ti-mobile"></i>
-								<p>021 - 44289714</p>
-							</li>
-						</ul>
-					</div>
-					<div class="widget">
-						<ul class="social_icons rounded_social">
-							<li><a href="#" class="sc_facebook"><i class="ion-social-facebook"></i></a></li>
-							<li><a href="#" class="sc_twitter"><i class="ion-social-twitter"></i></a></li>
-							<li><a href="#" class="sc_google"><i class="ion-social-googleplus"></i></a></li>
-							<li><a href="#" class="sc_youtube"><i class="ion-social-youtube-outline"></i></a></li>
-							<li><a href="#" class="sc_instagram"><i class="ion-social-instagram-outline"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="widget">
-						<h6 class="widget_title">لینک های مفید</h6>
-						<ul class="widget_links">
-							<li><a href="#">درباره ما</a></li>
-							<li><a href="#">نحوه خرید از سایت</a></li>
-							<li><a href="#">تماس با ما</a></li>
-							<li><a href="#">اخبار و مقالات</a></li>
-							<li><a href="#">محصولات</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-3 col-sm-6">
-					<div class="widget">
-						<h6 class="widget_title">حساب کاربری</h6>
-						<ul class="widget_links">
-							<li><a href="#">پروفایل کاربری</a></li>
-							<li><a href="#">لیست سفارشات</a></li>
-							<li><a href="#">پیگیری سفارش</a></li>
-							<li><a href="#">لیست محصولات</a></li>
-							<li><a href="#">سوالات متداول</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-12 col-sm-12">
-					<div class="widget">
-						<h6 class="widget_title">گواهینامه ها</h6>
-						 
-						<div class="newsletter_form rounded_input">
-							<a href="#">
 
-								<img width="150px" src="~/assets/images/namad1.jpg" />
-							</a>
-							<a href="#">
+	@Html.Partial("FrontEnd/_FooterPartial")
 
-								<img src="~/assets/images/namad2.jpg"  width="150px"/>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="bottom_footer border-top-tran">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<p class="mb-md-0 text-center text-md-left">تمامی حقوق این وب سایت مطعلق به مجموعه رنگ خوشدست می باشد. طراحی سایت توسط زاوش</p>
-				</div>
-				@*<div class="col-md-6">
-						<ul class="footer_payment text-center text-md-right">
-							<li><a href="#"><img src="/assets/images/visa.png" alt="visa"></a></li>
-							<li><a href="#"><img src="/assets/images/discover.png" alt="discover"></a></li>
-							<li><a href="#"><img src="/assets/images/master_card.png" alt="master_card"></a></li>
-							<li><a href="#"><img src="/assets/images/paypal.png" alt="paypal"></a></li>
-							<li><a href="#"><img src="/assets/images/amarican_express.png" alt="amarican_express"></a></li>
-						</ul>
-					</div>*@
-			</div>
-		</div>
-	</div>
-</footer>
 
-<div class="whatsappicon">
-	<a href="https://api.whatsapp.com/send?phone=989396084722&text=سلام و وقت بخیر">
-		<img src="~/assets/images/whatssapp.png" />
-	</a>
-</div>
-	<a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
 
 	<!-- Latest jQuery -->
 	<script src="/assets/js/jquery-1.12.4.min.js"></script>
@@ -1075,6 +545,27 @@
 	<script src="/assets/js/jquery.elevatezoom.js"></script>
 	<!-- scripts js -->
 	<script src="/assets/js/scripts.js"></script>
+	<script src="~/Scripts/function.js?v=1.3"></script>
+	<script>
+		$(document).ready(function () {
+			var cookie = getCookie('basket-khoshdast');
+			if (cookie != null) {
+				var orderDetails = cookie.split('/');
 
+				$('.cart_count').html(orderDetails.length - 1);
+			} else {
+				$('.cart_count').html('0');
+			}
+		});
+
+		$(function(){
+			$('input').keydown(function(e){
+				if (e.keyCode === 13) {
+					searchResult();
+					return false;
+				}
+			});
+		});
+	</script>
 </body>
 </html>

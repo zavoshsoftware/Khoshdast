@@ -44,20 +44,106 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\Kendo.Mvc.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="LibExcel, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\LibExcel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsIrRestful, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SmsIrRestful.1.1.3\lib\SmsIrRestful.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Data, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Map, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Map.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Check, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.Check.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Helper, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Stimulsoft.Report.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Mvc, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.Web, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Report.WebDesign, Version=2020.4.2.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Web.2020.4.2\lib\net45\Stimulsoft.Report.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Svg, Version=2.4.3.29446, Culture=neutral, PublicKeyToken=12a0bac221edeae2, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stimulsoft.Reports.Engine.2020.4.2\lib\net45\Svg.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -118,6 +204,10 @@
       <HintPath>..\lib\KENDOUIMVC\2017.3.913.545\spreadsheet\binaries\net40\Telerik.Windows.Zip.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZarinPal, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZarinPal-SDK.0.0.7\lib\ZarinPal.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -166,6 +256,9 @@
     <Content Include="assets\fonts\fa-solid-900.svg" />
     <Content Include="assets\fonts\Flaticon.svg" />
     <Content Include="assets\fonts\ionicons.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanwebbold%28fanum%29.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanweblight%28fanum%29.svg" />
+    <Content Include="assets\fonts\IranYekan\svg\iranyekanwebregular%28fanum%29.svg" />
     <Content Include="assets\fonts\Linearicons.svg" />
     <Content Include="assets\fonts\Simple-Line-Icons.svg" />
     <Content Include="assets\fonts\slick.svg" />
@@ -173,7 +266,9 @@
     <Content Include="assets\images\about_img.jpg" />
     <Content Include="assets\images\ajax-loader.gif" />
     <Content Include="assets\images\amarican_express.png" />
+    <Content Include="assets\images\aparaticon.png" />
     <Content Include="assets\images\avatar.png" />
+    <Content Include="assets\images\avatar_default.jpg" />
     <Content Include="assets\images\banner1.jpg" />
     <Content Include="assets\images\banner10.jpg" />
     <Content Include="assets\images\banner11.jpg" />
@@ -264,6 +359,7 @@
     <Content Include="assets\images\f1.png" />
     <Content Include="assets\images\f2.png" />
     <Content Include="assets\images\favicon.png" />
+    <Content Include="assets\images\favicon125.png" />
     <Content Include="assets\images\fn.png" />
     <Content Include="assets\images\furniture_banner1.jpg" />
     <Content Include="assets\images\furniture_banner2.jpg" />
@@ -326,6 +422,7 @@
     <Content Include="assets\images\menu_banner9.jpg" />
     <Content Include="assets\images\namad1.jpg" />
     <Content Include="assets\images\namad2.jpg" />
+    <Content Include="assets\images\no-Photo.jpg" />
     <Content Include="assets\images\paypal.png" />
     <Content Include="assets\images\PG\1.jpg" />
     <Content Include="assets\images\PG\2.jpg" />
@@ -334,6 +431,10 @@
     <Content Include="assets\images\PG\5.jpg" />
     <Content Include="assets\images\PG\6.jpg" />
     <Content Include="assets\images\PG\7.jpg" />
+    <Content Include="assets\images\PG\pg-banner.png" />
+    <Content Include="assets\images\PG\pg-banner2.png" />
+    <Content Include="assets\images\PG\pg-banner3.png" />
+    <Content Include="assets\images\PG\pg-banner4.png" />
     <Content Include="assets\images\popup_img.jpg" />
     <Content Include="assets\images\popup_img3.jpg" />
     <Content Include="assets\images\product_img1-2.jpg" />
@@ -362,6 +463,7 @@
     <Content Include="assets\images\product_zoom_img2.jpg" />
     <Content Include="assets\images\product_zoom_img3.jpg" />
     <Content Include="assets\images\product_zoom_img4.jpg" />
+    <Content Include="assets\images\response-logo.png" />
     <Content Include="assets\images\shop-banner-06.png" />
     <Content Include="assets\images\shop-banner-07.png" />
     <Content Include="assets\images\shop-banner01.jpg" />
@@ -393,6 +495,7 @@
     <Content Include="assets\images\team_img2.jpg" />
     <Content Include="assets\images\team_img3.jpg" />
     <Content Include="assets\images\team_img4.jpg" />
+    <Content Include="assets\images\telegramicon.png" />
     <Content Include="assets\images\tranding_img.png" />
     <Content Include="assets\images\ui-icons_444444_256x240.png" />
     <Content Include="assets\images\ui-icons_555555_256x240.png" />
@@ -430,6 +533,10 @@
     <Content Include="assets\js\jquery.elevatezoom.js" />
     <Content Include="assets\js\jquery.fitvids.js" />
     <Content Include="assets\js\jquery.ui.slider-rtl.min.js" />
+    <Content Include="assets\js\loadmore\btnloadmoreforBrands.js" />
+    <Content Include="assets\js\loadmore\btnloadmore.js" />
+    <Content Include="assets\js\loadmore\btnloadmore.min.js" />
+    <Content Include="assets\js\loadmore\btnloadmore_search.js" />
     <Content Include="assets\js\magnific-popup.min.js" />
     <Content Include="assets\js\parallax.js" />
     <Content Include="assets\js\popper.min.js" />
@@ -449,6 +556,7 @@
     <Content Include="Content\Admin\app.v2.min.css" />
     <Content Include="Content\Admin\bootstrap.css" />
     <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\style.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\fonts\Simple-Line-Icons.svg" />
@@ -794,12 +902,54 @@
     <Content Include="fonts\fontAwesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Localization\ar.xml" />
+    <Content Include="Localization\be.xml" />
+    <Content Include="Localization\bg.xml" />
+    <Content Include="Localization\bh.xml" />
+    <Content Include="Localization\ca-ES.xml" />
+    <Content Include="Localization\cs.xml" />
+    <Content Include="Localization\de.xml" />
+    <Content Include="Localization\el-GR.xml" />
+    <Content Include="Localization\en-GB.xml" />
+    <Content Include="Localization\en.xml" />
+    <Content Include="Localization\es.xml" />
+    <Content Include="Localization\eu-ES.xml" />
+    <Content Include="Localization\fa.xml" />
+    <Content Include="Localization\fr.xml" />
+    <Content Include="Localization\gl-ES.xml" />
+    <Content Include="Localization\hr.xml" />
+    <Content Include="Localization\hu.xml" />
+    <Content Include="Localization\id.xml" />
+    <Content Include="Localization\it.xml" />
+    <Content Include="Localization\ja.xml" />
+    <Content Include="Localization\ka.xml" />
+    <Content Include="Localization\ko.xml" />
+    <Content Include="Localization\lt.xml" />
+    <Content Include="Localization\nb-NO.xml" />
+    <Content Include="Localization\nl.xml" />
+    <Content Include="Localization\pl.xml" />
+    <Content Include="Localization\pt-BR.xml" />
+    <Content Include="Localization\pt.xml" />
+    <Content Include="Localization\ro.xml" />
+    <Content Include="Localization\ru.xml" />
+    <Content Include="Localization\sk.xml" />
+    <Content Include="Localization\sr.xml" />
+    <Content Include="Localization\sv.xml" />
+    <Content Include="Localization\tr.xml" />
+    <Content Include="Localization\uk.xml" />
+    <Content Include="Localization\vi.xml" />
+    <Content Include="Localization\zh-CHS.xml" />
+    <Content Include="Localization\zh-CHT.xml" />
     <Content Include="Scripts\AdminJS\app.v2.js" />
     <Content Include="Scripts\AdminJS\app.v2.min.js" />
     <Content Include="Scripts\AdminJS\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Scripts\AdminJS\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\AdminJS\landing.js" />
     <Content Include="Scripts\AdminJS\landing.min.js" />
+    <Content Include="Scripts\function.js" />
+    <Content Include="Scripts\KendoPersianDate\fa-IR.js" />
+    <Content Include="Scripts\KendoPersianDate\JalaliDate.js" />
+    <Content Include="Scripts\KendoPersianDate\kendo.web.js" />
     <Content Include="Scripts\kendo\2017.3.913\angular.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jquery.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\jszip.min.js" />
@@ -992,6 +1142,28 @@
     <Content Include="fonts\IranSans\woff\Vazir-Medium.woff" />
     <Content Include="fonts\IranSans\woff\Vazir-Thin.woff" />
     <Content Include="fonts\IranSans\woff\Vazir.woff" />
+    <Content Include="assets\fonts\Yekan\Yekan.woff" />
+    <Content Include="assets\fonts\Yekan\Yekan.eot" />
+    <Content Include="assets\fonts\Yekan\Yekan.ttf" />
+    <Content Include="assets\fonts\Yekan\Yekan.woff2" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.eot" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.ttf" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.woff2" />
+    <Content Include="assets\fonts\YekanDigits\Yekan.woff" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanwebbold%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanweblight%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\eot\iranyekanwebregular%28fanum%29.eot" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanwebbold%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanweblight%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\ttf\iranyekanwebregular%28fanum%29.ttf" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanwebbold%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanweblight%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff2\iranyekanwebregular%28fanum%29.woff2" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanwebbold%28fanum%29.woff" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanweblight%28fanum%29.woff" />
+    <Content Include="assets\fonts\IranYekan\woff\iranyekanwebregular%28fanum%29.woff" />
+    <Content Include="Reports\Mrt\Invoice.mrt" />
+    <Content Include="Content\license.key" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2017.3.913\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.all.min.js" />
@@ -1123,18 +1295,121 @@
     <Content Include="Scripts\kendo\2017.3.913\kendo.webcomponents.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\pako_deflate.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\BasketController.cs" />
+    <Compile Include="Controllers\BlogCommentsController.cs" />
+    <Compile Include="Controllers\BlogGroupsController.cs" />
+    <Compile Include="Controllers\BlogsController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\ContactUsFormsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DiscountCodesController.cs" />
+    <Compile Include="Controllers\ExcelDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageBrowserController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\ProductCommentsController.cs" />
+    <Compile Include="Controllers\ProductGroupDiscountsController.cs" />
     <Compile Include="Controllers\ProductGroupsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SidebarBannersController.cs" />
+    <Compile Include="Controllers\SiteMapGeneratorController.cs" />
+    <Compile Include="Controllers\SlidersController.cs" />
+    <Compile Include="Controllers\TextItemsController.cs" />
+    <Compile Include="Controllers\TextItemTypesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BaseViewModelHelper.cs" />
+    <Compile Include="Helpers\CodeGenerator.cs" />
+    <Compile Include="Helpers\DiscountHelper.cs" />
+    <Compile Include="Helpers\GetBasketInfo.cs" />
+    <Compile Include="Helpers\LoadMore.cs" />
+    <Compile Include="Helpers\PersianCulture.cs" />
+    <Compile Include="Helpers\SendSms.cs" />
+    <Compile Include="Helpers\Sitemap.cs" />
+    <Compile Include="Helpers\ZarinPalHelper.cs" />
+    <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Migrations\202010162045159_V01.cs" />
     <Compile Include="Migrations\202010162045159_V01.Designer.cs">
       <DependentUpon>202010162045159_V01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171050327_V02.cs" />
+    <Compile Include="Migrations\202010171050327_V02.Designer.cs">
+      <DependentUpon>202010171050327_V02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171252399_V03.cs" />
+    <Compile Include="Migrations\202010171252399_V03.Designer.cs">
+      <DependentUpon>202010171252399_V03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010181542125_V04.cs" />
+    <Compile Include="Migrations\202010181542125_V04.Designer.cs">
+      <DependentUpon>202010181542125_V04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010191543472_V05.cs" />
+    <Compile Include="Migrations\202010191543472_V05.Designer.cs">
+      <DependentUpon>202010191543472_V05.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010240627546_V06.cs" />
+    <Compile Include="Migrations\202010240627546_V06.Designer.cs">
+      <DependentUpon>202010240627546_V06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010251254281_V07.cs" />
+    <Compile Include="Migrations\202010251254281_V07.Designer.cs">
+      <DependentUpon>202010251254281_V07.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010261941052_V08.cs" />
+    <Compile Include="Migrations\202010261941052_V08.Designer.cs">
+      <DependentUpon>202010261941052_V08.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011012027331_V081.cs" />
+    <Compile Include="Migrations\202011012027331_V081.Designer.cs">
+      <DependentUpon>202011012027331_V081.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011012047356_V09.cs" />
+    <Compile Include="Migrations\202011012047356_V09.Designer.cs">
+      <DependentUpon>202011012047356_V09.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011121537403_V10.cs" />
+    <Compile Include="Migrations\202011121537403_V10.Designer.cs">
+      <DependentUpon>202011121537403_V10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011182022178_V11.cs" />
+    <Compile Include="Migrations\202011182022178_V11.Designer.cs">
+      <DependentUpon>202011182022178_V11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011242023548_V12.cs" />
+    <Compile Include="Migrations\202011242023548_V12.Designer.cs">
+      <DependentUpon>202011242023548_V12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012011526340_V13.cs" />
+    <Compile Include="Migrations\202012011526340_V13.Designer.cs">
+      <DependentUpon>202012011526340_V13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012201056207_V14.cs" />
+    <Compile Include="Migrations\202012201056207_V14.Designer.cs">
+      <DependentUpon>202012201056207_V14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012240648407_V15.cs" />
+    <Compile Include="Migrations\202012240648407_V15.Designer.cs">
+      <DependentUpon>202012240648407_V15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101071205462_V16.cs" />
+    <Compile Include="Migrations\202101071205462_V16.Designer.cs">
+      <DependentUpon>202101071205462_V16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101071208458_V17.cs" />
+    <Compile Include="Migrations\202101071208458_V17.Designer.cs">
+      <DependentUpon>202101071208458_V17.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
@@ -1154,15 +1429,49 @@
     <Compile Include="Models\Entities\OrderStatus.cs" />
     <Compile Include="Models\Entities\Product.cs" />
     <Compile Include="Models\Entities\ProductComment.cs" />
+    <Compile Include="Models\Entities\ProductGroupDiscount.cs" />
     <Compile Include="Models\Entities\ProductGroup.cs" />
     <Compile Include="Models\Entities\ProductGroupRelProduct.cs" />
     <Compile Include="Models\Entities\Province.cs" />
     <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\SidebarBanner.cs" />
     <Compile Include="Models\Entities\Slider.cs" />
+    <Compile Include="Models\Entities\TextItemType.cs" />
     <Compile Include="Models\Entities\TextItem.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\ZarinpallAuthority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Models\InvoiceReportViewModel.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminDashboardViewModel.cs" />
+    <Compile Include="ViewModels\AdminProductListViewModel.cs" />
+    <Compile Include="ViewModels\BrandListViewModel.cs" />
+    <Compile Include="ViewModels\CallBackViewModel.cs" />
+    <Compile Include="ViewModels\CustomerOrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\LazyLoadProductCards.cs" />
+    <Compile Include="ViewModels\OrderDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductGroupDiscountViewModel.cs" />
+    <Compile Include="ViewModels\ProductListByBrandViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\DropDownListViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\BlogDetailViewModel.cs" />
+    <Compile Include="ViewModels\BlogListViewModel.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CheckOutViewModel.cs" />
+    <Compile Include="ViewModels\CityItemViewModel.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
+    <Compile Include="ViewModels\ProductCrudViewModel.cs" />
+    <Compile Include="ViewModels\ProductDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProductGroupListViewModel.cs" />
+    <Compile Include="ViewModels\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\UploadFile.cs" />
+    <Compile Include="ViewModels\_BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1207,7 +1516,6 @@
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
-    <Content Include="assets\Views\Shared\_Layout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\BackEndLayout\_BackEndLayout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RichText.cshtml" />
@@ -1357,10 +1665,105 @@
     <Content Include="Views\ProductGroups\Edit.cshtml" />
     <Content Include="Views\ProductGroups\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\ProductList.cshtml" />
-    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\BlogComments\Create.cshtml" />
+    <Content Include="Views\BlogComments\Delete.cshtml" />
+    <Content Include="Views\BlogComments\Details.cshtml" />
+    <Content Include="Views\BlogComments\Edit.cshtml" />
+    <Content Include="Views\BlogComments\Index.cshtml" />
+    <Content Include="Views\BlogGroups\Create.cshtml" />
+    <Content Include="Views\BlogGroups\Delete.cshtml" />
+    <Content Include="Views\BlogGroups\Edit.cshtml" />
+    <Content Include="Views\BlogGroups\Index.cshtml" />
+    <Content Include="Views\Blogs\Create.cshtml" />
+    <Content Include="Views\Blogs\Delete.cshtml" />
+    <Content Include="Views\Blogs\Details.cshtml" />
+    <Content Include="Views\Blogs\Edit.cshtml" />
+    <Content Include="Views\Blogs\Index.cshtml" />
+    <Content Include="Views\Brands\Create.cshtml" />
+    <Content Include="Views\Brands\Delete.cshtml" />
+    <Content Include="Views\Brands\Details.cshtml" />
+    <Content Include="Views\Brands\Edit.cshtml" />
+    <Content Include="Views\Brands\Index.cshtml" />
+    <Content Include="Views\ContactUsForms\Create.cshtml" />
+    <Content Include="Views\ContactUsForms\Delete.cshtml" />
+    <Content Include="Views\ContactUsForms\Details.cshtml" />
+    <Content Include="Views\ContactUsForms\Edit.cshtml" />
+    <Content Include="Views\ContactUsForms\Index.cshtml" />
+    <Content Include="Views\DiscountCodes\Create.cshtml" />
+    <Content Include="Views\DiscountCodes\Delete.cshtml" />
+    <Content Include="Views\DiscountCodes\Details.cshtml" />
+    <Content Include="Views\DiscountCodes\Edit.cshtml" />
+    <Content Include="Views\DiscountCodes\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\List.cshtml" />
+    <Content Include="Views\ProductComments\Create.cshtml" />
+    <Content Include="Views\ProductComments\Delete.cshtml" />
+    <Content Include="Views\ProductComments\Details.cshtml" />
+    <Content Include="Views\ProductComments\Edit.cshtml" />
+    <Content Include="Views\ProductComments\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Sliders\Create.cshtml" />
+    <Content Include="Views\Sliders\Delete.cshtml" />
+    <Content Include="Views\Sliders\Details.cshtml" />
+    <Content Include="Views\Sliders\Edit.cshtml" />
+    <Content Include="Views\Sliders\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Basket\Basket.cshtml" />
+    <Content Include="Views\Accounts\LoginRegister.cshtml" />
+    <Content Include="Views\Basket\CheckOut.cshtml" />
+    <Content Include="Views\Home\payment.cshtml" />
+    <Content Include="Views\Blogs\List.cshtml" />
+    <Content Include="Views\Blogs\ListByGroup.cshtml" />
+    <Content Include="Views\ProductGroups\List.cshtml" />
+    <Content Include="Views\Basket\CallBack.cshtml" />
+    <Content Include="Views\ExcelData\Import.cshtml" />
+    <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Uploads\sample-excel.xls" />
+    <Content Include="Views\TextItemTypes\Create.cshtml" />
+    <Content Include="Views\TextItemTypes\Delete.cshtml" />
+    <Content Include="Views\TextItemTypes\Details.cshtml" />
+    <Content Include="Views\TextItemTypes\Edit.cshtml" />
+    <Content Include="Views\TextItemTypes\Index.cshtml" />
+    <Content Include="Views\TextItems\Create.cshtml" />
+    <Content Include="Views\TextItems\Delete.cshtml" />
+    <Content Include="Views\TextItems\Details.cshtml" />
+    <Content Include="Views\TextItems\Edit.cshtml" />
+    <Content Include="Views\TextItems\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Brands\List.cshtml" />
+    <Content Include="Views\Products\ListByBrand.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_CustomerDashboardMenuPartial.cshtml" />
+    <Content Include="Views\Dashboard\OrderList.cshtml" />
+    <Content Include="Views\Dashboard\Details.cshtml" />
+    <Content Include="Views\Dashboard\EditProfile.cshtml" />
+    <Content Include="Views\SidebarBanners\Create.cshtml" />
+    <Content Include="Views\SidebarBanners\Delete.cshtml" />
+    <Content Include="Views\SidebarBanners\Details.cshtml" />
+    <Content Include="Views\SidebarBanners\Edit.cshtml" />
+    <Content Include="Views\SidebarBanners\Index.cshtml" />
+    <Content Include="Views\Products\TestLazy.cshtml" />
+    <Content Include="Views\Report\Invoice.cshtml" />
+    <Content Include="Views\Products\SetDiscountForGroup.cshtml" />
+    <Content Include="Views\Home\Promotion.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Create.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Delete.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Edit.cshtml" />
+    <Content Include="Views\ProductGroupDiscounts\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1370,6 +1773,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Blog\" />
+    <Folder Include="Uploads\Brand\" />
+    <Folder Include="Uploads\Editor\" />
+    <Folder Include="Uploads\ProductGroup\" />
+    <Folder Include="Uploads\Product\" />
+    <Folder Include="Uploads\Slider\" />
+    <Folder Include="Uploads\text\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
@@ -1380,6 +1790,57 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010162045159_V01.resx">
       <DependentUpon>202010162045159_V01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171050327_V02.resx">
+      <DependentUpon>202010171050327_V02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171252399_V03.resx">
+      <DependentUpon>202010171252399_V03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010181542125_V04.resx">
+      <DependentUpon>202010181542125_V04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010191543472_V05.resx">
+      <DependentUpon>202010191543472_V05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010240627546_V06.resx">
+      <DependentUpon>202010240627546_V06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010251254281_V07.resx">
+      <DependentUpon>202010251254281_V07.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010261941052_V08.resx">
+      <DependentUpon>202010261941052_V08.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011012027331_V081.resx">
+      <DependentUpon>202011012027331_V081.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011012047356_V09.resx">
+      <DependentUpon>202011012047356_V09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011121537403_V10.resx">
+      <DependentUpon>202011121537403_V10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011182022178_V11.resx">
+      <DependentUpon>202011182022178_V11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011242023548_V12.resx">
+      <DependentUpon>202011242023548_V12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012011526340_V13.resx">
+      <DependentUpon>202012011526340_V13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012201056207_V14.resx">
+      <DependentUpon>202012201056207_V14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012240648407_V15.resx">
+      <DependentUpon>202012240648407_V15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101071205462_V16.resx">
+      <DependentUpon>202101071205462_V16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101071208458_V17.resx">
+      <DependentUpon>202101071208458_V17.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

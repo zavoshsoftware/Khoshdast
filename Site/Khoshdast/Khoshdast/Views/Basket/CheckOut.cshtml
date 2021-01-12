@@ -1,0 +1,301 @@
+﻿@model ViewModels.CheckOutViewModel
+@{
+    ViewBag.Title = "پرداخت سفارش";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+}
+
+
+<div class="main_content bg-gray-list">
+
+<div class="section">
+<div class="container ">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="khoshdast-breadcramp">
+				<ol class="breadcrumb ">
+					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+				</ol>
+
+				<h1>تکمیل سفارش</h1>
+				<p class="clearfix"></p>
+			</div>
+		</div>
+	</div>
+</div>
+@if (Model.Products.Any())
+{
+	<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<div class="table-responsive shop_cart_table">
+				<table class="table">
+					<thead>
+					<tr>
+						<th class="product-thumbnail">&nbsp;</th>
+						<th class="product-name">محصول</th>
+						<th class="product-price">قیمت</th>
+						<th class="product-quantity">تعداد</th>
+						<th class="product-subtotal">جمع مبلغ</th>
+					</tr>
+					</thead>
+					<tbody>
+
+					@foreach (var product in Model.Products)
+					{
+						<tr>
+							<td class="product-thumbnail">
+								<a href="#">
+									@if (File.Exists(Server.MapPath(product.Product.ImageUrl)))
+									{
+										<img src="@product.Product.ImageUrl" alt="رنگ خوشدست" height="70px">
+									}
+									else
+									{
+										<img src="/assets/images/no-Photo.jpg" alt="رنگ خوشدست" height="70px">
+									}
+								</a>
+							</td>
+							<td class="product-name" data-title="محصول"><a href="#">@product.Product.Title</a></td>
+							<td class="product-price" data-title="قیمت">@product.Amount</td>
+							<td class="product-quantity" data-title="تعداد">
+								@product.Quantity
+							</td>
+							<td class="product-subtotal" data-title="جمع مبلغ">@product.RowAmount</td>
+						</tr>
+					}
+
+
+
+					</tbody>
+					<tfoot>
+					<tr>
+						<td colspan="6" class="px-0">
+							جمع فاکتور: @Model.SubTotal
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6" class="px-0">
+							تخفیف: @Model.DiscountAmount
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="6" class="px-0">
+
+
+							<div class="row no-gutters align-items-center">
+
+								<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+									هزینه ارسال: @Model.ShipmentAmount
+
+								</div>
+								<div class="col-lg-8 col-md-6 text-left text-md-right">
+									<dfn >هزینه ارسال برای سفارشات بالای 400 هزار تومان رایگان می باشد</dfn>
+								</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="6" class="px-0 color-pink">
+							<div class="row no-gutters align-items-center">
+
+								<div class="col-lg-4 col-md-6 mb-3 mb-md-0 total-amount">
+									مبلغ قابل پرداخت: @Model.Total
+
+								</div>
+								<div class="col-lg-8 col-md-6 text-left text-md-right">
+									<a class="btn btn-line-fill btn-sm" href="/basket">ویرایش سبد خرید</a>
+
+
+								</div>
+							</div>
+
+
+
+						</td>
+					</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="small_divider"></div>
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col-md-12 ">
+			<div class="customer-info">
+				<div class="heading_s1">
+					<h4>اطلاعات ارسال</h4>
+				</div>
+				<form method="post">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="text" required class="form-control" value="@Model.UserInformation.FullName" id="fullname" placeholder="نام تحویل گیرنده *">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="text" required class="form-control" value="@Model.UserInformation.CellNumber" id="cellnumber" placeholder="شماره موبایل تحویل گیرنده *">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<div class="custom_select">
+									<select id="billing_Province" class="form-control">
+										@foreach (var province in Model.Provinces)
+										{
+											<option value="@province.Id">@province.Title</option>
+
+										}
+									</select>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<div class="custom_select">
+									<select id="ddlcity" class="form-control">
+										<option value="0">انتخاب شهر*</option>
+
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+
+
+							<div class="form-group">
+								<input type="text" class="form-control" id="address" required="" placeholder="آدرس *">
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<input class="form-control" required type="text" id="postalCode" placeholder="کد پستی">
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-0">
+						<textarea rows="5" class="form-control" id="note" placeholder="توضیحات"></textarea>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-12">
+			<div class="small_divider"></div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="order_review">
+
+
+
+				<div class="payment_method">
+					<div class="heading_s1">
+						<h4>نحوه پرداخت</h4>
+					</div>
+					<div class="payment_option">
+						<div class="custome-radio">
+							<input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="online" checked="">
+							<label class="form-check-label" for="exampleRadios3">پرداخت آنلاین</label>
+							<p data-method="online" class="payment-text">@Model.OnlinePay</p>
+						</div>
+						<div class="custome-radio">
+							<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="recieve">
+							<label class="form-check-label" for="exampleRadios4">پرداخت در محل (فقط سفارشات تهران)</label>
+							<p data-method="recieve" class="payment-text">@Model.RecievePay</p>
+						</div>
+						<div class="custome-radio">
+							<input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="transfer">
+							<label class="form-check-label" for="exampleRadios5">واریز به حساب</label>
+							<p data-method="transfer" class="payment-text">@Model.TransferPay</p>
+						</div>
+					</div>
+				</div>
+				<p class="alert alert-danger" id="error-box"></p>
+				<p class="alert alert-success" id="success-checkout-box"></p>
+
+				<button type="button" id="btnPayment" class="btn btn-fill-out btn-block" onclick="finalizeOrder();">پرداخت سفارش</button>
+			</div>
+		</div>
+	</div>
+	</div>
+}
+else
+{<div class="container basket-container">
+	 <div class="row">
+		 <div class="col-12">
+			 <p class="alert alert-warning">سبد خرید شما خالی است!</p>
+		 </div>
+
+	 </div>
+ </div>
+
+}
+</div>
+
+				</div>
+				@section scripts{
+					<script>
+
+
+						$('#billing_Province').on('change',
+							function () {
+								var SelectedValue = $(this).val();
+								if (SelectedValue !== "") {
+									var procemessage = "<option value='0'> صبرکنید...</option>";
+									$("#ddlcity").html(procemessage).show();
+									$.ajax(
+										{
+											url: "/Basket/FillCities",
+											data: { id: SelectedValue },
+											cache: false,
+											type: "POST",
+											success: function (data) {
+												var markup = "<option value='0'>انتخاب شهر</option>";
+												for (var x = 0; x < data.length; x++) {
+													markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+												}
+												$("#ddlcity").html(markup).show();
+											},
+											error: function (reponse) {
+												alert("error : " + reponse);
+											}
+										});
+								}
+							});
+
+						$('input[type=radio][name=payment_option]').change(function () {
+							if (this.value === 'online') {
+								$('#btnPayment').html("پرداخت سفارش");
+							}
+							else if (this.value === 'recieve') {
+								$('#btnPayment').html("ثبت نهایی سفارش");
+
+							}
+							else if (this.value === 'transfer') {
+								$('#btnPayment').html("ثبت نهایی سفارش");
+							}
+						});
+					</script>
+				}
