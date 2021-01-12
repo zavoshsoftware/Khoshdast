@@ -14,7 +14,6 @@ namespace ViewModels
         public List<BlogComment> BlogComments { get; set; }
         public int BlogCommentsCount { get { return BlogComments.Count(); } }
 
-        public Blog NextBlog { get; set; }
-        public Blog PrevBlog { get; set; }
+        public List<Blog> RelatedBlogs { get; set; }
     }
 }

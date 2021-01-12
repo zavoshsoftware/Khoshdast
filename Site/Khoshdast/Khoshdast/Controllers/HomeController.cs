@@ -99,7 +99,7 @@ namespace Khoshdast.Controllers
         public ActionResult Result(string searchQuery)
         {
             List<Product> products = db.Products
-                .Where(c => (c.Title.Contains(searchQuery) ||c.Brand.Title.Contains(searchQuery))&& c.IsDeleted == false && c.IsActive).ToList();
+                .Where(c => (c.Title.Contains(searchQuery) || c.Brand.Title.Contains(searchQuery)) && c.IsDeleted == false && c.IsActive).ToList();
 
             string[] searchArray = searchQuery.Split(' ');
             foreach (string searchItem in searchArray)
@@ -116,12 +116,12 @@ namespace Khoshdast.Controllers
                     }
                 }
             }
- 
+
 
             SearchViewModel search = new SearchViewModel()
             {
                 Products = products.OrderByDescending(c => c.Stock).ThenByDescending(c => c.Amount).ToList(),
-                
+
                 SearchQuery = searchQuery,
                 SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
                 SidebarProductGroups = GetComplexSidebarProductGroups(),
@@ -154,7 +154,7 @@ namespace Khoshdast.Controllers
             return list;
         }
         private int productPagination = Convert.ToInt32(WebConfigurationManager.AppSettings["productPagination"]);
- 
+
         public List<PageItem> GetPagination(int productCount, int? pageId)
         {
             List<PageItem> result = new List<PageItem>();
@@ -182,18 +182,25 @@ namespace Khoshdast.Controllers
         public ActionResult Promotion()
         {
             List<Product> products = db.Products
-                .Where(c =>  c.IsInPromotion==true && c.IsDeleted == false && c.IsActive).ToList();
-             
+                .Where(c => c.IsInPromotion == true && c.IsDeleted == false && c.IsActive).ToList();
+
             SearchViewModel search = new SearchViewModel()
             {
                 Products = products.OrderByDescending(c => c.Stock).ThenByDescending(c => c.Amount).ToList(),
 
-             
+
                 SidebarBanners = db.SidebarBanners.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
                 SidebarProductGroups = GetComplexSidebarProductGroups(),
             };
 
             return View(search);
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Dashboard()
+        {
+            return View();
         }
     }
 }

@@ -93,6 +93,10 @@ namespace Models
         [Display(Name = "پرفروش ترین ها؟")]
         public bool IsTopSell { get; set; }
 
+        [Display(Name = "برچسب ها")]
+        public string Tags { get; set; }
+
+
         public virtual ICollection<ProductGroupRelProduct> ProductGroupRelProducts { get; set; }
 
 

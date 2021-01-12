@@ -1403,6 +1403,14 @@
     <Compile Include="Migrations\202012240648407_V15.Designer.cs">
       <DependentUpon>202012240648407_V15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101071205462_V16.cs" />
+    <Compile Include="Migrations\202101071205462_V16.Designer.cs">
+      <DependentUpon>202101071205462_V16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101071208458_V17.cs" />
+    <Compile Include="Migrations\202101071208458_V17.Designer.cs">
+      <DependentUpon>202101071208458_V17.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\DatabaseContextInitializer.cs" />
@@ -1435,6 +1443,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Models\InvoiceReportViewModel.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminDashboardViewModel.cs" />
     <Compile Include="ViewModels\AdminProductListViewModel.cs" />
     <Compile Include="ViewModels\BrandListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
@@ -1754,6 +1763,7 @@
     <Content Include="Views\ProductGroupDiscounts\Delete.cshtml" />
     <Content Include="Views\ProductGroupDiscounts\Edit.cshtml" />
     <Content Include="Views\ProductGroupDiscounts\Index.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1825,6 +1835,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012240648407_V15.resx">
       <DependentUpon>202012240648407_V15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101071205462_V16.resx">
+      <DependentUpon>202101071205462_V16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101071208458_V17.resx">
+      <DependentUpon>202101071208458_V17.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

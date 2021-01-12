@@ -56,6 +56,7 @@ namespace Khoshdast.Controllers
                 blog.Visit = 0;
                 blog.IsDeleted = false;
                 blog.CreationDate = DateTime.Now;
+                blog.UrlParam = GetUrlParam(blog.Title);
 
                 blog.Id = Guid.NewGuid();
                 db.Blogs.Add(blog);
@@ -65,6 +66,31 @@ namespace Khoshdast.Controllers
 
             ViewBag.BlogGroupId = new SelectList(db.BlogGroups, "Id", "Title", blog.BlogGroupId);
             return View(blog);
+        }
+
+        public string GetUrlParam(string title)
+        {
+            title = ReplaceCharachter(title, '@');
+            title = ReplaceCharachter(title, '#');
+            title = ReplaceCharachter(title, '$');
+            title = ReplaceCharachter(title, '&');
+            title = ReplaceCharachter(title, '^');
+            title = ReplaceCharachter(title, '/');
+            title = ReplaceCharachter(title, ']');
+            title = ReplaceCharachter(title, '[');
+            title = ReplaceCharachter(title, '%');
+            title = ReplaceCharachter(title, '?');
+            title = ReplaceCharachter(title, '؟');
+            title = ReplaceCharachter(title, '!');
+
+            return title.Replace(' ', '-');
+        }
+
+        public string ReplaceCharachter(string title, char charachter)
+        {
+            if (title.Contains(charachter))
+                return title.Replace(charachter, '-');
+            return title;
         }
 
         public ActionResult Edit(Guid? id)
@@ -156,7 +182,7 @@ namespace Khoshdast.Controllers
             List<Blog> blogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive)
                 .OrderByDescending(c => c.CreationDate).ToList();
 
-            BlogListViewModel blogList=new BlogListViewModel()
+            BlogListViewModel blogList = new BlogListViewModel()
             {
                 Blogs = blogs
             };
@@ -176,7 +202,7 @@ namespace Khoshdast.Controllers
             List<Blog> blogs = db.Blogs.Where(c => c.BlogGroupId == blogGroup.Id && c.IsDeleted == false && c.IsActive)
                 .OrderByDescending(c => c.CreationDate).ToList();
 
-            BlogListViewModel blogList=new BlogListViewModel()
+            BlogListViewModel blogList = new BlogListViewModel()
             {
                 Blogs = blogs,
                 BlogGroup = blogGroup
@@ -189,8 +215,8 @@ namespace Khoshdast.Controllers
         [AllowAnonymous]
         public ActionResult Details(string urlParam)
         {
-         
-            Blog blog = db.Blogs.FirstOrDefault(c=>c.UrlParam==urlParam);
+
+            Blog blog = db.Blogs.FirstOrDefault(c => c.UrlParam == urlParam);
             if (blog == null)
             {
                 return Redirect("/blog");
@@ -203,14 +229,46 @@ namespace Khoshdast.Controllers
             {
                 Blog = blog,
                 BlogComments = db.BlogComments.Where(c => c.BlogId == blog.Id && c.IsActive && c.IsDeleted == false).ToList(),
-                SidebarBlogGroups = db.BlogGroups.Where(c =>  c.IsActive && c.IsDeleted == false).ToList(),
-                SidebarRecentBlogs = db.Blogs.Where(c => c.IsActive && c.IsDeleted == false).OrderByDescending(c=>c.CreationDate).Take(4).ToList(),
-                NextBlog = GetNeighbourBlogs("next",blog),
-               PrevBlog =  GetNeighbourBlogs("prev",blog),
+                SidebarBlogGroups = db.BlogGroups.Where(c => c.IsActive && c.IsDeleted == false).ToList(),
+                SidebarRecentBlogs = db.Blogs.Where(c => c.IsActive && c.IsDeleted == false).OrderByDescending(c => c.CreationDate).Take(4).ToList(),
+                RelatedBlogs = GetRelatedBlog(blog.Tags)
 
             };
 
             return View(detail);
+        }
+
+        public List<Blog> GetRelatedBlog(string blogTags)
+        {
+            List<Blog> result = new List<Blog>();
+
+            if (string.IsNullOrEmpty(blogTags))
+                return result;
+
+            string[] blogTagArray = blogTags.Split(',');
+
+            foreach (string blogTag in blogTagArray)
+            {
+                if (!string.IsNullOrEmpty(blogTag))
+                {
+                    var blogs = db.Blogs.Where(c => c.Tags == blogTag && c.IsDeleted == false && c.IsActive)
+                        .Take(2).ToList();
+
+                    foreach (var blog in blogs)
+                    {
+                        result.Add(blog);
+                    }
+                }
+
+                if (result.Count >= 2)
+                    break;
+            }
+
+            if (!result.Any())
+            {
+                result = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).Take(2).ToList();
+            }
+            return result;
         }
 
         [AllowAnonymous]

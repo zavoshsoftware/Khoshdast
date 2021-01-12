@@ -120,6 +120,9 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     font-size: 14px;
     text-align: justify
 }
+.single_post .blog_text a {
+    color: #022dd7;
+}
 
 .pl0 {
     padding-left: 0;
@@ -754,6 +757,8 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
     background-color: #fff;
     box-shadow: 0 0 7px rgba(0,0,0,0.3);
     border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 25px;
 }
 
 .why-us {
@@ -781,4 +786,14 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 
 .shop_el_slider .carousel-item {
     cursor: pointer;
+}
+
+@media  (min-width: 720px) {
+
+    .md-nopadding {
+        padding: 0;
+    }
+    .md-nopaddingright {
+        padding-right: 0;
+    }
 }

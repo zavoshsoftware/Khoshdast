@@ -28,9 +28,12 @@ namespace Models
         [Display(Name="تصویر")]
         public string ImageUrl { get; set; }
 
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد.")]
         [Display(Name="پارامتر url")]
         public string UrlParam { get; set; }
+
+        [Display(Name="برچسب ها")]
+        [DataType(DataType.MultilineText)]
+        public string Tags { get; set; }
 
         [Display(Name="تعداد بازدید")]
         public int Visit { get; set; }
