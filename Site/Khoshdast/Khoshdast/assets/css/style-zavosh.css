@@ -787,9 +787,16 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .shop_el_slider .carousel-item {
     cursor: pointer;
 }
-
-@media  (min-width: 720px) {
-
+.full-width {
+    width:100%;
+}
+.fright {
+    float: right;
+}
+.fleft {
+    float:left;
+}
+@media (min-width: 720px) {
     .md-nopadding {
         padding: 0;
     }

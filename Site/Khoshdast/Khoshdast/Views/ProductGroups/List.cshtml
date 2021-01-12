@@ -4,49 +4,45 @@
 		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
-<div class="breadcrumb_section bg_gray page-title-mini" style="background-image: url('../../images/banner2.jpg');">
-	<div class="container">
-		<!-- STRART CONTAINER -->
-		<div class="row align-items-center">
-			<div class="col-md-6">
-				<div class="page-title">
-					<h1>@ViewBag.Title</h1>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<ol class="breadcrumb justify-content-md-end">
-					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-					<li class="breadcrumb-item active">@ViewBag.Title</li>
-				</ol>
-			</div>
-		</div>
-	</div>
-</div>
 
-<div class="main_content">
+
+<div class="main_content  bg-gray-list">
 
 	<div class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
+        <div class="container container-custom">
+            <div class="row">
+                <div class="col-md-12 pl5">
+                    <div class="khoshdast-breadcramp">
+                        <ol class="breadcrumb ">
+                            <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 
-					<div class="row shop_container grid">
-						@foreach (var productGroup in Model.ProductGroups)
-						{
+                        </ol>
 
-								<div class="col-md-4 col-6 pg-list-item">
-									<a href="/category/@productGroup.UrlParam">
-										<img src="@productGroup.ImageUrl" alt="@productGroup.Title"/>
-									</a>
-								</div>
-						}
-					</div>
+                        <h1>@ViewBag.Title</h1>
+                        <p class="clearfix"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="row shop_container grid">
+                        @foreach (var productGroup in Model.ProductGroups)
+                        {
+
+                            <div class="col-md-4 col-6 pg-list-item">
+                                <a href="/category/@productGroup.UrlParam">
+                                    <img src="@productGroup.ImageUrl" alt="@productGroup.Title" />
+                                </a>
+                            </div>
+                        }
+                    </div>
 
 
-				</div>
-			 
-			</div>
-		</div>
+                </div>
+
+            </div>
+        </div>
 	</div>
  
 	<div class="section bg_default small_pt small_pb">

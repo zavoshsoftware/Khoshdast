@@ -7,8 +7,8 @@
 				<div class="col-md-6">
 					<div class="d-flex align-items-center justify-content-center justify-content-md-start">
 
-						<ul class="contact_detail text-center text-lg-left">
-							<li><a href="tel:00982144289714"> <i class="ti-mobile"></i><span>@Model.Phone</span></a></li>
+						<ul class="contact_detail text-center text-lg-left full-width">
+							<li class="fright"><a href="tel:00982144289714"> <i class="ti-mobile"></i><span>@Model.Phone</span></a></li>
 							@*<li>
 								<a href="https://api.whatsapp.com/send?phone=989012221418&text=سلام و وقت بخیر">
 									<i class="fa fa-whatsapp"></i><span>مکالمه از طریق Whatssapp</span>
@@ -18,16 +18,16 @@
 							{
 								if (Model.UserRole == "customer")
 								{
-									<li class="d-md-none"><a href="/dashboard"><i class="ti-user"></i><span>@Model.UserFullName</span></a></li>
+									<li class="d-md-none fleft"><a href="/dashboard"><i class="ti-user"></i><span>@Model.UserFullName</span></a></li>
 								}
 								else
 								{
-									<li class="d-md-none"><a href="/products"><i class="ti-user"></i><span>@Model.UserFullName</span></a></li>
+									<li class="d-md-none fleft"><a href="/products"><i class="ti-user"></i><span>@Model.UserFullName</span></a></li>
 								}
 							}
 							else
 							{
-								<li class="d-md-none"><a href="/loginregister"><i class="ti-user"></i><span>ورود</span></a></li>
+								<li class="d-md-none fleft"><a href="/loginregister"><i class="ti-user"></i><span>ورود</span></a></li>
 							}
 						</ul>
 					</div>

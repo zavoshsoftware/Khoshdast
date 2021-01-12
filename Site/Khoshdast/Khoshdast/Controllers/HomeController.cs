@@ -200,7 +200,58 @@ namespace Khoshdast.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Dashboard()
         {
-            return View();
+            Guid status2 = new Guid("EC934A7E-0061-4B09-BD44-CA5120CF6200");
+            Guid status3 = new Guid("7DBF85F4-7835-4D21-8269-26695D0C7E0F");
+            Guid id = new Guid("11869F4D-D6D1-434C-A2F1-7945227CD3BB");
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            DateTime tenRecentDay = DateTime.Now.AddDays(-10);
+
+            AdminDashboardViewModel model = new AdminDashboardViewModel();
+
+            model.TotalProduct = db.Products.Where(current => current.IsDeleted == false && current.IsActive == true).Count();
+
+            model.CurrentOrderCount = db.Orders.Where(o =>
+                   (o.OrderStatusId == id || o.OrderStatusId == status3 || o.OrderStatusId == status2) &&
+                   o.IsDeleted == false).Count();
+
+            model.TotalOrderCount = db.Orders.Where(current => current.IsDeleted == false && current.IsActive == true && current.OrderStatus.Code != 4).Count();
+
+            List<Order> thisMonthOrders = db.Orders.Where(current => current.IsDeleted == false && current.IsActive == true && current.OrderStatus.Code != 4
+             && current.CreationDate.Year == year && current.CreationDate.Month == month).ToList();
+
+            model.TotalOrderCountThisMount = thisMonthOrders.Count();
+
+            decimal thisMonthOrdersAmount = 0;
+            foreach (var order in thisMonthOrders)
+            {
+                thisMonthOrdersAmount += order.TotalAmount;
+            }
+
+            model.TotalOrderAmountThisMount = thisMonthOrdersAmount;
+
+            model.TotalBlog = db.Blogs.Where(current => current.IsDeleted == false && current.IsActive == true).Count();
+
+            var orders = db.Orders.Where(current => current.IsDeleted == false && current.IsActive == true
+            && current.CreationDate > tenRecentDay)
+            .GroupBy(current => current.CreationDate,
+    (key, g) => new { CreationDate = key, Orders = g.ToList() })
+            .ToList();
+
+            List<RecentOrder> recentOrders = new List<RecentOrder>();
+            foreach (var item in orders)
+            {
+                decimal amount = 0;
+                foreach (var order in item.Orders)
+                {
+                    amount += order.TotalAmount;
+                }
+                recentOrders.Add(new RecentOrder() { CreationDate = item.CreationDate, TotalCount = item.Orders.Count, TotalAmount = amount.ToString("n0") + "تومان" });
+            }
+            model.RecentOrders = recentOrders;
+            return View(model);
         }
+
+
     }
 }

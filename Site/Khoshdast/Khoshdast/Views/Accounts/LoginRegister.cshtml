@@ -1,115 +1,112 @@
 ﻿@model ViewModels.LoginRegisterViewModel
 @{
-		ViewBag.Title = "ورود";
-		Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+    ViewBag.Title = "ورود";
+    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
-<div class="breadcrumb_section bg_gray page-title-mini">
-	<div class="container">
-		<!-- STRART CONTAINER -->
-		<div class="row align-items-center">
-			<div class="col-md-6">
-				<div class="page-title">
-					<h1>ورود به ناحیه کاربری</h1>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<ol class="breadcrumb justify-content-md-end">
-					<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
-					<li class="breadcrumb-item active">ورود به ناحیه کاربری</li>
-				</ol>
-			</div>
-		</div>
-	</div>
+
+<div class="main_content  bg-gray-list">
+
+    <div class="section">
+        <div class="container container-custom">
+            <div class="row">
+                <div class="col-md-12 pl5">
+                    <div class="khoshdast-breadcramp">
+                        <ol class="breadcrumb ">
+                            <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+
+                        </ol>
+
+                        <h1>ورود به ناحیه کاربری</h1>
+                        <p class="clearfix"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="toggle_info">
+                            <span><i class="fas fa-user"></i>قبلا از سایت خرید کرده اید؟ <a href="#loginform" data-toggle="collapse" class="collapsed" aria-expanded="false">برای ورود به ناحیه کاربری فرم زیر را تکمیل کنید</a></span>
+                        </div>
+                        <div class="panel-collapse collapse login_form show" id="loginform">
+                            <div class="panel-body">
+                                @using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { }))
+                                {
+                                    @Html.HiddenFor(c => c.ReturnUrl)
+                                    @Html.AntiForgeryToken()
+
+                                    if (TempData["WrongPass"] != null)
+                                    {
+                                        <p class="alert alert-danger" id="wrongEmail">@TempData["WrongPass"]</p>
+                                    }
+                                    <div class="form-group">
+                                        <input type="text" required="" class="form-control" id="LoginCellNumber" name="LoginCellNumber" placeholder="شماره موبایل">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" required="" type="password" id="LoginPassword" name="LoginPassword" placeholder="کلمه عبور">
+                                    </div>
+                                    <div class="login_footer form-group">
+                                        <div class="chek-form">
+                                            <div class="custome-checkbox">
+                                                <input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
+                                                <label class="form-check-label" for="remember"><span>من را به خاطر بسپار</span></label>
+                                            </div>
+                                        </div>
+                                        <a href="/forgetpassword">فراموشی رمز عبور</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-fill-out btn-block">ورود به ناحیه کاربری</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="toggle_info">
+                            <span><i class="fas fa-tag"></i>اولین بار است که از سایت خرید می کنید؟ <a href="#coupon" data-toggle="collapse" class="collapsed" aria-expanded="false">برای ثبت نام فرم زیر را تکمیل کنید</a></span>
+                        </div>
+                        <div class="panel-collapse collapse coupon_form show" id="coupon">
+                            <div class="panel-body">
+                                @using (Html.BeginForm("Register", "Accounts", FormMethod.Post, new { }))
+                                {
+                                    @Html.HiddenFor(c => c.ReturnUrl)
+                                    @Html.AntiForgeryToken()
+
+                                    if (TempData["WrongRegisterCellnumber"] != null)
+                                    {
+                                        <p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterCellnumber"]</p>
+                                    }
+                                    @*if (TempData["WrongRegisterEmail"] != null)
+                                        {
+                                            <p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterEmail"]</p>
+                                        }*@
+                                if (TempData["WrongRegisterDuplicate"] != null)
+                                {
+                                    <p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterDuplicate"]</p>
+                                }
+                                <div class="form-group">
+                                    <input type="text" required="" class="form-control" name="RegisterFullName" placeholder="نام و نام خانودگی">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" required="" class="form-control" name="RegisterCellNumber" placeholder="شماره موبایل">
+                                </div>
+                                @*<div class="form-group">
+                                        <input type="text" required="" class="form-control" name="RegisterEmail" placeholder="ایمیل">
+                                    </div>*@
+                                    <div class="form-group">
+                                        <input class="form-control" required="" type="password" name="RegisterPassword" placeholder="کلمه عبور">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-fill-out btn-block" name="login">ثبت نام در سایت</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="main_content bg-gray-list">
-
-	<div class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="toggle_info">
-						<span><i class="fas fa-user"></i>قبلا از سایت خرید کرده اید؟ <a href="#loginform" data-toggle="collapse" class="collapsed" aria-expanded="false">برای ورود به ناحیه کاربری فرم زیر را تکمیل کنید</a></span>
-					</div>
-					<div class="panel-collapse collapse login_form show" id="loginform">
-						<div class="panel-body">
-						@using (Html.BeginForm("Login", "Accounts", FormMethod.Post, new { }))
-						{
-								@Html.HiddenFor(c=>c.ReturnUrl)
-								@Html.AntiForgeryToken()
-
-							 if (TempData["WrongPass"] != null)
-							 {
-								 <p class="alert alert-danger" id="wrongEmail">@TempData["WrongPass"]</p>
-							 }
-								<div class="form-group">
-									<input type="text" required="" class="form-control" id="LoginCellNumber" name="LoginCellNumber" placeholder="شماره موبایل">
-								</div>
-								<div class="form-group">
-									<input class="form-control" required="" type="password" id="LoginPassword" name="LoginPassword" placeholder="کلمه عبور">
-								</div>
-								<div class="login_footer form-group">
-									<div class="chek-form">
-										<div class="custome-checkbox">
-											<input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
-											<label class="form-check-label" for="remember"><span>من را به خاطر بسپار</span></label>
-										</div>
-									</div>
-									<a href="/forgetpassword">فراموشی رمز عبور</a>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-fill-out btn-block">ورود به ناحیه کاربری</button>
-								</div>
-						}
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="toggle_info">
-						<span><i class="fas fa-tag"></i>اولین بار است که از سایت خرید می کنید؟ <a href="#coupon" data-toggle="collapse" class="collapsed" aria-expanded="false">برای ثبت نام فرم زیر را تکمیل کنید</a></span>
-					</div>
-					<div class="panel-collapse collapse coupon_form show" id="coupon">
-						<div class="panel-body">
-						@using (Html.BeginForm("Register", "Accounts", FormMethod.Post, new { }))
-						{
-							@Html.HiddenFor(c=>c.ReturnUrl)
-							@Html.AntiForgeryToken()
-
-							if (TempData["WrongRegisterCellnumber"] != null)
-							{
-								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterCellnumber"]</p>
-							}
-							@*if (TempData["WrongRegisterEmail"] != null)
-							{
-								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterEmail"]</p>
-							}*@
-							if (TempData["WrongRegisterDuplicate"] != null)
-							{
-								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongRegisterDuplicate"]</p>
-							}
-							<div class="form-group">
-								<input type="text" required="" class="form-control" name="RegisterFullName" placeholder="نام و نام خانودگی">
-							</div>
-							<div class="form-group">
-								<input type="text" required="" class="form-control" name="RegisterCellNumber" placeholder="شماره موبایل">
-							</div>
-							@*<div class="form-group">
-								<input type="text" required="" class="form-control" name="RegisterEmail" placeholder="ایمیل">
-							</div>*@
-							<div class="form-group">
-								<input class="form-control" required="" type="password" name="RegisterPassword" placeholder="کلمه عبور">
-							</div>
-
-							<div class="form-group">
-								<button type="submit" class="btn btn-fill-out btn-block" name="login">ثبت نام در سایت</button>
-							</div>
-						}
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-			</div>
-			</div>
 
