@@ -143,7 +143,7 @@ namespace Khoshdast.Controllers
         {
 
             if (role.ToLower().Contains("admin"))
-                return RedirectToAction("Index", "Users");
+                return RedirectToAction("dashboard", "Home");
             if (role.ToLower().Contains("content"))
                 return RedirectToAction("Index", "Blogs");
 

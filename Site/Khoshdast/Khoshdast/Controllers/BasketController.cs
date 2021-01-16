@@ -61,11 +61,12 @@ namespace Khoshdast.Controllers
         }
 
 
+        private BaseViewModelHelper baseviewmodel = new BaseViewModelHelper();
 
         public decimal GetShipmentAmountByTotal(decimal totalAmount)
         {
-          decimal shipmentAmount =Convert.ToDecimal(WebConfigurationManager.AppSettings["shipmentAmount"]);
-          decimal freeShipmentLimitAmount = Convert.ToDecimal(WebConfigurationManager.AppSettings["freeShipmentLimitAmount"]);
+          decimal shipmentAmount =Convert.ToDecimal(baseviewmodel.GetTextItemByName("shipping-amount", "summery"));
+          decimal freeShipmentLimitAmount = Convert.ToDecimal(baseviewmodel.GetTextItemByName("free-shipping-amount", "summery"));
 
             if (totalAmount >= freeShipmentLimitAmount)
                 return 0;

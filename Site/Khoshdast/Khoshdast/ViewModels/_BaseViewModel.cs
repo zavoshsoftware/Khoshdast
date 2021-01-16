@@ -14,7 +14,7 @@ namespace ViewModels
 
         public List<MenuItems> MenuItems { get { return baseviewmodel.GetMenuProductGroup(); } }
         public string Address { get { return baseviewmodel.GetTextItemByName("address", "summery"); } }
-        public string Phone { get { return baseviewmodel.GetTextItemByName("phone", "summery"); } }
+        public string Phone { get { return baseviewmodel.GetTextItemByName("header-phone", "summery"); } }
         public string Email { get { return baseviewmodel.GetTextItemByName("email", "summery"); } }
         public string Instagram { get { return baseviewmodel.GetTextItemByName("Instagram", "linkUrl"); } }
         public string Telegram { get { return baseviewmodel.GetTextItemByName("telegram", "linkUrl"); } }
@@ -23,6 +23,8 @@ namespace ViewModels
         public bool IsAuthenticate { get { return baseviewmodel.GetAuthenticationStatus(); } }
         public string UserFullName { get { return baseviewmodel.GetAuthenticateUserName(); } }
         public string UserRole { get { return baseviewmodel.GetRoleTitle(); } }
+        public string WhatsappPhone { get { return baseviewmodel.GetTextItemByName("whatsapp-phone", "summery"); } }
+        public string WhatsappText { get { return baseviewmodel.GetTextItemByName("whatsapp-text", "summery"); } }
     }
 
     public class MenuItems

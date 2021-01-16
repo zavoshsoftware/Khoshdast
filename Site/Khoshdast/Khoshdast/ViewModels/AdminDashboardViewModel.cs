@@ -12,7 +12,7 @@ namespace ViewModels
         public int CurrentOrderCount { get; set; }
         public int TotalOrderCount { get; set; }
         public int TotalOrderCountThisMount { get; set; }
-        public decimal TotalOrderAmountThisMount { get; set; }
+        public string TotalOrderAmountThisMount { get; set; }
         public int TotalBlog { get; set; }
         public List<RecentOrder> RecentOrders { get; set; }
     }

@@ -42,6 +42,7 @@ namespace Khoshdast.Controllers
                 HomeMidleBanner2 = homeMidkeBanners.LastOrDefault(),
                 HomeMetaDescription = GetTextByName("metadesc")
             };
+            ViewBag.Title = GetTextByName("home-title");
             return View(home);
         }
 
@@ -228,7 +229,7 @@ namespace Khoshdast.Controllers
                 thisMonthOrdersAmount += order.TotalAmount;
             }
 
-            model.TotalOrderAmountThisMount = thisMonthOrdersAmount;
+            model.TotalOrderAmountThisMount = thisMonthOrdersAmount.ToString("n0");
 
             model.TotalBlog = db.Blogs.Where(current => current.IsDeleted == false && current.IsActive == true).Count();
 
