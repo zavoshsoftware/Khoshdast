@@ -55,22 +55,28 @@
 											@if (product.Stock > 0)
 											{
 												if (product.Amount == 0)
-											{
-												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
-											}
-											else
-											{
-												if (product.IsInPromotion)
 												{
-													<span class="price">@product.DiscountAmountStr</span>
-													<del>@product.AmountStr</del>
+												<span class="price">@System.Web.Configuration.WebConfigurationManager.AppSettings["CallForAmount"]</span>
 												}
 												else
 												{
-													<span class="price">@product.AmountStr</span>
-													<del></del>
+													if (product.IsInPromotion)
+													{
+														<span class="price">@product.DiscountAmountStr</span>
+														<del>@product.AmountStr</del>
+													}
+													else
+													{
+														<span class="price">@product.AmountStr</span>
+														<del></del>
 												}
-												}
+											}
+											}
+											
+											else
+											{
+												<span class="price">ناموجود</span>
+
 											}
 										</div>
 

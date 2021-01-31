@@ -30,7 +30,7 @@
 						<div class="text-center order_complete">
 							<i class="fas fa-check-circle"></i>
 							<div class="heading_s1">
-								<h3>مبلغ سفارش شما با موفقیت پرداخت شد.</h3>
+								<h3>با تشکر، سفارش شما با موفقیت ثبت گردید.</h3>
 							</div>
 							<p>ممنون بابت تکمیل سفارش. سفارش شما به انبار ارجاع داده شد و کارشناسان ما جهت هماهنگی ارسال با شما تماس خواهند گرفت</p>
 							<table class="table table-bordered table-hover" style="direction: rtl;">
@@ -39,10 +39,6 @@
 								<tr>
 									<td>شماره فاکتور: </td>
 									<td>@Model.OrderCode </td>
-								</tr>
-								<tr>
-									<td>شماره پیگیری: </td>
-									<td>@Model.RefrenceId </td>
 								</tr>
 
 								</tbody>
@@ -117,7 +113,7 @@
 
 												</tr>
 												<tr>
-													<td colspan="4" class="border-left"><strong>مبلغ پرداختی: @string.Format("{0:n0}", Model.Order.TotalAmountStr)   </strong></td>
+													<td colspan="4" class="border-left"><strong>مبلغ پرداختی: @string.Format("{0:n0}", Model.Order.TotalAmountStr) </strong></td>
 												</tr>
 												</tbody>
 											</table>

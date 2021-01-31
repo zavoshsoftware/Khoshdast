@@ -71,7 +71,7 @@
               <Brush>Transparent</Brush>
               <ClientRectangle>0.2,0.2,4.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text1</Name>
               <Page isRef="4" />
@@ -84,7 +84,7 @@
               <Brush>Transparent</Brush>
               <ClientRectangle>0.2,1,4.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text2</Name>
               <Page isRef="4" />
@@ -97,7 +97,7 @@
               <Brush>Transparent</Brush>
               <ClientRectangle>8,1,4.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text3</Name>
@@ -111,7 +111,7 @@
               <Brush>Transparent</Brush>
               <ClientRectangle>8,0.2,4.6,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text4</Name>
@@ -227,28 +227,11 @@ rkJggg==</ImageBytes>
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>0,3.2,12.8,0.8</ClientRectangle>
-          <Components isList="true" count="5">
-            <HeaderProducts_Barcode Ref="15" type="Text" isKey="true">
+          <Components isList="true" count="4">
+            <HeaderProducts_ProductTitle Ref="15" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>9.2,0,3.6,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Tahoma,10,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>HeaderProducts_Barcode</Name>
-              <Page isRef="4" />
-              <Parent isRef="14" />
-              <Text>بارکد</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </HeaderProducts_Barcode>
-            <HeaderProducts_ProductTitle Ref="16" type="Text" isKey="true">
-              <Border>Left;Black;1;Solid;False;4;Black</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>6,0,3.2,0.8</ClientRectangle>
+              <ClientRectangle>6.4,0,6.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Tahoma,10,Bold</Font>
               <HorAlignment>Center</HorAlignment>
@@ -262,10 +245,10 @@ rkJggg==</ImageBytes>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </HeaderProducts_ProductTitle>
-            <HeaderProducts_Amount Ref="17" type="Text" isKey="true">
+            <HeaderProducts_Amount Ref="16" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>4,0,2,0.8</ClientRectangle>
+              <ClientRectangle>4.2,0,2.2,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Tahoma,10,Bold</Font>
               <HorAlignment>Center</HorAlignment>
@@ -279,10 +262,10 @@ rkJggg==</ImageBytes>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </HeaderProducts_Amount>
-            <HeaderProducts_Quantity Ref="18" type="Text" isKey="true">
+            <HeaderProducts_Quantity Ref="17" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>2.2,0,1.8,0.8</ClientRectangle>
+              <ClientRectangle>2.6,0,1.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Tahoma,10,Bold</Font>
               <HorAlignment>Center</HorAlignment>
@@ -296,9 +279,9 @@ rkJggg==</ImageBytes>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </HeaderProducts_Quantity>
-            <HeaderProducts_RowAmount Ref="19" type="Text" isKey="true">
+            <HeaderProducts_RowAmount Ref="18" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0,0,2.2,0.8</ClientRectangle>
+              <ClientRectangle>0,0,2.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Font>Tahoma,10,Bold</Font>
               <HorAlignment>Center</HorAlignment>
@@ -318,91 +301,74 @@ rkJggg==</ImageBytes>
           <Page isRef="4" />
           <Parent isRef="4" />
         </Header>
-        <Data Ref="20" type="DataBand" isKey="true">
+        <Data Ref="19" type="DataBand" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <BusinessObjectGuid>3ff5a302385b4c53acdeaa68745842f6</BusinessObjectGuid>
           <ClientRectangle>0,4.8,12.8,0.8</ClientRectangle>
-          <Components isList="true" count="5">
-            <DataProducts_Barcode Ref="21" type="Text" isKey="true">
+          <Components isList="true" count="4">
+            <DataProducts_ProductTitle Ref="20" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>9.2,0,3.6,0.8</ClientRectangle>
+              <ClientRectangle>6.4,0,6.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>DataProducts_Barcode</Name>
-              <Page isRef="4" />
-              <Parent isRef="20" />
-              <Text>{KhoshdastInvoice.Products.Barcode}</Text>
-              <TextBrush>Black</TextBrush>
-              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-              <VertAlignment>Center</VertAlignment>
-            </DataProducts_Barcode>
-            <DataProducts_ProductTitle Ref="22" type="Text" isKey="true">
-              <Border>Left;Black;1;Solid;False;4;Black</Border>
-              <Brush>Transparent</Brush>
-              <CanGrow>True</CanGrow>
-              <ClientRectangle>6,0,3.2,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataProducts_ProductTitle</Name>
               <Page isRef="4" />
-              <Parent isRef="20" />
+              <Parent isRef="19" />
               <Text>{KhoshdastInvoice.Products.ProductTitle}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <VertAlignment>Center</VertAlignment>
             </DataProducts_ProductTitle>
-            <DataProducts_Amount Ref="23" type="Text" isKey="true">
+            <DataProducts_Amount Ref="21" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>4,0,2,0.8</ClientRectangle>
+              <ClientRectangle>4.2,0,2.2,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataProducts_Amount</Name>
               <Page isRef="4" />
-              <Parent isRef="20" />
+              <Parent isRef="19" />
               <Text>{KhoshdastInvoice.Products.Amount}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <VertAlignment>Center</VertAlignment>
             </DataProducts_Amount>
-            <DataProducts_Quantity Ref="24" type="Text" isKey="true">
+            <DataProducts_Quantity Ref="22" type="Text" isKey="true">
               <Border>Left;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>2.2,0,1.8,0.8</ClientRectangle>
+              <ClientRectangle>2.6,0,1.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataProducts_Quantity</Name>
               <Page isRef="4" />
-              <Parent isRef="20" />
+              <Parent isRef="19" />
               <Text>{KhoshdastInvoice.Products.Quantity}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <VertAlignment>Center</VertAlignment>
             </DataProducts_Quantity>
-            <DataProducts_RowAmount Ref="25" type="Text" isKey="true">
+            <DataProducts_RowAmount Ref="23" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>0,0,2.2,0.8</ClientRectangle>
+              <ClientRectangle>0,0,2.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataProducts_RowAmount</Name>
               <Page isRef="4" />
-              <Parent isRef="20" />
+              <Parent isRef="19" />
               <Text>{KhoshdastInvoice.Products.RowAmount}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
@@ -417,187 +383,160 @@ rkJggg==</ImageBytes>
           <Parent isRef="4" />
           <Sort isList="true" count="0" />
         </Data>
-        <CrossFooterBand1 Ref="26" type="Stimulsoft.Report.Components.StiCrossFooterBand" isKey="true">
+        <CrossFooterBand1 Ref="24" type="Stimulsoft.Report.Components.StiCrossFooterBand" isKey="true">
           <Border>All;Black;1;Solid;False;4;Black</Border>
           <Brush>Transparent</Brush>
           <ClientRectangle>0,6,12.8,9.4</ClientRectangle>
-          <Components isList="true" count="12">
-            <Text5 Ref="27" type="Text" isKey="true">
+          <Components isList="true" count="10">
+            <Text5 Ref="25" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>8,0,4.6,1</ClientRectangle>
+              <ClientRectangle>6,0,6.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text5</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>وضعیت سفارش: {KhoshdastInvoice.OrderStatus}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text5>
-            <Text7 Ref="28" type="Text" isKey="true">
+            <Text7 Ref="26" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>8,1.2,4.6,1</ClientRectangle>
+              <ClientRectangle>6,0.8,6.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text7</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>نوع پرداخت: {KhoshdastInvoice.PaymentType}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text7>
-            <Text8 Ref="29" type="Text" isKey="true">
+            <Text9 Ref="27" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>8,2.4,4.6,1</ClientRectangle>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.2,4,12.4,1.2</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
-              <HorAlignment>Right</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text8</Name>
-              <Page isRef="4" />
-              <Parent isRef="26" />
-              <Text>شهر: {KhoshdastInvoice.City}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text8>
-            <Text9 Ref="30" type="Text" isKey="true">
-              <Brush>Transparent</Brush>
-              <ClientRectangle>5,3.6,7.6,1.6</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text9</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
-              <Text>آدرس: {KhoshdastInvoice.CustomerAddress}</Text>
+              <Parent isRef="24" />
+              <ShrinkFontToFitMinimumSize>2</ShrinkFontToFitMinimumSize>
+              <Text>آدرس:{KhoshdastInvoice.City}, {KhoshdastInvoice.CustomerAddress},کد پستی: {KhoshdastInvoice.PostalCode}</Text>
               <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text9>
-            <Text10 Ref="31" type="Text" isKey="true">
+            <Text11 Ref="28" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>8,5.4,4.6,1</ClientRectangle>
+              <ClientRectangle>0.2,0,5.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
-              <HorAlignment>Right</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text10</Name>
-              <Page isRef="4" />
-              <Parent isRef="26" />
-              <Text>کد پستی: {KhoshdastInvoice.PostalCode}</Text>
-              <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text10>
-            <Text11 Ref="32" type="Text" isKey="true">
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,0,4.6,1</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,10</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text11</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>جمع فاکتور: {KhoshdastInvoice.SubTotal}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text11>
-            <Text12 Ref="33" type="Text" isKey="true">
+            <Text12 Ref="29" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,1.2,4.6,1</ClientRectangle>
+              <ClientRectangle>0.2,0.8,5.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text12</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>هزینه ارسال: {KhoshdastInvoice.Shipping}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text12>
-            <Text13 Ref="34" type="Text" isKey="true">
+            <Text13 Ref="30" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,2.4,4.6,1</ClientRectangle>
+              <ClientRectangle>0.2,1.6,5.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text13</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>تخفیف: {KhoshdastInvoice.Discount}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text13>
-            <Text14 Ref="35" type="Text" isKey="true">
+            <Text14 Ref="31" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,3.6,4.6,1</ClientRectangle>
+              <ClientRectangle>0.2,2.4,5.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text14</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>مبلغ قابل پرداخت: {KhoshdastInvoice.Total}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text14>
-            <Text15 Ref="36" type="Text" isKey="true">
+            <Text15 Ref="32" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,4.8,4.6,1</ClientRectangle>
+              <ClientRectangle>6,2.4,6.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text15</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>کد رهگیری پرداخت آنلاین: {KhoshdastInvoice.RefId}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text15>
-            <Text16 Ref="37" type="Text" isKey="true">
+            <Text16 Ref="33" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,6,4.6,0.8</ClientRectangle>
+              <ClientRectangle>6,1.6,6.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text16</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>وضعیت پرداخت: {KhoshdastInvoice.IsPay}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text16>
-            <Text17 Ref="38" type="Text" isKey="true">
+            <Text17 Ref="34" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>0.2,7,4.6,0.8</ClientRectangle>
+              <ClientRectangle>0.2,3.2,12.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
-              <Font>Tahoma,8</Font>
+              <Font>Tahoma,11</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>Text17</Name>
               <Page isRef="4" />
-              <Parent isRef="26" />
+              <Parent isRef="24" />
               <Text>توضیحات پرداخت: {KhoshdastInvoice.PaymentDesc}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
@@ -631,10 +570,10 @@ rkJggg==</ImageBytes>
     <value>Stimulsoft.Report.Dll</value>
   </ReferencedAssemblies>
   <ReportAlias>Report</ReportAlias>
-  <ReportChanged>12/5/2020 7:36:21 PM</ReportChanged>
+  <ReportChanged>1/31/2021 6:40:41 PM</ReportChanged>
   <ReportCreated>12/5/2020 5:48:42 PM</ReportCreated>
   <ReportFile>C:\Users\Hossein\Documents\GitHub\Khoshdast\Site\Khoshdast\Khoshdast\Reports\Mrt\Invoice.mrt</ReportFile>
-  <ReportGuid>8f6ac8a404f946f880f1e44d8c2ac7e4</ReportGuid>
+  <ReportGuid>79e6585590284eb9b45f5b2566b297b0</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2020.4.2.0</ReportVersion>

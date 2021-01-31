@@ -437,13 +437,14 @@ namespace Khoshdast.Controllers
                         {
                             RemoveCookie();
 
-                            res = "notonline";
+                            res = "notonline|"+order.Id;
 
                             User user = db.Users.Find(userId);
                            string smsCellnumber = cellnumber;
                             if (user != null)
                                 smsCellnumber = user.CellNum;
-                            SendSms.SendCommonSms(smsCellnumber, "کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با موفقیت ثبت گردید.");
+
+                            SendSms.SendCommonSms(smsCellnumber, GetUserSms(order.Code.ToString()));
 
                         }
                         return Json(res, JsonRequestBehavior.AllowGet);
@@ -463,7 +464,14 @@ namespace Khoshdast.Controllers
 
         #region Finalize
 
+        public string GetUserSms(string code)
+        {
+            string nextLine = "\n";
 
+            return "*فروشگاه آنلاین خوشدست*" + nextLine + "با سپاس از خرید شما" + nextLine + "شماره پیگیری: " + code +
+                   nextLine + "کارشناسان ما برای هماهنگی ارسال با شما تماس خواهند گرفت.";
+
+        }
 
 
         public decimal GetTotalAmount(decimal? subtotal, decimal? discount, decimal? shippment)
@@ -667,7 +675,7 @@ namespace Khoshdast.Controllers
                             }
                             RemoveCookie();
 
-                           SendSms.SendCommonSms(order.User.CellNum,"کاربر گرامی با تشکر از خرید شما. سفارش شما در سایت رنگ و ابزار خوشدست با شماره پیگیری "+ verificationResponse.RefID + " با موفقیت ثبت گردید.");
+                           SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
                         }
                         else
                         {
@@ -680,6 +688,40 @@ namespace Khoshdast.Controllers
                         callBack.IsSuccess = false;
                         callBack.RefrenceId = verificationResponse.Status.ToString();
                     }
+                }
+                catch (Exception e)
+                {
+                    callBack.IsSuccess = false;
+                    callBack.RefrenceId = "خطا سیستمی. لطفا با پشتیبانی سایت تماس بگیرید";
+                }
+            }
+
+            return View(callBack);
+        }
+
+        [Route("thank-you")]
+        public ActionResult FreeCallBack(Guid orderId)
+        {
+            CallBackViewModel callBack = new CallBackViewModel();
+
+            Order order = db.Orders.Find(orderId);
+
+            if (order == null)
+            {
+                callBack.IsSuccess = false;
+                callBack.RefrenceId = "414";
+            }
+          
+            
+            else
+            {
+                try
+                {
+                    callBack.Order = order;
+                    callBack.IsSuccess = true;
+                    callBack.OrderCode = order.Code.ToString();
+                    callBack.OrderDetails = db.OrderDetails.Where(c => c.OrderId == order.Id).ToList();
+
                 }
                 catch (Exception e)
                 {

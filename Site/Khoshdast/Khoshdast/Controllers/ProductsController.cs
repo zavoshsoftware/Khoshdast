@@ -978,6 +978,29 @@ namespace Khoshdast.Controllers
 
             return string.Empty;
         }
+
+
+        public string removebadsproducts()
+        {
+            Guid italian = new Guid("6CA03143-8F9E-4985-92F8-C52F6047465D");
+
+            var ppg = db.ProductGroupRelProducts.Where(c => c.ProductGroupId == italian);
+
+            foreach (var groupRelProduct in ppg)
+            {
+                Product p = db.Products.Where(c => c.Id == groupRelProduct.ProductId).FirstOrDefault();
+
+                db.ProductGroupRelProducts.Remove(groupRelProduct);
+
+                if (p != null)
+                    db.Products.Remove(p);
+            }
+            db.SaveChanges();
+
+            return string.Empty;
+        }
+
+        
     }
 }
 

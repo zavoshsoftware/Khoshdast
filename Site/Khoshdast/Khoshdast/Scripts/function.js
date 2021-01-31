@@ -55,10 +55,10 @@ function addDiscountCode() {
                         $('#errorDiv-discount').html("این کد تخفیف قبلا استفاده شده است.");
                     }
                     else if (result.toLowerCase() === "expired") {
-                        $('#errorDiv-discount').html("کد تخفیف وارد شده منقضی شده است.");
+                        $('#errorDiv-discount').html("کد تخفیف شما منقضی شده است..");
                     }
                     else if (result.toLowerCase() === "invald") {
-                        $('#errorDiv-discount').html("کد تخفیف وارد شده معتبر نمی باشد.");
+                        $('#errorDiv-discount').html("کد تخفیف نامعتبر است.");
                     }
                     else if (result.toLowerCase() === "true") {
                         $('#SuccessDiv-discount').css('display', 'block');
@@ -170,12 +170,14 @@ function finalizeOrder() {
 
                     }
 
-                    else if (result === 'notonline') {
+                    else if (result.includes('notonline')) {
 
-                        $('#error-box').css('display', 'none');
-                        $('#success-checkout-box').css('display', 'block');
-                        $('#success-checkout-box').html('با تشکر از خرید شما. همکاران ما جهت هماهنگی ارسال با شما تماس خواهند گرفت');
-                        AppearButton();
+                        var orderId = result.split('|')[1];
+                        window.location = "/thank-you?orderid="+orderId;
+                        //$('#error-box').css('display', 'none');
+                        //$('#success-checkout-box').css('display', 'block');
+                        //$('#success-checkout-box').html('با تشکر از خرید شما. همکاران ما جهت هماهنگی ارسال با شما تماس خواهند گرفت');
+                        //AppearButton();
 
                     }
                     else if (result === 'emptyBasket') {

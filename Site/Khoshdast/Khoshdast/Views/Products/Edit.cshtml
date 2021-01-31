@@ -104,7 +104,7 @@
 			<div class="form-group">
 				@Html.LabelFor(model => model.Amount, new { @class = "control-label col-md-2" })
 				<div class="col-md-10">
-					@Html.EditorFor(model => model.Amount)
+					@Html.EditorFor(model => model.Amount) تومان
 
 					@Html.ValidationMessageFor(model => model.Amount)
 				</div>
@@ -113,7 +113,7 @@
 			<div class="form-group">
 				@Html.LabelFor(model => model.DiscountAmount, new { @class = "control-label col-md-2" })
 				<div class="col-md-10">
-					@Html.EditorFor(model => model.DiscountAmount)
+					@Html.EditorFor(model => model.DiscountAmount) تومان
 
 					@Html.ValidationMessageFor(model => model.DiscountAmount)
 				</div>
@@ -172,7 +172,6 @@
 				<div class="col-md-10">
 					@Html.EditorFor(model => model.IsActive)
 
-					@Html.LabelFor(model => model.IsActive)
 					@Html.ValidationMessageFor(model => model.IsActive)
 				</div>
 			</div>

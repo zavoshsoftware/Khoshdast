@@ -1764,6 +1764,7 @@
     <Content Include="Views\ProductGroupDiscounts\Edit.cshtml" />
     <Content Include="Views\ProductGroupDiscounts\Index.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Basket\FreeCallBack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
