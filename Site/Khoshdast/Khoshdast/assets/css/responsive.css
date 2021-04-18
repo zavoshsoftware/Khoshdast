@@ -960,7 +960,7 @@ div.banner_large_pad {
 .banner_section:not(.full_screen) .banner_content_wrap .carousel-item {
 	height: 252px;
 }
-    .leftslide {
+    .leftslide, .leftslide img {
         height: 200px !important;
     }
 .banner_section.slide_medium, 
@@ -1146,7 +1146,7 @@ footer .widget_title {
 	line-height: 68px;
 }
 .nav_style4.owl-theme .owl-nav [class*="owl-"] {
-	top: -70px;
+	top: -55px;
 }
 .cat_overlap {
 	margin-top: -40px;

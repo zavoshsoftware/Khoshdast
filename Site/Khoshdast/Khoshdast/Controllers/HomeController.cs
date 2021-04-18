@@ -35,7 +35,7 @@ namespace Khoshdast.Controllers
                 TopCategoryProducts = GetTopCategoryProducts(topProductGroup),
                 TopProductGroupTitle = topPgTitle,
                 HomeBlogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(3).ToList(),
-                HomeBrands = db.Brands.Where(c => c.BrandNameImageUrl != null && c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.Order).Take(10).ToList(),
+                HomeBrands = db.Brands.Where(c => c.BrandNameImageUrl != null && c.IsDeleted == false && c.IsActive&&c.IsInHome).OrderByDescending(c => c.Order).Take(10).ToList(),
                 SliderLeftBanners1 = sliderBanners.FirstOrDefault(),
                 SliderLeftBanners2 = sliderBanners.LastOrDefault(),
                 HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),
@@ -63,7 +63,7 @@ namespace Khoshdast.Controllers
             {
                 List<ProductGroupRelProduct> productGroupRelProducts =
                     db.ProductGroupRelProducts.Where(c => (c.ProductGroupId == productGroup.Id || c.ProductGroup.ParentId == productGroup.Id) && c.IsDeleted == false)
-                        .ToList();
+                      .Take(10).ToList();
 
                 foreach (ProductGroupRelProduct pro in productGroupRelProducts)
                 {
@@ -111,7 +111,7 @@ namespace Khoshdast.Controllers
 
                 foreach (Product product in segmentProducts)
                 {
-                    if (products.All(c => c.Id == product.Id))
+                    if (!products.Any(c => c.Id == product.Id))
                     {
                         products.Add(product);
                     }

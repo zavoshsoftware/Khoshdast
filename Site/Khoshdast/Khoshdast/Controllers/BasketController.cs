@@ -27,6 +27,15 @@ namespace Khoshdast.Controllers
             return Json("true", JsonRequestBehavior.AllowGet);
         }
 
+        [Route("basketRedirect")]
+   
+        public ActionResult AddToCartByRedirect(string code)
+        {
+            //code=CheckCodeParent(code);
+            SetCookie(code, "1");
+            return RedirectToAction("Basket");
+        }
+
 
 
         [Route("Basket")]
@@ -104,7 +113,7 @@ namespace Khoshdast.Controllers
                 Value = cookievalue,
                 Expires = DateTime.Now.AddDays(1)
             });
-
+            RemoveCookie("discount");
             return RedirectToAction("basket");
         }
 
@@ -435,7 +444,7 @@ namespace Khoshdast.Controllers
 
                         else
                         {
-                            RemoveCookie();
+                            RemoveCookie("basket-khoshdast");
 
                             res = "notonline|"+order.Id;
 
@@ -604,11 +613,11 @@ namespace Khoshdast.Controllers
         }
 
 
-        public void RemoveCookie()
+        public void RemoveCookie(string name)
         {
-            if (Request.Cookies["basket-khoshdast"] != null)
+            if (Request.Cookies[name] != null)
             {
-                Response.Cookies["basket-khoshdast"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies[name].Expires = DateTime.Now.AddDays(-1);
             }
         }
         #endregion
@@ -673,7 +682,7 @@ namespace Khoshdast.Controllers
                                 }
                                 db.SaveChanges();
                             }
-                            RemoveCookie();
+                            RemoveCookie("basket-khoshdast");
 
                            SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
                         }

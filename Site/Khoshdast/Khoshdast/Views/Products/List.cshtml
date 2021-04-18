@@ -143,7 +143,9 @@
 										@if (product.Amount != 0 && product.Stock > 0)
 										{
 											<div class="add-to-cart">
-												<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>
+												@*<button class="btn btn-fill-out btn-addtocart" onclick="addToBasket('@product.Code', '1');"><i class="icon-basket-loaded"></i>خرید</button>*@
+												<a class="btn btn-fill-out btn-addtocart" href="/basketRedirect?code=@product.Code&qty=1"><i class="icon-basket-loaded"></i>خرید</a>
+										
 											</div>
 										}
 										else

@@ -3,7 +3,19 @@
     ViewBag.Title = "پرداخت سفارش";
     Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
-
+@section head{
+	<style>
+		.custom-message {
+			text-align: center;
+			background: #ecc535;
+			color: #fff;
+			border: 1px solid #ad8a07;
+			padding: 7px 0;
+			margin-bottom: 10px;
+			border-radius:5px;
+		}
+	</style>
+}
 
 <div class="main_content bg-gray-list">
 
@@ -23,6 +35,21 @@
 		</div>
 	</div>
 </div>
+	
+	
+<div class="container ">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="custom-message">
+				به دلیل تعطیلی پست، تیپاکس و باربری ها، ارسال سفارش شما از هفتم فروردین 1400 به بعد خواهد بود.
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+
 @if (Model.Products.Any())
 {
 	<div class="container">

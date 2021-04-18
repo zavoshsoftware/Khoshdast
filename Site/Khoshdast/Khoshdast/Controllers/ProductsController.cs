@@ -514,7 +514,7 @@ namespace Khoshdast.Controllers
                 string amount = "";
                 if (product.Stock > 0)
                 {
-                     amount = product.AmountStr;
+                    amount = product.AmountStr;
 
                     //if (product.IsInPromotion)
                     //    amount = product.DiscountAmountStr;
@@ -570,13 +570,13 @@ namespace Khoshdast.Controllers
             bool isLastBatch = products.Count < productPagination;
 
             List<LazyLoadProductCardsItemViewModel> resItem = new List<LazyLoadProductCardsItemViewModel>();
-          
+
             foreach (var product in products)
             {
-               string amount = "";
+                string amount = "";
                 if (product.Stock > 0)
                 {
-                     amount = product.AmountStr;
+                    amount = product.AmountStr;
 
                     //if (product.IsInPromotion)
                     //    amount = product.DiscountAmountStr;
@@ -675,7 +675,7 @@ namespace Khoshdast.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           int proCode= Convert.ToInt32(code);
+            int proCode = Convert.ToInt32(code);
             Product product = db.Products.FirstOrDefault(c => c.Code == proCode);
             if (product == null)
             {
@@ -971,7 +971,7 @@ namespace Khoshdast.Controllers
             foreach (Product product in products)
             {
                 product.Code = codeGenerator.ReturnProductCode();
-                product.LastModifiedDate=DateTime.Now;
+                product.LastModifiedDate = DateTime.Now;
                 db.SaveChanges();
 
             }
@@ -999,8 +999,18 @@ namespace Khoshdast.Controllers
 
             return string.Empty;
         }
+        public string removeBadChars()
+        {
+            var products = db.Products.Where(c => c.Title.Contains("طرح‌دار"));
 
-        
+            foreach (var product in products)
+            {
+                product.Title = product.Title.Replace("طرح‌دار", "طرح دار");
+            }
+            db.SaveChanges();
+
+            return string.Empty;
+        }
     }
 }
 

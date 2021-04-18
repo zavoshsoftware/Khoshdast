@@ -32,10 +32,10 @@
 	<link rel="stylesheet" href="/assets/css/slick.css">
 	<link rel="stylesheet" href="/assets/css/slick-theme.css">
 	<link rel="stylesheet" href="/assets/css/style.css?v=1.4">
-	<link rel="stylesheet" href="/assets/css/responsive.css?v=1.2">
+	<link rel="stylesheet" href="/assets/css/responsive.css?v=1.4">
 	<link href="~/assets/css/font-awesome.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/assets/css/rtl-style.css">
-	<link href="~/assets/css/style-zavosh.css?v=1.7" rel="stylesheet" />
+	<link href="~/assets/css/style-zavosh.css?v=1.8" rel="stylesheet" />
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-P83QNZCTEW"></script>
 	<script>
@@ -65,7 +65,14 @@
 	<script src="/assets/js/slick.min.js"></script>
 	<script src="/assets/js/jquery.elevatezoom.js"></script>
 	<script src="/assets/js/scripts.js"></script>
-	<script src="~/Scripts/function.js?v=1.4"></script>
+<script src="~/Scripts/function.js?v=1.6"></script>
+<script type="text/javascript">
+	(function(c,l,a,r,i,t,y){
+		c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+		t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+		y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+	})(window, document, "clarity", "script", "5oe8cns208");
+</script>
 	@RenderSection("scripts", required: false)
 
 	<script>
@@ -81,7 +88,7 @@
 		});
 
 		$(function(){
-			$('input #search_input').keydown(function(e){
+			$('input#search_input').keydown(function(e){
 				if (e.keyCode === 13) {
 					searchResult();
 					return false;

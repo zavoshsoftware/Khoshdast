@@ -822,3 +822,7 @@ h1, h2, h3, h4, h5, h6, a, span, label, p {
 .order_complete {
     padding-top: 30px;
 }
+
+.owl-carousel.owl-drag .owl-item {
+    touch-action: auto;
+}
