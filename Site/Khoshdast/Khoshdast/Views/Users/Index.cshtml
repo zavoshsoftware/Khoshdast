@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<Models.User>
 
 @{
-ViewBag.Title = "فهرست کاربران";
-    
+    ViewBag.Title = "فهرست کاربران";
+
 }
 
 <h2>@ViewBag.Title</h2>
 
-        @(Html.Kendo().Grid(Model)
-									.Name("Grid")
-									.Columns(columns =>
-									{
+@(Html.Kendo().Grid(Model)
+                                    .Name("Grid")
+                                    .Columns(columns =>
+                                    {
 
-									columns.Bound(model => model.Code);
-									columns.Bound(model => model.CellNum);
-									columns.Bound(model => model.FullName);
-									columns.Bound(model => model.Role.Title);
-									columns.Bound(model => model.Password);
-									columns.Bound(model => model.IsActive);
-									columns.Bound(model => model.CreationDate);
-									columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
-									.Template(@<text>
-									@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
-									@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
-									</text>).Width(200);  
-		})
-		.ToolBar(toolbar =>
-					{				
-						toolbar.Custom().Action("Create","Users").Text("افزودن");                          
-					}
-		)         
-		.DataSource(dataSource => dataSource
-									.Server()
-							
-									.Model(model => model.Id(item => item.Id))
-					)              
-	)
+                                        columns.Bound(model => model.Code);
+                                        columns.Bound(model => model.CellNum);
+                                        columns.Bound(model => model.FullName);
+                                        columns.Bound(model => model.Role.Title);
+                                        columns.Bound(model => model.Password);
+                                        columns.Bound(model => model.IsActive);
+                                        columns.Bound(model => model.CreationDate);
+                                        columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+                                .Template(@<text>
+                                        @Html.ActionLink("ویرایش", "Edit", new { id = @item.Id }, new { @class = "k-button" })
+                                        @Html.ActionLink("حذف", "Delete", new { id = @item.Id }, new { @class = "k-button" })
+                                        @Html.ActionLink("لیست سفارش های کاربر", "GetUserOrder","Orders", new { id = @item.Id }, new { @class = "k-button" })
+                                </text>).Width(200);
+                                    })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Custom().Action("Create", "Users").Text("افزودن");
+            toolbar.Custom().Action("ExportUserList", "Users").Text("دریافت خروجی اکسل");
+        }
+        )
+        .DataSource(dataSource => dataSource
+                                    .Server()
+
+                                    .Model(model => model.Id(item => item.Id))
+                    )
+)

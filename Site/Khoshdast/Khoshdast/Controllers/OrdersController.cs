@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Helpers;
@@ -312,6 +313,11 @@ namespace Khoshdast.Controllers
                 i++;
             }
             db.SaveChanges();
+        }
+        public async Task<ActionResult> GetUserOrder(Guid id)
+        {
+            var userOrders =await db.Orders.Where(x => x.UserId == id).ToListAsync();            
+            return View(userOrders);
         }
     }
 }

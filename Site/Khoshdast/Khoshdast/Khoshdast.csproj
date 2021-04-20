@@ -426,11 +426,17 @@
     <Content Include="assets\images\paypal.png" />
     <Content Include="assets\images\PG\1.jpg" />
     <Content Include="assets\images\PG\2.jpg" />
+    <Content Include="assets\images\PG\227e472ab9e743caa135ae0cdb00d40f.jpg" />
+    <Content Include="assets\images\PG\27cb9dcf31854eadb001c75b7e649ddc.jpg" />
     <Content Include="assets\images\PG\3.jpg" />
     <Content Include="assets\images\PG\4.jpg" />
+    <Content Include="assets\images\PG\4ea8d6ce61f4407d9ec9ad57208452d6.jpg" />
     <Content Include="assets\images\PG\5.jpg" />
+    <Content Include="assets\images\PG\51e011b45ee649e0baa2fed4243bb1d1.jpg" />
     <Content Include="assets\images\PG\6.jpg" />
     <Content Include="assets\images\PG\7.jpg" />
+    <Content Include="assets\images\PG\d96d2f897f39414ca6c95935ac843adb.jpg" />
+    <Content Include="assets\images\PG\e49eec5c573e470ea0a4636a4b3a5eaa.jpg" />
     <Content Include="assets\images\PG\pg-banner.png" />
     <Content Include="assets\images\PG\pg-banner2.png" />
     <Content Include="assets\images\PG\pg-banner3.png" />
@@ -1769,6 +1775,7 @@
     <Content Include="Views\Basket\FreeCallBack.cshtml" />
     <Content Include="Views\Accounts\forgetpassword.cshtml" />
     <Content Include="Views\Accounts\ChangePassword.cshtml" />
+    <Content Include="Views\Orders\GetUserOrder.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

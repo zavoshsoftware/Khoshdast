@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ClosedXML.Excel;
 using Models;
 using ViewModels;
 
@@ -15,11 +18,10 @@ namespace Khoshdast.Controllers
     public class UsersController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Gender).Where(u=>u.IsDeleted==false).OrderByDescending(u=>u.CreationDate).Include(u => u.Role).Where(u=>u.IsDeleted==false).OrderByDescending(u=>u.CreationDate);
+            var users = db.Users.Include(u => u.Gender).Where(u => u.IsDeleted == false).OrderByDescending(u => u.CreationDate).Include(u => u.Role).Where(u => u.IsDeleted == false).OrderByDescending(u => u.CreationDate);
             return View(users.ToList());
         }
 
@@ -55,9 +57,9 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				user.IsDeleted=false;
-				user.CreationDate= DateTime.Now; 
-					
+                user.IsDeleted = false;
+                user.CreationDate = DateTime.Now;
+
                 user.Id = Guid.NewGuid();
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -95,8 +97,8 @@ namespace Khoshdast.Controllers
         {
             if (ModelState.IsValid)
             {
-				user.IsDeleted=false;
-					user.LastModifiedDate=DateTime.Now;
+                user.IsDeleted = false;
+                user.LastModifiedDate = DateTime.Now;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,9 +129,9 @@ namespace Khoshdast.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             User user = db.Users.Find(id);
-			user.IsDeleted=true;
-			user.DeletionDate=DateTime.Now;
- 
+            user.IsDeleted = true;
+            user.DeletionDate = DateTime.Now;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -142,7 +144,54 @@ namespace Khoshdast.Controllers
             }
             base.Dispose(disposing);
         }
+        public async Task<ActionResult> ExportUserList()
+        {
+            /****************************( create excel file )******************************/
+            string a, b, c, d, e;
+            a = "لیست مشترکین";
+            b = "ردیف";
+            c = "نام کاربر";
+            d = "شماره موبایل";
+            e = "تاریخ ایجاد";
+            var workBook = new XLWorkbook();
+            var workSheet = workBook.Worksheets.Add(a);
+            /***************************( table title)****************************/
+            workSheet.Cell("A1").Value = a;
+            /**************************( table column names)**************************************/
+            workSheet.Cell("A2").Value = b;
+            workSheet.Cell("B2").Value = c;
+            workSheet.Cell("C2").Value = d;
+            workSheet.Cell("D2").Value = e;
+            /**************************( table rows values)**************************************/
+            var users = await db.Users.ToListAsync();
+            for (int i = 0; i < users.Count; i++)
+            {
+                string indexCelNumber = "A" + (i + 3).ToString();
+                string nameCelNumber = "B" + (i + 3).ToString();
+                string mobileCelNumber = "C" + (i + 3).ToString();
+                string createdDateCelNumber = "D" + (i + 3).ToString();
+                workSheet.Cell(indexCelNumber).Value = i.ToString();
+                workSheet.Cell(nameCelNumber).Value = users[i].FullName;
+                workSheet.Cell(mobileCelNumber).Value = users[i].CellNum;
+                workSheet.Cell(createdDateCelNumber).Value = users[i].CreationDateStr;
+            }
 
+            // Prepare the response
+
+            HttpContext.Response.Clear();
+
+            HttpContext.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"لیست مشترکین.xlsx\"");
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                workBook.SaveAs(memoryStream);
+                memoryStream.WriteTo(HttpContext.Response.OutputStream);
+                memoryStream.Close();
+            }
+            HttpContext.Response.End();
+
+            return RedirectToAction("Index", "Users");
+        }
         //[Authorize]
         //[Route("profile")]
         //public ActionResult UserProfile()
@@ -168,7 +217,7 @@ namespace Khoshdast.Controllers
         //        ViewBag.GenderId = new SelectList(db.Genders, "Id", "Title",user.GenderId);
 
         //        ViewBag.BirthDay = new SelectList(db.Genders, "Id", "Title", user.GenderId);
-                
+
 
         //    }
 
