@@ -11,6 +11,8 @@ using Helpers;
 using ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Threading.Tasks;
+
 
 namespace Khoshdast.Controllers
 {
@@ -25,6 +27,80 @@ namespace Khoshdast.Controllers
             model.ReturnUrl = returnUrl;
             return View(model);
         }
+        /**********************( forget password )****************************/
+        [HttpGet]
+        [Route("forgetpassword")]
+        public async Task<ActionResult> ForgetPassword()
+        {
+            ForgetPasswordViewModel model = new ForgetPasswordViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        [Route("forgetpassword")]
+        public async Task<ActionResult> ForgetPassword(ForgetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.UserCellNumber != null)
+                {
+                    var user = db.Users.FirstOrDefault(x => x.CellNum == model.UserCellNumber);
+                    if (user != null)
+                    {
+                        string nextLine = "\n";
+                        TempData["Message"] = "رمز عبور برای از طریق پیامک ارسال شد";
+                        SendSms.SendCommonSms(user.CellNum,
+                            $"رمز عبور شما در وب سایت رنگ خوشدست :{nextLine} {user.Password}");
+                        return RedirectToAction("LoginRegister");
+                    }
+                    else
+                    {
+                        TempData["WrongMobile"] = "شماره موبایل وارد شده در سایت ثبت نشده است";
+                        return View(model);
+                    }
+                }
+
+            }
+            return View();
+        }
+        /**********************( change password )****************************/
+        [HttpGet]
+        [Route("changepassword")]
+        public async Task<ActionResult> ChangePassword()
+        {
+            ChangePasswordViewModel model = new ChangePasswordViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        [Route("changepassword")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid && model.OldPassword != null &&
+                model.NewPassword != null && model.ConfirmNewPassword != null)
+            {
+
+                var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
+                string id = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Id ==new Guid(id));
+                if (user != null && (user.Password != model.OldPassword))
+                {
+                    TempData["WrongPassword"] = "کلمه عبور پیشین وارد شده صحیح نمی باشد";
+                    return View(model);
+                }
+                if (model.NewPassword != model.ConfirmNewPassword)
+                {
+                    TempData["PasswordNotMatch"] = "کلمه عبور جدید با تکرار آن برار نیست";
+                    return View(model);
+                }
+                user.Password = model.NewPassword;
+                await db.SaveChangesAsync();
+                TempData["Message"] = "کلمه عبور با موفقیت تغییر یافت";
+                return RedirectToAction("Index", "Dashboard");
+
+            }
+
+            return View();
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,6 +135,11 @@ namespace Khoshdast.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(LoginRegisterViewModel model)
         {
+            if (!model.RegisterCellNumber.StartsWith("0") || !model.RegisterCellNumber.StartsWith("۰") &&
+                model.RegisterCellNumber.Length <= 11)
+            {
+                model.RegisterCellNumber = 0.ToString() + model.RegisterCellNumber;
+            }
             model.RegisterCellNumber = model.RegisterCellNumber.Replace("۰", "0").Replace("۱", "1").Replace("۲", "2").Replace("۳", "3").Replace("۴", "4").Replace("۵", "5").Replace("۶", "6").Replace("v", "7").Replace("۸", "8").Replace("۹", "9");
 
             bool isValidMobile = Regex.IsMatch(model.RegisterCellNumber, @"(^(09|9)[0-9][0-9]\d{7}$)|(^(09|9)[3][12456]\d{7}$)", RegexOptions.IgnoreCase);

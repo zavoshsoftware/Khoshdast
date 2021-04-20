@@ -39,6 +39,10 @@
                                     {
                                         <p class="alert alert-danger" id="wrongEmail">@TempData["WrongPass"]</p>
                                     }
+                                    if (TempData["Message"] != null)
+                                    {
+                                        <p class="alert alert-success" id="wrongEmail">@TempData["Message"]</p>
+                                    }
                                     <div class="form-group">
                                         <input type="text" required="" class="form-control" id="LoginCellNumber" name="LoginCellNumber" placeholder="شماره موبایل">
                                     </div>

@@ -1447,9 +1447,11 @@
     <Compile Include="ViewModels\AdminProductListViewModel.cs" />
     <Compile Include="ViewModels\BrandListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModels\LazyLoadProductCards.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductGroupDiscountViewModel.cs" />
@@ -1765,6 +1767,8 @@
     <Content Include="Views\ProductGroupDiscounts\Index.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Basket\FreeCallBack.cshtml" />
+    <Content Include="Views\Accounts\forgetpassword.cshtml" />
+    <Content Include="Views\Accounts\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
