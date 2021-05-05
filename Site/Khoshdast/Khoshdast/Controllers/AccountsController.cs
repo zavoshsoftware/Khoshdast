@@ -47,7 +47,7 @@ namespace Khoshdast.Controllers
                     if (user != null)
                     {
                         string nextLine = "\n";
-                        TempData["Message"] = "رمز عبور برای از طریق پیامک ارسال شد";
+                        TempData["Message"] = "رمز عبور از طریق پیامک برای شما ارسال شد";
                         SendSms.SendCommonSms(user.CellNum,
                             $"رمز عبور شما در وب سایت رنگ خوشدست :{nextLine} {user.Password}");
                         return RedirectToAction("LoginRegister");
