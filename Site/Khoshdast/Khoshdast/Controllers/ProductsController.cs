@@ -5,9 +5,11 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using ClosedXML.Excel;
 using Helpers;
 using Kendo.Mvc.Extensions;
 using Models;
@@ -1010,6 +1012,63 @@ namespace Khoshdast.Controllers
             db.SaveChanges();
 
             return string.Empty;
+        }
+
+        public async Task<ActionResult> ExportProductList()
+        {
+            /****************************( create excel file )******************************/
+          
+            string sheetTitle = "فهرست محصولات";
+           string index  = "ردیف";
+           string  productTitle= "محصول";
+           string barcode = "بارکد";
+           string amount = "قیمت";
+            string stock = "موجودی";
+            string brand = "برند";
+            var workBook = new XLWorkbook();
+            var workSheet = workBook.Worksheets.Add(sheetTitle);
+            /***************************( table title)****************************/
+            workSheet.Cell("A1").Value = sheetTitle;
+            /**************************( table column names)**************************************/
+            workSheet.Cell("A2").Value = index;
+            workSheet.Cell("B2").Value = productTitle;
+            workSheet.Cell("C2").Value = barcode;
+            workSheet.Cell("D2").Value = amount;
+            workSheet.Cell("E2").Value = stock;
+            workSheet.Cell("F2").Value = brand;
+            /**************************( table rows values)**************************************/
+            var products = await db.Products.ToListAsync();
+            for (int i = 0; i < products.Count; i++)
+            {
+                string indexCelNumber = "A" + (i + 3).ToString();
+                string nameCelNumber = "B" + (i + 3).ToString();
+                string mobileCelNumber = "C" + (i + 3).ToString();
+                string createdDateCelNumber = "D" + (i + 3).ToString();
+                string stockInSheet = "E" + (i + 3).ToString();
+                string brandInSheet = "F" + (i + 3).ToString();
+                workSheet.Cell(indexCelNumber).Value = i.ToString();
+                workSheet.Cell(nameCelNumber).Value = products[i].Title;
+                workSheet.Cell(mobileCelNumber).Value = products[i].Barcode;
+                workSheet.Cell(createdDateCelNumber).Value = products[i].AmountStr;
+                workSheet.Cell(stockInSheet).Value = products[i].Stock;
+                workSheet.Cell(brandInSheet).Value = products[i].Brand.Title;
+            }
+
+            // Prepare the response
+
+            HttpContext.Response.Clear();
+
+            HttpContext.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            HttpContext.Response.AddHeader("content-disposition", "attachment;filename=\"لیست محصولات.xlsx\"");
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                workBook.SaveAs(memoryStream);
+                memoryStream.WriteTo(HttpContext.Response.OutputStream);
+                memoryStream.Close();
+            }
+            HttpContext.Response.End();
+
+            return RedirectToAction("Index", "Products");
         }
     }
 }

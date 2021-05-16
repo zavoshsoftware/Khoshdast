@@ -28,7 +28,7 @@ namespace Khoshdast.Controllers
         }
 
         [Route("basketRedirect")]
-   
+
         public ActionResult AddToCartByRedirect(string code)
         {
             //code=CheckCodeParent(code);
@@ -61,9 +61,9 @@ namespace Khoshdast.Controllers
 
             decimal shipmentAmount = GetShipmentAmountByTotal(total);
 
-            cart.ShipmentAmount = shipmentAmount.ToString("N0") +" تومان";
+            cart.ShipmentAmount = shipmentAmount.ToString("N0") + " تومان";
 
-            cart.Total = (total+shipmentAmount).ToString("n0") + " تومان";
+            cart.Total = (total + shipmentAmount).ToString("n0") + " تومان";
 
             cart.Policy = db.TextItems.FirstOrDefault(c => c.Name == "policy");
             return View(cart);
@@ -74,8 +74,8 @@ namespace Khoshdast.Controllers
 
         public decimal GetShipmentAmountByTotal(decimal totalAmount)
         {
-          decimal shipmentAmount =Convert.ToDecimal(baseviewmodel.GetTextItemByName("shipping-amount", "summery"));
-          decimal freeShipmentLimitAmount = Convert.ToDecimal(baseviewmodel.GetTextItemByName("free-shipping-amount", "summery"));
+            decimal shipmentAmount = Convert.ToDecimal(baseviewmodel.GetTextItemByName("shipping-amount", "summery"));
+            decimal freeShipmentLimitAmount = Convert.ToDecimal(baseviewmodel.GetTextItemByName("free-shipping-amount", "summery"));
 
             if (totalAmount >= freeShipmentLimitAmount)
                 return 0;
@@ -172,7 +172,7 @@ namespace Khoshdast.Controllers
                 {
                     string[] productItem = basketItems[i].Split('^');
 
-                    int productCode =Convert.ToInt32(productItem[0]);
+                    int productCode = Convert.ToInt32(productItem[0]);
 
                     Product product =
                         db.Products.FirstOrDefault(current =>
@@ -395,7 +395,24 @@ namespace Khoshdast.Controllers
             return Json(cityItems, JsonRequestBehavior.AllowGet);
         }
 
+        public List<Guid> GetNonStockProductList(List<OrderDetail> orderDetails)
+        {
 
+            List<Guid> nonStockProducts = new List<Guid>();
+
+            foreach (OrderDetail orderDetail in orderDetails)
+            {
+                Product product = db.Products.FirstOrDefault(current =>
+                    current.IsDeleted == false && current.IsActive && current.Id == orderDetail.ProductId);
+
+                if (product == null || product.Stock < orderDetail.Quantity)
+                {
+                    nonStockProducts.Add(orderDetail.ProductId);
+                }
+            }
+
+            return nonStockProducts;
+        }
 
         public ActionResult Finalize(string notes, string cellnumber, string postal,
                                     string address, string city, string fullname, string paymentType)
@@ -417,46 +434,77 @@ namespace Khoshdast.Controllers
                         return Json("emptyBasket", JsonRequestBehavior.AllowGet);
 
                     }
-                    Order order = ConvertCoockieToOrder(productInCarts);
+                    CookieToOrderViewModel orderAndDetails = ConvertCoockieToOrder(productInCarts);
+
+                    Order order = orderAndDetails.Order;
 
                     if (order != null)
                     {
-                        order.UserId = userId;
-                        order.DeliverFullName = fullname;
-                        order.DeliverCellNumber = cellnumber;
-                        order.Address = address;
-                        order.PostalCode = postal;
-                        order.CustomerDesc = notes;
-                        order.CityId = new Guid(city);
-                        order.PaymentTypeTitle = paymentType;
+                        List<Guid> nonStockProducts = GetNonStockProductList(orderAndDetails.OrderDetails);
+
+                        if (!nonStockProducts.Any())
+                        {
+
+                            order.UserId = userId;
+                            order.DeliverFullName = fullname;
+                            order.DeliverCellNumber = cellnumber;
+                            order.Address = address;
+                            order.PostalCode = postal;
+                            order.CustomerDesc = notes;
+                            order.CityId = new Guid(city);
+                            order.PaymentTypeTitle = paymentType;
 
 
-                        order.TotalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
+                            order.TotalAmount = GetTotalAmount(order.SubTotal, order.DiscountAmount, order.ShippingAmount);
 
 
 
-                        db.SaveChanges();
+                            db.SaveChanges();
 
-                        string res = "";
+                            string res = "";
 
-                        if (paymentType == "online")
-                            res = zp.ZarinPalRedirect(order, order.TotalAmount);
+                            if (paymentType == "online")
+                                res = zp.ZarinPalRedirect(order, order.TotalAmount);
 
+                            else
+                            {
+                                RemoveCookie("basket-khoshdast");
+
+                                res = "notonline|" + order.Id;
+
+                                User user = db.Users.Find(userId);
+                                string smsCellnumber = cellnumber;
+                                if (user != null)
+                                    smsCellnumber = user.CellNum;
+
+                                SendSms.SendCommonSms(smsCellnumber, GetUserSms(order.Code.ToString()));
+
+                                foreach (var orderDetail in orderAndDetails.OrderDetails)
+                                {
+                                    var product = db.Products.Find(orderDetail.ProductId);
+                                    if (product != null)
+                                    {
+                                        product.Stock -= orderDetail.Quantity;
+                                    }
+                                }
+
+                                db.SaveChanges();
+                            }
+                            return Json(res, JsonRequestBehavior.AllowGet);
+                        }
                         else
                         {
-                            RemoveCookie("basket-khoshdast");
+                            string returnProducts = "";
+                            foreach (Guid productId in nonStockProducts)
+                            {
+                                Product product = db.Products.Find(productId);
 
-                            res = "notonline|"+order.Id;
-
-                            User user = db.Users.Find(userId);
-                           string smsCellnumber = cellnumber;
-                            if (user != null)
-                                smsCellnumber = user.CellNum;
-
-                            SendSms.SendCommonSms(smsCellnumber, GetUserSms(order.Code.ToString()));
+                                if (product != null)
+                                    returnProducts = returnProducts + product.Title + "|";
+                            }
+                            return Json("nonstock|" + returnProducts, JsonRequestBehavior.AllowGet);
 
                         }
-                        return Json(res, JsonRequestBehavior.AllowGet);
                     }
                 }
 
@@ -498,7 +546,7 @@ namespace Khoshdast.Controllers
 
             return (decimal)subtotal - discountAmount + shipmentAmount;
         }
-        public Order ConvertCoockieToOrder(List<ProductInCart> products)
+        public CookieToOrderViewModel ConvertCoockieToOrder(List<ProductInCart> products)
         {
             try
             {
@@ -525,7 +573,8 @@ namespace Khoshdast.Controllers
 
 
                 db.Orders.Add(order);
-
+            
+                List<OrderDetail> orderDetails=new List<OrderDetail>();
                 foreach (ProductInCart product in products)
                 {
                     decimal amount = product.Product.Amount;
@@ -547,11 +596,15 @@ namespace Khoshdast.Controllers
                         OrderId = order.Id,
                         Price = amount
                     };
-
+                    orderDetails.Add(orderDetail);
                     db.OrderDetails.Add(orderDetail);
                 }
-
-                return order;
+                CookieToOrderViewModel result = new CookieToOrderViewModel()
+                {
+                    Order = order,
+                    OrderDetails = orderDetails
+                };
+                return result;
             }
             catch (Exception e)
             {
@@ -674,7 +727,7 @@ namespace Khoshdast.Controllers
                             foreach (OrderDetail orderDetail in callBack.OrderDetails)
                             {
                                 Product product = orderDetail.Product;
-                                product.Stock = orderDetail.Product.Stock - 1;
+                                product.Stock = orderDetail.Product.Stock - orderDetail.Quantity;
 
                                 if (product.Stock <= 0)
                                 {
@@ -684,7 +737,7 @@ namespace Khoshdast.Controllers
                             }
                             RemoveCookie("basket-khoshdast");
 
-                           SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
+                            SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
                         }
                         else
                         {
@@ -720,8 +773,8 @@ namespace Khoshdast.Controllers
                 callBack.IsSuccess = false;
                 callBack.RefrenceId = "414";
             }
-          
-            
+
+
             else
             {
                 try

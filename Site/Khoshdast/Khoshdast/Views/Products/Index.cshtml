@@ -25,16 +25,17 @@ ViewBag.Title = "فهرست محصولات";
 										.Template(@<text>
 										@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})
 										@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
-										</text>).Width(200);  
+										</text>).Width(200);
 							})
 							.ToolBar(toolbar =>
-										{				
-											toolbar.Custom().Action("Create","Products").Text("افزودن");                          
-										}
-							)         .Filterable().Pageable().Sortable()
+							{
+								toolbar.Custom().Action("Create","Products").Text("افزودن");
+								toolbar.Custom().Action("ExportProductList", "Products").Text("دریافت خروجی اکسل");
+							}
+														)         .Filterable().Pageable().Sortable()
 							.DataSource(dataSource => dataSource
 														.Server()
 												.PageSize(50)
 														.Model(model => model.Id(item => item.Id))
-										)              
+										)
 							)

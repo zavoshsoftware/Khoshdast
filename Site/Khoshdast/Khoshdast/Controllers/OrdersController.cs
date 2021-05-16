@@ -204,9 +204,17 @@ namespace Khoshdast.Controllers
 
             if (order != null)
             {
-                //اگر وضعیت از ثبت اولیه به درحال اماده سازی یا در حال ارسال یا ارسال شده تغییر کرد از موجودی کسر بشه
+                ////اگر وضعیت از ثبت اولیه به درحال اماده سازی یا در حال ارسال یا ارسال شده تغییر کرد از موجودی کسر بشه
+                //if (order.PaymentTypeTitle != "online")
+                //    ChangeStock(order, id);
+
+                //اگر وضعیت از لغو شده به درحال اماده سازی یا در حال ارسال یا ارسال شده تغییر کرد از موجودی کسر بشه
                 if (order.PaymentTypeTitle != "online")
-                    ChangeStock(order, id);
+                    ChangeCanseledStock(order, id);
+
+                //اگر وضعیت به لغو شده تغییر کرد به موجودی اضافه بشه
+                if (order.PaymentTypeTitle != "online")
+                    ChangeStockAfterCansele(order, id);
 
                 order.OrderStatusId = id;
                 order.LastModifiedDate = DateTime.Now;
@@ -217,11 +225,27 @@ namespace Khoshdast.Controllers
             return Json("true", JsonRequestBehavior.AllowGet);
         }
 
-        public void ChangeStock(Order order, Guid newstatusId)
+        public void ChangeStockAfterCansele(Order order, Guid newstatusId)
         {
-            if (order.OrderStatusId == new Guid("11869F4D-D6D1-434C-A2F1-7945227CD3BB") &&
+            if (newstatusId == new Guid("99c42ad7-ae29-46c5-bae2-00d2da31ddcd"))
+            {
+                List<OrderDetail> orderDetails = db.OrderDetails.Where(c => c.OrderId == order.Id).ToList();
+
+                foreach (OrderDetail orderDetail in orderDetails)
+                {
+                    orderDetail.Product.Stock = orderDetail.Product.Stock + orderDetail.Quantity;
+                    if (orderDetail.Product.Stock > 0)
+                        orderDetail.Product.IsAvailable = true;
+                }
+            }
+        }
+
+        public void ChangeCanseledStock(Order order, Guid newstatusId)
+        {
+            if (order.OrderStatusId == new Guid("99c42ad7-ae29-46c5-bae2-00d2da31ddcd") &&
                 (newstatusId == new Guid("7DBF85F4-7835-4D21-8269-26695D0C7E0F") || newstatusId == new Guid("68490C34-A666-44DA-8D9F-7B6DEE2E4DE0") ||
-                 newstatusId == new Guid("EC934A7E-0061-4B09-BD44-CA5120CF6200")))
+                 newstatusId == new Guid("EC934A7E-0061-4B09-BD44-CA5120CF6200") ||
+                 newstatusId == new Guid("11869f4d-d6d1-434c-a2f1-7945227cd3bb")))
             {
                 List<OrderDetail> orderDetails = db.OrderDetails.Where(c => c.OrderId == order.Id).ToList();
 

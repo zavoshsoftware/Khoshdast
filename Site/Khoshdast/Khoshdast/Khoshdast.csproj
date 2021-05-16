@@ -1454,6 +1454,7 @@
     <Compile Include="ViewModels\BrandListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\CookieToOrderViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />

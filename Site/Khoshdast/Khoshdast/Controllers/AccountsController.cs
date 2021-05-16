@@ -128,7 +128,9 @@ namespace Khoshdast.Controllers
                 }
             }
 
-            return RedirectToAction("LoginRegister", model);
+            LoginRegisterViewModel result = new LoginRegisterViewModel();
+            result.ReturnUrl = model.ReturnUrl;
+            return RedirectToAction("LoginRegister");
         }
 
         [HttpPost]
@@ -136,7 +138,7 @@ namespace Khoshdast.Controllers
         public ActionResult Register(LoginRegisterViewModel model)
         {
             if (!model.RegisterCellNumber.StartsWith("0") || !model.RegisterCellNumber.StartsWith("۰") &&
-                model.RegisterCellNumber.Length <= 11)
+                model.RegisterCellNumber.Length < 11)
             {
                 model.RegisterCellNumber = 0.ToString() + model.RegisterCellNumber;
             }
@@ -147,7 +149,9 @@ namespace Khoshdast.Controllers
             if (!isValidMobile)
             {
                 TempData["WrongRegisterCellnumber"] = "شماره موبایل وارد شده صحیح نمی باشد.";
-                return RedirectToAction("LoginRegister", model);
+                //LoginRegisterViewModel result = new LoginRegisterViewModel();
+                //result.ReturnUrl = model.ReturnUrl;
+                return RedirectToAction("LoginRegister");
             }
 
             if (!string.IsNullOrEmpty(model.RegisterEmail))
@@ -159,7 +163,9 @@ namespace Khoshdast.Controllers
                 if (!isEmail)
                 {
                     TempData["WrongRegisterEmail"] = "ایمیل وارد شده صحیح نمی باشد.";
-                    return RedirectToAction("LoginRegister", model);
+                    //LoginRegisterViewModel result = new LoginRegisterViewModel();
+                    //result.ReturnUrl = model.ReturnUrl;
+                    return RedirectToAction("LoginRegister");
                 }
             }
 
@@ -167,7 +173,9 @@ namespace Khoshdast.Controllers
             if (user != null)
             {
                 TempData["WrongRegisterDuplicate"] = "این شماره موبایل قبلا در سایت ثبت شده است. با شماره موبایل دیگری ثبت نام کنید.";
-                return RedirectToAction("LoginRegister", model);
+                //LoginRegisterViewModel result = new LoginRegisterViewModel();
+                //result.ReturnUrl = model.ReturnUrl;
+                return RedirectToAction("LoginRegister");
             }
 
             CodeGenerator codeGenerator = new CodeGenerator();
