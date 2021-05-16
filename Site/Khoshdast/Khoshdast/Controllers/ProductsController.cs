@@ -1018,40 +1018,44 @@ namespace Khoshdast.Controllers
         {
             /****************************( create excel file )******************************/
           
-            string sheetTitle = "فهرست محصولات";
-           string index  = "ردیف";
+             string sheetTitle = "Sheet1";
+         //  string index  = "ردیف";
            string  productTitle= "محصول";
            string barcode = "بارکد";
            string amount = "قیمت";
             string stock = "موجودی";
             string brand = "برند";
+            string group = "گروه";
             var workBook = new XLWorkbook();
             var workSheet = workBook.Worksheets.Add(sheetTitle);
             /***************************( table title)****************************/
-            workSheet.Cell("A1").Value = sheetTitle;
+            //workSheet.Cell("A1").Value = sheetTitle;
             /**************************( table column names)**************************************/
-            workSheet.Cell("A2").Value = index;
-            workSheet.Cell("B2").Value = productTitle;
-            workSheet.Cell("C2").Value = barcode;
-            workSheet.Cell("D2").Value = amount;
-            workSheet.Cell("E2").Value = stock;
-            workSheet.Cell("F2").Value = brand;
+           // workSheet.Cell("A1").Value = index;
+            workSheet.Cell("B1").Value = productTitle;
+            workSheet.Cell("A1").Value = barcode;
+            workSheet.Cell("C1").Value = group;
+            workSheet.Cell("D1").Value = brand;
+            workSheet.Cell("E1").Value = amount;
+            workSheet.Cell("F1").Value = stock;
             /**************************( table rows values)**************************************/
             var products = await db.Products.ToListAsync();
             for (int i = 0; i < products.Count; i++)
             {
-                string indexCelNumber = "A" + (i + 3).ToString();
-                string nameCelNumber = "B" + (i + 3).ToString();
-                string mobileCelNumber = "C" + (i + 3).ToString();
-                string createdDateCelNumber = "D" + (i + 3).ToString();
-                string stockInSheet = "E" + (i + 3).ToString();
-                string brandInSheet = "F" + (i + 3).ToString();
-                workSheet.Cell(indexCelNumber).Value = i.ToString();
-                workSheet.Cell(nameCelNumber).Value = products[i].Title;
-                workSheet.Cell(mobileCelNumber).Value = products[i].Barcode;
-                workSheet.Cell(createdDateCelNumber).Value = products[i].AmountStr;
-                workSheet.Cell(stockInSheet).Value = products[i].Stock;
+                //string indexCelNumber = "A" + (i + 2).ToString();
+                string barcodeSheet = "A" + (i + 2).ToString();
+                string productSheet = "B" + (i + 2).ToString();
+                string groupSheet = "C" + (i + 2).ToString();
+                string amountSheet = "E" + (i + 2).ToString();
+                string stockInSheet = "F" + (i +2).ToString();
+                string brandInSheet = "D" + (i + 2).ToString();
+                //workSheet.Cell(indexCelNumber).Value = i.ToString();
+                workSheet.Cell(barcodeSheet).Value = products[i].Barcode;
+                workSheet.Cell(productSheet).Value = products[i].Title;
+                workSheet.Cell(groupSheet).Value = GetProductGroupById(products[i].Id);
                 workSheet.Cell(brandInSheet).Value = products[i].Brand.Title;
+                workSheet.Cell(stockInSheet).Value = products[i].Stock;
+                workSheet.Cell(amountSheet).Value = products[i].Amount*10;
             }
 
             // Prepare the response
@@ -1069,6 +1073,17 @@ namespace Khoshdast.Controllers
             HttpContext.Response.End();
 
             return RedirectToAction("Index", "Products");
+        }
+
+        public string GetProductGroupById(Guid id)
+        {
+            ProductGroupRelProduct productGroupRelProduct =
+                db.ProductGroupRelProducts.FirstOrDefault(c => c.ProductId == id);
+
+            if (productGroupRelProduct != null)
+                return productGroupRelProduct.ProductGroup.Title;
+
+            return "";
         }
     }
 }
