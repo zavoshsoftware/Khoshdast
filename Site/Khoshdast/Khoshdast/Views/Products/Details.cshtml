@@ -116,15 +116,14 @@
 						{
 							<div class="cart-product-quantity">
 								<div class="quantity">
-									<input type="button" value="-" class="minus">
-									<input type="text" name="quantity" value="1" title="تعداد" class="qty" size="4" id="basketQty">
-									<input type="button" value="+" class="plus">
+									@*<input type="button" value="-" class="minus">*@
+									@*<input type="number" name="quantity" value="1" title="تعداد" class="qty" size="4" id="basketQty">*@
+									@*<input type="button" value="+" class="plus">*@
 								</div>
 							</div>
 
 							<div class="cart_btn">
-								<a class="btn btn-fill-out btn-addtocart" href="/basketRedirect?code=@Model.Product.Code&qty=1"><i class="icon-basket-loaded"></i>خرید</a>
-								
+								<a class="btn btn-fill-out btn-addtocart" href="/basketRedirect?code=@Model.Product.Code"><i class="icon-basket-loaded"></i>خرید</a>
 								@*<button class="btn btn-fill-out btn-addtocart" type="button" onclick="addToBasket('@Model.Product.Code', 'detail');"><i class="icon-basket-loaded"></i>افزودن به سبد خرید</button>*@
 							</div>
 						}
