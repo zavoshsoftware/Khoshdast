@@ -1777,6 +1777,7 @@
     <Content Include="Views\Accounts\forgetpassword.cshtml" />
     <Content Include="Views\Accounts\ChangePassword.cshtml" />
     <Content Include="Views\Orders\GetUserOrder.cshtml" />
+    <Content Include="Views\ExcelData\ImportNames.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

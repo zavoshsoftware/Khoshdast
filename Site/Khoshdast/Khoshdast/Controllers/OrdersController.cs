@@ -54,7 +54,6 @@ namespace Khoshdast.Controllers
             return View(orders);
         }
 
-        // GET: OrderDetails/Details/5
         public ActionResult Details(Guid? id)
         {
             if (id == null)

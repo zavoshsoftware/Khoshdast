@@ -127,7 +127,7 @@ namespace Khoshdast.Controllers
                     !string.IsNullOrEmpty(brandTitle) && !string.IsNullOrEmpty(amount) && !string.IsNullOrEmpty(amount))
                 {
                     int qtyInt = Convert.ToInt32(qty);
-                    decimal amountDecimal = Convert.ToDecimal(amount)/10;
+                    decimal amountDecimal = Convert.ToDecimal(amount) / 10;
 
                     int productGroupCodeInt = Convert.ToInt32(productGroupCode);
 
@@ -166,7 +166,7 @@ namespace Khoshdast.Controllers
             {
                 if (!string.IsNullOrEmpty(amount))
                 {
-                    decimal amountDecimal = Convert.ToDecimal(amount)/10;
+                    decimal amountDecimal = Convert.ToDecimal(amount) / 10;
                     product.Amount = amountDecimal;
                     product.LastModifiedDate = DateTime.Now;
                     db.SaveChanges();
@@ -205,6 +205,19 @@ namespace Khoshdast.Controllers
 
                     db.ProductGroupRelProducts.Add(productGroupRelProduct);
                 }
+            }
+        }
+
+        public void RemoveOldProductGroupRel(Guid productId)
+        {
+            ProductGroupRelProduct productGroupRelProduct = db.ProductGroupRelProducts.FirstOrDefault
+                                            (c => c.ProductId == productId && c.IsDeleted == false);
+
+
+            if (productGroupRelProduct != null)
+            {
+                db.ProductGroupRelProducts.Remove(productGroupRelProduct);
+                db.SaveChanges();
             }
         }
 
@@ -364,6 +377,99 @@ namespace Khoshdast.Controllers
 
             db.SaveChanges();
             return "";
+        }
+
+
+        public ActionResult ImportNames()
+        {
+            UploadFile uploadFile = new UploadFile();
+            return View(uploadFile);
+        }
+
+        [HttpPost]
+        public ActionResult ImportNames(UploadFile UploadFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (UploadFile.ExcelFile.ContentLength > 0)
+                {
+                    if (UploadFile.ExcelFile.FileName.EndsWith(".xlsx") || UploadFile.ExcelFile.FileName.EndsWith(".xls"))
+                    {
+                        XLWorkbook Workbook;
+                        try
+                        {
+                            Workbook = new XLWorkbook(UploadFile.ExcelFile.InputStream);
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError(String.Empty, $"Check your file. {ex.Message}");
+                            return View();
+                        }
+                        IXLWorksheet WorkSheet = null;
+                        try
+                        {
+                            WorkSheet = Workbook.Worksheet("Sheet1");
+
+                        }
+                        catch
+                        {
+                            ModelState.AddModelError(String.Empty, "sheet not found!");
+                            return View();
+                        }
+                        WorkSheet.FirstRow().Delete();//if you want to remove ist row
+
+
+                        foreach (var row in WorkSheet.RowsUsed())
+                        {
+                            if (!string.IsNullOrEmpty(row.Cell(4).Value.ToString()))
+                                BrandCheck(row.Cell(4).Value.ToString());
+                        }
+
+                        foreach (var row in WorkSheet.RowsUsed())
+                        {
+                            UpdateRowName(row.Cell(1).Value.ToString(), row.Cell(2).Value.ToString(), row.Cell(3).Value.ToString());
+                        }
+
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "Only .xlsx and .xls files are allowed");
+                        return View();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(String.Empty, "Not a valid file");
+                    return View();
+                }
+            }
+            return View();
+        }
+
+
+        public void UpdateRowName(string barcode, string title, string pgTitle)
+        {
+            CodeGenerator codeGenerator = new CodeGenerator();
+
+            Product product = db.Products.FirstOrDefault(c => c.Barcode == barcode && c.IsDeleted == false);
+
+            if (product != null)
+            {
+                if (!string.IsNullOrEmpty(title))
+                {
+                    product.Title = title;
+                    db.SaveChanges();
+                }
+                if (!string.IsNullOrEmpty(pgTitle))
+                {
+                    int productGroupCodeInt = Convert.ToInt32(pgTitle);
+
+                    RemoveOldProductGroupRel(product.Id);
+
+                    InsertToProductGroupRel(product.Id, productGroupCodeInt);
+                }
+            }
         }
     }
 }

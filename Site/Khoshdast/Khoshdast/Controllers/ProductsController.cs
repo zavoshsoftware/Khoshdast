@@ -708,13 +708,13 @@ namespace Khoshdast.Controllers
 
         public List<Product> GetProductByPagination(List<Product> products, int? pageId, string sortby)
         {
-            List<Product> result = products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
-                .ToList();
-
             if (sortby == null)
-                return result;
+               return products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
+                .ToList();
+                          
 
-            return SortProductList(result, sortby);
+            return SortProductList(products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).ToList(), sortby).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
+                .ToList();
         }
 
         public List<Product> SortProductList(List<Product> products, string sortby)
@@ -723,7 +723,7 @@ namespace Khoshdast.Controllers
             {
                 case "newest":
                     {
-                        return products.OrderBy(c => c.CreationDate).ToList();
+                        return products.OrderByDescending(c => c.CreationDate).ToList();
                     }
 
                 case "mostsell":
