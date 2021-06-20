@@ -399,6 +399,15 @@
 				var statusId = $('#OrderStatusId').val();
 
 				var statusId = $('#Order_IsPaid').val();
+
+				if ($('#Order_IsPaid').is(":checked")) {
+					statusId = true;
+				} else {
+					statusId = false;
+
+				}
+
+
 				var paymentDesc = $('#Order_PaymentDesc').val();
 				$.ajax(
 					{
