@@ -35,7 +35,7 @@ namespace Khoshdast.Controllers
                 TopCategoryProducts = GetTopCategoryProducts(topProductGroup),
                 TopProductGroupTitle = topPgTitle,
                 HomeBlogs = db.Blogs.Where(c => c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(3).ToList(),
-                HomeBrands = db.Brands.Where(c => c.BrandNameImageUrl != null && c.IsDeleted == false && c.IsActive&&c.IsInHome).OrderByDescending(c => c.Order).Take(10).ToList(),
+                HomeBrands = db.Brands.Where(c => c.BrandNameImageUrl != null && c.IsDeleted == false && c.IsActive && c.IsInHome).OrderByDescending(c => c.Order).Take(10).ToList(),
                 SliderLeftBanners1 = sliderBanners.FirstOrDefault(),
                 SliderLeftBanners2 = sliderBanners.LastOrDefault(),
                 HomeMidleBanner1 = homeMidkeBanners.FirstOrDefault(),
@@ -249,7 +249,26 @@ namespace Khoshdast.Controllers
                 }
                 recentOrders.Add(new RecentOrder() { CreationDate = item.CreationDate, TotalCount = item.Orders.Count, TotalAmount = amount.ToString("n0") + "تومان" });
             }
-            model.RecentOrders = recentOrders;
+            var query = from x in recentOrders
+                        group x by x.CreationDate.Date;
+            var selected = query.Select(x => new
+            {
+                CreationDate = x.Key,
+                TotalCount = x.Count(),
+                TotalAmount = x.FirstOrDefault().
+                 TotalAmount.Replace("تومان", "").Replace(",", "")
+            });
+            model.RecentOrders = new List<RecentOrder>();
+            foreach (var item in selected)
+            {
+                RecentOrder recentOrder = new RecentOrder();
+                recentOrder.CreationDate = item.CreationDate;
+                recentOrder.TotalCount = item.TotalCount;
+                recentOrder.TotalAmount = (int.Parse(item.TotalAmount) * item.TotalCount).ToString() + " " + "تومان";
+
+                model.RecentOrders.Add(recentOrder);
+            }
+
             return View(model);
         }
 
