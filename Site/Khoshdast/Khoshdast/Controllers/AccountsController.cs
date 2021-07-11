@@ -20,6 +20,176 @@ namespace Khoshdast.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
+        [HttpGet]
+        [Route("login")]
+        public async Task<ActionResult> OtpLogin(string returnUrl)
+        {
+            ForgetPasswordViewModel model = new ForgetPasswordViewModel(){ReturnUrl = returnUrl };
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View(model);
+        }
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult> OtpLogin(ForgetPasswordViewModel model,string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.UserCellNumber != null)
+                {
+                    string cellNumber = PersianToEnglish(model.UserCellNumber);
+
+                    bool isValidMobile = Regex.IsMatch(cellNumber,
+                        @"(^(09|9)[0123456789][0123456789]\d{7}$)|(^(09|9)[0123456789][0123456789]\d{7}$)",
+                        RegexOptions.IgnoreCase);
+
+                    if (isValidMobile)
+                    {
+
+                        var user = db.Users.FirstOrDefault(x => x.CellNum == model.UserCellNumber);
+
+                        if (user != null)
+                        {
+                            user.Password = RandomCode();
+                            user.LastModifiedDate = DateTime.Now;
+                            db.SaveChanges();
+
+                            SendSms.SendOtpSms(user.CellNum, user.Password, 35100);
+
+                            return RedirectToAction("Activate", new { returnUrl = returnUrl, code = user.Code });
+                        }
+                        else
+                        {
+                            User oUser = new User()
+                            {
+                                Id = Guid.NewGuid(),
+                                CellNum = model.UserCellNumber,
+                                Password = RandomCode(),
+                                IsDeleted = false,
+                                IsActive = true,
+                                CreationDate = DateTime.Now,
+                                Code = codeGenerator.ReturnUserCode(),
+                                RemainCredit = 0,
+                                RoleId = db.Roles.FirstOrDefault(c => c.Name == "customer").Id
+                            };
+
+                            db.Users.Add(oUser);
+                            db.SaveChanges();
+
+                            SendSms.SendOtpSms(oUser.CellNum, oUser.Password, 35100);
+
+                            return RedirectToAction("Activate", new { returnUrl = returnUrl, code = oUser.Code });
+                        }
+                    }
+                    else
+                    {
+                        TempData["WrongMobile"] = "شماره موبایل وارد شده صحیح نمی باشد";
+                        return View(model);
+                    }
+                }
+
+            }
+            else
+            {
+                TempData["WrongMobile"] = "شماره موبایل خود را وارد نمایید";
+                return View(model);
+            }
+            return View();
+        }
+     
+        
+        [HttpGet]
+        [Route("activate")]
+        public async Task<ActionResult> Activate(int code, string returnUrl)
+        {
+            var user = db.Users.Where(c => c.Code == code).Select(c => new { c.CellNum, c.Password }).FirstOrDefault();
+            ViewBag.ReturnUrl = returnUrl;
+
+            if (user != null)
+            {
+                ActivateAccountViewModel activateViewModel = new ActivateAccountViewModel()
+                {
+                    CellNumber = user.CellNum,
+                };
+                return View(activateViewModel);
+            }
+
+            return RedirectToAction("Login");
+        }
+
+        [Route("Activate/{id:int}")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Activate(int id, ActivateAccountViewModel activateViewModel, string returnUrl)
+        {
+            if (!string.IsNullOrEmpty(activateViewModel.ActivationCode))
+            {
+
+           
+            string code = PersianToEnglish(activateViewModel.ActivationCode);
+
+            User user = db.Users.FirstOrDefault(c => c.Code == id && c.Password == code);
+
+            if (user != null)
+            {
+                if (!user.IsActive)
+                {
+                    user.IsActive = true;
+                    user.LastModifiedDate = DateTime.Now;
+
+                    db.SaveChanges();
+                }
+                LoginTask(user);
+
+                if (returnUrl != null)
+                    return Redirect(returnUrl);
+
+                return RedirectToAction("index", "home");
+            }
+
+            TempData["WrongActivationCode"] = "کد فعالسازی وارد شده صحیح نمی باشد.";
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View(activateViewModel);
+            }
+
+
+            TempData["WrongActivationCode"] = "کد فعالسازی را وارد کنید.";
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View(activateViewModel);
+        }
+
+
+        public string RandomCode()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 100000).ToString("D5");
+            return (r);
+        }
+
+
+        public string PersianToEnglish(string persianStr)
+        {
+
+            Dictionary<string, string> LettersDictionary = new Dictionary<string, string>
+            {
+                ["۰"] = "0",
+                ["۱"] = "1",
+                ["۲"] = "2",
+                ["۳"] = "3",
+                ["۴"] = "4",
+                ["۵"] = "5",
+                ["۶"] = "6",
+                ["۷"] = "7",
+                ["۸"] = "8",
+                ["۹"] = "9"
+            };
+            return LettersDictionary.Aggregate(persianStr, (current, item) =>
+                current.Replace(item.Key, item.Value));
+        }
+
         [Route("LoginRegister")]
         public ActionResult LoginRegister(string returnUrl)
         {
@@ -80,7 +250,7 @@ namespace Khoshdast.Controllers
 
                 var identity = (System.Security.Claims.ClaimsIdentity)User.Identity;
                 string id = identity.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
-                var user = await db.Users.FirstOrDefaultAsync(x => x.Id ==new Guid(id));
+                var user = await db.Users.FirstOrDefaultAsync(x => x.Id == new Guid(id));
                 if (user != null && (user.Password != model.OldPassword))
                 {
                     TempData["WrongPassword"] = "کلمه عبور پیشین وارد شده صحیح نمی باشد";
@@ -132,6 +302,7 @@ namespace Khoshdast.Controllers
             result.ReturnUrl = model.ReturnUrl;
             return RedirectToAction("LoginRegister");
         }
+        CodeGenerator codeGenerator = new CodeGenerator();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -178,7 +349,6 @@ namespace Khoshdast.Controllers
                 return RedirectToAction("LoginRegister");
             }
 
-            CodeGenerator codeGenerator = new CodeGenerator();
 
             User oUser = new User()
             {

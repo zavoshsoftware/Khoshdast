@@ -477,8 +477,8 @@ namespace Khoshdast.Controllers
                                 if (user != null)
                                     smsCellnumber = user.CellNum;
 
-                                SendSms.SendCommonSms(smsCellnumber, GetUserSms(order.Code.ToString()));
-
+                                //   SendSms.SendCommonSms(smsCellnumber, GetUserSms(order.Code.ToString()));
+                                SendTanksSms(smsCellnumber, order.Code.ToString());
                                 foreach (var orderDetail in orderAndDetails.OrderDetails)
                                 {
                                     var product = db.Products.Find(orderDetail.ProductId);
@@ -518,17 +518,21 @@ namespace Khoshdast.Controllers
             }
         }
 
+        public void SendTanksSms(string cellNumber, string code)
+        {
+            SendSms.SendOtpSms(cellNumber,code, 42168);
+        }
 
         #region Finalize
 
-        public string GetUserSms(string code)
-        {
-            string nextLine = "\n";
+        //public string GetUserSms(string code)
+        //{
+        //    string nextLine = "\n";
 
-            return "*فروشگاه آنلاین خوشدست*" + nextLine + "با سپاس از خرید شما" + nextLine + "شماره پیگیری: " + code +
-                   nextLine + "کارشناسان ما برای هماهنگی ارسال با شما تماس خواهند گرفت.";
+        //    return "*فروشگاه آنلاین خوشدست*" + nextLine + "با سپاس از خرید شما" + nextLine + "شماره پیگیری: " + code +
+        //           nextLine + "کارشناسان ما برای هماهنگی ارسال با شما تماس خواهند گرفت.";
 
-        }
+        //}
 
 
         public decimal GetTotalAmount(decimal? subtotal, decimal? discount, decimal? shippment)
@@ -737,7 +741,8 @@ namespace Khoshdast.Controllers
                             }
                             RemoveCookie("basket-khoshdast");
 
-                            SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
+                            //        SendSms.SendCommonSms(order.User.CellNum, GetUserSms(order.Code.ToString()));
+                            SendTanksSms(order.User.CellNum, order.Code.ToString());
                         }
                         else
                         {

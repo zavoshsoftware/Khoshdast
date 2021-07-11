@@ -27,14 +27,14 @@ namespace Helpers
             SmsIrRestful.CreditResponse creditResponse = new SmsIrRestful.CreditResponse();
 
         }
-        public static void SendOtpSms(string cellNumber, string code)
+        public static void SendOtpSms(string cellNumber, string code, int templateId)
         {
             var token = new Token().GetToken("cb6f10e0147b27dbea1b14df", "123qwe!@#QWE");
 
             var ultraFastSend = new UltraFastSend()
             {
                 Mobile = Convert.ToInt64(cellNumber),
-                TemplateId = 34939,
+                TemplateId = templateId,
                 ParameterArray = new List<UltraFastParameters>()
                 {
                     new UltraFastParameters()
@@ -59,5 +59,5 @@ namespace Helpers
 
     }
 
-    
+
 }

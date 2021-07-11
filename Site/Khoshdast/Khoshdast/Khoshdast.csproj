@@ -1458,6 +1458,7 @@
     <Compile Include="ViewModels\CustomerOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\CustomerOrderListViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\ActivateAccountViewModel.cs" />
     <Compile Include="ViewModels\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModels\LazyLoadProductCards.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
@@ -1778,6 +1779,8 @@
     <Content Include="Views\Accounts\ChangePassword.cshtml" />
     <Content Include="Views\Orders\GetUserOrder.cshtml" />
     <Content Include="Views\ExcelData\ImportNames.cshtml" />
+    <Content Include="Views\Accounts\OtpLogin.cshtml" />
+    <Content Include="Views\Accounts\Activate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

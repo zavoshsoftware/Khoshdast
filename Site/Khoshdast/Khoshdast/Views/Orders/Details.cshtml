@@ -90,6 +90,17 @@
 					<div class="row">
 						<div class="col-md-5">
 							<label class="control-label">
+								استان
+							</label>
+						</div>
+						<div class="col-md-7">
+							@Html.DisplayFor(model => model.Order.City.Province.Title)
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<label class="control-label">
 								@Html.LabelFor(model => model.Order.City.Title, new { @class = "control-label" })
 							</label>
 						</div>

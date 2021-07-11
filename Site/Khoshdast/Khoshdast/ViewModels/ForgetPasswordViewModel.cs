@@ -11,5 +11,6 @@ namespace ViewModels
     {
         [Required(ErrorMessage ="وارد نمودن شماره تلفن همراه اجباری است")]
         public string UserCellNumber { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }
