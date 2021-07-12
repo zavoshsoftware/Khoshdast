@@ -63,6 +63,7 @@ namespace Khoshdast.Controllers
                             User oUser = new User()
                             {
                                 Id = Guid.NewGuid(),
+                                FullName = cellNumber,
                                 CellNum = model.UserCellNumber,
                                 Password = RandomCode(),
                                 IsDeleted = false,
@@ -104,6 +105,7 @@ namespace Khoshdast.Controllers
         {
             var user = db.Users.Where(c => c.Code == code).Select(c => new { c.CellNum, c.Password }).FirstOrDefault();
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.code = code;
 
             if (user != null)
             {
@@ -117,19 +119,19 @@ namespace Khoshdast.Controllers
             return RedirectToAction("Login");
         }
 
-        [Route("Activate/{id:int}")]
+        [Route("Activate")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Activate(int id, ActivateAccountViewModel activateViewModel, string returnUrl)
+        public ActionResult Activate(int code, ActivateAccountViewModel activateViewModel, string returnUrl)
         {
             if (!string.IsNullOrEmpty(activateViewModel.ActivationCode))
             {
 
            
-            string code = PersianToEnglish(activateViewModel.ActivationCode);
+            string activecode = PersianToEnglish(activateViewModel.ActivationCode);
 
-            User user = db.Users.FirstOrDefault(c => c.Code == id && c.Password == code);
+            User user = db.Users.FirstOrDefault(c => c.Code == code && c.Password == activecode);
 
             if (user != null)
             {
