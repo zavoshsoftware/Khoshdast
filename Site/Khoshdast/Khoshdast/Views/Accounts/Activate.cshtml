@@ -1,66 +1,65 @@
 ﻿@model ViewModels.ActivateAccountViewModel
 @{
-    ViewBag.Title = "ورود";
-    Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
+	ViewBag.Title = "ورود";
+	Layout = "~/Views/Shared/FrontEnd/_FronEndLayout.cshtml";
 }
 
 
 
 <div class="main_content  bg-gray-list">
 
-    <div class="section">
-        <div class="container container-custom">
-            <div class="row">
-                <div class="col-md-12 pl5">
-                    <div class="khoshdast-breadcramp">
-                        <ol class="breadcrumb ">
-                            <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+	<div class="section">
+		<div class="container container-custom">
+			<div class="row">
+				<div class="col-md-12 pl5">
+					<div class="khoshdast-breadcramp">
+						<ol class="breadcrumb ">
+							<li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
 
-                        </ol>
+						</ol>
 
-                        <h1>ورود</h1>
-                        <p class="clearfix"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex flex-column justify-content-center">
-                <div class="col-md-4 mx-auto mb-4">
-                    <div class="panel-collapse collapse login_form show" id="loginform">
-                        <div class="panel-body">
-	                        <h2 class="text-center"> کد تایید را وارد نمایید</h2>
+						<h1>ورود</h1>
+						<p class="clearfix"></p>
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex flex-column justify-content-center">
+				<div class="col-md-4 mx-auto mb-4">
+					<div class="panel-collapse collapse login_form show" id="loginform">
+						<div class="panel-body">
+							@*<h2 class="text-center"> کد تایید را وارد نمایید</h2>*@
 
-	                        @if (TempData["WrongActivationCode"] != null)
-	                        {
-		                        <p class="alert alert-danger" id="wrongEmail">@TempData["WrongActivationCode"]</p>
-	                        }
+							@if (TempData["WrongActivationCode"] != null)
+							{
+								<p class="alert alert-danger" id="wrongEmail">@TempData["WrongActivationCode"]</p>
+							}
 
-                          
-	                        @using (Html.BeginForm("Activate", "Accounts", new { returnUrl = ViewBag.ReturnUrl,code= ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "", role = "form" }))
-													{
-		                        @Html.AntiForgeryToken()
-		                        @Html.ValidationSummary(false, "", new { @class = "alert-danger" })
-		                        @Html.HiddenFor(c=>c.CellNumber)
-		                        <div class="form-group">
-			                        <p class="center">یک کد تایید برای شماره موبایل @Model.CellNumber ارسال شده است.</p>
 
-			                        @Html.TextBoxFor(m => m.ActivationCode, new { @class = "form-control", @placeholder = "کد فعال سازی "})
+							@using (Html.BeginForm("Activate", "Accounts", new { returnUrl = ViewBag.ReturnUrl, code = ViewBag.code }, FormMethod.Post, new { @class = "", role = "form" }))
+							{
+								@Html.AntiForgeryToken()
+								@Html.ValidationSummary(false, "", new { @class = "alert-danger" })
+								@Html.HiddenFor(c => c.CellNumber)
+								<div class="form-group">
+									<p class="text-center">یک کد تایید برای شماره موبایل @Model.CellNumber ارسال شده است. آن را وارد نمایید:</p>
 
-		                        </div>
-		                        <div class="text-center">
-			                        <button type="submit" class="btn btn-fill-out btn-block">ثبت کد</button>
-		                        </div>
-		                        <div class="login-footer">
-			                        <p style="font-size: 13px; text-align: center; line-height: 21px; margin-top: 20px">
-				                        جهت تایید شماره موبایل، کد فعال سازی ارسال شده را وارد نمایید.
-			                        </p>
-		                        </div>
-	                        }
+									@Html.TextBoxFor(m => m.ActivationCode, new { @class = "form-control", @placeholder = "کد فعال سازی " })
 
-                        </div>
-                    </div>
-                </div>
-        </div>
-        </div>
-    </div>
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-fill-out btn-block">ورود</button>
+								</div>
+								@*<div class="login-footer">
+									<p style="font-size: 13px; text-align: center; line-height: 21px; margin-top: 20px">
+										جهت تایید شماره موبایل، کد فعال سازی ارسال شده را وارد نمایید.
+									</p>
+								</div>*@
+							}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-

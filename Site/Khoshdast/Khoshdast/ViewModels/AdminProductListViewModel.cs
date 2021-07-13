@@ -28,5 +28,8 @@ namespace ViewModels
         public string BrandTitle { get; set; }
         [Display(Name = "تصویر")]
         public string ImageUrl { get; set; }
+
+        [Display(Name = "تازه های صفحه اصلی")]
+        public bool IsNewest { get; set; }
     }
 }

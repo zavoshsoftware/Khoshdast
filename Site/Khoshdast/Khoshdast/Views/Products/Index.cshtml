@@ -19,6 +19,7 @@ ViewBag.Title = "فهرست محصولات";
 							columns.Bound(model => model.ImageUrl).Template(@<text><img src="@item.ImageUrl" height="100px" /></text>);
 						  columns.Bound(model => model.Amount);
 						  columns.Bound(model => model.IsInPromotion);
+						  columns.Bound(model => model.IsNewest);
 					    columns.Bound(model => model.Stock);
 					    columns.Bound(model => model.IsActive);
 							columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)

@@ -44,7 +44,8 @@ namespace Khoshdast.Controllers
                     Amount = product.AmountStr,
                     BarCode = product.Barcode,
                     BrandTitle = product.Brand.Title,
-                    ProductGroupTitle = GetProductGroups(product.Id)
+                    ProductGroupTitle = GetProductGroups(product.Id),
+                    IsNewest = product.IsInHome
 
 
                 });
@@ -709,8 +710,9 @@ namespace Khoshdast.Controllers
         public List<Product> GetProductByPagination(List<Product> products, int? pageId, string sortby)
         {
             if (sortby == null)
-               return products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
-                .ToList();
+                sortby = "newest";
+               //return products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).Skip((pageId.Value - 1) * productPagination).Take(productPagination)
+               // .ToList();
                           
 
             return SortProductList(products.OrderByDescending(c => c.Stock).ThenBy(c => c.Order).ToList(), sortby).Skip((pageId.Value - 1) * productPagination).Take(productPagination)

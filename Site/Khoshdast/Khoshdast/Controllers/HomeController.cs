@@ -29,7 +29,7 @@ namespace Khoshdast.Controllers
             HomeViewModel home = new HomeViewModel()
             {
                 Sliders = db.Sliders.Where(c => c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).ToList(),
-                HomeProductGroups = db.ProductGroups.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
+                HomeProductGroups = db.ProductGroups.Where(c => c.IsInHome && c.IsDeleted == false && c.IsActive).OrderByDescending(c => c.CreationDate).Take(8).ToList(),
                 BestSaleProducts = db.Products.Where(c => c.IsTopSell && c.Stock > 0 && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
                 NewestProducts = db.Products.Where(c => c.IsInHome && c.Stock > 0 && c.IsDeleted == false && c.IsActive).OrderBy(c => c.Order).Take(8).ToList(),
                 TopCategoryProducts = GetTopCategoryProducts(topProductGroup),

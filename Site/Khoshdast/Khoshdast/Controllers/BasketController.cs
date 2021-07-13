@@ -328,7 +328,7 @@ namespace Khoshdast.Controllers
 
                 if (role != "customer")
                 {
-                    return Redirect("/loginregister?ReturnUrl=checkout");
+                    return Redirect("/login?ReturnUrl=checkout&type=role");
                 }
 
 
@@ -366,7 +366,7 @@ namespace Khoshdast.Controllers
                 return View(checkOut);
             }
 
-            return Redirect("/loginregister?ReturnUrl=checkout");
+            return Redirect("/login?ReturnUrl=checkout&type=authorize");
 
         }
 
@@ -508,7 +508,7 @@ namespace Khoshdast.Controllers
                     }
                 }
 
-                return Json("/loginregister?ReturnUrl=checkout", JsonRequestBehavior.AllowGet);
+                return Json("/login?ReturnUrl=checkout", JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e)

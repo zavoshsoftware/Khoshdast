@@ -24,14 +24,14 @@ namespace Khoshdast.Controllers
         [Route("login")]
         public async Task<ActionResult> OtpLogin(string returnUrl)
         {
-            ForgetPasswordViewModel model = new ForgetPasswordViewModel(){ReturnUrl = returnUrl };
+            ForgetPasswordViewModel model = new ForgetPasswordViewModel() { ReturnUrl = returnUrl };
             ViewBag.ReturnUrl = returnUrl;
 
             return View(model);
         }
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> OtpLogin(ForgetPasswordViewModel model,string returnUrl)
+        public async Task<ActionResult> OtpLogin(ForgetPasswordViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace Khoshdast.Controllers
                     if (isValidMobile)
                     {
 
-                        var user = db.Users.FirstOrDefault(x => x.CellNum == model.UserCellNumber);
+                        var user = db.Users.FirstOrDefault(x => x.CellNum == model.UserCellNumber&&x.IsDeleted==false);
 
                         if (user != null)
                         {
@@ -60,10 +60,17 @@ namespace Khoshdast.Controllers
                         }
                         else
                         {
+                            if (cellNumber.Length < 11)
+                            {
+
+                                TempData["WrongMobile"] = "شماره موبایل وارد شده صحیح نمی باشد";
+                                return View(model);
+                            }
                             User oUser = new User()
                             {
                                 Id = Guid.NewGuid(),
-                                CellNum = model.UserCellNumber,
+                                FullName = cellNumber,
+                                CellNum = cellNumber,
                                 Password = RandomCode(),
                                 IsDeleted = false,
                                 IsActive = true,
@@ -96,14 +103,15 @@ namespace Khoshdast.Controllers
             }
             return View();
         }
-     
-        
+
+
         [HttpGet]
         [Route("activate")]
         public async Task<ActionResult> Activate(int code, string returnUrl)
         {
             var user = db.Users.Where(c => c.Code == code).Select(c => new { c.CellNum, c.Password }).FirstOrDefault();
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.code = code;
 
             if (user != null)
             {
@@ -117,46 +125,49 @@ namespace Khoshdast.Controllers
             return RedirectToAction("Login");
         }
 
-        [Route("Activate/{id:int}")]
+        [Route("Activate")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Activate(int id, ActivateAccountViewModel activateViewModel, string returnUrl)
+        public ActionResult Activate(int code, ActivateAccountViewModel activateViewModel, string returnUrl)
         {
             if (!string.IsNullOrEmpty(activateViewModel.ActivationCode))
             {
+                string activecode = PersianToEnglish(activateViewModel.ActivationCode);
 
-           
-            string code = PersianToEnglish(activateViewModel.ActivationCode);
+                User user = db.Users.FirstOrDefault(c =>
+                    c.Code == code && c.Password == activecode && c.IsDeleted == false);
 
-            User user = db.Users.FirstOrDefault(c => c.Code == id && c.Password == code);
 
-            if (user != null)
-            {
-                if (!user.IsActive)
+                if (user != null)
                 {
-                    user.IsActive = true;
-                    user.LastModifiedDate = DateTime.Now;
+                    if (!user.IsActive)
+                    {
+                        user.IsActive = true;
+                        user.LastModifiedDate = DateTime.Now;
 
-                    db.SaveChanges();
+                        db.SaveChanges();
+                    }
+
+                    LoginTask(user);
+
+                    if (returnUrl != null)
+                        return Redirect(returnUrl);
+
+                    return RedirectToAction("index", "home");
                 }
-                LoginTask(user);
 
-                if (returnUrl != null)
-                    return Redirect(returnUrl);
+                TempData["WrongActivationCode"] = "کد فعالسازی وارد شده صحیح نمی باشد.";
+                ViewBag.ReturnUrl = returnUrl;
+                ViewBag.code = code;
 
-                return RedirectToAction("index", "home");
-            }
-
-            TempData["WrongActivationCode"] = "کد فعالسازی وارد شده صحیح نمی باشد.";
-            ViewBag.ReturnUrl = returnUrl;
-
-            return View(activateViewModel);
+                return View(activateViewModel);
             }
 
 
             TempData["WrongActivationCode"] = "کد فعالسازی را وارد کنید.";
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.code = code;
 
             return View(activateViewModel);
         }
