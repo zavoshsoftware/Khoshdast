@@ -562,6 +562,8 @@
     <Content Include="Content\Admin\bootstrap.css" />
     <Content Include="Content\Admin\bootstrap.min.css" />
     <Content Include="Content\Admin\style.css" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\fonts\Simple-Line-Icons.svg" />
@@ -1300,6 +1302,9 @@
     <Content Include="Scripts\kendo\2017.3.913\kendo.webcomponents.js" />
     <Content Include="Scripts\kendo\2017.3.913\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2017.3.913\pako_deflate.min.js" />
+    <Content Include="Scripts\productfunction.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1451,6 +1456,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AdminDashboardViewModel.cs" />
     <Compile Include="ViewModels\AdminProductListViewModel.cs" />
+    <Compile Include="ViewModels\BasketViewModel.cs" />
     <Compile Include="ViewModels\BrandListViewModel.cs" />
     <Compile Include="ViewModels\CallBackViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
@@ -1463,6 +1469,7 @@
     <Compile Include="ViewModels\LazyLoadProductCards.cs" />
     <Compile Include="ViewModels\OrderDetailViewModel.cs" />
     <Compile Include="ViewModels\ProductGroupDiscountViewModel.cs" />
+    <Compile Include="ViewModels\ProductInputViewModel.cs" />
     <Compile Include="ViewModels\ProductListByBrandViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\DropDownListViewModel.cs" />

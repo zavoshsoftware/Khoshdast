@@ -9,23 +9,23 @@
         <label>@ViewBag.Title</label>
     </div>
     <div class="panel-body">
-        <div class="row">
+        <div class="row mt-5" style="padding-top:5px">
             <div class="col-md-6">
                 <label class="col-md-3">تلفن همراه*:</label>
                 <div class="col-md-9 ">
-                    @Html.EditorFor(model => model.Order.DeliverCellNumber)
+                    @Html.EditorFor(model => model.Order.DeliverCellNumber, new { @id = "CellNumber" })
                 </div>
             </div>
             <div class="col-md-6">
                 <label class="col-md-3">نام مشتری*:</label>
                 <div class="col-md-9 ">
-                    @Html.EditorFor(model => model.Order.DeliverFullName)
+                    @Html.EditorFor(model => model.Order.DeliverFullName, new { @id = "fullName" })
 
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row top-buffer bottom-buffer">
             <div class="col-md-6">
                 <label class="col-md-3">تاریخ فاکتور*:</label>
                 <div class="col-md-9 ">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label class="col-md-3">آدرس*:</label>
+                <label class="col-md-3">آدرس:</label>
                 <div class="col-md-9 ">
                     @Html.EditorFor(model => model.Order.Address)
 
@@ -49,18 +49,20 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">انتخاب محصولات</div>
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row top-buffer bottom-buffer row justify-content-around">
 
                             <label class="col-md-3 product-group-title">انتخاب گروه محصولات:</label>
-                            <div class="col-md-9 ">
-                                <div class="row">
-                                    @Html.DropDownList("ProductGroupId", (IEnumerable<SelectListItem>)ViewBag.ProductGroupId, new { @class = "form-control pro-group-selector" })
+                            <div class="col-md-9" style="padding-right : 5px; text-align:right" >
+                                <div class="form-group">
+                                    @Html.DropDownList("ProductGroupId", (SelectList)ViewBag.ProductGroupId, "-- گروه محصول ---", htmlAttributes: new { id = "ProductGroupId", @class = "js-example-basic-single js-states form-control" })
                                 </div>
                             </div>
-                            <div class="col-md-9 ">
-                                <label class="col-md-3">محصول:</label>
-                                <div class="col-md-9 ">
-                                    <select id="ProductId" name="ProductId" class="form-control"></select>
+                            <div class="col-md-9 " style="padding-right :30px; text-align:right">
+                                <label class="col-md-3" style="padding-right:0px;">محصول:</label>
+                                <div class="col-md-9">
+                                    <div class="form-group" style="margin-right :0px; width:345px;" >
+                                        <select id="ProductId"  name="ProductId" class="form-control" disabled></select>
+                                    </div>
                                 </div>
                             </div>
 
@@ -81,8 +83,6 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">نام محصول</th>
-                                    <th scope="col">رنگ</th>
-                                    <th scope="col">تشک</th>
                                     <th scope="col">تعداد</th>
                                     <th scope="col">قیمت واحد</th>
                                     <th scope="col">قیمت کل</th>
@@ -169,7 +169,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="button" class="btn btn-success" onclick="finalizeOrder();" value="ثبت فاکتور" />
+                                    <input type="button" class="btn btn-success top-buffer bottom-buffer" onclick="finalizeOrder();" value="ثبت فاکتور" />
                                 </td>
                             </tr>
                         </table>
@@ -183,14 +183,40 @@
     </div>
 
 </div>
-
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
 @section scripts{
-
+    <script src="~/Scripts/productfunction.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
     <script>
+
+        $(document).ready(function () {
+            let today = new Date().toLocaleDateString('fa-IR');
+            $('#Order_OrderDateStr').val(today);
+            document.getElementById('submit-succes').style.display = "none";
+            document.getElementById('submit-error').style.display = "none";
+            clearForm();
+
+            $('#ProductGroupId').select2({
+                placeholder: '...گروه محصول',
+                width: '100%',
+                multiple: false,
+                closeOnSelect: true,
+            });
+
+            $('#ProductId').select2({
+                placeholder: '...محصول',
+                width: '100%',
+                multiple: false,
+                closeOnSelect: true,
+            });
+
+        });
+
         $('#ProductGroupId').on('change',
             function () {
                 var SelectedValue = $(this).val();
                 if (SelectedValue !== "") {
+                    document.getElementById("ProductId").disabled = false;
                     var procemessage = "<option value='0'> صبرکنید...</option>";
                     $("#ProductId").html(procemessage).show();
                     $.ajax(
@@ -212,6 +238,71 @@
                         });
                 }
             });
+
+        $('#ProductGroupId').change(function () {
+            freezePage();
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Pos/LoadProductByGroupId",
+                contentType: "application/json; charset=utf-8",
+                data: { "id": id },
+                datatype: "json",
+                success: function (data) {
+                    loadProductList(data.Products);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+            unFreezePage();
+        });
+
+        $('#ProductId').change(function () {
+            document.getElementById('parent-message').style.display = "none";
+            freezePage();
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Pos/LoadProductBySelectProduct",
+                contentType: "application/json; charset=utf-8",
+                data: { "id": id },
+                datatype: "json",
+                success: function (data) {
+                    loadProductList(data.Products);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+            unFreezePage();
+        });
+
+        $("#Order_DeliverCellNumber").focus(function () {
+        }).blur(function () {
+            var cellNumber = $("#Order_DeliverCellNumber").val();
+
+            $.ajax(
+                {
+                    url: "/Pos/GetUserFullName",
+                    data: { cellNumber: cellNumber },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data !== 'invalid') {
+                            var name = data;
+
+                            $('#Order_DeliverFullName').val(name);
+                        } else
+                            $('#Order_DeliverFullName').val('');
+                    },
+                    error: function (reponse) {
+                        alert("خطا : صفحه را مجددا باز کنید");
+                    }
+                });
+        });
     </script>
 }
 

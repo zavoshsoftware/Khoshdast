@@ -421,4 +421,7 @@ function getNoStockTitle(stock) {
         return "";
     }
 }
+
+
+
  
