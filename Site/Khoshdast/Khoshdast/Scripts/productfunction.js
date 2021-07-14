@@ -333,5 +333,104 @@ function clearForm() {
     $('.panel-body input').css('border-color', '#d9d9d9');
 }
 
+function finalizeOrder() {
+
+    freezePage();
+
+    var cookie = getCookie('basket');
+
+    if (cookie) {
+        
+        var orderDate = $('#Order_OrderDateStr').val();
+        var cellNumber = $('#Order_DeliverCellNumber').val();
+        var fullName = $('#Order_DeliverFullName').val();
+        var address = $('#Order_Address').val();
+        var addedAmount = $('#addedAmount').val();
+        var decreasedAmount = $('#decreasedAmount').val();
+        var desc = $('#desc').val();
+        var paymentTypeId = $('#PaymentTypeId').val();
+        var paymentAmount = $('#payment').val();
+        var subtotalAmount = $('#total').val();
+        var totalAmount = $('#totalAmount').val();
+
+        var paymentTypeIsRequired = null;
+
+        if (paymentAmount === '0')
+            paymentTypeIsRequired = "true";
+
+        else if (paymentAmount !== '0' && paymentTypeId)
+            paymentTypeIsRequired = "true";
+
+        var img = getCookie('image');
+
+        if (cellNumber && fullName && paymentTypeIsRequired && paymentTypeId) {
+            $.ajax({
+                type: "Post",
+                url: "/Pos/PostFinalize",
+                data: {
+                    
+                    "orderDate": orderDate,
+                    "cellNumber": cellNumber,
+                    "fullName": fullName,
+                    "address": address,
+                    "addedAmount": addedAmount,
+                    "decreasedAmount": decreasedAmount,
+                    "desc": desc,
+                    "paymentAmount": paymentAmount, "paymentTypeId": paymentTypeId,
+                    "subtotalAmount": subtotalAmount,
+                    "totalAmount": totalAmount
+                },
+                success: function (data) {
+                    if (data.includes("true")) {
+                        var orderCode = data.split('-')[1];
+                        $('#submit-succes').css('display', 'block');
+                        $('#submit-succes').html('فاکتور شماره ' + orderCode + ' با موفقیت ثبت گردید.');
+                        $('#submit-error').css('display', 'none');
+                        //clearForm();
+                        //window.location = "/orders/list";
+                    } else {
+                        $('#submit-succes').css('display', 'none');
+                        $('#submit-error').css('display', 'block');
+                        $('#submit-error').html('خطایی رخ داده است. لطفا دوباره تلاش کنید');
+
+                    }
+
+                },
+                error: function () {
+                    $('#submit-succes').css('display', 'none');
+                    $('#submit-error').css('display', 'block');
+                    $('#submit-error').html('خطایی رخ داده است. لطفا دوباره تلاش کنید');
+                }
+            });
+
+
+        } else {
+            $('#submit-succes').css('display', 'none');
+            $('#submit-error').css('display', 'block');
+            $('#submit-error').html('فیلدهای ستاره دار را تکمیل نمایید.');
+            if (!paymentTypeIsRequired)
+                $('#submit-error').html('نوع پرداخت را مشخص کنید.');
+
+            if (cellNumber === '') {
+                $('#CellNumber').css('border-color', 'red');
+            }
+            if (branchId === '') {
+                $('#BranchId').css('border-color', 'red');
+            }
+            if (fullName === '') {
+                $('#fullName').css('border-color', 'red');
+            }
+            if (paymentTypeId === '') {
+                $('#PaymentTypeId').css('border-color', 'red');
+            }
+        }
+    } else {
+        $('#submit-succes').css('display', 'none');
+        $('#submit-error').css('display', 'block');
+        $('#submit-error').html('محصولی انتخاب نشده است.');
+    }
+    unFreezePage();
+}
+
 $("#addedAmount").change(function () {
 });

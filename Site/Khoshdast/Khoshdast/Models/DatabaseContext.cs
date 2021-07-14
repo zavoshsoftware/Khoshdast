@@ -42,5 +42,7 @@ namespace Models
 
         public DbSet<TextItemType> TextItemTypes { get; set; }
         public DbSet<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
     }
 }
