@@ -51,21 +51,24 @@
                     <div class="panel-body">
                         <div class="row top-buffer bottom-buffer row justify-content-around">
 
-                            <label class="col-md-3 product-group-title">انتخاب گروه محصولات:</label>
+                            <label class="col-md-3 product-group-title">گروه محصولات:</label>
                             <div class="col-md-9" style="padding-right : 5px; text-align:right" >
                                 <div class="form-group">
                                     @Html.DropDownList("ProductGroupId", (SelectList)ViewBag.ProductGroupId, "-- گروه محصول ---", htmlAttributes: new { id = "ProductGroupId", @class = "js-example-basic-single js-states form-control" })
                                 </div>
                             </div>
-                            <div class="col-md-9 " style="padding-right :30px; text-align:right">
-                                <label class="col-md-3" style="padding-right:0px;">محصول:</label>
-                                <div class="col-md-9">
-                                    <div class="form-group" style="margin-right :0px;" >
-                                        <select id="ProductId"  name="ProductId" class="form-control" disabled></select>
-                                    </div>
-                                </div>
-                            </div>
+	                        
+                        </div>
+                        <div class="row top-buffer bottom-buffer row justify-content-around">
+                           
+                         
+                            <label class="col-md-3" >محصول:</label>
+                            <div class="col-md-9">
+	                            <div class="form-group"  style="padding-right : 5px; text-align:right" >
+		                            @Html.DropDownList("ProductId", (SelectList)ViewBag.ProductId, "-- انتخاب محصول ---", htmlAttributes: new { id = "ProductId", @class = "js-example-basic-single js-states form-control" })
 
+	                            </div>
+                            </div>
                         </div>
                         <p id="parent-message" class="alert alert-info"> محصول<span id="parentProductTitle"></span> را انتخاب کنید</p>
                         <div class="row" id="product-list">

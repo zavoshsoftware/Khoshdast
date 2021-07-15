@@ -1319,6 +1319,7 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\ContactUsFormsController.cs" />
+    <Compile Include="Controllers\CustomerTypesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DiscountCodesController.cs" />
     <Compile Include="Controllers\ExcelDataController.cs" />
@@ -1444,6 +1445,7 @@
     <Compile Include="Models\Entities\Brand.cs" />
     <Compile Include="Models\Entities\City.cs" />
     <Compile Include="Models\Entities\ContactUsForm.cs" />
+    <Compile Include="Models\Entities\CustomerType.cs" />
     <Compile Include="Models\Entities\DiscountCode.cs" />
     <Compile Include="Models\Entities\Gender.cs" />
     <Compile Include="Models\Entities\Order.cs" />
@@ -1814,6 +1816,11 @@
     <Content Include="Views\PaymentTypes\Details.cshtml" />
     <Content Include="Views\PaymentTypes\Edit.cshtml" />
     <Content Include="Views\PaymentTypes\Index.cshtml" />
+    <Content Include="Views\CustomerTypes\Create.cshtml" />
+    <Content Include="Views\CustomerTypes\Delete.cshtml" />
+    <Content Include="Views\CustomerTypes\Details.cshtml" />
+    <Content Include="Views\CustomerTypes\Edit.cshtml" />
+    <Content Include="Views\CustomerTypes\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

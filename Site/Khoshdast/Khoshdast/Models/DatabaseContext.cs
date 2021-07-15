@@ -44,5 +44,6 @@ namespace Models
         public DbSet<ProductGroupDiscount> ProductGroupDiscounts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<CustomerType> CustomerTypes { get; set; }
     }
 }
