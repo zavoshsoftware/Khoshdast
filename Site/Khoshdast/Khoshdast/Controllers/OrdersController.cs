@@ -19,9 +19,12 @@ namespace Khoshdast.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: Orders
-        public ActionResult Index(Guid? id)
+        public ActionResult Index(Guid? id, string orderType)
         {
+            ViewBag.OrderType = orderType;
             List<Order> orders = new List<Order>();
+
+            bool isPos = orderType != null;
 
             if (id != null)
             {
@@ -31,14 +34,14 @@ namespace Khoshdast.Controllers
                     Guid status3 = new Guid("7DBF85F4-7835-4D21-8269-26695D0C7E0F");
                     orders = db.Orders.Include(o => o.City).Where(o =>
                             (o.OrderStatusId == id || o.OrderStatusId == status3 || o.OrderStatusId == status2) &&
-                            o.IsDeleted == false)
+                            o.IsDeleted == false && o.IsPos == isPos)
                         .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                         .Include(o => o.User).ToList();
                 }
                 else
                 {
                     orders = db.Orders.Include(o => o.City).Where(o =>
-                           o.OrderStatusId == id && o.IsDeleted == false)
+                            o.OrderStatusId == id && o.IsDeleted == false && o.IsPos == isPos)
                         .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                         .Include(o => o.User).ToList();
                 }
@@ -46,7 +49,7 @@ namespace Khoshdast.Controllers
             else
             {
 
-                orders = db.Orders.Include(o => o.City).Where(o => o.IsDeleted == false)
+                orders = db.Orders.Include(o => o.City).Where(o => o.IsDeleted == false && o.IsPos == isPos)
                     .OrderByDescending(o => o.CreationDate).Include(o => o.DiscountCode).Include(o => o.OrderStatus)
                     .Include(o => o.User).ToList();
 
@@ -339,7 +342,7 @@ namespace Khoshdast.Controllers
         }
         public async Task<ActionResult> GetUserOrder(Guid id)
         {
-            var userOrders =await db.Orders.Where(x => x.UserId == id).ToListAsync();            
+            var userOrders = await db.Orders.Where(x => x.UserId == id).ToListAsync();
             return View(userOrders);
         }
     }

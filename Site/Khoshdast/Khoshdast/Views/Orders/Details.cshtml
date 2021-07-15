@@ -71,10 +71,46 @@
 
 					<div class="row">
 						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.AdditiveAmount, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.AdditiveAmount)
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.DecreaseAmount, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.DecreaseAmount)
+						</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-md-5">
 							@Html.LabelFor(model => model.Order.TotalAmountStr, new { @class = "control-label" })
 						</div>
 						<div class="col-md-7">
 							@String.Format("{0:n0}", Model.Order.TotalAmountStr)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.PaymentAmount, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.PaymentAmount)
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							@Html.LabelFor(model => model.Order.RemainAmount, new { @class = "control-label" })
+						</div>
+						<div class="col-md-7">
+							@String.Format("{0:n0}", Model.Order.RemainAmount)
 						</div>
 					</div>
 

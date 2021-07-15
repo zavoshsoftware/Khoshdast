@@ -1,0 +1,305 @@
+﻿@model ViewModels.OrderDetailViewModel
+@{
+    ViewBag.Title = "ثبت فاکتور جدید";
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <label>@ViewBag.Title</label>
+    </div>
+    <div class="panel-body">
+        <div class="row mt-5" style="padding-top:5px">
+            <div class="col-md-6">
+                <label class="col-md-3">تلفن همراه*:</label>
+                <div class="col-md-9 ">
+                    @Html.EditorFor(model => model.Order.DeliverCellNumber, new { @id = "CellNumber" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-3">نام مشتری*:</label>
+                <div class="col-md-9 ">
+                    @Html.EditorFor(model => model.Order.DeliverFullName, new { @id = "fullName" })
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row top-buffer bottom-buffer">
+            <div class="col-md-6">
+                <label class="col-md-3">تاریخ فاکتور*:</label>
+                <div class="col-md-9 ">
+                    @Html.EditorFor(model => model.Order.OrderDateStr)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-3">آدرس:</label>
+                <div class="col-md-9 ">
+                    @Html.EditorFor(model => model.Order.Address)
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-5 product-list">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">انتخاب محصولات</div>
+                    <div class="panel-body">
+                        <div class="row top-buffer bottom-buffer row justify-content-around">
+
+                            <label class="col-md-3 product-group-title">انتخاب گروه محصولات:</label>
+                            <div class="col-md-9" style="padding-right : 5px; text-align:right" >
+                                <div class="form-group">
+                                    @Html.DropDownList("ProductGroupId", (SelectList)ViewBag.ProductGroupId, "-- گروه محصول ---", htmlAttributes: new { id = "ProductGroupId", @class = "js-example-basic-single js-states form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-9 " style="padding-right :30px; text-align:right">
+                                <label class="col-md-3" style="padding-right:0px;">محصول:</label>
+                                <div class="col-md-9">
+                                    <div class="form-group" style="margin-right :0px;" >
+                                        <select id="ProductId"  name="ProductId" class="form-control" disabled></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <p id="parent-message" class="alert alert-info"> محصول<span id="parentProductTitle"></span> را انتخاب کنید</p>
+                        <div class="row" id="product-list">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">فاکتور</div>
+                    <div class="panel-body">
+                        <table id="factor" class="table table-responsive">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">نام محصول</th>
+                                    <th scope="col">تعداد</th>
+                                    <th scope="col">قیمت واحد</th>
+                                    <th scope="col">قیمت کل</th>
+                                    <th scope="col">#</th>
+                                    @*<th scope="col">توضیحات</th>*@
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+                    <div class="panel-footer">
+                        <table>
+                            @*<tr>
+                                    <td></td>
+                                    <td><input type="button" value="به روز رسانی جمع کل" onclick="updateFactor();" class="btn btn-warning" /></td>
+                                </tr>*@
+                            <tr>
+                                <td>جمع کل</td>
+                                <td id="total">0</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    هزینه های اضافه شونده (تومان)
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="addedAmount" value="0" onKeyUp="return changeTotalOrder()" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    هزینه های کسر شونده (تومان)
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="decreasedAmount" value="0" onKeyUp="return changeTotalOrder()" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    جمع کل فاکتور (تومان)
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="totalAmount" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    مبلغ پرداختی
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="payment" value="0" onKeyUp="return changeTotalOrder()" />
+                                </td>
+                                <td>
+                                    @Html.DropDownList("PaymentTypeId", (IEnumerable<SelectListItem>)ViewBag.PaymentTypeId, "نوع پرداخت", new { @class = "form-control" })
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    مبلغ باقی مانده
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="remainAmount" readonly="readonly" value="0" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    توضیحات
+                                </td>
+                                <td>
+                                    <textarea class="form-control" id="desc" placeholder="توضیحات"></textarea>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="button" class="btn btn-success top-buffer bottom-buffer" onclick="finalizeOrder();" value="ثبت فاکتور" />
+                                </td>
+                            </tr>
+                        </table>
+                        <p class="alert alert-success" id="submit-succes">ثبت اطلاعات با موفقیت انجام شد.</p>
+                        <p class="alert alert-danger" id="submit-error"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/Scripts/productfunction.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            let today = new Date().toLocaleDateString('fa-IR');
+            $('#Order_OrderDateStr').val(today);
+            document.getElementById('submit-succes').style.display = "none";
+            document.getElementById('submit-error').style.display = "none";
+            clearForm();
+
+            $('#ProductGroupId').select2({
+                placeholder: '...گروه محصول',
+                width: '100%',
+                multiple: false,
+                closeOnSelect: true,
+            });
+
+            $('#ProductId').select2({
+                placeholder: '...محصول',
+                width: '100%',
+                multiple: false,
+                closeOnSelect: true,
+            });
+
+        });
+
+        $('#ProductGroupId').on('change',
+            function () {
+                var SelectedValue = $(this).val();
+                if (SelectedValue !== "") {
+                    document.getElementById("ProductId").disabled = false;
+                    var procemessage = "<option value='0'> صبرکنید...</option>";
+                    $("#ProductId").html(procemessage).show();
+                    $.ajax(
+                        {
+                            url: "/Pos/GetProductByProductGroup",
+                            data: { id: SelectedValue },
+                            cache: false,
+                            type: "POST",
+                            success: function (data) {
+                                var markup = "<option value='0'>انتخاب محصول</option>";
+                                for (var x = 0; x < data.length; x++) {
+                                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                                }
+                                $("#ProductId").html(markup).show();
+                            },
+                            error: function (reponse) {
+                                alert("error : " + reponse);
+                            }
+                        });
+                }
+            });
+
+        $('#ProductGroupId').change(function () {
+            freezePage();
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Pos/LoadProductByGroupId",
+                contentType: "application/json; charset=utf-8",
+                data: { "id": id },
+                datatype: "json",
+                success: function (data) {
+                    loadProductList(data.Products);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+            unFreezePage();
+        });
+
+        $('#ProductId').change(function () {
+            document.getElementById('parent-message').style.display = "none";
+            freezePage();
+            var id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "/Pos/LoadProductBySelectProduct",
+                contentType: "application/json; charset=utf-8",
+                data: { "id": id },
+                datatype: "json",
+                success: function (data) {
+                    loadProductList(data.Products);
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+            unFreezePage();
+        });
+
+        $("#Order_DeliverCellNumber").focus(function () {
+        }).blur(function () {
+            var cellNumber = $("#Order_DeliverCellNumber").val();
+
+            $.ajax(
+                {
+                    url: "/Pos/GetUserFullName",
+                    data: { cellNumber: cellNumber },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data !== 'invalid') {
+                            var name = data;
+
+                            $('#Order_DeliverFullName').val(name);
+                        } else
+                            $('#Order_DeliverFullName').val('');
+                    },
+                    error: function (reponse) {
+                        alert("خطا : صفحه را مجددا باز کنید");
+                    }
+                });
+        });
+    </script>
+}
+

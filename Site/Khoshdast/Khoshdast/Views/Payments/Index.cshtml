@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Models.Payment>
+
+@{
+ViewBag.Title = "فهرست پرداختی های سفارش کد "+@ViewBag.code+" تاریخ "+@ViewBag.orderDate ;
+    
+    Layout = "~/Views/Shared/BackEndLayout/_BackEndLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <td>جمع کل سفارش</td>
+        <td>@ViewBag.total</td>
+    </tr>   
+    <tr>
+        <td>مبلغ پرداختی</td>
+        <td>@ViewBag.payment</td>
+    </tr>  
+    <tr>
+        <td>مبلغ باقی مانده</td>
+        <td>@ViewBag.remain</td>
+    </tr>
+</table>
+  
+@(Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+        columns.Bound(model => model.PaymentType.Title);
+        columns.Bound(model => model.AmountStr);
+        columns.Bound(model => model.IsDeposit);
+        columns.Bound(model => model.Code);
+        columns.Bound(model => model.PaymentDay);
+        columns.Bound(model => model.IsActive);
+        columns.Bound(model => model.CreationDateStr);
+        columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
+                      .Template(@<text>
+									@*@Html.ActionLink("ویرایش", "Edit", new {id = @item.Id}, new {@class = "k-button"})*@
+									@Html.ActionLink("حذف", "Delete", new {id = @item.Id}, new {@class = "k-button"})
+									</text>).Width(200);  
+		})
+		.ToolBar(toolbar =>
+					{				
+						toolbar.Custom().Action("Create","Payments").Text("افزودن");                          
+						toolbar.Custom().Action("list","orders",null).Text("بازگشت به لیست فاکتورها");                          
+						toolbar.Custom().Action("details","orders").Text("مشاهده جزییات فاکتور");                          
+					}
+		)         
+		.Sortable().Filterable().DataSource(dataSource => dataSource
+									.Server()
+							
+									.Model(model => model.Id(item => item.Id))
+					)              
+	)

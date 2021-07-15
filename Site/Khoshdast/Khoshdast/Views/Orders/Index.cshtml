@@ -25,7 +25,12 @@ ViewBag.Title = "فهرست سفارشات" ;
 					columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false)
 							.Template(@<text>
 									@Html.ActionLink("جزییات", "Details", new {id = @item.Id}, new {@class = "k-button"})
-									</text>);  
+									@if (ViewBag.OrderType == "pos")
+									{
+										@Html.ActionLink("پرداخت ها", "index","Payments", new {id = @item.Id}, new {@class = "k-button"})
+
+									}
+							           </text>);  
 		})
 		.ToolBar(toolbar =>
 					{				

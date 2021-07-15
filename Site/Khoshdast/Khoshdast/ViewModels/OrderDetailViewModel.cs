@@ -4,7 +4,7 @@ using Models;
 
 namespace ViewModels
 {
-    public class OrderDetailViewModel
+    public class OrderDetailViewModel : _BaseViewModel
     {
         public Order Order { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
@@ -22,7 +22,7 @@ namespace ViewModels
                 if (Order.PaymentTypeTitle == "transfer")
                     return "کارت به کارت";
 
-                return "پرداخت آنلاین";
+                return Order.PaymentTypeTitle;
             }
         }
 
