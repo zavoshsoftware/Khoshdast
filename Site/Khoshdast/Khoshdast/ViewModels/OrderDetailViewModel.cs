@@ -22,7 +22,7 @@ namespace ViewModels
                 if (Order.PaymentTypeTitle == "transfer")
                     return "کارت به کارت";
 
-                return "پرداخت آنلاین";
+                return Order.PaymentTypeTitle;
             }
         }
 

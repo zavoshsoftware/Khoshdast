@@ -1826,6 +1826,7 @@
     <Folder Include="Uploads\Blog\" />
     <Folder Include="Uploads\Brand\" />
     <Folder Include="Uploads\Editor\" />
+    <Folder Include="Uploads\paymentAttachment\" />
     <Folder Include="Uploads\ProductGroup\" />
     <Folder Include="Uploads\Product\" />
     <Folder Include="Uploads\Slider\" />

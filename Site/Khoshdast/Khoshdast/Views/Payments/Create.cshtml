@@ -7,12 +7,30 @@
 
 <h2>افزودن @Html.DisplayNameFor(model => model)</h2>
 
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <td>جمع کل سفارش</td>
+        <td>@ViewBag.total</td>
+    </tr>
+    <tr>
+        <td>مبلغ پرداختی</td>
+        <td>@ViewBag.payment</td>
+    </tr>
+    <tr>
+        <td>مبلغ باقی مانده</td>
+        <td>@ViewBag.remain</td>
+    </tr>
+</table>
+
 @using (Html.BeginForm("Create", "Payments",FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">        
         @Html.ValidationSummary(true)
+        @Html.ValidationMessage("highAmount")
+
 
         <div class="form-group">
         <div class="form-group">
@@ -31,17 +49,39 @@
                 @Html.ValidationMessageFor(model => model.PaymentTypeId)
             </div>
         </div>
-
+            
         <div class="form-group">
-            @Html.LabelFor(model => model.IsDeposit, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PaymentDay, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IsDeposit)
+                @Html.EditorFor(model => model.PaymentDay)
 
-
-                @Html.ValidationMessageFor(model => model.IsDeposit)
+                @Html.ValidationMessageFor(model => model.PaymentDay)
             </div>
-        </div>
+        </div>	
+	       
+	        <div class="form-group">
+		        @Html.LabelFor(model => model.FileAttched, new { @class = "control-label col-md-2" })
+		        <div class="col-md-10">
+			        @Html.Kendo().Upload().Name("fileUpload").Multiple(false)
+			        @Html.ValidationMessageFor(model => model.FileAttched)
+		        </div>
+	        </div>
 
+            
+	        @if (ViewBag.hasDeposite == false)
+            {
+                <div class="form-group">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsDeposit)
+
+                        @Html.LabelFor(model => model.IsDeposit)
+                        @Html.ValidationMessageFor(model => model.IsDeposit)
+                    </div>
+                </div>
+            }
+          
         <div class="form-group">
             @Html.LabelFor(model => model.Code, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -49,44 +89,9 @@
 
                 @Html.ValidationMessageFor(model => model.Code)
             </div>
-        </div>
+            </div> 
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FileAttched, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Kendo().Upload().Name("fileUpload").Multiple(false)
-                @Html.ValidationMessageFor(model => model.FileAttched)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PaymentDay, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                    @Html.EditorFor(model => model.PaymentDay)
-
-                @Html.ValidationMessageFor(model => model.PaymentDay)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrderId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OrderId", String.Empty)
-                @Html.ValidationMessageFor(model => model.OrderId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IsActive)
-
-
-                @Html.ValidationMessageFor(model => model.IsActive)
-            </div>
-        </div>
-
-        <div class="form-group">
+            <div class="form-group">
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                     @Html.EditorFor(model => model.Description)
@@ -98,7 +103,7 @@
         <div class="form-group" id="buttons">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="ایجاد" class="btn btn-primary" />
-				@Html.ActionLink("بازگشت به فهرست", "Index")
+				@Html.ActionLink("بازگشت به فهرست", "Index",new{id=ViewBag.id})
             </div>
         </div>
         </div>

@@ -13,166 +13,168 @@ namespace Khoshdast.Controllers
 {
     public class PaymentsController : Controller
     {
+
         private DatabaseContext db = new DatabaseContext();
-
-        // GET: Payments
-        public ActionResult Index()
+        public ActionResult Index(Guid id)
         {
-            var payments = db.Payments.Include(p => p.Order).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate).Include(p => p.PaymentType).Where(p=>p.IsDeleted==false).OrderByDescending(p=>p.CreationDate);
-            return View(payments.ToList());
+            List<Payment> payments = db.Payments.Where(current => current.OrderId == id).ToList();
+
+            PutAmount(id);
+
+            Order order = db.Orders.Find(id);
+
+            if (order != null)
+            {
+                if (order.RemainAmount == 0)
+                {
+                    if (!order.IsPaid)
+                    {
+                        order.IsPaid = true;
+                        order.LastModifiedDate = DateTime.Now;
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            return View(payments);
         }
 
-        // GET: Payments/Details/5
-        public ActionResult Details(Guid? id)
+        public void PutAmount(Guid orderId)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Payment payment = db.Payments.Find(id);
-            if (payment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(payment);
-        }
+            Order order = db.Orders.Find(orderId);
 
-        // GET: Payments/Create
-        public ActionResult Create()
+
+            ViewBag.total = order.TotalAmountStr;
+            ViewBag.payment = order.PaymentAmount;
+            ViewBag.remain = order.RemainAmount;
+            ViewBag.orderDate = order.OrderDateStr;
+            ViewBag.code = order.Code;
+
+        }
+        public ActionResult Create(Guid id)
         {
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Address");
-            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "Id", "Title");
+            Payment depositePayment = db.Payments.Where(current => current.OrderId == id && current.IsDeposit).FirstOrDefault();
+
+            if (depositePayment != null)
+                ViewBag.hasDeposite = true;
+            else
+                ViewBag.hasDeposite = false;
+
+
+            PutAmount(id);
+
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes.Where(c=>c.IsDeleted==false), "Id", "Title");
+
+            ViewBag.id = id;
+
             return View();
         }
 
-        // POST: Payments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Payment payment, HttpPostedFileBase fileupload)
+        public ActionResult Create(Payment payment, Guid id, HttpPostedFileBase fileupload)
         {
             if (ModelState.IsValid)
             {
-                #region Upload and resize image if needed
-                string newFilenameUrl = string.Empty;
-                if (fileupload != null)
+                if (UpdateOrderPayment(id, payment.Amount))
                 {
-                    string filename = Path.GetFileName(fileupload.FileName);
-                    string newFilename = Guid.NewGuid().ToString().Replace("-", string.Empty)
-                                         + Path.GetExtension(filename);
+                    #region Upload and resize image if needed
+                    string newFilenameUrl = string.Empty;
+                    if (fileupload != null)
+                    {
+                        string filename = Path.GetFileName(fileupload.FileName);
+                        string newFilename = Guid.NewGuid().ToString().Replace("-", string.Empty)
+                                             + Path.GetExtension(filename);
 
-                    newFilenameUrl = "/Uploads/Payment/" + newFilename;
-                    string physicalFilename = Server.MapPath(newFilenameUrl);
-                    fileupload.SaveAs(physicalFilename);
-                    payment.FileAttched = newFilenameUrl;
+                        newFilenameUrl = "/Uploads/paymentAttachment/" + newFilename;
+                        string physicalFilename = Server.MapPath(newFilenameUrl);
+
+                        fileupload.SaveAs(physicalFilename);
+
+                        payment.FileAttched = newFilenameUrl;
+                    }
+                    #endregion
+
+
+                    payment.OrderId = id;
+                    payment.IsActive = true;
+                    db.Payments.Add(payment);
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index", new { id = id });
                 }
-
-
-                #endregion
-                payment.IsDeleted=false;
-				payment.CreationDate= DateTime.Now; 
-					
-                payment.Id = Guid.NewGuid();
-                db.Payments.Add(payment);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("highAmount", "مبلغ وارد شده بیشتر از باقی مانده مبلغ سفارش می باشد");
             }
+            PutAmount(id);
 
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Address", payment.OrderId);
-            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "Id", "Title", payment.PaymentTypeId);
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes.Where(c => c.IsDeleted == false), "Id", "Title");
             return View(payment);
         }
 
-        // GET: Payments/Edit/5
-        public ActionResult Edit(Guid? id)
+        public bool UpdateOrderPayment(Guid orderId, decimal payment)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Payment payment = db.Payments.Find(id);
-            if (payment == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Address", payment.OrderId);
-            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "Id", "Title", payment.PaymentTypeId);
-            return View(payment);
+            Order order =db.Orders.Find(orderId);
+
+            if (payment > order.RemainAmount)
+                return false;
+
+            order.PaymentAmount = order.PaymentAmount + payment;
+
+            order.RemainAmount = order.RemainAmount - payment;
+
+            if (order.PaymentAmount == order.RemainAmount)
+                order.IsPaid = true;
+
+            
+
+            return true;
         }
 
-        // POST: Payments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Payment payment, HttpPostedFileBase fileupload)
-        {
-            if (ModelState.IsValid)
-            {
 
-                #region Upload and resize image if needed
-                string newFilenameUrl = string.Empty;
-                if (fileupload != null)
-                {
-                    string filename = Path.GetFileName(fileupload.FileName);
-                    string newFilename = Guid.NewGuid().ToString().Replace("-", string.Empty)
-                                         + Path.GetExtension(filename);
-
-                    newFilenameUrl = "/Uploads/Payment/" + newFilename;
-                    string physicalFilename = Server.MapPath(newFilenameUrl);
-                    fileupload.SaveAs(physicalFilename);
-                    payment.FileAttched = newFilenameUrl;
-                }
-
-
-                #endregion
-                payment.IsDeleted=false;
-					payment.LastModifiedDate=DateTime.Now;
-                db.Entry(payment).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Address", payment.OrderId);
-            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "Id", "Title", payment.PaymentTypeId);
-            return View(payment);
-        }
-
-        // GET: Payments/Delete/5
         public ActionResult Delete(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Payment payment = db.Payments.Find(id);
+            Payment payment = db.Payments.Find(id.Value);
             if (payment == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.id = payment.OrderId;
+
             return View(payment);
         }
 
-        // POST: Payments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(Payment entity)
         {
-            Payment payment = db.Payments.Find(id);
-			payment.IsDeleted=true;
-			payment.DeletionDate=DateTime.Now;
- 
+            entity = db.Payments.Find(entity.Id);
+            entity.IsDeleted = true;
+            entity.DeletionDate=DateTime.Now;
+            UpdateOrderPaymentOnDelete(entity.OrderId, entity.Amount);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = entity.OrderId });
         }
 
-        protected override void Dispose(bool disposing)
+
+        public bool UpdateOrderPaymentOnDelete(Guid orderId, decimal payment)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            Order order = db.Orders.Find(orderId);
+
+            if (payment > order.RemainAmount)
+                return false;
+
+            order.PaymentAmount = order.PaymentAmount - payment;
+
+            order.RemainAmount = order.RemainAmount + payment;
+
+           
+
+            return true;
         }
+
     }
 }

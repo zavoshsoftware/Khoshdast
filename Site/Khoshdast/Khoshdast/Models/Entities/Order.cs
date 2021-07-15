@@ -39,7 +39,7 @@ namespace Models
             get { return TotalAmount.ToString("n0") + " تومان"; } 
         }
 
-        [Display(Name = "AdditiveAmount", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "هزینه های اضافه شونده")]
         public decimal AdditiveAmount { get; set; }
 
         [Display(Name = "هزینه های کسر شونده")]
@@ -47,10 +47,10 @@ namespace Models
         [Display(Name = "ثبت توسط اپراتور")]
         public bool IsPos { get; set; }
 
-        [Display(Name = "PaymentAmount", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "مبلغ پرداختی")]
         public decimal PaymentAmount { get; set; }
 
-        [Display(Name = "RemainAmount", ResourceType = typeof(Resources.Models.Order))]
+        [Display(Name = "مبلغ باقی مانده")]
         public decimal RemainAmount { get; set; }
 
         [Display(Name = "OrderStatusId", ResourceType = typeof(Resources.Models.Order))]

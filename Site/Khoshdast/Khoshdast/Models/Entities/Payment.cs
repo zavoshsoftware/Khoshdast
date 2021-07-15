@@ -27,7 +27,7 @@ namespace Models
         public string FileAttched { get; set; }
         /***********************( new fild )***************************/
         [Display(Name = "تاریخ پرداخت")]
-        [UIHint("PersianDatePicker")]
+        //[UIHint("PersianDatePicker")]
         public DateTime PaymentDay { get; set; }
         public Guid OrderId { get; set; }
 
@@ -45,7 +45,7 @@ namespace Models
 
 
         [NotMapped]
-        [Display(Name = "Amount", ResourceType = typeof(Models.Payment))]
+        [Display(Name = "مبلغ پرداختی")]
         public string AmountStr
         {
             get { return Amount.ToString("N0"); }

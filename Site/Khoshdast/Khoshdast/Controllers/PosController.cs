@@ -484,7 +484,7 @@ namespace Khoshdast.Controllers
                 UserId = user.Id,
                 SubTotal = subTotal,
                 AdditiveAmount = additiveAmount,
-                DiscountAmount = discountAmount,
+                DiscountAmount = 0,
                 TotalAmount = totalAmount,
                 PaymentAmount = paymentAmountDecimal,
                 Address = address,
@@ -501,6 +501,18 @@ namespace Khoshdast.Controllers
                 CreationDate = DateTime.Now,
                 IsDeleted = false
             };
+
+            if (remainAmountDecimal == 0)
+            {
+                Guid paymentTypeIdGuid = new Guid(paymentTypeId);
+
+                PaymentType paymentType = db.PaymentTypes.Find(paymentTypeIdGuid);
+             
+                if (paymentType != null)
+                    order.PaymentTypeTitle = paymentType.Title;
+            
+                order.IsPaid = true;
+            }
 
             db.Orders.Add(order);
             db.SaveChanges();
