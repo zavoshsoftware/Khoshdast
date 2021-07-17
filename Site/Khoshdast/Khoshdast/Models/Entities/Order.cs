@@ -59,6 +59,10 @@ namespace Models
 
         public Guid? CityId { get; set; }
 
+        [Display(Name = "نوع مشتری")]
+        public Guid? CustomerTypeId { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
+
         [Display(Name = "SaleReferenceId", ResourceType = typeof(Resources.Models.Order))]
         public string SaleReferenceId { get; set; }
 

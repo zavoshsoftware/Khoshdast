@@ -40,6 +40,14 @@
                 </div>
             </div>
         </div>
+        <div class="row top-buffer bottom-buffer">
+            <div class="col-md-6">
+                <label class="col-md-3">نوع مشتری:</label>
+                <div class="col-md-9 ">
+                    @Html.DropDownList("CustomerTypeId", (IEnumerable<SelectListItem>)ViewBag.PaymentTypeId, "نوع مشتری", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
 
 
 
@@ -52,22 +60,22 @@
                         <div class="row top-buffer bottom-buffer row justify-content-around">
 
                             <label class="col-md-3 product-group-title">گروه محصولات:</label>
-                            <div class="col-md-9" style="padding-right : 5px; text-align:right" >
+                            <div class="col-md-9" style="padding-right : 5px; text-align:right">
                                 <div class="form-group">
                                     @Html.DropDownList("ProductGroupId", (SelectList)ViewBag.ProductGroupId, "-- گروه محصول ---", htmlAttributes: new { id = "ProductGroupId", @class = "js-example-basic-single js-states form-control" })
                                 </div>
                             </div>
-	                        
+
                         </div>
                         <div class="row top-buffer bottom-buffer row justify-content-around">
-                           
-                         
-                            <label class="col-md-3" >محصول:</label>
-                            <div class="col-md-9">
-	                            <div class="form-group"  style="padding-right : 5px; text-align:right" >
-		                            @Html.DropDownList("ProductId", (SelectList)ViewBag.ProductId, "-- انتخاب محصول ---", htmlAttributes: new { id = "ProductId", @class = "js-example-basic-single js-states form-control" })
 
-	                            </div>
+
+                            <label class="col-md-3">محصول:</label>
+                            <div class="col-md-9">
+                                <div class="form-group" style="padding-right : 5px; text-align:right">
+                                    @Html.DropDownList("ProductId", (SelectList)ViewBag.ProductId, "-- انتخاب محصول ---", htmlAttributes: new { id = "ProductId", @class = "js-example-basic-single js-states form-control" })
+
+                                </div>
                             </div>
                         </div>
                         <p id="parent-message" class="alert alert-info"> محصول<span id="parentProductTitle"></span> را انتخاب کنید</p>
@@ -100,9 +108,9 @@
                     <div class="panel-footer">
                         <table>
                             @*<tr>
-                                    <td></td>
-                                    <td><input type="button" value="به روز رسانی جمع کل" onclick="updateFactor();" class="btn btn-warning" /></td>
-                                </tr>*@
+                                <td></td>
+                                <td><input type="button" value="به روز رسانی جمع کل" onclick="updateFactor();" class="btn btn-warning" /></td>
+                            </tr>*@
                             <tr>
                                 <td>جمع کل</td>
                                 <td id="total">0</td>

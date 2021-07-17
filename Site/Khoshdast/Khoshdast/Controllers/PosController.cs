@@ -38,6 +38,7 @@ namespace Khoshdast.Controllers
             //        "Text");
 
             ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes.Where(current => current.IsDeleted == false), "Id", "Title");
+            ViewBag.PaymentTypeId = new SelectList(db.CustomerTypes.Where(current => current.IsDeleted == false), "Id", "Title");
             return View();
         }
 
@@ -332,7 +333,7 @@ namespace Khoshdast.Controllers
         [AllowAnonymous]
         [HttpPost]
         public ActionResult PostFinalize(string orderDate, string cellNumber, string fullName, string address, string addedAmount,
-            string decreasedAmount, string desc, string paymentAmount, string paymentTypeId, string file, string subtotalAmount, string totalAmount)
+            string decreasedAmount, string desc, string paymentAmount, string paymentTypeId, Guid customerTypeId, string file, string subtotalAmount, string totalAmount)
         {
             try
             {
@@ -343,7 +344,7 @@ namespace Khoshdast.Controllers
                 //DateTime dtOrderDete = DateTimeHelper.PostPersianDate(orderDate);
                 DateTime dtOrderDete = DateTime.Now;
                 Order order = InsertOrder(user, dtOrderDete, address,
-                    addedAmount, decreasedAmount, desc, paymentAmount, paymentTypeId,
+                    addedAmount, decreasedAmount, desc, paymentAmount, paymentTypeId, customerTypeId,
                     orderDetails.SubTotal, file);
 
                 InsertToOrderDetail(orderDetails, order.Id);
@@ -464,7 +465,7 @@ namespace Khoshdast.Controllers
         }
 
         public Order InsertOrder(User user, DateTime orderDate, string address, string addedAmount,
-            string decreasedAmount, string desc, string paymentAmount, string paymentTypeId, decimal subTotal, string fileUrl)
+            string decreasedAmount, string desc, string paymentAmount, string paymentTypeId, Guid customerTypeId, decimal subTotal, string fileUrl)
         {
             decimal additiveAmount = Convert.ToDecimal(addedAmount);
             decimal discountAmount = Convert.ToDecimal(decreasedAmount);
@@ -499,7 +500,8 @@ namespace Khoshdast.Controllers
                 DeliverCellNumber = user.CellNum,
                 DeliverFullName = user.FullName,
                 CreationDate = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                CustomerTypeId = customerTypeId
             };
 
             if (remainAmountDecimal == 0)

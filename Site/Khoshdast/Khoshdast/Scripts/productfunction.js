@@ -352,6 +352,7 @@ function finalizeOrder() {
         var paymentAmount = $('#payment').val();
         var subtotalAmount = $('#total').val();
         var totalAmount = $('#totalAmount').val();
+        var customerTypeId = $('#CustomerTypeId').val();
 
         var paymentTypeIsRequired = null;
 
@@ -376,7 +377,7 @@ function finalizeOrder() {
                     "addedAmount": addedAmount,
                     "decreasedAmount": decreasedAmount,
                     "desc": desc,
-                    "paymentAmount": paymentAmount, "paymentTypeId": paymentTypeId,
+                    "paymentAmount": paymentAmount, "paymentTypeId": paymentTypeId, "customerTypeId": customerTypeId,
                     "subtotalAmount": subtotalAmount,
                     "totalAmount": totalAmount
                 },
